@@ -2,7 +2,7 @@
 #include "ide_listener.h"
 #include "xml_listener.h"
 #include "cute_runner.h"
-
+#include <iostream>
 void thisIsATest() {
 	ASSERTM("start writing tests", false);	
 }
@@ -18,6 +18,7 @@ void runAllTests(int argc, char const *argv[]){
 
 int main(int argc, char const *argv[]){
     runAllTests(argc,argv);
+    std::cout<<"Ola";
     return 0;
 }
 
