@@ -7,7 +7,7 @@
 #include "negocio.h"
 
 class Utilizador{
-	contacto cont;
+	Contacto cont;
 	vector<Anuncio *> anuncios;
 	localizacao local;
 	vector<Negocio> negociosConcluidos;
