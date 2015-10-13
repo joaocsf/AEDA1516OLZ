@@ -1,20 +1,21 @@
+#ifndef ANUNCIO_H_
+#define ANUNCIO_H_
+
 #include <iostream>
 #include <vector>
 #include <string>
 
 
-#ifndef ANUNCIO_H_
-#define ANUNCIO_H_
-
 using namespace std;
 
-class anuncio{
+class Anuncio{
 public:
-	anuncio();
-	anuncio(string Titulo,string categ_produto,string descricao,string estado,float preco,bool negociavel);
+	Anuncio();
+	Anuncio(string Titulo,string categ_produto,string descricao,string estado,float preco,bool negociavel);
+	~Anuncio();
 
 protected:
-	string Titulo;
+	string titulo;
 	string categ_produto;
 	string descricao;
 	//vetor imagens??
@@ -26,16 +27,18 @@ protected:
 	bool negociavel;
 }
 
-class anuncioCompra: public anuncio{
-	anuncioVenda *a; //anuncio de venda quando é diferente de NULL significa que o utilizador aceita troca, pointer para anuncio de venda do mesmo utilizador
+class AnuncioVenda: public Anuncio{
+	//membros-dado
+public:
+}
+
+class AnuncioCompra: public Anuncio{
+	AnuncioVenda *a; //anuncio de venda quando é diferente de NULL significa que o utilizador aceita troca, pointer para anuncio de venda do mesmo utilizador
 public:
 }
 
 
-class anuncioVenda: public anuncio{
-	//menbros-dado
-public:
-}
+
 
 
 #endif
