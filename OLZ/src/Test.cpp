@@ -18,7 +18,7 @@ void runAllTests(int argc, char const *argv[]){
 
 int main(int argc, char const *argv[]){
     runAllTests(argc,argv);
-    std::cout<<"Ola";
+    std::cout<<"Ola BlaBla";
     return 0;
 }
 
