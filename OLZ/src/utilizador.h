@@ -9,12 +9,12 @@
 class Utilizador{
 	Contacto cont;
 	vector<Anuncio *> anuncios;
-	localizacao local;
+	Localizacao local;
 	vector<Negocio> negociosConcluidos;
 public:
 
 
-}
+};
 
 
 #endif

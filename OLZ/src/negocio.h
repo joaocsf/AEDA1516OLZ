@@ -9,7 +9,7 @@ class Negocio{
 	//data da venda
 public:
 
-}
+};
 
 
 #endif

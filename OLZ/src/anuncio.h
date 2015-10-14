@@ -25,17 +25,17 @@ protected:
 	string estado;
 	float preco;
 	bool negociavel;
-}
+};
 
 class AnuncioVenda: public Anuncio{
 	//membros-dado
 public:
-}
+};
 
 class AnuncioCompra: public Anuncio{
 	AnuncioVenda *a; //anuncio de venda quando é diferente de NULL significa que o utilizador aceita troca, pointer para anuncio de venda do mesmo utilizador
 public:
-}
+};
 
 
 
