@@ -7,10 +7,10 @@
 #include "negocio.h"
 
 class Utilizador{
-	Contacto cont;
-	vector<Anuncio *> anuncios;
-	Localizacao local;
-	vector<Negocio> negociosConcluidos;
+	Contacto _contacto;
+	vector<Anuncio *> _anuncios;
+	Localizacao _local;
+	vector<Negocio> _negociosConcluidos;
 public:
 
 	bool AdicionarAnuncio(Anuncio* anuncio);//Adiciona um anuncio ao utilizador

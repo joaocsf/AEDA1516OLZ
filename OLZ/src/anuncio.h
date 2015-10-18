@@ -9,23 +9,23 @@
 using namespace std;
 
 class Anuncio{
-	static int proxID;
+	static int _proxID;
 public:
 	Anuncio();
 	Anuncio(string Titulo,string categ_produto,string descricao,string estado,float preco,bool negociavel);
 	~Anuncio();
 
 protected:
-	string titulo;
-	string categ_produto;
-	string descricao;
+	string _titulo;
+	string _categ_produto;
+	string _descricao;
 	//vetor imagens??
 	//data criacao criar classe DATA?? e assim fica mais facil para fazermos comparaçoes de datas e podemos fazer procura por data tambem
-	int indentificador;
-	int num_vizualizacoes;
-	string estado;
-	float preco;
-	bool negociavel;
+	int _indentificador;
+	int _num_vizualizacoes;
+	string _estado;
+	float _preco;
+	bool _negociavel;
 };
 
 enum EstadoProduto{
@@ -37,12 +37,12 @@ enum EstadoProduto{
 
 class AnuncioVenda: public Anuncio{
 	//membros-dado
-	EstadoProduto estado;
+	EstadoProduto _estado;
 public:
 };
 
 class AnuncioCompra: public Anuncio{
-	AnuncioVenda *a; //anuncio de venda quando é diferente de NULL significa que o utilizador aceita troca, pointer para anuncio de venda do mesmo utilizador
+	AnuncioVenda *_anuncioVenda; //anuncio de venda quando é diferente de NULL significa que o utilizador aceita troca, pointer para anuncio de venda do mesmo utilizador
 public:
 };
 
