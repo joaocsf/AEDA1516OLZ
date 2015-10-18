@@ -9,6 +9,7 @@
 using namespace std;
 
 class Anuncio{
+	static int proxID;
 public:
 	Anuncio();
 	Anuncio(string Titulo,string categ_produto,string descricao,string estado,float preco,bool negociavel);
@@ -20,15 +21,23 @@ protected:
 	string descricao;
 	//vetor imagens??
 	//data criacao criar classe DATA?? e assim fica mais facil para fazermos comparaçoes de datas e podemos fazer procura por data tambem
-	static int indentificador;
-	static int num_vizualizacoes;
+	int indentificador;
+	int num_vizualizacoes;
 	string estado;
 	float preco;
 	bool negociavel;
 };
 
+enum EstadoProduto{
+	NOVO,
+	USADO_COMO_NOVO,
+	FUNCIONAL,
+	PARA_PECAS
+};
+
 class AnuncioVenda: public Anuncio{
 	//membros-dado
+	EstadoProduto estado;
 public:
 };
 
