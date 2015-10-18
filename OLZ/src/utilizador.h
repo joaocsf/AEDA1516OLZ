@@ -13,6 +13,9 @@ class Utilizador{
 	vector<Negocio> negociosConcluidos;
 public:
 
+	bool AdicionarAnuncio(Anuncio* anuncio);//Adiciona um anuncio ao utilizador
+	bool RemoverAnuncio(Anuncio* anuncio);//Remove um anicio do utilizador
+	bool RemoverAnuncio(int id);//Remove um anuncio por id
 
 };
 
