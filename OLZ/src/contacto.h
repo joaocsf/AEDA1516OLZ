@@ -1,17 +1,13 @@
 #ifndef CONTACTO_H_
 #define CONTACTO_H_
 
-#include <iostream>
-#include <vector>
-#include <string>
+#include "utilidades.h"
+#include "dadospessoais.h"
 
-using namespace std;
 
 class Contacto{
-	string email;
-	string telefone;
-	string nome;
-	vector<string*> visiveis; //podemos por aqui os dados que são visiveis e quando queremos fazer display fazemos display do vetor
+	string mensagem;
+	DadosPessoais dados;
 public:
 
 
