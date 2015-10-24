@@ -3,11 +3,12 @@
 
 #include "utilidades.h"
 #include "contacto.h"
+#include "data.h"
 
 class Anuncio{
 public:
 	Anuncio();
-	Anuncio(string titulo,string categ_produto,string descricao);
+	Anuncio(string titulo,string categ_produto,string descricao,Data date);
 	~Anuncio();
 
 protected:
@@ -16,7 +17,7 @@ protected:
 	string _categ_produto;
 	string _descricao;
 	//vetor imagens??
-	//data criacao criar classe DATA?? e assim fica mais facil para fazermos comparaçoes de datas e podemos fazer procura por data tambem
+	Data _data;
 	vector<Contacto> _contactos;//contatos realizados pelo site entre comprador e anunciante
 	int _indentificador;
 	int _num_vizualizacoes;
@@ -34,13 +35,13 @@ class AnuncioVenda: public Anuncio{
 	bool _negociavel;
 	EstadoProduto _estado;
 public:
-	AnuncioVenda(string titulo,string categ_produto,string descricao,float preco,bool negociavel, EstadoProduto estado);
+	AnuncioVenda(string titulo,string categ_produto,string descricao,Data date,float preco,bool negociavel, EstadoProduto estado);
 };
 
 class AnuncioCompra: public Anuncio{
 	AnuncioVenda *_anuncioVenda; //anuncio de venda quando é diferente de NULL significa que o utilizador aceita troca, pointer para anuncio de venda do mesmo utilizador
 public:
-	AnuncioCompra(string titulo,string categ_produto,string descricao);
+	AnuncioCompra(string titulo,string categ_produto,string descricao,Data date);
 };
 
 
