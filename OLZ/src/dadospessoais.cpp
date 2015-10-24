@@ -31,6 +31,7 @@ void DadosPessoais::visibilidadeTelefone(bool visivel) {
 }
 
 
+
 string DadosPessoais::getInfo() const {
 	string info;
 	for (int i = 0; i < 3; ++i) {
