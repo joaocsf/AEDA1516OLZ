@@ -42,5 +42,5 @@ Localizacao Utilizador::getLocalizacao(){
 }
 
 bool Utilizador::FecharNegocio (Anuncio* anuncio, float montante){
-	Negocio neg = new Negocio(anuncio, montante);
+	Negocio* neg = new Negocio(anuncio, montante);
 	_negociosConcluidos.push_back(neg);
