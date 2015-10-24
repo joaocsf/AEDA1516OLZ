@@ -1,0 +1,32 @@
+#include "utilizador.h"
+
+bool Utilizador::AdicionarAnuncio(Anuncio* anuncio){
+	//excepçao o anuncio pode ja existir neste utilizador;
+	_anuncios.push_back(anuncio);
+	return true;
+}
+
+bool Utilizador::RemoverAnuncio(Anuncio* anuncio){
+	for (unsigned int var = 0; var < _anuncios.size(); var++) {
+		if (_anuncios[var] == anuncio){
+			_anuncios.erase(_anuncios.begin() + var);
+			return true;
+		}
+	}
+	//criar a excepçao de AnuncioInexistente;
+	return false;
+}
+
+bool Utilizador::RemoverAnuncio(int id){
+	for (unsigned int var = 0; var < _anuncios.size(); var++) {
+			if (_anuncios[var]->_ID == id){
+				_anuncios.erase(_anuncios.begin() + var);
+				return true;
+			}
+		}
+	//Anuncio Inexistente;
+	return false;
+}
+
+
+
