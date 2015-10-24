@@ -19,30 +19,30 @@ void DadosPessoais::alterarEmail(string novoEmail) {
 }
 
 void DadosPessoais::visibilidadeEmail(bool visivel) {
-	visiveis[VisibilidadeDados::EMAIL] = visivel;
+	visiveis[2] = visivel;
 }
 
 void DadosPessoais::visibilidadeNome(bool visivel) {
-	visiveis[VisibilidadeDados::NOME] = visivel;
+	visiveis[0] = visivel;
 }
 
 void DadosPessoais::visibilidadeTelefone(bool visivel) {
-	visiveis[VisibilidadeDados::TELEFONE] = visivel;
+	visiveis[1] = visivel;
 }
 
 
 string DadosPessoais::getInfo() const {
 	string info;
-	for (int i = 0; i < VisibilidadeDados::TOTAL; ++i) {
+	for (int i = 0; i < 3; ++i) {
 		if (visiveis[i]) {
 			switch (i) {
-			case VisibilidadeDados::NOME:
+			case 0:
 				info += nome + "\n";
 				break;
-			case VisibilidadeDados::TELEFONE:
+			case 1:
 				info += telefone + "\n";
 				break;
-			case VisibilidadeDados::EMAIL:
+			case 2:
 				info += email + "\n";
 				break;
 			}
