@@ -2,6 +2,7 @@
 #define ANUNCIO_H_
 
 #include "utilidades.h"
+#include "contacto.h"
 
 class Anuncio{
 public:

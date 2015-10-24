@@ -5,6 +5,7 @@
 #include "dadospessoais.h"
 
 
+
 class Contacto{
 
 	string mensagem;

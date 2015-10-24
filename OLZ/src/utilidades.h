@@ -5,13 +5,14 @@
 #include <vector>
 #include <string>
 
+
 using namespace std;
 
 struct Localizacao{
 	string freguesia;
 	string concelho;
 	string distrito;
-}
+};
 
 
 
