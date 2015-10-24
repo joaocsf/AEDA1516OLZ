@@ -5,9 +5,10 @@
 #include "contacto.h"
 #include "utilidades.h"
 #include "negocio.h"
+#include "dadospessoais.h"
 
 class Utilizador{
-	Contacto _contacto;
+	DadosPessoais _contacto;
 	vector<Anuncio *> _anuncios;
 	Localizacao _local;
 	vector<Negocio> _negociosConcluidos;
