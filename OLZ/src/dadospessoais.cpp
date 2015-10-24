@@ -30,6 +30,7 @@ void DadosPessoais::visibilidadeTelefone(bool visivel) {
 	visiveis[VisibilidadeDados::TELEFONE] = visivel;
 }
 
+
 string DadosPessoais::getInfo() const {
 	string info;
 	for (int i = 0; i < VisibilidadeDados::TOTAL; ++i) {
