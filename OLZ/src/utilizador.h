@@ -11,7 +11,7 @@ class Utilizador{
 	DadosPessoais _contacto;
 	vector<Anuncio *> _anuncios;
 	Localizacao _local;
-	vector<Negocio> _negociosConcluidos;
+	vector<Negocio *> _negociosConcluidos;
 public:
 	Utilizador();
 	Utilizador(DadosPessoais contacto, Localizacao loc);
