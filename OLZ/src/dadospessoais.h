@@ -16,7 +16,7 @@ class DadosPessoais {
 	string telefone;
 	string email;
 
-	bool visiveis[VisibilidadeDados::TOTAL]; //podemos por aqui os dados que são visiveis e quando queremos fazer display fazemos display do vetor
+	bool visiveis[3]; //podemos por aqui os dados que são visiveis e quando queremos fazer display fazemos display do vetor
 public:
 
 	DadosPessoais(string nome, string telefone, string email);
