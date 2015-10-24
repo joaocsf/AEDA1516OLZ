@@ -1,5 +1,10 @@
 #include "utilizador.h"
 
+Utilizador::Utilizador(DadosPessoais contacto, Localizacao loc){
+	_contacto = contacto;
+	_local = loc;
+}
+
 bool Utilizador::AdicionarAnuncio(Anuncio* anuncio){
 	//excepçao o anuncio pode ja existir neste utilizador;
 	_anuncios.push_back(anuncio);
@@ -28,5 +33,14 @@ bool Utilizador::RemoverAnuncio(int id){
 	return false;
 }
 
+DadosPessoais Utilizador::getDadosPessoais(){
+	return this->_contacto;
+}
 
+Localizacao Utilizador::getLocalizacao(){
+	return this->_local;
+}
 
+bool Utilizador::FecharNegocio (Anuncio* anuncio, float montante){
+	Negocio neg = new Negocio(anuncio, montante);
+	_negociosConcluidos.push_back(neg);

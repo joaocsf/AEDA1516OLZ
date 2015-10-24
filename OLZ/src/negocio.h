@@ -8,7 +8,12 @@ class Negocio{
 	float _montante; // montatne da compra/venda
 	//data da venda
 public:
-
+	Negocio();
+	Negocio(Anuncio* anun,float valor){
+		_ptr_anuncio = anun;
+		_montante = valor;
+	};
+	~Negocio();
 };
 
 
