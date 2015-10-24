@@ -7,7 +7,7 @@
 class Anuncio{
 public:
 	Anuncio();
-	Anuncio(string titulo,string categ_produto,string descricao,string estado,float preco,bool negociavel);
+	Anuncio(string titulo,string categ_produto,string descricao);
 	~Anuncio();
 
 protected:
@@ -20,7 +20,6 @@ protected:
 	vector<Contacto> _contactos;//contatos realizados pelo site entre comprador e anunciante
 	int _indentificador;
 	int _num_vizualizacoes;
-
 };
 
 enum EstadoProduto{
@@ -35,12 +34,13 @@ class AnuncioVenda: public Anuncio{
 	bool _negociavel;
 	EstadoProduto _estado;
 public:
-
+	AnuncioVenda(string titulo,string categ_produto,string descricao,float preco,bool negociavel, EstadoProduto estado);
 };
 
 class AnuncioCompra: public Anuncio{
 	AnuncioVenda *_anuncioVenda; //anuncio de venda quando é diferente de NULL significa que o utilizador aceita troca, pointer para anuncio de venda do mesmo utilizador
 public:
+	AnuncioCompra(string titulo,string categ_produto,string descricao);
 };
 
 
