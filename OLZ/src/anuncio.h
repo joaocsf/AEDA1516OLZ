@@ -21,7 +21,7 @@ private:
 	string _titulo;
 	string _categ_produto;
 	string _descricao;
-
+	vector<Imagem> _imagens;
 	Data _data;
 	vector<Contacto> _contactos;//contatos realizados pelo site entre comprador e anunciante
 	int _indentificador;

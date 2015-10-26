@@ -14,6 +14,8 @@ struct Localizacao{
 	string distrito;
 };
 
-
+struct Imagem{
+	string conteudo;
+};
 
 #endif
