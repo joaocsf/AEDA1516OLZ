@@ -2,7 +2,7 @@
 #define DADOSPESSOAIS_H_
 
 #include "utilidades.h"
-#include <string>
+
 
 using namespace std;
 

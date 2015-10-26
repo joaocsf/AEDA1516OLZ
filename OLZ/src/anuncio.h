@@ -4,8 +4,7 @@
 #include "utilidades.h"
 #include "contacto.h"
 #include "data.h"
-#include <string>
-#include <vector>
+
 
 using namespace std;
 
