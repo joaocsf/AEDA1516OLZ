@@ -5,8 +5,10 @@
 #include "contacto.h"
 #include "data.h"
 
-
-using namespace std;
+#define ESTADO_NOVO
+#define ESTADO_USADO
+#define ESTADO_FUNCIONAL
+#define ESTADO_PECAS
 
 class Anuncio{
 public:
@@ -26,19 +28,14 @@ private:
 	int _num_vizualizacoes;
 };
 
-enum EstadoProduto{
-	NOVO,
-	USADO_COMO_NOVO,
-	FUNCIONAL,
-	PARA_PECAS
-};
+
 
 class AnuncioVenda: public Anuncio{
 	float _preco;
 	bool _negociavel;
-	EstadoProduto _estado;
+	int _estado; //Usar ESTADO_*
 public:
-	AnuncioVenda(string titulo,string categ_produto,string descricao,Data date,float preco,bool negociavel, EstadoProduto estado);
+	AnuncioVenda(string titulo,string categ_produto,string descricao,Data date,float preco,bool negociavel, int estado);
 };
 
 class AnuncioCompra: public Anuncio{
