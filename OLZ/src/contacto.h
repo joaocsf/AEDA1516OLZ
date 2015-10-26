@@ -8,14 +8,13 @@
 
 class Contacto{
 
-	string mensagem;
-	DadosPessoais dados;
+	string _mensagem;
+	DadosPessoais _dados;
 public:
-	Contacto(string nome,string mail, string ntelefone);
-	//Mostra todas as Informacoes visiveis do utilizador
+	Contacto();
+	Contacto(string mensagem, DadosPessoais dados);
 	string ObterInfo();
-
-
+	void setMensagem(string mensagem);
 };
 
 
