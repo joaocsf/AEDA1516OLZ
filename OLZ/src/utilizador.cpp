@@ -58,7 +58,11 @@ bool Utilizador::FecharNegocio (Anuncio* anuncio, float montante){
 	return RemoverAnuncio(anuncio);
 }
 
-
+bool Utilizador::AlteraContacto(string telefone, string email){
+	this->_contacto.alterarEmail(email);
+	this->_contacto.alterarTelefone(telefone);
+	return true;
+}
 
 
 

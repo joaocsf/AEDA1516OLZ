@@ -23,6 +23,7 @@ public:
 	bool RemoverAnuncio(Anuncio* anuncio);//Remove um anicio do utilizador
 	bool RemoverAnuncio(int id);//Remove um anuncio por id
 	bool FecharNegocio (Anuncio* anuncio, float montante);
+	bool AlteraContacto(string telefone, string email);
 	DadosPessoais getDadosPessoais();
 	Localizacao getLocalizacao();
 
