@@ -10,9 +10,7 @@ Utilizador::Utilizador(DadosPessoais contacto, Localizacao loc){
 	_contacto = contacto;
 }
 
-
 bool Utilizador::AdicionarAnuncio(Anuncio* anuncio){
-	//excepçao o anuncio pode ja existir neste utilizador;
 	_anuncios.push_back(anuncio);
 	return true;
 }
@@ -24,8 +22,7 @@ bool Utilizador::RemoverAnuncio(Anuncio* anuncio){
 			return true;
 		}
 	}
-	//criar a excepçao de AnuncioInexistente;
-	return false;
+	throw AnuncioInexistente(anuncio);
 }
 
 bool Utilizador::RemoverAnuncio(int id){
@@ -35,8 +32,7 @@ bool Utilizador::RemoverAnuncio(int id){
 				return true;
 			}
 		}
-	//Anuncio Inexistente;
-	return false;
+	throw AnuncioInexistente(id);
 }
 
 DadosPessoais Utilizador::getDadosPessoais(){
@@ -48,10 +44,18 @@ Localizacao Utilizador::getLocalizacao(){
 }
 
 bool Utilizador::FecharNegocio (Anuncio* anuncio, float montante){
-	Negocio* neg = new Negocio(anuncio, montante);
+	Negocio* neg = NULL;
+	for (unsigned int i = 0; i < _anuncios.size(); i++) {
+		if(_anuncios[i] == anuncio){
+			neg = new Negocio(anuncio, montante);//Se encontrou o anuncio então cria o negocio;
+			break;
+		}
+	}
+	if (neg == NULL){
+		throw AnuncioInexistente(anuncio);
+	}
 	_negociosConcluidos.push_back(neg);
-	RemoverAnuncio(anuncio);
-	//excepcao de anuncio inexistente;
+	return RemoverAnuncio(anuncio);
 }
 
 
