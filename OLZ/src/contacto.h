@@ -11,9 +11,9 @@ class Contacto{
 	string mensagem;
 	DadosPessoais dados;
 public:
-	Contacto(std::string nome,std::string mail, std::string ntelefone);
+	Contacto(string nome,string mail, string ntelefone);
 	//Mostra todas as Informacoes visiveis do utilizador
-	std::string ObterInfo();
+	string ObterInfo();
 
 
 };

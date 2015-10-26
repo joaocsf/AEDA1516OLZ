@@ -4,19 +4,23 @@
 #include "utilidades.h"
 #include "contacto.h"
 #include "data.h"
+#include <string>
+#include <vector>
+
+using namespace std;
 
 class Anuncio{
 public:
 	Anuncio();
 	Anuncio(string titulo,string categ_produto,string descricao,Data date);
-	~Anuncio();
-
-protected:
+	//~Anuncio();
+	static int getID();
+private:
 	static int _ID;
 	string _titulo;
 	string _categ_produto;
 	string _descricao;
-	//vetor imagens??
+
 	Data _data;
 	vector<Contacto> _contactos;//contatos realizados pelo site entre comprador e anunciante
 	int _indentificador;

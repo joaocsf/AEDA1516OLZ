@@ -2,13 +2,14 @@
 #define DADOSPESSOAIS_H_
 
 #include "utilidades.h"
+#include <string>
 
-enum VisibilidadeDados{
-	NOME,
-	TELEFONE,
-	EMAIL,
-	TOTAL
-};
+using namespace std;
+
+#define VIS_NOME 0
+#define VIS_TELEFONE 1
+#define VIS_EMAIL 2
+#define VIS_TOTAL 3
 
 class DadosPessoais {
 
@@ -16,9 +17,10 @@ class DadosPessoais {
 	string telefone;
 	string email;
 
-	bool visiveis[3]; //podemos por aqui os dados que são visiveis e quando queremos fazer display fazemos display do vetor
+	bool visiveis[VIS_TOTAL]; //podemos por aqui os dados que são visiveis e quando queremos fazer display fazemos display do vetor
 public:
 
+	DadosPessoais(){}
 	DadosPessoais(string nome, string telefone, string email);
 
 	/* "Altera 'O' nome" by Martins

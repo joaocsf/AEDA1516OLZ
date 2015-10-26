@@ -6,6 +6,9 @@
 #include "utilidades.h"
 #include "negocio.h"
 #include "dadospessoais.h"
+#include "data.h"
+
+
 
 class Utilizador{
 	DadosPessoais _contacto;
@@ -15,7 +18,7 @@ class Utilizador{
 public:
 	Utilizador();
 	Utilizador(DadosPessoais contacto, Localizacao loc);
-	~Utilizador();
+	//~Utilizador();
 	bool AdicionarAnuncio(Anuncio* anuncio);//Adiciona um anuncio ao utilizador
 	bool RemoverAnuncio(Anuncio* anuncio);//Remove um anicio do utilizador
 	bool RemoverAnuncio(int id);//Remove um anuncio por id

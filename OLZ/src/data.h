@@ -6,6 +6,7 @@
 class Data
 {
 public:
+	Data() {}
 Data(unsigned int a, unsigned int m,unsigned int d);
 void setAno(unsigned int a) ;
 void setMes(unsigned int m) ;

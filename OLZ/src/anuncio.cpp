@@ -1,8 +1,12 @@
 #include "anuncio.h"
+#include "data.h"
 
 int Anuncio::_ID=1;
 
-//anuncio
+int Anuncio::getID(){
+	return _ID;
+}
+
 Anuncio::Anuncio(string titulo,string categ_produto,string descricao,Data date){
 	_num_vizualizacoes=0;
 	_titulo=titulo;

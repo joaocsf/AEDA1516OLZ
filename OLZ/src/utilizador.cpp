@@ -1,9 +1,15 @@
 #include "utilizador.h"
 
-Utilizador::Utilizador(DadosPessoais contacto, Localizacao loc){
-	_contacto = contacto;
-	_local = loc;
+
+Utilizador::Utilizador(){
+
 }
+
+Utilizador::Utilizador(DadosPessoais contacto, Localizacao loc){
+	_local = loc;
+	_contacto = contacto;
+}
+
 
 bool Utilizador::AdicionarAnuncio(Anuncio* anuncio){
 	//excepçao o anuncio pode ja existir neste utilizador;
@@ -24,7 +30,7 @@ bool Utilizador::RemoverAnuncio(Anuncio* anuncio){
 
 bool Utilizador::RemoverAnuncio(int id){
 	for (unsigned int var = 0; var < _anuncios.size(); var++) {
-			if (_anuncios[var]->_ID == id){
+			if (_anuncios[var]->Anuncio::getID() == id){
 				_anuncios.erase(_anuncios.begin() + var);
 				return true;
 			}
@@ -38,7 +44,7 @@ DadosPessoais Utilizador::getDadosPessoais(){
 }
 
 Localizacao Utilizador::getLocalizacao(){
-	return this->_local;
+	return _local;
 }
 
 bool Utilizador::FecharNegocio (Anuncio* anuncio, float montante){

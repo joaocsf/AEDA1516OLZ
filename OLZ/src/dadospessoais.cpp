@@ -19,15 +19,15 @@ void DadosPessoais::alterarEmail(string novoEmail) {
 }
 
 void DadosPessoais::visibilidadeEmail(bool visivel) {
-	visiveis[2] = visivel;
+	visiveis[VIS_EMAIL] = visivel;
 }
 
 void DadosPessoais::visibilidadeNome(bool visivel) {
-	visiveis[0] = visivel;
+	visiveis[VIS_NOME] = visivel;
 }
 
 void DadosPessoais::visibilidadeTelefone(bool visivel) {
-	visiveis[1] = visivel;
+	visiveis[VIS_TELEFONE] = visivel;
 }
 
 
@@ -37,13 +37,13 @@ string DadosPessoais::getInfo() const {
 	for (int i = 0; i < 3; ++i) {
 		if (visiveis[i]) {
 			switch (i) {
-			case 0:
+			case VIS_NOME:
 				info += nome + "\n";
 				break;
-			case 1:
+			case VIS_TELEFONE:
 				info += telefone + "\n";
 				break;
-			case 2:
+			case VIS_EMAIL:
 				info += email + "\n";
 				break;
 			}
