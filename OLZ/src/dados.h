@@ -8,7 +8,7 @@ using namespace std;
 class Dados{
 public:
 
-	virtual void ler(ifstream& in) =0;
+	virtual void ler(ifstream& in ,bool escreve = false) =0;
 	virtual void escrever(ofstream& out) = 0;
 };
 

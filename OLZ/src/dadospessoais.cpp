@@ -57,7 +57,7 @@ string DadosPessoais::getInfo() const {
 	return info;
 }
 
-void DadosPessoais::ler(ifstream& in) {
+void DadosPessoais::ler(ifstream& in, bool escreve) {
 	string linha;
 	int index = 0;
 	while (getline(in, linha)) {

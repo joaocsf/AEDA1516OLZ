@@ -52,7 +52,7 @@ public:
 
 	string getInfo() const;
 
-	virtual void ler(ifstream& in);
+	virtual void ler(ifstream& in, bool escreve = false);
 	virtual void escrever(ofstream& out);
 
 };

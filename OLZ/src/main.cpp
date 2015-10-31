@@ -2,6 +2,8 @@
 #include <fstream>
 #include <vector>
 #include "dadospessoais.h"
+#include "utilizador.h"
+
 using namespace std;
 
 
@@ -14,26 +16,56 @@ int main(){
 	dadosPessoais.push_back(DadosPessoais("Carlota", "nA", "c@c.c"));
 	dadosPessoais.push_back(DadosPessoais("Andreia", "", "naoSei@cenas.com"));
 
+
+	Localizacao loc1;
+	loc1.concelho="Penafiel";
+	loc1.distrito="Porto";
+	loc1.freguesia="Pieres";
+	Localizacao loc2;
+	loc2.freguesia="123";
+	loc2.concelho="345";
+	loc2.distrito="6789";
+	Localizacao loc[] ={loc1, loc2};
 	ofstream file("testeDados.txt");
+	ifstream file1("testeDados.txt");
+
+
+
+	vector<Utilizador> utilizadores;
 
 	for (int i = 0; i < dadosPessoais.size(); ++i) {
-		dadosPessoais[i].escrever(file);
+		utilizadores.push_back(Utilizador(dadosPessoais[i], loc[i%2]));
 	}
 
-	ifstream file1("testeDados.txt");
+
+	for (int i = 0; i < utilizadores.size(); ++i) {
+		utilizadores[i].escrever(file);
+	}
+
+
 	string linha;
 
-	vector<DadosPessoais> dadosPessoais2;
+	vector<Utilizador> utilizadores2;
+
 	while(getline(file1,linha)){
-		if(linha == "D"){
-			DadosPessoais dTemp;
-			dTemp.ler(file1);
-			dadosPessoais2.push_back(dTemp);
+		if(linha == "U"){
+
+			Utilizador uTemp;
+			uTemp.ler(file1);
+			utilizadores2.push_back(uTemp);
 		}
 	}
-	for (int i = 0; i < dadosPessoais2.size(); ++i) {
-		cout <<dadosPessoais[i].getInfo() <<endl;
-		cout <<dadosPessoais2[i].getInfo() <<endl;
+	cout  <<endl;
+	if(utilizadores.size() != utilizadores2.size()){
+		cout <<"WTF?";
+		return 0;
+	}
+
+	for (int i = 0; i < utilizadores.size(); ++i) {
+		if(utilizadores[i].getInfo()!= utilizadores2[i].getInfo())
+			cout<<"WTF MATE!";
+		else
+			cout << "Tudo Bom";
 	}
 
 

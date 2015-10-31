@@ -8,12 +8,20 @@
 #include "dadospessoais.h"
 #include "data.h"
 
+#define UT_CONTACTO 0
+#define UT_FREGUESIA 1
+#define UT_CONCELHO 2
+#define UT_DISTRITO 3
+#define UT_ANUNCIOS 4
+#define UT_NEGOCIOS 5
+#define UT_TOTAL 6
 
-
-class Utilizador{
+class Utilizador : public Dados{
+	static int _ID;
+	int _identificador;
 	DadosPessoais _contacto;
-	vector<Anuncio *> _anuncios;
 	Localizacao _local;
+	vector<Anuncio *> _anuncios;
 	vector<Negocio *> _negociosConcluidos;
 public:
 	Utilizador();
@@ -26,7 +34,9 @@ public:
 	bool AlteraContacto(string telefone, string email);
 	DadosPessoais getDadosPessoais();
 	Localizacao getLocalizacao();
-
+	virtual void ler(ifstream& in,bool escreve= false);
+	virtual void escrever(ofstream& out);
+	string getInfo() const;
 };
 
 class AnuncioInexistente{
