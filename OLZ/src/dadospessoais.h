@@ -2,6 +2,7 @@
 #define DADOSPESSOAIS_H_
 
 #include "utilidades.h"
+#include "dados.h"
 
 
 using namespace std;
@@ -11,7 +12,7 @@ using namespace std;
 #define VIS_EMAIL 2
 #define VIS_TOTAL 3
 
-class DadosPessoais {
+class DadosPessoais : public Dados {
 
 	string nome;
 	string telefone;
@@ -20,18 +21,18 @@ class DadosPessoais {
 	bool visiveis[VIS_TOTAL]; //podemos por aqui os dados que são visiveis e quando queremos fazer display fazemos display do vetor
 public:
 
-	DadosPessoais(){}
+	DadosPessoais();
 	DadosPessoais(string nome, string telefone, string email);
 
-	/* "Altera 'O' nome" by Martins
+	/* "Altera 'O' nome"
 	 */
 	void alterarNome(string novoNome);
 
-	/* "Altera 'O' telefone" by Martins
+	/* "Altera 'O' telefone"
 	 */
 	void alterarTelefone(string novoTelefone);
 
-	/* "Altera 'O' e-mail" by Martins
+	/* "Altera 'O' e-mail"
 	 */
 	void alterarEmail(string novoEmail);
 
@@ -50,6 +51,9 @@ public:
 	 */
 
 	string getInfo() const;
+
+	virtual void ler(ifstream& in);
+	virtual void escrever(ofstream& out);
 
 };
 

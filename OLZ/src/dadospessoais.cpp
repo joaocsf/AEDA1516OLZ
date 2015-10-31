@@ -1,9 +1,16 @@
 #include "dadospessoais.h"
 
+DadosPessoais::DadosPessoais(){
+	for (int i = 0; i < VIS_TOTAL; ++i)
+			visiveis[i]=true;
+}
+
 DadosPessoais::DadosPessoais(string nome, string telefone, string email) {
 	this->nome = nome;
 	this->telefone = telefone;
 	this->email = email;
+	for (int i = 0; i < VIS_TOTAL; ++i)
+		visiveis[i]=true;
 }
 
 void DadosPessoais::alterarNome(string novoNome) {
@@ -30,8 +37,6 @@ void DadosPessoais::visibilidadeTelefone(bool visivel) {
 	visiveis[VIS_TELEFONE] = visivel;
 }
 
-
-
 string DadosPessoais::getInfo() const {
 	string info;
 	for (int i = 0; i < 3; ++i) {
@@ -52,3 +57,36 @@ string DadosPessoais::getInfo() const {
 	return info;
 }
 
+void DadosPessoais::ler(ifstream& in) {
+	string linha;
+	int index = 0;
+	while (getline(in, linha)) {
+		//cout <<"["<< index<< "]" << linha << endl;
+		switch (index) {
+		case VIS_NOME:
+			nome = linha;
+			break;
+		case VIS_TELEFONE:
+			telefone = linha;
+			break;
+		case VIS_EMAIL:
+			email = linha;
+			break;
+		case VIS_TOTAL:
+			if (linha != "#D") {
+				cout<<"ERRROOOOO FAZER THROW!";
+			} else{
+				return; //tudo bem pode continuar.
+			}
+			break;
+		default:
+			break;
+		}
+		index++;
+	}
+}
+void DadosPessoais::escrever(ofstream& out) {
+
+	out <<"D"<< endl<< nome << endl << telefone << endl << email << endl << "#D" << endl;
+
+}
