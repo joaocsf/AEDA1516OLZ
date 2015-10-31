@@ -40,6 +40,7 @@ public:
 	virtual void ler(ifstream& in,bool escreve= false);
 	virtual void escrever(ofstream& out);
 	string getInfo() const;
+	int getID() const;
 };
 
 class AnuncioInexistente{
