@@ -7,28 +7,47 @@
 #include "comum.h"
 #include "dados.h"
 
-#define ESTADO_NOVO
-#define ESTADO_USADO
-#define ESTADO_FUNCIONAL
-#define ESTADO_PECAS
+#define ESTADO_NOVO 0
+#define ESTADO_USADO 1
+#define ESTADO_FUNCIONAL 2
+#define ESTADO_PECAS 3
+
+#define A_IDENFICADOR 0
+#define A_TITULO 1
+#define A_CATEG 2
+#define A_DESC 3
+#define A_VIS 4
+#define A_DATA 5
+#define A_PRECO 0
+#define A_NEGOCIAVEL 1
+#define A_ESTADO 2
+
+
+
 
 class Anuncio : public Dados{
+	static int _ID;
+	int _identificador;
+	string _titulo;
+	string _categ_produto;
+	string _descricao;
+	int _num_vizualizacoes;
+	Data _data;
+	vector<Imagem> _imagens;
+	vector<Contacto> _contactos;//contatos realizados pelo site entre comprador e anunciante
+
 public:
 	Anuncio();
 	Anuncio(string titulo,string categ_produto,string descricao,Data date);
 	//~Anuncio();
 	static int getID();
 	Utilizador* _user;
-private:
-	static int _ID;
-	string _titulo;
-	string _categ_produto;
-	string _descricao;
-	vector<Imagem> _imagens;
-	Data _data;
-	vector<Contacto> _contactos;//contatos realizados pelo site entre comprador e anunciante
-	int _indentificador;
-	int _num_vizualizacoes;
+
+	virtual void ler(ifstream& in,bool escreve= false);
+	virtual void escrever(ofstream& out);
+	void setUser(Utilizador* user);
+
+
 };
 
 

@@ -40,3 +40,9 @@ void Data::imprime(){
 	cout << ano << "/"<<  mes << "/" << dia;
 }
 
+void Data::ler(ifstream& in,bool escreve){
+
+}
+void Data::escrever(ofstream& out){
+
+}

@@ -17,3 +17,10 @@ string Contacto::ObterInfo(){
 void Contacto::setMensagem(string mensagem){
 	_mensagem = mensagem;
 }
+
+void Contacto::ler(ifstream& in,bool escreve){
+
+}
+void Contacto::escrever(ofstream& out){
+
+}

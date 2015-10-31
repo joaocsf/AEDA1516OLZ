@@ -3,10 +3,10 @@
 
 #include "utilidades.h"
 #include "dadospessoais.h"
+#include "dados.h"
 
 
-
-class Contacto : public Dados{
+class Contacto: public Dados{
 
 	string _mensagem;
 	DadosPessoais _dados;
@@ -15,6 +15,10 @@ public:
 	Contacto(string mensagem, DadosPessoais dados);
 	string ObterInfo();
 	void setMensagem(string mensagem);
+
+	virtual void ler(ifstream& in,bool escreve= false);
+	virtual void escrever(ofstream& out);
+
 };
 
 
