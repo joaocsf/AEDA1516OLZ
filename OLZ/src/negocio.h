@@ -3,16 +3,16 @@
 
 #include "anuncio.h"
 
+
 class Negocio{
 	Anuncio *_ptr_anuncio;
 	float _montante; // montatne da compra/venda
-	//data da venda
+	Data _data;
+	static int _ID;
+	int _identificador;
 public:
 	Negocio();
-	Negocio(Anuncio* anun,float valor){
-		_ptr_anuncio = anun;
-		_montante = valor;
-	};
+	Negocio(Anuncio* anun,float valor);
 	~Negocio();
 };
 

@@ -4,6 +4,7 @@
 #include "utilidades.h"
 #include "contacto.h"
 #include "data.h"
+#include "comum.h"
 
 #define ESTADO_NOVO
 #define ESTADO_USADO

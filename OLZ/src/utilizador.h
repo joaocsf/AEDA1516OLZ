@@ -1,12 +1,13 @@
 #ifndef UTILIZADOR_H_
 #define UTILIZADOR_H_
 
-#include "anuncio.h"
+//#include "anuncio.h"
 #include "contacto.h"
 #include "utilidades.h"
 #include "negocio.h"
 #include "dadospessoais.h"
 #include "data.h"
+#include "comum.h"
 
 #define UT_CONTACTO 0
 #define UT_FREGUESIA 1
@@ -15,6 +16,8 @@
 #define UT_ANUNCIOS 4
 #define UT_NEGOCIOS 5
 #define UT_TOTAL 6
+
+
 
 class Utilizador : public Dados{
 	static int _ID;
