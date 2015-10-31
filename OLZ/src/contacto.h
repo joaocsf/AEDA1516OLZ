@@ -6,7 +6,7 @@
 
 
 
-class Contacto{
+class Contacto : public Dados{
 
 	string _mensagem;
 	DadosPessoais _dados;

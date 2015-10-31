@@ -3,7 +3,7 @@
 int Utilizador::_ID = 1;
 
 Utilizador::Utilizador() {
-
+	_identificador=_ID++;
 }
 
 Utilizador::Utilizador(DadosPessoais contacto, Localizacao loc) {
@@ -87,16 +87,17 @@ void Utilizador::ler(ifstream& in, bool escreve) {
 		case UT_DISTRITO:
 			_local.distrito = linha;
 			break;
-		case UT_NEGOCIOS:
-			break;
-		case UT_ANUNCIOS:
-			break;
-		case UT_TOTAL:
-			if(linha != "#U")
-				cout <<"Throw BlaBle";
-			else
-				return;
 		default:
+
+			if(linha == "A"){
+
+			}else if( linha == "N"){
+
+			}else if (linha != "#U"){
+				cout << "Throw BlaBle";
+			}else{
+				return;
+			}
 			break;
 		}
 
@@ -112,13 +113,11 @@ void Utilizador::escrever(ofstream& out) {
 	out << _local.distrito << endl;
 
 	for (int i = 0; i < _anuncios.size(); ++i) {
-		out << _anuncios[i]->getID();
+		//out << _anuncios[i];
 	}
-	out << endl;
 	/*for (int i = 0; i <_negociosConcluidos.size(); ++i) {
 	 out << _negociosConcluidos[i]->getID();
 	 }*/
-	 out <<endl;
 
 	out << "#U" << endl;
 

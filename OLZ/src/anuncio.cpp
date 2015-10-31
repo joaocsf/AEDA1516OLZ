@@ -23,7 +23,12 @@ AnuncioVenda::AnuncioVenda(string titulo,string categ_produto,string descricao,D
 		_preco(preco),
 		_negociavel(negociavel),
 		_estado(estado)
-{
+{}
+
+void AnuncioVenda::ler(ifstream& in,bool escreve= false){
+
+}
+void AnuncioVenda::escrever(ofstream& out){
 
 }
 
