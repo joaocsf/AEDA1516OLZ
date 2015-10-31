@@ -13,7 +13,7 @@
 #define UT_FREGUESIA 1
 #define UT_CONCELHO 2
 #define UT_DISTRITO 3
-#define UT_ANUNCIOS 4
+#define UT_IDENTIFICADOR 4
 #define UT_NEGOCIOS 5
 #define UT_TOTAL 6
 

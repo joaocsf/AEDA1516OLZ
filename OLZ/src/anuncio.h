@@ -38,7 +38,7 @@ class Anuncio : public Dados{
 	vector<Contacto> _contactos;//contatos realizados pelo site entre comprador e anunciante
 
 public:
-	Anuncio();
+	Anuncio(){}
 	Anuncio(string titulo,string categ_produto,string descricao,Data date);
 	//~Anuncio();
 	static int getID();
@@ -59,6 +59,7 @@ class AnuncioVenda: public Anuncio{
 	bool _negociavel;
 	int _estado; //Usar ESTADO_*
 public:
+	AnuncioVenda(){}
 	AnuncioVenda(string titulo,string categ_produto,string descricao,Data date,float preco,bool negociavel, int estado);
 	virtual void ler(ifstream& in,bool escreve= false);
 	virtual void escrever(ofstream& out);

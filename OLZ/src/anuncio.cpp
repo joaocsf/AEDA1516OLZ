@@ -62,21 +62,21 @@ void Anuncio::ler(ifstream& in, bool escreve) {
 string Anuncio::getInfo() const{
 	string info;
 	stringstream ss;
-	ss<<_identificador << endl;
-	ss<<_titulo << endl;
-	ss<<_categ_produto << endl;
-	ss<<_descricao << endl;
-	ss<<_num_vizualizacoes << endl;
-	ss << _data.getDia() << ":"<<_data.getMes()<< ":"<< _data.getAno() << endl;
+	ss<<"Identificador  "<<_identificador << endl;
+	ss<<"Titulo........."<<_titulo << endl;
+	ss<<"Categoria      "<<_categ_produto << endl;
+	ss<<"Descricao......"<<_descricao << endl;
+	ss<<"Visualizacoes  "<<_num_vizualizacoes << endl;
+	ss <<"Data.........."<< _data.getDia() << ":"<<_data.getMes()<< ":"<< _data.getAno() << endl;
 	for (int i = 0; i < _imagens.size(); ++i) {
-		ss<< "I:"<<_imagens[i].conteudo;
+		ss<< " I:"<<_imagens[i].conteudo;
 	}
 	for (int i = 0; i < _contactos.size(); ++i) {
-		ss<<_contactos[i].getInfo();
+		ss<<"Contactos:\n"<<_contactos[i].getInfo();
 	}
 
 	info +=ss.str();
-
+	return info;
 }
 
 void Anuncio::escrever(ofstream& out) {
@@ -152,8 +152,10 @@ void AnuncioVenda::escrever(ofstream& out) {
 string AnuncioVenda::getInfo()const{
 	string info = Anuncio::getInfo();
 	stringstream ss;
-	ss <<_preco << endl;
-	ss <<((_negociavel)? "true":"false") << endl;
+	ss<<"AnuncioVenda:"<<endl;
+	ss <<"Preco:........."<<_preco << endl;
+	ss <<"Negociavel:    "<<((_negociavel)? "true":"false") << endl;
+	ss <<"Estado:........";
 	switch(_estado){
 	case ESTADO_FUNCIONAL:
 		ss<<"Funcional";

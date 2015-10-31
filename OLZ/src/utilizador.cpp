@@ -80,7 +80,7 @@ void Utilizador::ler(ifstream& in, bool escreve) {
 			if (linha == "D")
 				_contacto.ler(in);
 			else
-				cout << "MERDOU ANUNCIO CONTACTO" << linha<<endl;
+				cout << "MERDOU CONTACTO" << linha<<endl;
 			break;
 		case UT_FREGUESIA:
 			_local.freguesia=linha;
@@ -91,14 +91,20 @@ void Utilizador::ler(ifstream& in, bool escreve) {
 		case UT_DISTRITO:
 			_local.distrito = linha;
 			break;
+		case UT_IDENTIFICADOR:
+			stringstream(linha)>>_identificador;
+			break;
 		default:
 
-			if(linha == "A"){
+			if(linha == "AV"){
+				Anuncio* A = new AnuncioVenda();
+				A->ler(in);
+				AdicionarAnuncio(A);
 
 			}else if( linha == "N"){
 
 			}else if (linha != "#U"){
-				cout << "MERDOU ANUNCIO\n";
+				cout << "MERDOU UTILIZADOR!"<<linha<<endl;
 			}else{
 				return;
 			}
@@ -115,7 +121,7 @@ void Utilizador::escrever(ofstream& out) {
 	out << _local.freguesia << endl;
 	out << _local.concelho << endl;
 	out << _local.distrito << endl;
-
+	out << _identificador << endl;
 	for (int i = 0; i < _anuncios.size(); ++i) {
 		_anuncios[i]->escrever(out);
 	}
@@ -129,12 +135,15 @@ void Utilizador::escrever(ofstream& out) {
 
 string Utilizador::getInfo() const{
 	string info;
+	stringstream ss;
+	ss<<_identificador;
+	info += "Identificador: " + ss.str()+"\n";
 	info +="Contacto \n" + _contacto.getInfo();
 	info +="LOC \n"+ _local.freguesia +"\n";
 	info += _local.concelho +"\n";
 	info += _local.distrito +"\n";
 	for (int i = 0; i < _anuncios.size(); ++i) {
-		info += _anuncios[i]->getID() + " ";
+		info += _anuncios[i]->getInfo() + "\n";
 	}
 	info += "\n";
 	info += "\n"; //negocios;
