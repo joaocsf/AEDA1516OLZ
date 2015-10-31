@@ -4,6 +4,7 @@
 #include "dadospessoais.h"
 #include "utilizador.h"
 #include "data.h"
+#include "menus.h"
 using namespace std;
 
 
@@ -11,6 +12,7 @@ using namespace std;
 
 int main(){
 
+	menu(3,0);
 
 	vector<DadosPessoais> dadosPessoais;
 	dadosPessoais.push_back(DadosPessoais("Nuno", "123", ""));
@@ -83,5 +85,6 @@ int main(){
 			cout << "Tudo Bom "<<endl<<endl;
 	}
 
+	system("pause");
 	return 0;
 }
