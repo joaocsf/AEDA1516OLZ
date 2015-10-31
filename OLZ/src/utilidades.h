@@ -4,7 +4,11 @@
 #include <iostream>
 #include <vector>
 #include <string>
-
+#include <Windows.h>
+#include <stdio.h>
+#include <fstream>
+#include <iomanip>
+#include <conio.h>
 
 using namespace std;
 
@@ -17,5 +21,18 @@ struct Localizacao{
 struct Imagem{
 	string conteudo;
 };
+
+
+void setcolor(unsigned int color);
+
+void setcolor(unsigned int color, unsigned int background_color);
+
+
+
+
+
+
+
+
 
 #endif
