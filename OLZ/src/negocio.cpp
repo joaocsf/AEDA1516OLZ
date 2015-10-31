@@ -8,3 +8,7 @@ Negocio::Negocio(Anuncio* anun,float valor){
 	_montante = valor;
 	_identificador=(_ID++);
 };
+
+int Negocio::getID(){
+	return _identificador;
+}

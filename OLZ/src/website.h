@@ -21,7 +21,6 @@ public:
 	static void RemoveAnuncio(int id);
 	static void RemoveUtilizador(int id);
 	static void	RemoveNegocio(int id);
-
 };
 
 

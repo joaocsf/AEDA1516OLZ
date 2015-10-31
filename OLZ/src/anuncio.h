@@ -13,22 +13,22 @@
 #define ESTADO_PECAS
 
 class Anuncio : public Dados{
+	static int _ID;
+		string _titulo;
+		string _categ_produto;
+		string _descricao;
+		vector<Imagem> _imagens;
+		Data _data;
+		vector<Contacto> _contactos;//contatos realizados pelo site entre comprador e anunciante
+		int _indentificador;
+		int _num_vizualizacoes;
 public:
 	Anuncio();
 	Anuncio(string titulo,string categ_produto,string descricao,Data date);
 	//~Anuncio();
 	static int getID();
 	Utilizador* _user;
-private:
-	static int _ID;
-	string _titulo;
-	string _categ_produto;
-	string _descricao;
-	vector<Imagem> _imagens;
-	Data _data;
-	vector<Contacto> _contactos;//contatos realizados pelo site entre comprador e anunciante
-	int _indentificador;
-	int _num_vizualizacoes;
+	Utilizador* getUser() const;
 };
 
 

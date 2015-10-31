@@ -13,9 +13,15 @@ Anuncio::Anuncio(string titulo,string categ_produto,string descricao,Data date):
 	_categ_produto(categ_produto),
 	_descricao(descricao),
 	_data(date),
-	_indentificador(_ID++)
+	_indentificador(_ID++),
+	_user(NULL)
 {
 }
+
+Utilizador* Anuncio::getUser() const{
+	return _user;
+}
+
 
 //anuncio venda
 AnuncioVenda::AnuncioVenda(string titulo,string categ_produto,string descricao,Data date,float preco,bool negociavel, int estado):

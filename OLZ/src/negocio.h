@@ -14,6 +14,7 @@ public:
 	Negocio();
 	Negocio(Anuncio* anun,float valor);
 	~Negocio();
+	int getID();
 };
 
 

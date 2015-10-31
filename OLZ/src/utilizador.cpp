@@ -12,6 +12,10 @@ Utilizador::Utilizador(DadosPessoais contacto, Localizacao loc) {
 	_identificador=_ID++;
 }
 
+int Utilizador::getID() const{
+	return _identificador;
+}
+
 bool Utilizador::AdicionarAnuncio(Anuncio* anuncio) {
 	_anuncios.push_back(anuncio);
 	return true;
