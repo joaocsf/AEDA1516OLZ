@@ -13,7 +13,7 @@ class Contacto: public Dados{
 public:
 	Contacto();
 	Contacto(string mensagem, DadosPessoais dados);
-	string ObterInfo();
+	string getInfo()const;
 	void setMensagem(string mensagem);
 
 	virtual void ler(ifstream& in,bool escreve= false);

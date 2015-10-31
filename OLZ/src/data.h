@@ -4,6 +4,12 @@
 #include "utilidades.h"
 #include "dados.h"
 
+#define DATA_ANO 0
+#define DATA_MES 1
+#define DATA_DIA 2
+
+
+
 class Data : public Dados {
 public:
 	Data(){}
@@ -12,9 +18,9 @@ public:
 	void setMes(unsigned int m);
 	void setDia(unsigned int d);
 	void setData(unsigned int a, unsigned int m, unsigned int d);
-	unsigned int getAno();
-	unsigned int getMes();
-	unsigned int getDia();
+	unsigned int getAno()const;
+	unsigned int getMes()const;
+	unsigned int getDia()const;
 	void imprime();
 
 	virtual void ler(ifstream& in, bool escreve = false);

@@ -80,7 +80,7 @@ void Utilizador::ler(ifstream& in, bool escreve) {
 			if (linha == "D")
 				_contacto.ler(in);
 			else
-				cout << "Throw bla bla";
+				cout << "MERDOU ANUNCIO CONTACTO" << linha<<endl;
 			break;
 		case UT_FREGUESIA:
 			_local.freguesia=linha;
@@ -98,7 +98,7 @@ void Utilizador::ler(ifstream& in, bool escreve) {
 			}else if( linha == "N"){
 
 			}else if (linha != "#U"){
-				cout << "Throw BlaBle";
+				cout << "MERDOU ANUNCIO\n";
 			}else{
 				return;
 			}
@@ -117,7 +117,7 @@ void Utilizador::escrever(ofstream& out) {
 	out << _local.distrito << endl;
 
 	for (int i = 0; i < _anuncios.size(); ++i) {
-		//out << _anuncios[i];
+		_anuncios[i]->escrever(out);
 	}
 	/*for (int i = 0; i <_negociosConcluidos.size(); ++i) {
 	 out << _negociosConcluidos[i]->getID();

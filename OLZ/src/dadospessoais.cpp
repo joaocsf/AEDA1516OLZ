@@ -74,7 +74,7 @@ void DadosPessoais::ler(ifstream& in, bool escreve) {
 			break;
 		case VIS_TOTAL:
 			if (linha != "#D") {
-				cout<<"ERRROOOOO FAZER THROW!";
+				cout<<"MERDOU DADOSPESSOAIS!";
 			} else{
 				return; //tudo bem pode continuar.
 			}

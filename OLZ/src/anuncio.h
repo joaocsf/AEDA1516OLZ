@@ -47,7 +47,7 @@ public:
 	virtual void ler(ifstream& in,bool escreve= false);
 	virtual void escrever(ofstream& out);
 	void setUser(Utilizador* user);
-
+	virtual string getInfo() const;
 	Utilizador* getUser();
 
 };
@@ -62,6 +62,7 @@ public:
 	AnuncioVenda(string titulo,string categ_produto,string descricao,Data date,float preco,bool negociavel, int estado);
 	virtual void ler(ifstream& in,bool escreve= false);
 	virtual void escrever(ofstream& out);
+	virtual string getInfo() const;
 };
 
 class AnuncioCompra: public Anuncio{
@@ -70,6 +71,7 @@ public:
 	AnuncioCompra(string titulo,string categ_produto,string descricao,Data date);
 	virtual void ler(ifstream& in,bool escreve= false);
 	virtual void escrever(ofstream& out);
+	virtual string getInfo() const;
 };
 
 

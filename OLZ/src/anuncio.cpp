@@ -34,11 +34,10 @@ void Anuncio::ler(ifstream& in, bool escreve) {
 		case A_VIS:
 			stringstream(linha)>>_num_vizualizacoes;
 			break;
-		case A_DATA:
-			_data.ler(in);
-			break;
 		default:
-			if(linha == "I"){
+			if(linha == "DAT"){
+				_data.ler(in);
+			}else if(linha == "I"){
 				getline(in,linha);
 				Imagem temp;
 				temp.conteudo=linha;
@@ -60,6 +59,26 @@ void Anuncio::ler(ifstream& in, bool escreve) {
 
 }
 
+string Anuncio::getInfo() const{
+	string info;
+	stringstream ss;
+	ss<<_identificador << endl;
+	ss<<_titulo << endl;
+	ss<<_categ_produto << endl;
+	ss<<_descricao << endl;
+	ss<<_num_vizualizacoes << endl;
+	ss << _data.getDia() << ":"<<_data.getMes()<< ":"<< _data.getAno() << endl;
+	for (int i = 0; i < _imagens.size(); ++i) {
+		ss<< "I:"<<_imagens[i].conteudo;
+	}
+	for (int i = 0; i < _contactos.size(); ++i) {
+		ss<<_contactos[i].getInfo();
+	}
+
+	info +=ss.str();
+
+}
+
 void Anuncio::escrever(ofstream& out) {
 	out << _identificador << endl;
 	out << _titulo << endl;
@@ -73,7 +92,7 @@ void Anuncio::escrever(ofstream& out) {
 	for (int i = 0; i < _contactos.size(); ++i) {
 		_contactos[i].escrever(out);
 	}
-	out <<"#V";//Sinaliza Fim vetor
+	out <<"#V" << endl;//Sinaliza Fim vetor
 }
 void Anuncio::setUser(Utilizador* user){
 	_user = user;
@@ -130,6 +149,32 @@ void AnuncioVenda::escrever(ofstream& out) {
 
 }
 
+string AnuncioVenda::getInfo()const{
+	string info = Anuncio::getInfo();
+	stringstream ss;
+	ss <<_preco << endl;
+	ss <<((_negociavel)? "true":"false") << endl;
+	switch(_estado){
+	case ESTADO_FUNCIONAL:
+		ss<<"Funcional";
+		break;
+	case ESTADO_NOVO:
+		ss<<"Novo";
+		break;
+	case ESTADO_PECAS:
+		ss<<"Novo Para Pecas";
+		break;
+	case ESTADO_USADO:
+		ss<<"Usado";
+		break;
+	}
+	ss <<endl;
+
+
+
+	return ss.str() + info;
+}
+
 //anuncio compra
 AnuncioCompra::AnuncioCompra(string titulo, string categ_produto,
 		string descricao, Data date) :
@@ -138,13 +183,29 @@ AnuncioCompra::AnuncioCompra(string titulo, string categ_produto,
 
 void AnuncioCompra::ler(ifstream& in, bool escreve) {
 	Anuncio::ler(in);
-	string
-	while(getline(in,))
+	string linha;
+	int index =0;
+	while(getline(in,linha)){
+		if(index == 0){//Procurar Anuncio;
+
+		}else if(linha == "#AC"){
+			return;
+		}else{
+			cout <<"Merdou Compra \n";
+		}
+
+		index ++;
+	}
 
 }
 void AnuncioCompra::escrever(ofstream& out) {
 	out << "AC"<<endl;
 	out << _anuncioVenda->getID();
 	out <<"#AC"<<endl;
+}
+string AnuncioCompra::getInfo() const{
+	string info = Anuncio::getInfo();
+
+	return info;
 }
 

@@ -3,13 +3,38 @@
 #include <vector>
 #include "dadospessoais.h"
 #include "utilizador.h"
-
+#include "data.h"
 using namespace std;
 
 
 
 
 int main(){
+	Localizacao loc1;
+	loc1.concelho="Penafiel";
+	loc1.distrito="Porto";
+	loc1.freguesia="Pieres";
+
+	Utilizador u = Utilizador(DadosPessoais("Nuno", "123", "Bla"), loc1);
+
+	AnuncioVenda AVenda = AnuncioVenda("Papel De Comer","Comida","Mete isto no rabo",Data(2015,12,11),0.12f,false,ESTADO_USADO );
+	u.AdicionarAnuncio(&AVenda);
+	ofstream out("testeDados.txt");
+	u.escrever(out);
+	Utilizador u2;
+	ifstream in("testeDados.txt");
+
+	string linha;
+	while(getline(in,linha)){
+		if(linha == "U"){
+			u2.ler(in);
+		}
+	}
+
+	u2.getInfo();
+
+	/**/
+	/*
 	vector<DadosPessoais> dadosPessoais;
 	dadosPessoais.push_back(DadosPessoais("Nuno", "123", ""));
 	dadosPessoais.push_back(DadosPessoais("Manel", "321", "aff@blup.com"));
@@ -68,6 +93,6 @@ int main(){
 			cout << "Tudo Bom";
 	}
 
-
+	*/
 	return 0;
 }
