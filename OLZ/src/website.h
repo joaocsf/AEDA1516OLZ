@@ -12,6 +12,7 @@ class Website{
 	static vector<Anuncio *> anuncios;
 	static vector<Negocio *> negocios;
 public:
+	Website();
 	static vector<Utilizador*>  getUtilizadores();
 	static vector<Anuncio *>  getAnuncios();
 	static vector<Negocio*>  getNegocios();

@@ -4,6 +4,10 @@ vector<Utilizador*> Website::utilizadores;
 vector<Anuncio *> Website::anuncios;
 vector<Negocio*> Website::negocios;
 
+Website::Website(){
+
+}
+
 vector<Utilizador*>  Website::getUtilizadores(){
 	return utilizadores;
 }

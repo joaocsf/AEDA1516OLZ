@@ -23,8 +23,18 @@ WHITE 15
  */
 
 void intro();
+
 string Highlight();
-void menuImprime(int y);
+
+void menuInicial(int y);
+void menuLogin(int y);
+void menuAnunciar(int y);
+void menuPesquisar(int y);
+void menuOrdemPesq(int y);
+void menuConta(int y);
+void menuAnuncio(int y);
+
+
 int menu(int tamanho,int menuSelect);
 
 
