@@ -15,3 +15,13 @@ void setcolor(unsigned int color, unsigned int background_color)	//define a cor 
 		SetConsoleTextAttribute(hCon, color + 16*background_color);
 }
 
+void intro(){
+	setcolor(9);
+	cout << "   ______    __       ________  " <<endl;
+	cout << "  /  __  \\  |  |     |       /  " <<endl;
+	cout << " |  |  |  | |  |     `---/  /   " <<endl;
+	cout << " |  |  |  | |  |        /  /    " <<endl;
+	cout << " |  `--'  | |  `----.  /  /----." <<endl;
+	cout << "  \\______/  |_______| /________|" <<endl << endl << endl;
+	setcolor(15);
+}

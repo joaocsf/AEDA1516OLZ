@@ -2,6 +2,7 @@
 #define MENUS_H_
 
 #include "utilidades.h"
+#include "website.h"
 
 /*cores
 BLACK 0
@@ -22,10 +23,13 @@ YELLOW 14
 WHITE 15
  */
 
-void intro();
+static Website site;
+
 
 string Highlight();
+int menu(int tamanho,int menuSelect);
 
+//menu print
 void menuInicial(int y);
 void menuLogin(int y);
 void menuAnunciar(int y);
@@ -33,10 +37,12 @@ void menuPesquisar(int y);
 void menuOrdemPesq(int y);
 void menuConta(int y);
 void menuAnuncio(int y);
-
-
-int menu(int tamanho,int menuSelect);
-
+//interface
+void menuInterface();
+void interfaceLog();
+void interfaceConta();
+void interfacePesquisar(bool logado);
+void interfaceOrdemPesq(bool logado);
 
 
 

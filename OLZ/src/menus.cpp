@@ -2,17 +2,6 @@
 #include <stdlib.h>
 
 
-void intro(){
-	setcolor(9);
-	cout << "   ______    __       ________  " <<endl;
-	cout << "  /  __  \\  |  |     |       /  " <<endl;
-	cout << " |  |  |  | |  |     `---/  /   " <<endl;
-	cout << " |  |  |  | |  |        /  /    " <<endl;
-	cout << " |  `--'  | |  `----.  /  /----." <<endl;
-	cout << "  \\______/  |_______| /________|" <<endl << endl << endl;
-	setcolor(15);
-}
-
 
 string Highlight(string frase, int select, int ops){
 	if(select == ops){
@@ -22,7 +11,7 @@ string Highlight(string frase, int select, int ops){
 
 	return frase;
 }
-
+//--------TEXTO------------------
 void menuInicial(int y){
 	system("cls");
 	intro();
@@ -102,7 +91,6 @@ void menuOrdemPesq(int y){
 	setcolor(15);
 }
 
-//fazer menu para os anuncios com nova funcao highligth
 
 void menuAnuncio(int y){
 	system("cls");
@@ -112,7 +100,141 @@ void menuAnuncio(int y){
 	cout << setw(50) <<  Highlight("Voltar Atras", y, 1) << endl;
 	setcolor(15);
 }
+//----------------------------------------------------------------------------------
+//---------------------------funcoes interface--------------------------------------
+/*void MenuSeletor() {
 
+	int menu = 0;
+	while (true) {
+		switch (menu) {
+		case 0:
+			menu = menuInterface();
+			break;
+		case 1:
+			menu = menuAdicionarAnuncio();
+		case 3:
+			return;
+			break;
+		}
+	}
+}
+*/
+
+void menuInterface(){
+	int y;
+	y=menu(3,0);
+	switch(y){
+	case 0:{
+		try{
+		site.login();
+		}
+		catch(UtilizadorInixestente &e){
+			setcolor(4);
+			cout << "O Utilizador " << e.getMail() << " nao esta registado" << endl;
+			setcolor(15);
+			getch();
+			//e agora?
+
+		}
+		interfaceLog();
+	}
+	break;
+	case 1:{//registar
+	}
+	break;
+	case 2:{//pesquisar
+		interfacePesquisar(false);
+	}
+	break;
+	case 3:{return;}
+	break;
+	}
+}
+
+void interfaceLog(){
+	int y;
+	y=menu(3,1);
+	switch(y){
+	case 0:{//anunciar
+			}
+		break;
+	case 1:{//conta
+		interfaceConta();
+	}
+		break;
+	case 2:{
+		interfacePesquisar(true);
+	}
+		break;
+	case 3:{
+		menuInterface();
+	}
+		break;
+	}
+}
+
+void interfaceConta(){
+	int y;
+	y=menu(3,5);
+	switch(y){
+	case 0:{//ac
+			}
+		break;
+	case 1:{//av
+		}
+		break;
+	case 2:{//visibilidade
+		}
+		break;
+	case 3:{interfaceLog();}
+		break;
+	}
+}
+
+void interfacePesquisar(bool logado){
+	int y;
+	y=menu(4,3);
+	switch(y){
+	case 0:{//palavra
+	}
+	break;
+	case 1:{//data
+		interfaceOrdemPesq(logado);
+	}
+	break;
+	case 2:{//categ
+	}
+	break;
+	case 3:{//localizacao
+
+	}
+	break;
+	case 4:{
+		if(logado)
+			interfaceLog();
+		else
+			menuInterface();}
+	break;
+	}
+}
+
+void interfaceOrdemPesq(bool logado){
+	int y;
+	y=menu(2,4);
+	switch(y){
+	case 0:{//crescente
+			}
+		break;
+	case 1:{//decrecente
+		}
+		break;
+	case 2:{
+		interfacePesquisar(logado);
+		}
+		break;
+	}
+}
+//-----------------------------------------
 int menu(int tamanho,int menuSelect){
 	int y=0;
 	bool teclado=true;

@@ -10,7 +10,13 @@
 #include <iomanip>
 #include <conio.h>
 
+
 using namespace std;
+
+void intro();
+
+
+
 
 struct Localizacao{
 	string freguesia;

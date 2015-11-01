@@ -20,7 +20,7 @@ class DadosPessoais : public Dados {
 
 	bool visiveis[VIS_TOTAL]; //podemos por aqui os dados que são visiveis e quando queremos fazer display fazemos display do vetor
 public:
-
+	string getNome();
 	DadosPessoais();
 	DadosPessoais(string nome, string telefone, string email);
 

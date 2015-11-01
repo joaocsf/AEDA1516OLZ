@@ -90,3 +90,9 @@ void DadosPessoais::escrever(ofstream& out) {
 	out <<"D"<< endl<< nome << endl << telefone << endl << email << endl << "#D" << endl;
 
 }
+
+//get
+
+string DadosPessoais::getNome(){
+	return nome;
+}

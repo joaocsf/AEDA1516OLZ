@@ -5,7 +5,7 @@ vector<Anuncio *> Website::anuncios;
 vector<Negocio*> Website::negocios;
 
 Website::Website(){
-
+indiceUtilizador = -1;
 }
 
 vector<Utilizador*>  Website::getUtilizadores(){
@@ -68,8 +68,32 @@ void Website::RemoveNegocio(int id){//só remove do vetor negocios
 		}
 	}
 }
+//funçoes interaão com o usuario
 
 
+void Website::login(){
+
+	string login;
+
+	system("cls");
+	intro();
+	cout << "Login: ";
+	cin >> login;
+	for (unsigned int i = 0; i < utilizadores.size(); ++i) {
+		if(utilizadores[i]->getDadosPessoais().getNome()==login)
+			indiceUtilizador = i;
+	}
+
+	throw UtilizadorInixestente(login);
+}
+
+void Website::Registar(){
+	system("cls");
+	intro();
+	cout << "Nome: ";
+
+
+}
 
 
 

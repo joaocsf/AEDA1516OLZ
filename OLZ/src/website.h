@@ -11,8 +11,11 @@ class Website{
 	static vector<Utilizador *> utilizadores;
 	static vector<Anuncio *> anuncios;
 	static vector<Negocio *> negocios;
+	int indiceUtilizador;
 public:
 	Website();
+	void login();
+	void Registar();
 	static vector<Utilizador*>  getUtilizadores();
 	static vector<Anuncio *>  getAnuncios();
 	static vector<Negocio*>  getNegocios();
@@ -24,6 +27,15 @@ public:
 	static void	RemoveNegocio(int id);
 };
 
-
+class UtilizadorInixestente{
+	string mail;
+public:
+	UtilizadorInixestente(string mail){
+		this->mail=mail;
+	}
+	string getMail(){
+		return mail;
+	}
+};
 
 #endif
