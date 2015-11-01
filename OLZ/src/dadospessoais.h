@@ -20,7 +20,8 @@ class DadosPessoais : public Dados {
 
 	bool visiveis[VIS_TOTAL]; //podemos por aqui os dados que são visiveis e quando queremos fazer display fazemos display do vetor
 public:
-	string getNome();
+	string getNome() const;
+	string getEmail() const;
 	DadosPessoais();
 	DadosPessoais(string nome, string telefone, string email);
 

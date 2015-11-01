@@ -4,8 +4,10 @@ vector<Utilizador*> Website::utilizadores;
 vector<Anuncio *> Website::anuncios;
 vector<Negocio*> Website::negocios;
 
+
+int Website::indiceUtilizador=-1;
+
 Website::Website(){
-indiceUtilizador = -1;
 }
 
 vector<Utilizador*>  Website::getUtilizadores(){
@@ -69,30 +71,54 @@ void Website::RemoveNegocio(int id){//só remove do vetor negocios
 	}
 }
 //funçoes interaão com o usuario
+int Website::getIndiceUtilizador(){
+return indiceUtilizador;
 
+}
 
 void Website::login(){
 
 	string login;
 
-	system("cls");
-	intro();
-	cout << "Login: ";
+	cout << "Login:";
 	cin >> login;
 	for (unsigned int i = 0; i < utilizadores.size(); ++i) {
-		if(utilizadores[i]->getDadosPessoais().getNome()==login)
+		if(utilizadores[i]->getDadosPessoais().getEmail()==login){
 			indiceUtilizador = i;
+			return;
+		}
 	}
 
 	throw UtilizadorInixestente(login);
 }
 
 void Website::Registar(){
-	system("cls");
-	intro();
+
+	string nome;
+	string telefone;
+	string email;
 	cout << "Nome: ";
+	getline(cin,nome);
+	cout << "Telefone: " ;
+	getline(cin,telefone);
+	cout << "Email: " ;
+	getline(cin,email);
+	DadosPessoais dados(nome,telefone,email);
 
+	Localizacao loc_tmp;
+	cout << "Freguesia: ";
+	getline(cin,loc_tmp.freguesia);
+	cout << "Concelho: ";
+	getline(cin,loc_tmp.concelho);
+	cout << "Distrito: ";
+	getline(cin,loc_tmp.distrito);
 
+	utilizadores.push_back(new Utilizador(dados,loc_tmp));
+	indiceUtilizador=utilizadores.size()-1;
+}
+
+void Website::logout(){
+     indiceUtilizador=-1;
 }
 
 

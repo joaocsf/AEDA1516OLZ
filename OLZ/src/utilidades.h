@@ -9,7 +9,7 @@
 #include <fstream>
 #include <iomanip>
 #include <conio.h>
-
+#include "limits.h"
 
 using namespace std;
 

@@ -11,11 +11,12 @@ class Website{
 	static vector<Utilizador *> utilizadores;
 	static vector<Anuncio *> anuncios;
 	static vector<Negocio *> negocios;
-	int indiceUtilizador;
+	static int indiceUtilizador;
 public:
 	Website();
-	void login();
-	void Registar();
+	static void login();
+	static void logout();
+	static void Registar();
 	static vector<Utilizador*>  getUtilizadores();
 	static vector<Anuncio *>  getAnuncios();
 	static vector<Negocio*>  getNegocios();
@@ -25,6 +26,7 @@ public:
 	static void RemoveAnuncio(int id);
 	static void RemoveUtilizador(int id);
 	static void	RemoveNegocio(int id);
+	static int getIndiceUtilizador();
 };
 
 class UtilizadorInixestente{

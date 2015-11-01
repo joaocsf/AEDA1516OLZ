@@ -23,12 +23,14 @@ YELLOW 14
 WHITE 15
  */
 
-static Website site;
-
 
 string Highlight();
-int menu(int tamanho,int menuSelect);
 
+class Menu{
+
+public:
+void intro();
+int menu(int tamanho,int menuSelect);
 //menu print
 void menuInicial(int y);
 void menuLogin(int y);
@@ -38,12 +40,14 @@ void menuOrdemPesq(int y);
 void menuConta(int y);
 void menuAnuncio(int y);
 //interface
-void menuInterface();
-void interfaceLog();
-void interfaceConta();
-void interfacePesquisar(bool logado);
-void interfaceOrdemPesq(bool logado);
-
-
+int menuInterface();
+int interfaceLog();
+int interfaceConta();
+int interfacePesquisar(bool log);
+int interfaceOrdemPesq();
+//selector
+void InterfaceSeletor();
+bool logado = false; //variavel que indica se o usuario está logado
+};
 
 #endif

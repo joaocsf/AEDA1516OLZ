@@ -7,11 +7,37 @@
 #include "menus.h"
 using namespace std;
 
-
 int main() {
 	//ler ficheiros
 
-	menuInterface();
+	vector<DadosPessoais> dadosPessoais;
+	dadosPessoais.push_back(DadosPessoais("Nuno", "123", ""));
+	dadosPessoais.push_back(DadosPessoais("Manel", "321", "aff@blup.com"));
+	dadosPessoais.push_back(DadosPessoais("Carlota", "nA", "c@c.c"));
+	dadosPessoais.push_back(DadosPessoais("Andreia", "", "naoSei@cenas.com"));
+
+	Localizacao loc1;
+	loc1.concelho = "Penafiel";
+	loc1.distrito = "Porto";
+	loc1.freguesia = "Pieres";
+	Localizacao loc2;
+	loc2.freguesia = "123";
+	loc2.concelho = "345";
+	loc2.distrito = "6789";
+	Localizacao loc[] = { loc1, loc2 };
+
+	vector<Utilizador> utilizadores;
+
+	for (int i = 0; i < dadosPessoais.size(); ++i) {
+		utilizadores.push_back(Utilizador(dadosPessoais[i], loc[i % 2]));
+	}
+
+	for (unsigned int i = 0; i < utilizadores.size(); ++i) {
+		Website::addUtilizador(&utilizadores[i]);
+	}
+
+	Menu m;
+	m.InterfaceSeletor();
 
 	//escrever ficheiros
 

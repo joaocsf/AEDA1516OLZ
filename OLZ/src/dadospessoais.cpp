@@ -93,6 +93,10 @@ void DadosPessoais::escrever(ofstream& out) {
 
 //get
 
-string DadosPessoais::getNome(){
+string DadosPessoais::getNome() const{
 	return nome;
+}
+
+string DadosPessoais::getEmail() const{
+	return email;
 }
