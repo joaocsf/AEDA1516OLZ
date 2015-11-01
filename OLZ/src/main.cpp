@@ -55,7 +55,7 @@ void interfaceLog(){
 	}
 		break;
 	case 3:{
-		return;
+		menuinterface();
 	}
 		break;
 	}
