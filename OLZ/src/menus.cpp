@@ -41,7 +41,7 @@ void menuLogin(int y){
 	intro();
 	cout << setw(20) <<  Highlight("Anunciar", y, 0) << endl;
 	setcolor(15);
-	cout << setw(20) <<  Highlight("Definicoes De Conta", y, 0) << endl;
+	cout << setw(20) <<  Highlight("Definicoes De Conta", y, 1) << endl;
 	setcolor(15);
 	cout << setw(20) <<  Highlight("Pesquisar Anuncios", y, 2) << endl;
 	setcolor(15);
@@ -54,9 +54,9 @@ void menuAnunciar(int y){
 	intro();
 	cout << setw(20) <<  Highlight("Criar Anuncio de Venda", y, 0) << endl;
 	setcolor(15);
-	cout << setw(20) <<  Highlight("Criar Anuncio de Compra", y, 0) << endl;
+	cout << setw(20) <<  Highlight("Criar Anuncio de Compra", y, 1) << endl;
 	setcolor(15);
-	cout << setw(20) <<Highlight("Voltar Atras", y, 3) << endl;
+	cout << setw(20) <<Highlight("Voltar Atras", y, 2) << endl;
 	setcolor(15);
 }
 
@@ -83,9 +83,9 @@ void menuPesquisar(int y){
 		setcolor(15);
 		cout << setw(20) <<  Highlight("Categoria do Produto", y, 2) << endl;
 		setcolor(15);
-		cout << setw(20) <<  Highlight("Localizacao", y, 2) << endl;
+		cout << setw(20) <<  Highlight("Localizacao", y, 3) << endl;
 		setcolor(15);
-		cout << setw(20) <<Highlight("Voltar Atras", y, 3) << endl;
+		cout << setw(20) <<Highlight("Voltar Atras", y, 4) << endl;
 		setcolor(15);
 }
 
@@ -109,7 +109,7 @@ void menuAnuncio(int y){
 	intro();
 	cout << setw(50) <<  Highlight("Contactar Anunciante", y, 0) << endl;
 	setcolor(15);
-	cout << setw(50) <<  Highlight("Voltar Atras", y, 0) << endl;
+	cout << setw(50) <<  Highlight("Voltar Atras", y, 1) << endl;
 	setcolor(15);
 }
 
