@@ -9,6 +9,7 @@
 #include "data.h"
 #include "comum.h"
 
+
 #define UT_CONTACTO 0
 #define UT_FREGUESIA 1
 #define UT_CONCELHO 2
@@ -35,12 +36,15 @@ public:
 	bool RemoverAnuncio(int id);//Remove um anuncio por id
 	bool FecharNegocio (Anuncio* anuncio, float montante);
 	bool AlteraContacto(string telefone, string email);
+
 	DadosPessoais getDadosPessoais();
 	Localizacao getLocalizacao();
 	virtual void ler(ifstream& in,bool escreve= false);
 	virtual void escrever(ofstream& out);
 	string getInfo() const;
+	Anuncio* procurarAnuncio(int id);
 	int getID() const;
+	static int getIDGlobal();
 };
 
 class AnuncioInexistente{

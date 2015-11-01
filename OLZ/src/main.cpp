@@ -124,16 +124,13 @@ void interfaceOrdemPesq(bool logado){
 }
 
 int main(){
-	menuinterface();
+	//menuinterface();
 
-
-
-/*
 	vector<DadosPessoais> dadosPessoais;
-	dadosPessoais.push_back(DadosPessoais("Nuno", "123", ""));
-	dadosPessoais.push_back(DadosPessoais("Manel", "321", "aff@blup.com"));
-	dadosPessoais.push_back(DadosPessoais("Carlota", "nA", "c@c.c"));
-	dadosPessoais.push_back(DadosPessoais("Andreia", "", "naoSei@cenas.com"));
+	dadosPessoais.push_back(DadosPessoais("Nuno", "+351 111 222 333", "emal@mail.com"));
+	dadosPessoais.push_back(DadosPessoais("Manel", "+351 123 456 789", "aff@blup.com"));
+	dadosPessoais.push_back(DadosPessoais("Carlota", "+351 999 999 999", "c@c.c"));
+	dadosPessoais.push_back(DadosPessoais("Andreia", "NumeroTelemovel", "naoSei@cenas.com"));
 
 
 	Localizacao loc1;
@@ -141,9 +138,9 @@ int main(){
 	loc1.distrito="Porto";
 	loc1.freguesia="Pieres";
 	Localizacao loc2;
-	loc2.freguesia="123";
-	loc2.concelho="345";
-	loc2.distrito="6789";
+	loc2.freguesia="Freguesia";
+	loc2.concelho="Concelho";
+	loc2.distrito="Distrito";
 	Localizacao loc[] ={loc1, loc2};
 	ofstream file("testeDados.txt");
 	ifstream file1("testeDados.txt");
@@ -161,13 +158,29 @@ int main(){
 	Anuncio* a3 =new AnuncioVenda("Peluche Bacalhau","Decoracao","Experimenta ;D",Data(2222,22,21),15.00f,false,ESTADO_USADO);
 	Anuncio* a4 =new AnuncioVenda("Shampu Para Tu","Limpeza","Ate te limpa a careca ho belho!",Data(2121,21,21),0.01f,true,ESTADO_FUNCIONAL);
 	Anuncio* a5 =new AnuncioVenda("Nave Espacial","O que ser isto?","Fake",Data(9999,9999,9999),999.99f,true,ESTADO_PECAS);
+	AnuncioCompra* av1 = new AnuncioCompra("Compro Shampu","Limpeza","Gostava de ter a sensacao de careca cintilante.",Data(2015,12,12));
+	av1->setAnuncioVenda(dynamic_cast<AnuncioVenda*>(a1));
 
+	av1->enviarMensagem(Contacto("Olá!!!",dadosPessoais[1]));
+	av1->enviarMensagem(Contacto("Queres Comprar?",dadosPessoais[0]));
+	av1->enviarMensagem(Contacto("NOPE!", dadosPessoais[1]));
 
+	Imagem i1;
+	i1.conteudo="IMAGEM01";
+	Imagem i2;
+	i2.conteudo="IMAGEM02";
+	a2->AdicionarImagem(i2);
+	a5->AdicionarImagem(i1);
+
+	utilizadores[0].AdicionarAnuncio(av1);
 	utilizadores[0].AdicionarAnuncio(a1);
+
 	utilizadores[1].AdicionarAnuncio(a2);
 	utilizadores[2].AdicionarAnuncio(a3);
 	utilizadores[2].AdicionarAnuncio(a4);
 	utilizadores[0].AdicionarAnuncio(a5);
+
+	utilizadores[2].FecharNegocio(a4, 20.0f);
 
 	for (int i = 0; i < utilizadores.size(); ++i) {
 		utilizadores[i].escrever(file);
@@ -185,20 +198,20 @@ int main(){
 	}
 	cout  <<endl;
 	if(utilizadores.size() != utilizadores2.size()){
-		cout <<"WTF?";
+		cout <<"MENOS UTILIZADORES";
 		return 0;
 	}
 
 	for (int i = 0; i < utilizadores.size(); ++i) {
 		cout<<utilizadores[i].getInfo()<<endl<<endl;
-		intro();
+
 		cout<<utilizadores2[i].getInfo();
 		if(utilizadores[i].getInfo()!= utilizadores2[i].getInfo())
 			cout<<"WTF MATE!";
 		else
 			cout << "Tudo Bom "<<endl<<endl;
 	}
-*/
-	system("pause");
+/**/
+	//system("pause");
 	return 0;
 }

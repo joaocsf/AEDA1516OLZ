@@ -11,8 +11,8 @@ Contacto::Contacto(){
 }
 
 string Contacto::getInfo() const{
-	string info = _mensagem;
-	info += "\n";
+	string info ="Mensagem:"+ _mensagem + "\n";
+	info += "De:\n";
 	info +=_dados.getInfo();
 	return info;
 }

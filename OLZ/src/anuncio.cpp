@@ -1,9 +1,9 @@
 #include "anuncio.h"
-#include "data.h"
+#include "utilizador.h"
 
 int Anuncio::_ID = 1;
 
-int Anuncio::getID() {
+int Anuncio::getIDGlobal(){
 	return _ID;
 }
 
@@ -11,7 +11,7 @@ int Anuncio::getID() {
 Anuncio::Anuncio(string titulo, string categ_produto, string descricao,
 		Data date) :
 		_num_vizualizacoes(0), _titulo(titulo), _categ_produto(categ_produto), _descricao(
-				descricao), _data(date), _identificador(_ID++), _user(NULL) {
+				descricao), _data(date), _identificador(_ID++), _user(NULL), _visivel(true) {
 }
 
 void Anuncio::ler(ifstream& in, bool escreve) {
@@ -31,8 +31,13 @@ void Anuncio::ler(ifstream& in, bool escreve) {
 		case A_DESC:
 			_descricao = linha;
 			break;
-		case A_VIS:
+		case A_N_VIS:
 			stringstream(linha)>>_num_vizualizacoes;
+			break;
+		case A_VISIVEL:
+			int temp;
+			stringstream(linha)>>temp;
+			_visivel = temp;
 			break;
 		default:
 			if(linha == "DAT"){
@@ -50,13 +55,17 @@ void Anuncio::ler(ifstream& in, bool escreve) {
 			}else if(linha == "#V"){
 				return;
 			}else{
-				cout <<"Merdou Anuncio \n";
+				cout <<"Merdou Anuncio \n" << linha;
 			}
 			break;
 		}
 		index++;
 	}
 
+}
+
+void Anuncio::alterarVisibilidade(bool vis){
+	_visivel=vis;
 }
 
 string Anuncio::getInfo() const{
@@ -67,16 +76,21 @@ string Anuncio::getInfo() const{
 	ss<<"Categoria      "<<_categ_produto << endl;
 	ss<<"Descricao......"<<_descricao << endl;
 	ss<<"Visualizacoes  "<<_num_vizualizacoes << endl;
-	ss <<"Data.........."<< _data.getDia() << ":"<<_data.getMes()<< ":"<< _data.getAno() << endl;
+	ss<<"Visibilidade...."<<((_visivel)? "Visivel": "Invisivel")<<endl;
+	ss <<"Data          "<< _data.getDia() << ":"<<_data.getMes()<< ":"<< _data.getAno() << endl;
 	for (int i = 0; i < _imagens.size(); ++i) {
-		ss<< " I:"<<_imagens[i].conteudo;
+		ss<< "  I:"<<_imagens[i].conteudo << endl;
 	}
 	for (int i = 0; i < _contactos.size(); ++i) {
-		ss<<"Contactos:\n"<<_contactos[i].getInfo();
+		ss<<"Contactos:\n"<<_contactos[i].getInfo()<< endl;
 	}
 
 	info +=ss.str();
 	return info;
+}
+
+void Anuncio::enviarMensagem(Contacto c){
+	_contactos.push_back(c);
 }
 
 void Anuncio::escrever(ofstream& out) {
@@ -85,6 +99,7 @@ void Anuncio::escrever(ofstream& out) {
 	out << _categ_produto << endl;
 	out << _descricao << endl;
 	out << _num_vizualizacoes << endl;
+	out << ((_visivel)? 1 : 0)<<endl;
 	_data.escrever(out);
 	for (int i = 0; i < _imagens.size(); ++i) {
 		out << "I" << endl << _imagens[i].conteudo << endl << "#I" << endl;
@@ -98,10 +113,17 @@ void Anuncio::setUser(Utilizador* user){
 	_user = user;
 }
 
+int Anuncio::getID()const{
+	return _identificador;
+}
+
 Utilizador* Anuncio::getUser(){
 	return _user;
 }
 
+void Anuncio::AdicionarImagem(Imagem img){
+	_imagens.push_back(img);
+}
 
 //anuncio venda
 AnuncioVenda::AnuncioVenda(string titulo, string categ_produto,
@@ -189,7 +211,17 @@ void AnuncioCompra::ler(ifstream& in, bool escreve) {
 	int index =0;
 	while(getline(in,linha)){
 		if(index == 0){//Procurar Anuncio;
-
+			int id;
+			stringstream(linha)>>id;
+			if(id!=-1){
+				Utilizador* user = getUser();
+				if(user != NULL){
+					Anuncio* aTemp = user->procurarAnuncio(id);
+					_anuncioVenda= dynamic_cast<AnuncioVenda*>(aTemp);
+				}
+			}else{
+				_anuncioVenda=NULL;
+			}
 		}else if(linha == "#AC"){
 			return;
 		}else{
@@ -200,14 +232,35 @@ void AnuncioCompra::ler(ifstream& in, bool escreve) {
 	}
 
 }
+
+void  AnuncioCompra::setAnuncioVenda(AnuncioVenda* anuncio){
+	_anuncioVenda=anuncio;
+}
+
 void AnuncioCompra::escrever(ofstream& out) {
 	out << "AC"<<endl;
-	out << _anuncioVenda->getID();
+	Anuncio::escrever(out);
+	if(_anuncioVenda!=NULL){
+		out << _anuncioVenda->getID() << endl;
+	}else{
+		out << "-1"<<endl;
+	}
 	out <<"#AC"<<endl;
 }
 string AnuncioCompra::getInfo() const{
-	string info = Anuncio::getInfo();
-
+	string info;
+	stringstream ss;
+	ss<< "Anuncio Compra:\n";
+	ss << "TrocoPor: ";
+	if(_anuncioVenda!=NULL)
+	ss<<_anuncioVenda->getID();
+	ss<<endl;
+	info += ss.str();
+	info += Anuncio::getInfo();
 	return info;
+}
+
+AnuncioVenda* AnuncioCompra::getAnuncioVenda(){
+	return _anuncioVenda;
 }
 

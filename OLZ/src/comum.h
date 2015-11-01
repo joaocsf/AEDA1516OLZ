@@ -3,6 +3,10 @@
 
 class Utilizador;
 class Anuncio;
+//class Negocio;
+
+
+
 
 
 #endif
