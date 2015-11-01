@@ -97,7 +97,7 @@ void Utilizador::ler(ifstream& in, bool escreve) {
 		default:
 
 			if(linha == "AV"){
-				Anuncio* A = new AnuncioVenda();
+				Anuncio* A = new AnuncioVenda();//falta fazer para anuncio de compra
 				A->ler(in);
 				AdicionarAnuncio(A);
 
