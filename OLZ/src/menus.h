@@ -29,25 +29,28 @@ string Highlight();
 class Menu{
 
 public:
-void intro();
-int menu(int tamanho,int menuSelect);
+static int menu(int tamanho,int menuSelect);
 //menu print
-void menuInicial(int y);
-void menuLogin(int y);
-void menuAnunciar(int y);
-void menuPesquisar(int y);
-void menuOrdemPesq(int y);
-void menuConta(int y);
-void menuAnuncio(int y);
+static void menuInicial(int y);
+static void menuLogin(int y);
+static void menuAnunciar(int y);
+static void menuPesquisar(int y);
+static void menuOrdemPesq(int y);
+static void menuConta(int y);
+static void menuAnuncio(int y);
+static void menuTipoAnuncio(int y);
+static void menuCategProd(int y);
 //interface
-int menuInterface();
-int interfaceLog();
-int interfaceConta();
-int interfacePesquisar(bool log);
-int interfaceOrdemPesq();
+static int menuInterface();
+static int interfaceLog();
+static int interfaceConta();
+static int interfacePesquisar(bool log);
+static int interfaceOrdemPesq();
+static int interfaceTipoAnuncio();
+static int interfaceCategProd();
 //selector
-void InterfaceSeletor();
-bool logado = false; //variavel que indica se o usuario está logado
+static void InterfaceSeletor();
+static bool logado; //variavel que indica se o usuario está logado
 };
 
 #endif

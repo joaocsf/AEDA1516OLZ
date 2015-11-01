@@ -1,4 +1,5 @@
 #include "website.h"
+#include "menus.h"
 
 vector<Utilizador*> Website::utilizadores;
 vector<Anuncio *> Website::anuncios;
@@ -6,6 +7,22 @@ vector<Negocio*> Website::negocios;
 
 
 int Website::indiceUtilizador=-1;
+Data Website::_data= Data();
+
+void Website::intro(){
+	setcolor(9);
+	cout << "   ______    __       ________  " <<endl;
+	cout << "  /  __  \\  |  |     |       /  " <<endl;
+	cout << " |  |  |  | |  |     `---/  /   " <<endl;
+	cout << " |  |  |  | |  |        /  /    " <<endl;
+	cout << " |  `--'  | |  `----.  /  /----." <<endl;
+	cout << "  \\______/  |_______| /________|" <<endl;
+
+
+	setcolor(23);
+	cout << setw(40) << ((Website::getIndiceUtilizador()==-1) ? "" : Website::getUtilizadores()[Website::getIndiceUtilizador()]->getDadosPessoais().getNome()) << endl << endl;
+	setcolor(15);
+}
 
 Website::Website(){
 }
@@ -49,27 +66,26 @@ anuncios[index]->getUser()->RemoverAnuncio(id);
 }
 
 void Website::RemoveUtilizador(int id){
-	int index;
+
 
 		for (unsigned int i = 0; i < utilizadores.size(); ++i) {
 			if(utilizadores[i]->getID()==id){
 				utilizadores.erase(utilizadores.begin()+i);
-				index=i;
 				break;
 			}
 		}
 }
 
 void Website::RemoveNegocio(int id){//só remove do vetor negocios
-	int index;
+
 	for (unsigned int i = 0; i < negocios.size(); ++i) {
 		if(negocios[i]->getID()==id){
 			negocios.erase(negocios.begin()+i);
-			index=i;
 			break;
 		}
 	}
 }
+
 //funçoes interaão com o usuario
 int Website::getIndiceUtilizador(){
 return indiceUtilizador;
@@ -77,6 +93,9 @@ return indiceUtilizador;
 }
 
 void Website::login(){
+
+	system("cls");
+	intro();
 
 	string login;
 
@@ -97,12 +116,34 @@ void Website::Registar(){
 	string nome;
 	string telefone;
 	string email;
-	cout << "Nome: ";
-	getline(cin,nome);
+
+	do{
+		system("cls");
+		intro();
+		cout << "Nome: " ;
+		getline(cin,nome);
+	}while(nome.size()==0);
+
 	cout << "Telefone: " ;
 	getline(cin,telefone);
-	cout << "Email: " ;
-	getline(cin,email);
+
+	while(telefone.size() < 9){
+		system("cls");
+		intro();
+		setcolor(12);
+		cout << "Numero Invalido (Deve conter 9 ou mais digitos)" << endl;
+		setcolor(15);
+		cout << "Telefone: " ;
+		getline(cin,telefone);
+	}
+
+	do{
+		system("cls");
+		intro();
+		cout << "Email: " ;
+		getline(cin,email);
+	}while(email.size()==0);
+
 	DadosPessoais dados(nome,telefone,email);
 
 	Localizacao loc_tmp;
@@ -119,6 +160,95 @@ void Website::Registar(){
 
 void Website::logout(){
      indiceUtilizador=-1;
+}
+
+void Website::Anunciar_AC(){
+
+
+
+}
+
+
+void Website::Anunciar_AV(){
+	string titulo;
+	string categ_produto;
+	string descricao;
+	Data data;
+	float preco;
+	string tmp;
+	bool negociavel;
+	string letra;
+	int estado;
+	string imagem;
+	vector<string> imagens;
+
+	do{
+		system("cls");
+		intro();
+		cout << "Titulo Do Anuncio: ";
+		getline(cin,titulo);
+	}while(titulo.size()==0);
+
+	do{
+		system("cls");
+		intro();
+		cout << "Categoria do Produto: ";
+		getline(cin,categ_produto);
+	}while(categ_produto.size()==0);
+
+
+	system("cls");
+	intro();
+	cout << "Descricao: ";
+	getline(cin,descricao);
+
+	data=_data;
+
+	system("cls");
+	intro();
+	cout << "Preco: " ;
+	getline(cin,tmp);
+
+	while(stringstream(tmp)>> preco){
+		system("cls");
+		intro();
+		setcolor(12);
+		cout << "Preco deve ser maior do que zero" << endl;
+		setcolor(15);
+		cout << "Preco: " ;
+		cin>>preco;
+	}
+
+	do{
+		system("cls");
+		intro();
+		cout << "Imagens(Prima enter se não quiser adicionar mais imagens): ";
+		getline(cin,imagem);
+		imagens.push_back(imagem);
+	}while(imagem != "");
+	imagens.pop_back();
+
+	system("cls");
+	intro();
+	cout << "Negociavel? (S/N): ";
+	getline(cin,letra);
+
+	do{
+		system("cls");
+		intro();
+		cout << "Negociavel? (S/N): ";
+		getline(cin,letra);
+	}while(letra != "s" || letra != "S" || letra != "n" || letra != "N" );
+
+	if(letra != "s" || letra != "S")
+		negociavel=true;
+	else
+		negociavel=false;
+
+	estado = Menu::interfaceCategProd();
+
+	anuncios.push_back(new AnuncioVenda(titulo,categ_produto,descricao,data,preco,negociavel,estado));
+
 }
 
 

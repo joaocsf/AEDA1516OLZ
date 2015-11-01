@@ -1,20 +1,8 @@
 #include "menus.h"
 #include <stdlib.h>
 
-void Menu::intro(){
-	setcolor(9);
-	cout << "   ______    __       ________  " <<endl;
-	cout << "  /  __  \\  |  |     |       /  " <<endl;
-	cout << " |  |  |  | |  |     `---/  /   " <<endl;
-	cout << " |  |  |  | |  |        /  /    " <<endl;
-	cout << " |  `--'  | |  `----.  /  /----." <<endl;
-	cout << "  \\______/  |_______| /________|" <<endl;
 
-
-	setcolor(23);
-	cout << setw(40) << ((Website::getIndiceUtilizador()==-1) ? "" : Website::getUtilizadores()[Website::getIndiceUtilizador()]->getDadosPessoais().getNome()) << endl << endl;
-	setcolor(15);
-}
+bool Menu::logado=false;
 
 string Highlight(string frase, int select, int ops) {
 	if (select == ops) {
@@ -27,7 +15,7 @@ string Highlight(string frase, int select, int ops) {
 //--------TEXTO------------------
 void Menu::menuInicial(int y) {
 	system("cls");
-	intro();
+	Website::intro();
 	cout << setw(20) << Highlight("Login", y, 0) << endl;
 	setcolor(15);
 	cout << setw(20) << Highlight("Registar", y, 1) << endl;
@@ -40,7 +28,7 @@ void Menu::menuInicial(int y) {
 
 void Menu::menuLogin(int y) {
 	system("cls");
-	intro();
+	Website::intro();
 	cout << setw(20) << Highlight("Anunciar", y, 0) << endl;
 	setcolor(15);
 	cout << setw(20) << Highlight("Definicoes De Conta", y, 1) << endl;
@@ -53,7 +41,7 @@ void Menu::menuLogin(int y) {
 
 void Menu::menuAnunciar(int y) {
 	system("cls");
-	intro();
+	Website::intro();
 	cout << setw(20) << Highlight("Criar Anuncio de Venda", y, 0) << endl;
 	setcolor(15);
 	cout << setw(20) << Highlight("Criar Anuncio de Compra", y, 1) << endl;
@@ -64,7 +52,7 @@ void Menu::menuAnunciar(int y) {
 
 void Menu::menuConta(int y) {
 	system("cls");
-	intro();
+	Website::intro();
 	cout << setw(20) << Highlight("Meus Anuncios De Compra", y, 0) << endl;
 	setcolor(15);
 	cout << setw(20) << Highlight("Meus Anuncios De Venda", y, 1) << endl;
@@ -79,7 +67,7 @@ void Menu::menuConta(int y) {
 
 void Menu::menuPesquisar(int y) {
 	system("cls");
-	intro();
+	Website::intro();
 	cout << "Pesquisar por: " << endl << endl;
 	cout << setw(20) << Highlight("Palavra-Chave", y, 0) << endl;
 	setcolor(15);
@@ -95,7 +83,7 @@ void Menu::menuPesquisar(int y) {
 
 void Menu::menuOrdemPesq(int y) {
 	system("cls");
-	intro();
+	Website::intro();
 	cout << "Ordem: " << endl << endl;
 	cout << setw(20) << Highlight("Crescente", y, 0) << endl;
 	setcolor(15);
@@ -104,17 +92,41 @@ void Menu::menuOrdemPesq(int y) {
 	cout << setw(20) << Highlight("Voltar Atras", y, 2) << endl;
 	setcolor(15);
 }
+void Menu::menuTipoAnuncio(int y) {
+	system("cls");
+	Website::intro();
+	cout << setw(20) << Highlight("Anuncio Compra", y, 0) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Anuncio Venda", y, 1) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Voltar Atras", y, 2) << endl;
+	setcolor(15);
+}
 
 void Menu::menuAnuncio(int y) {
 	system("cls");
-	intro();
-	cout << setw(50) << Highlight("Contactar Anunciante", y, 0) << endl;
+	Website::intro();
+	cout << setw(20) << Highlight("Contactar Anunciante", y, 0) << endl;
 	setcolor(15);
-	cout << setw(50) << Highlight("Voltar Atras", y, 1) << endl;
+	cout << setw(20) << Highlight("Voltar Atras", y, 1) << endl;
+	setcolor(15);
+}
+
+void Menu::menuCategProd(int y) {
+	system("cls");
+	Website::intro();
+	cout << "Estado Produto: " << endl << endl;
+	cout << setw(20) << Highlight("Novo", y, 0) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Usado Como Novo", y, 1) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Funcional", y, 2) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Para Pecas", y, 3) << endl;
 	setcolor(15);
 }
 //----------------------------------------------------------------------------------
-//---------------------------Menu Selector--------------------------------------
+//---------------------------Menu Selector------------------------------------------
 void Menu::InterfaceSeletor() {
 
 	int menu = 0;
@@ -126,6 +138,9 @@ void Menu::InterfaceSeletor() {
 		case 1:
 			menu = interfaceLog();
 			break;
+		case 2:
+			menu=interfaceTipoAnuncio();
+			break;
 		case 3:
 			menu = interfaceConta();
 			break;
@@ -136,6 +151,9 @@ void Menu::InterfaceSeletor() {
 			menu = interfaceOrdemPesq();
 			break;
 		case 6:
+			menu = interfaceCategProd();
+			break;
+		case 7:
 			return;
 		default:
 			cout << "Interface Invalida" << endl;
@@ -154,8 +172,6 @@ int Menu::menuInterface() {
 	switch (y) {
 	case 0:
 		try {
-			system("cls");
-			intro();
 			Website::login();
 			logado = true;
 			return 1;
@@ -168,8 +184,6 @@ int Menu::menuInterface() {
 		}
 		break;
 	case 1:
-		system("cls");
-		intro();
 		Website::Registar();
 		logado=true;
 		return 1;
@@ -191,23 +205,23 @@ int Menu::interfaceLog() {
 	int y;
 	y = menu(3, 1);
 	switch (y) {
-	case 0: { //anunciar
-	}
+	case 0:  //anunciar
+		return 2;
 		break;
-	case 1: { //conta
+	case 1:  //conta
 		return 3;
-	}
+
 		break;
-	case 2: {
+	case 2:
 		return 4;
-	}
+
 		break;
-	case 3: {
+	case 3:
 		logado = false;
 		Website::logout();
 		//por o indice do site a 0
 		return 0;
-	}
+
 	default:
 		break;
 	}
@@ -281,6 +295,43 @@ int Menu::interfaceOrdemPesq() {
 	}
 }
 
+int Menu::interfaceTipoAnuncio() {
+	int y;
+	y = menu(2,7);
+	switch (y) {
+	case 0:  //Anuncio compra
+
+		break;
+	case 1:  //anuncio venda
+		Website::Anunciar_AV();
+		return 1;
+		break;
+	case 2: //voltar atras
+		return 1;
+
+		break;
+	}
+}
+
+int Menu::interfaceCategProd() {
+	int y;
+	y = menu(3,8);
+	switch (y) {
+	case 0:
+		return 0;
+		break;
+	case 1:
+		return 1;
+		break;
+	case 2:
+		return 2;
+		break;
+	case 3:
+		return 3;
+		break;
+	}
+}
+
 //------------------------menu propriamente dito-----------------
 int Menu::menu(int tamanho, int menuSelect) {
 	int y = 0;
@@ -307,6 +358,12 @@ int Menu::menu(int tamanho, int menuSelect) {
 		break;
 	case 6:
 		menuAnuncio(y);
+		break;
+	case 7:
+		menuTipoAnuncio(y);
+		break;
+	case 8:
+		menuCategProd(y);
 		break;
 	default:
 		cout << "Menu Inixestente" << endl;
@@ -348,6 +405,12 @@ int Menu::menu(int tamanho, int menuSelect) {
 				break;
 			case 6:
 				menuAnuncio(y);
+				break;
+			case 7:
+				menuTipoAnuncio(y);
+				break;
+			case 8:
+				menuCategProd(y);
 				break;
 			default:
 				cout << "menu inixestente" << endl;

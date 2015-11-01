@@ -36,8 +36,7 @@ int main() {
 		Website::addUtilizador(&utilizadores[i]);
 	}
 
-	Menu m;
-	m.InterfaceSeletor();
+	Menu::InterfaceSeletor();
 
 	//escrever ficheiros
 

@@ -5,6 +5,7 @@
 #include "utilizador.h"
 #include "anuncio.h"
 #include "negocio.h"
+#include "anuncio.h"
 
 
 class Website{
@@ -12,11 +13,14 @@ class Website{
 	static vector<Anuncio *> anuncios;
 	static vector<Negocio *> negocios;
 	static int indiceUtilizador;
+	static Data _data;
 public:
 	Website();
 	static void login();
 	static void logout();
 	static void Registar();
+	static void Anunciar_AC();
+	static void Anunciar_AV();
 	static vector<Utilizador*>  getUtilizadores();
 	static vector<Anuncio *>  getAnuncios();
 	static vector<Negocio*>  getNegocios();
@@ -27,6 +31,7 @@ public:
 	static void RemoveUtilizador(int id);
 	static void	RemoveNegocio(int id);
 	static int getIndiceUtilizador();
+	static void intro();
 };
 
 class UtilizadorInixestente{
