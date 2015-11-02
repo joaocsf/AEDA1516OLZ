@@ -180,6 +180,85 @@ void Menu::InterfaceSeletor() {
 
 //---------------------------Funcoes Interface--------------------------------------
 
+void Menu::desenharAnuncioThumbnail(int indice, int sel, int pos){
+
+	Anuncio* aTemp = Website::getAnuncios()[indice];
+	AnuncioVenda* aVend = dynamic_cast<AnuncioVenda*>(aTemp);
+
+	string header = (aVend == NULL)? "Anuncio Compra" : "Anuncio Venda";
+	setcolor(15);
+	if (sel == pos)
+		setcolor(2);
+
+	cout << "------------------------------------------" << endl;
+	cout << "|" << setw(40) << header << "|" << endl;
+	cout << "|" << setw(40) << aTemp->getTitulo() << "|" << endl;
+	if (aVend != NULL)
+		cout <<"|Preco: "<<setw(33) << aVend->getPreco() <<"|"<< endl;
+	cout << "------------------------------------------"<<endl;
+
+	setcolor(15);
+
+}
+
+int Menu::menuAnuncioInterface(vector<int> indices){
+	int y= 0;//Seletor
+	int nPagina=0; //numero pagina;
+	int anuncioPorPagina=3;//numero de anuncio por pagina;
+	bool update= true;
+	int maxY;
+	while (true) {
+
+
+		if(update){
+			update=false;
+			system("cls");
+			Website::intro();
+
+			cout<<(nPagina+1)<< "/" <<((indices.size()-1)/anuncioPorPagina + 1)<<endl;
+			for (int i = 0; i < 3; ++i) {
+				int n = nPagina * anuncioPorPagina;
+				if (i + n >= indices.size())
+					break;
+				maxY=i;
+				desenharAnuncioThumbnail(indices[i + n], y, i);
+			}
+		}
+
+		if (kbhit()) {
+			int tecla = getch();
+			if (tecla == 72) { // para cima
+				if (y > 0){//não diminui o indice se já estiver na posição com o menor indice
+					y--;
+					update=true;
+				}
+
+			} else if (tecla == 80) { // para baixo
+				if(y<maxY){
+					y++;
+					update=true;
+				}
+
+			}else if(tecla == 75){ //esquerda
+				if(nPagina>0){
+					y=0;
+					nPagina--;
+					update=true;
+				}
+
+			}else if(tecla == 77){ // direita
+				if(nPagina < (indices.size()-1)/anuncioPorPagina){
+					y=0;
+					nPagina++;
+					update=true;
+				}
+			}else if (tecla == 13) { // enter
+				break;
+			}
+		}
+	}
+}
+
 int Menu::menuInterface() {
 	int y;
 	y = menu(3, 0);

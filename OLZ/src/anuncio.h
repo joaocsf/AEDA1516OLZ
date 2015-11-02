@@ -22,6 +22,9 @@
 #define A_NEGOCIAVEL 1
 #define A_ESTADO 2
 
+#define TIPO_VENDA 1
+#define TIPO_COMPRA 0
+
 
 
 
@@ -45,7 +48,7 @@ public:
 	//~Anuncio();
 	static int getIDGlobal();
 	int getID() const;
-
+	virtual int getTipo() const = 0;
 	void enviarMensagem(Contacto c);
 	virtual void ler(ifstream& in,bool escreve= false);
 	virtual void escrever(ofstream& out);
@@ -55,6 +58,7 @@ public:
 	string getCategoria()const;
 	virtual void setUser(Utilizador* user);
 	Utilizador* getUser();
+	string getTitulo() const;
 	void AdicionarImagem(Imagem img);
 	void alterarVisibilidade(bool vis);
 	bool getVisibilidade();
@@ -72,6 +76,8 @@ public:
 	virtual void ler(ifstream& in,bool escreve= false);
 	virtual void escrever(ofstream& out);
 	virtual string getInfo() const;
+	virtual int getTipo()const;
+	float getPreco() const;
 };
 
 class AnuncioCompra: public Anuncio{
@@ -85,7 +91,7 @@ public:
 	virtual void escrever(ofstream& out);
 	virtual string getInfo() const;
 	bool troca();
-
+	virtual int getTipo()const;
 };
 
 

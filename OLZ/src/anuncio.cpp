@@ -67,6 +67,11 @@ void Anuncio::ler(ifstream& in, bool escreve) {
 void Anuncio::alterarVisibilidade(bool vis){
 	_visivel=vis;
 }
+
+string Anuncio::getTitulo() const{
+	return _titulo;
+}
+
 bool Anuncio::getVisibilidade(){
 	return _visivel;
 }
@@ -213,6 +218,13 @@ string AnuncioVenda::getInfo()const{
 	return ss.str() + info;
 }
 
+int AnuncioVenda::getTipo()const{
+	return TIPO_VENDA;
+}
+
+float AnuncioVenda::getPreco() const{
+	return _preco;
+}
 //anuncio compra
 AnuncioCompra::AnuncioCompra(string titulo, string categ_produto,
 		string descricao, Data date) :
@@ -281,3 +293,9 @@ AnuncioVenda* AnuncioCompra::getAnuncioVenda(){
 bool AnuncioCompra::troca(){
 	return (_anuncioVenda!=NULL);
 }
+
+int AnuncioCompra::getTipo() const{
+	return TIPO_COMPRA;
+}
+
+

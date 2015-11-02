@@ -18,11 +18,11 @@ void Website::intro() {
 	cout << "  \\______/  |_______| /________|" << endl;
 
 	setcolor(23);
-	cout << setw(40)
+	cout << setw(45)
 			<< ((Website::getIndiceUtilizador() == -1) ?
 					"" :
 					Website::getUtilizadores()[Website::getIndiceUtilizador()]->getDadosPessoais().getNome())
-			<< endl << endl;
+			<< endl;
 	setcolor(15);
 }
 
