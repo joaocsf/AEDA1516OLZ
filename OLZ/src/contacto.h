@@ -36,10 +36,18 @@ public:
 	string getInfo()const;
 	//! Funcao que altera a variavel mensagem.
 	    /*!
-	     *
 	    */
 	void setMensagem(string mensagem);
+	//! Funcao que le as informaçoes do ficheiro.
+		/*!
+		 \param in funcao de leitura de ficheiros.
+		 \param escreve switch que indica se se vai escrever ou nao.
+		 */
 	virtual void ler(ifstream& in,bool escreve= false);
+	//! Funcao que escreve as informaçoes no ficheiro.
+		/*!
+		 \param out funcao de escrita de ficheiros.
+		 */
 	virtual void escrever(ofstream& out);
 
 };
