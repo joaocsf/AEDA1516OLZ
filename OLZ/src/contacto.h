@@ -7,7 +7,7 @@
 
 //!  Classe Contacto.
 /*!
-  Esta classe contêm as informaçoes relativas ao Utilizador que criou um anuncio nomeadamente a forma de contacto por parte dos interessados.
+ Esta classe contêm as informaçoes relativas ao Utilizador que criou um anuncio nomeadamente a forma de contacto por parte dos interessados.
 */
 class Contacto: public Dados{
 	//! Mensagem.
@@ -17,7 +17,7 @@ class Contacto: public Dados{
 	string _mensagem;
 	//! Dados.
 	    /*!
-	      Contem os dados pessoais do anunciante que vai receber/enviar a mensagem.
+	      Contem os dados pessoais do anunciante que vai receber a mensagem.
 	    */
 	DadosPessoais _dados;
 public:
@@ -26,7 +26,7 @@ public:
 	//! Overload do Construtor que recebe dois argumentos.
 	    /*!
 	      \param mensagem a mensagem a ser enviada.
-	      \param dados os dados do utilizador que vai receber/enviar a mensagem.
+	      \param dados os dados do utilizador que vai receber a mensagem.
 	    */
 	Contacto(string mensagem, DadosPessoais dados);
 	//! Funcao que retorna a informaçao (mensagem + dados pessoais).

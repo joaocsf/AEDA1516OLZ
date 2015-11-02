@@ -19,15 +19,43 @@
 #define UT_TOTAL 6
 
 
-
+//! Classe Utilizador
+/*!
+ * Esta classe encarrega-se dos atributos de cada utilizador e da gestao dos seus anuncios
+ */
 class Utilizador : public Dados{
+	//! ID
+	/*!
+	 * Variavel global da classe com o numero de identificacao do proximo utilizador
+	 */
 	static int _ID;
+	//! identificador
+	/*!
+	 * Numero de identificacao do utilizador
+	 */
 	int _identificador;
+	//! Contacto
+	/*!
+	 * Informacoes de contato do utilizador
+	 */
 	DadosPessoais _contacto;
+	//! Localizacao
+	/*!
+	 * localizacao do utilizador
+	 */
 	Localizacao _local;
+	//! Anuncios
+	/*!
+	 * Vector de anuncios do utilizador (anuncios de venda e de compra)
+	 */
 	vector<Anuncio *> _anuncios;
+	//! NegociosConcluidos
+	/*!
+	 * Vector com os negocios concluidos do utilizador
+	 */
 	vector<Negocio *> _negociosConcluidos;
 public:
+
 	Utilizador();
 	Utilizador(DadosPessoais contacto, Localizacao loc);
 	//~Utilizador();
