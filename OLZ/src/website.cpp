@@ -169,9 +169,10 @@ void Website::Anunciar_AC() {
 	string descricao;
 	Data data;
 	string lixo;
-	bool erro = false;
 	string imagem;
 	vector<string> imagens;
+	string letra;
+	bool ptrAV;
 
 	do {
 		system("cls");
@@ -195,8 +196,6 @@ void Website::Anunciar_AC() {
 	data = _data;
 
 
-	getline(cin,lixo);
-
 	do {
 		system("cls");
 		intro();
@@ -207,10 +206,30 @@ void Website::Anunciar_AC() {
 	imagens.pop_back();
 
 
+	AnuncioCompra *ac=new AnuncioCompra(titulo, categ_produto, descricao, data);
+	anuncios.push_back(ac);
+	utilizadores[indiceUtilizador]->AdicionarAnuncio(ac);
 
-	anuncios.push_back(new AnuncioCompra(titulo, categ_produto, descricao, data));
 
+	do {
+		system("cls");
+		intro();
+		cout << "Deseja escolher um dos seus anuncios de venda? (S/N)" << endl;
+		setcolor(7);
+		cout << "(Indicando assim, a possibilidade de trocar o\n produto que esta a vender,pelo produto deste anuncio)"  << endl;
+		setcolor(15);
+		getline(cin, letra);
+	} while (letra != "s" && letra != "S" && letra != "n" && letra != "N");
 
+	if (letra != "s" || letra != "S")
+		ptrAV = true;
+	else
+		ptrAV = false;
+
+	if(ptrAV){
+	//mostrar menu com os anuncios de venda do mesmo utilizador e o que escolher faz um setAnuncioVenda()
+	//adicionar bool troca ao auncio venda
+	}
 }
 
 void Website::Anunciar_AV() {
@@ -297,9 +316,58 @@ void Website::Anunciar_AV() {
 
 	estado = Menu::interfaceCategProd();
 
-	anuncios.push_back(
-			new AnuncioVenda(titulo, categ_produto, descricao, data, preco,
-					negociavel, estado));
+	AnuncioVenda *av=new AnuncioVenda(titulo, categ_produto, descricao, data, preco,negociavel, estado);
+	anuncios.push_back(av);
+	utilizadores[indiceUtilizador]->AdicionarAnuncio(av);
 
+}
+
+//Procuras ETC ----------------
+vector<int> Website::procurarLocalizacao(string loc){
+		vector<int> res;
+
+	for(int i = 0 ; i<anuncios.size(); i++){
+		Localizacao l = anuncios[i]->getUser()->getLocalizacao();
+		if(l.freguesia == loc || l.distrito == loc || l.concelho == loc)
+			res.push_back(i);
+	}
+
+	return res;
+}
+
+
+vector<int> Website::procurarCategoria(string categoria){
+	vector<int> res;
+
+	for(int i = 0 ; i<anuncios.size(); i++){
+		if(categoria == anuncios[i]->getCategoria())
+			res.push_back(i);
+	}
+
+	return res;
+
+}
+
+vector<int> Website::procurarData(Data data){
+	vector<int> res;
+
+	for(int i = 0 ; i<anuncios.size(); i++){
+		if(data == anuncios[i]->getData())
+			res.push_back(i);
+	}
+
+	return res;
+}
+
+vector<int> Website::procurarPalavraChave(string palavra){
+	vector<int> res;
+	for(int i = 0 ; i< anuncios.size(); i++){
+
+		unsigned int found = anuncios[i]->getTitulo_Descricao().find(palavra);
+		if(found != string::npos){
+			res.push_back(i);
+		}
+	}
+	return res;
 }
 

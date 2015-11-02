@@ -28,6 +28,7 @@
 class Anuncio : public Dados{
 	static int _ID;
 
+	Utilizador* _user;
 	int _identificador;
 	string _titulo;
 	string _categ_produto;
@@ -44,13 +45,16 @@ public:
 	//~Anuncio();
 	static int getIDGlobal();
 	int getID() const;
-	Utilizador* _user;
+
 	void enviarMensagem(Contacto c);
 	virtual void ler(ifstream& in,bool escreve= false);
 	virtual void escrever(ofstream& out);
-	virtual void setUser(Utilizador* user);
 	virtual string getInfo() const;
-	virtual Utilizador* getUser();
+	string getTitulo_Descricao()const;
+	Data getData()const;
+	string getCategoria()const;
+	virtual void setUser(Utilizador* user);
+	Utilizador* getUser();
 	void AdicionarImagem(Imagem img);
 	void alterarVisibilidade(bool vis);
 	bool getVisibilidade();
@@ -80,6 +84,7 @@ public:
 	virtual void ler(ifstream& in,bool escreve= false);
 	virtual void escrever(ofstream& out);
 	virtual string getInfo() const;
+	bool troca();
 
 };
 
