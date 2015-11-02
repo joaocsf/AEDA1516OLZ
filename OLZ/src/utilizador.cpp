@@ -120,11 +120,15 @@ void Utilizador::ler(ifstream& in, bool escreve) {
 				A->setUser(this);
 				A->ler(in);
 				AdicionarAnuncio(A);
+				if (A->getVisibilidade())
+					Website::addAnuncio(A);
 			} else if (linha == "AC") {
 				Anuncio* AC = new AnuncioCompra();
 				AC->setUser(this);
 				AC->ler(in);
 				AdicionarAnuncio(AC);
+				if (AC->getVisibilidade())
+					Website::addAnuncio(AC);
 			} else if (linha == "N") {
 				Negocio* N = new Negocio();
 				N->setUser(this);

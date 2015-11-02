@@ -53,6 +53,7 @@ public:
 	virtual Utilizador* getUser();
 	void AdicionarImagem(Imagem img);
 	void alterarVisibilidade(bool vis);
+	bool getVisibilidade();
 };
 
 
