@@ -54,7 +54,7 @@ public:
 	Data getData()const;
 	string getCategoria()const;
 	virtual void setUser(Utilizador* user);
-	virtual Utilizador* getUser();
+	Utilizador* getUser();
 	void AdicionarImagem(Imagem img);
 	void alterarVisibilidade(bool vis);
 	bool getVisibilidade();
@@ -84,6 +84,7 @@ public:
 	virtual void ler(ifstream& in,bool escreve= false);
 	virtual void escrever(ofstream& out);
 	virtual string getInfo() const;
+	bool troca();
 
 };
 

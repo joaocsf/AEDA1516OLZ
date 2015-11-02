@@ -24,7 +24,7 @@ class Negocio : public Dados{
 public:
 	Negocio(){}
 	Negocio(Anuncio* anun,float valor);
-	virtual ~Negocio();
+	//virtual ~Negocio();
 	int getID();
 	void setUser(Utilizador* user);
 	virtual void ler(ifstream& in,bool escreve= false);

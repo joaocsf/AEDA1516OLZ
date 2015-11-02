@@ -7,7 +7,6 @@
 #include "negocio.h"
 #include "anuncio.h"
 
-
 class Website{
 	static vector<Utilizador *> utilizadores;
 	static vector<Anuncio *> anuncios;
@@ -31,6 +30,11 @@ public:
 	static void RemoveUtilizador(int id);
 	static void	RemoveNegocio(int id);
 	static int getIndiceUtilizador();
+	static vector<int> procurarPalavraChave(string palavra);
+	static vector<int> procurarData(Data data);
+	static vector<int> procurarCategoria(string categoria);
+	vector<int> procurarLocalizacao(string loc);
+
 	static void intro();
 };
 

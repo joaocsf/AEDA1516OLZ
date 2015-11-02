@@ -70,3 +70,8 @@ void Data::escrever(ofstream& out) {
 	out << dia << endl;
 	out << "#DAT" << endl;
 }
+
+bool operator==(const Data& d1, const Data& d2){
+
+	return d1.getAno()==d2.getAno() && d1.getMes() == d2.getMes() && d1.getDia() == d2.getDia();
+}

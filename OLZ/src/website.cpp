@@ -226,7 +226,7 @@ void Website::Anunciar_AC() {
 		ptrAV = false;
 
 	if(ptrAV){
-	//mostrar menu com os anuncios de compra do mesmo utilizador e o que escolher faz um setAnuncioVenda()
+	//mostrar menu com os anuncios de venda do mesmo utilizador e o que escolher faz um setAnuncioVenda()
 	//adicionar bool troca ao auncio venda
 	}
 }
@@ -319,5 +319,54 @@ void Website::Anunciar_AV() {
 	anuncios.push_back(av);
 	utilizadores[indiceUtilizador]->AdicionarAnuncio(av);
 
+}
+
+//Procuras ETC ----------------
+vector<int> Website::procurarLocalizacao(string loc){
+		vector<int> res;
+
+	for(int i = 0 ; i<anuncios.size(); i++){
+		Localizacao l = anuncios[i]->getUser()->getLocalizacao();
+		if(l.freguesia == loc || l.distrito == loc || l.concelho == loc)
+			res.push_back(i);
+	}
+
+	return res;
+}
+
+
+vector<int> Website::procurarCategoria(string categoria){
+	vector<int> res;
+
+	for(int i = 0 ; i<anuncios.size(); i++){
+		if(categoria == anuncios[i]->getCategoria())
+			res.push_back(i);
+	}
+
+	return res;
+
+}
+
+vector<int> Website::procurarData(Data data){
+	vector<int> res;
+
+	for(int i = 0 ; i<anuncios.size(); i++){
+		if(data == anuncios[i]->getData())
+			res.push_back(i);
+	}
+
+	return res;
+}
+
+vector<int> Website::procurarPalavraChave(string palavra){
+	vector<int> res;
+	for(int i = 0 ; i< anuncios.size(); i++){
+
+		unsigned int found = anuncios[i]->getTitulo_Descricao().find(palavra);
+		if(found != string::npos){
+			res.push_back(i);
+		}
+	}
+	return res;
 }
 

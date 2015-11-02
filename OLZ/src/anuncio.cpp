@@ -278,3 +278,6 @@ AnuncioVenda* AnuncioCompra::getAnuncioVenda(){
 	return _anuncioVenda;
 }
 
+bool AnuncioCompra::troca(){
+	return (_anuncioVenda!=NULL);
+}
