@@ -298,4 +298,85 @@ int AnuncioCompra::getTipo() const{
 	return TIPO_COMPRA;
 }
 
+void Anuncio::visualizacao(){
+	_num_vizualizacoes++;
+}
+
+int Anuncio::getVisualizacoes() const{
+	return _num_vizualizacoes;
+
+}
+
+//get
+vector<Imagem> Anuncio::getImagens() const{
+	return _imagens;
+}
+
+string Anuncio::getDescricao() const{
+	return _descricao;
+}
+
+bool AnuncioVenda::getNegociavel() const{
+	return _negociavel;
+}
+
+int AnuncioVenda::getEstado() const{
+	return _estado;
+}
+
+//overload <<
+
+
+
+
+ostream & operator<<(ostream & o, AnuncioVenda & av){
+	o<<endl<<"Titulo: " << av.getTitulo()  << "  Num.Vizualizacoes: " << av.getVisualizacoes() << endl;
+	o<< "Categoria do Produto: " << av.getCategoria()  << endl <<"Data de Criacao: " << av.getData() << endl;
+	o << "Imagens: " << endl;
+	for (unsigned int i = 0; i < av.getImagens().size(); ++i) {
+		o << av.getImagens()[i].conteudo << endl;
+	}
+	o<< "Descricao: " << endl <<av.getDescricao() << endl;
+	o << "Preco: " << av.getPreco() << "          Negocialvel: ";
+	if(av.getNegociavel())
+		cout << "Sim" << endl;
+	else
+		cout << "Nao" << endl;
+
+	o << "Estado: ";
+	switch(av.getEstado()){
+	case ESTADO_FUNCIONAL:
+		o<<"Funcional";
+		break;
+	case ESTADO_NOVO:
+		o<<"Novo";
+		break;
+	case ESTADO_PECAS:
+		o<<"Novo Para Pecas";
+		break;
+	case ESTADO_USADO:
+		o<<"Usado";
+		break;
+	}
+	o <<endl;
+	return o;
+}
+
+
+ostream & operator<<(ostream & o, AnuncioCompra & ac){
+	o << endl << "Titulo: " << ac.getTitulo()  << "  Num.Vizualizacoes: " << ac.getVisualizacoes() << endl;
+	o<< "Categoria do Produto: " << ac.getCategoria()  << endl <<"Data de Criacao: " << ac.getData() << endl;
+	o << "Imagens: " << endl;
+	for (unsigned int i = 0; i < ac.getImagens().size(); ++i) {
+		o << ac.getImagens()[i].conteudo << endl;
+	}
+	o<< "Descricao: " << endl <<ac.getDescricao() << endl;
+	cout << "Troca: ";
+	if(ac.troca())
+		cout << "Sim" << endl;
+	else
+		cout << "Nao" << endl;
+	return o;
+
+}
 

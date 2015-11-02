@@ -75,3 +75,10 @@ bool operator==(const Data& d1, const Data& d2){
 
 	return d1.getAno()==d2.getAno() && d1.getMes() == d2.getMes() && d1.getDia() == d2.getDia();
 }
+std::ostream & operator<<(ostream & o, const Data & d){
+		o << d.getDia() << '/' << d.getMes() << '/' << d.getAno();
+		return o;
+	}
+
+
+

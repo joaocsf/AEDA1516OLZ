@@ -107,7 +107,10 @@ void Menu::menuTipoAnuncio(int y) {
 void Menu::menuAnuncio(int y) {
 	system("cls");
 	Website::intro();
-	//cout << (*Website::getAnuncios()[idAnuncio]);
+	if(Website::getAnuncios()[idAnuncio]->getTipo())
+		cout<< (*static_cast<AnuncioVenda*>(Website::getAnuncios()[idAnuncio]));
+	else
+		cout<< (*static_cast<AnuncioCompra*>(Website::getAnuncios()[idAnuncio]));
 	cout << setw(20) << Highlight("Contactar Anunciante", y, 0) << endl;
 	setcolor(15);
 	cout << setw(20) << Highlight("Voltar Atras", y, 1) << endl;
@@ -216,7 +219,6 @@ int Menu::menuAnuncioInterface(vector<int> indices){
 			update=false;
 			system("cls");
 			Website::intro();
-			//cout<<indices.size()<<endl;
 			cout<<(nPagina+1)<< "/" <<((indices.size()-1)/anuncioPorPagina + 1)<<endl;
 			for (int i = 0; i < 3; ++i) {
 				int n = nPagina * anuncioPorPagina;

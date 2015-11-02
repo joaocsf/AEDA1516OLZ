@@ -426,6 +426,8 @@ int Website::menuAnuncioPalavra(){
 	intro();
 	cout << "Introduza a Palavra-Chave: ";
 	getline(cin,p);
+	bool vis=true;
+
 	while(true){
 		vector<int> indices = procurarPalavraChave(p);
 		if(indices.size() == 0){
@@ -442,6 +444,11 @@ int Website::menuAnuncioPalavra(){
 		int y;
 		do{
 			y= Menu::interfacemenuAnuncio();
+			if(vis){
+				anuncios[Menu::idAnuncio]->visualizacao();
+				vis=false;
+			}
+
 			if(!y){
 				contactar(Menu::idAnuncio);
 			}

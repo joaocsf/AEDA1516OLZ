@@ -25,7 +25,6 @@ public:
 
 	virtual void ler(ifstream& in, bool escreve = false);
 	virtual void escrever(ofstream& out);
-
 private:
 	unsigned int ano;
 	unsigned int mes;
@@ -34,5 +33,7 @@ private:
 };
 
 bool operator==(const Data& d1, const Data& d2);
+std::ostream & operator<<(ostream & o, const Data & d);
+
 
 #endif

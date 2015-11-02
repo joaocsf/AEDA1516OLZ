@@ -30,7 +30,6 @@
 
 class Anuncio : public Dados{
 	static int _ID;
-
 	Utilizador* _user;
 	int _identificador;
 	string _titulo;
@@ -62,6 +61,10 @@ public:
 	void AdicionarImagem(Imagem img);
 	void alterarVisibilidade(bool vis);
 	bool getVisibilidade();
+	void visualizacao();
+	int getVisualizacoes() const;
+	vector<Imagem> getImagens() const;
+	string getDescricao() const;
 };
 
 
@@ -78,7 +81,11 @@ public:
 	virtual string getInfo() const;
 	virtual int getTipo()const;
 	float getPreco() const;
+	bool getNegociavel() const;
+	int getEstado() const;
 };
+
+ostream & operator<<(ostream & o, AnuncioVenda & av);
 
 class AnuncioCompra: public Anuncio{
 	AnuncioVenda *_anuncioVenda; //anuncio de venda quando é diferente de NULL significa que o utilizador aceita troca, pointer para anuncio de venda do mesmo utilizador
@@ -94,7 +101,7 @@ public:
 	virtual int getTipo()const;
 };
 
-
+ostream & operator<<(ostream & o, AnuncioCompra & ac);
 
 
 
