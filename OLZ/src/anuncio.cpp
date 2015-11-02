@@ -119,6 +119,18 @@ int Anuncio::getID()const{
 	return _identificador;
 }
 
+string Anuncio::getTitulo_Descricao()const{
+	return _titulo+_descricao;
+}
+
+Data Anuncio::getData()const{
+	return _data;
+}
+
+string Anuncio::getCategoria()const{
+	return _categ_produto;
+}
+
 Utilizador* Anuncio::getUser(){
 	return _user;
 }
