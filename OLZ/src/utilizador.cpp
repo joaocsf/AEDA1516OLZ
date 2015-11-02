@@ -54,7 +54,7 @@ Localizacao Utilizador::getLocalizacao() {
 }
 
 Anuncio* Utilizador::procurarAnuncio(int id) {
-	for (int i = 0; i < _anuncios.size(); ++i) {
+	for (unsigned int i = 0; i < _anuncios.size(); ++i) {
 		if (_anuncios[i]->getID() == id)
 			return _anuncios[i];
 	}
@@ -81,6 +81,7 @@ bool Utilizador::FecharNegocio(Anuncio* anuncio, float montante) {
 	}
 	_negociosConcluidos.push_back(neg);
 	anuncio->alterarVisibilidade(false);
+	return true;
 }
 
 bool Utilizador::AlteraContacto(string telefone, string email) {
@@ -149,17 +150,17 @@ void Utilizador::escrever(ofstream& out) {
 	out << _local.concelho << endl;
 	out << _local.distrito << endl;
 	out << _identificador << endl;
-	for (int i = 0; i < _anuncios.size(); ++i) {
+	for (unsigned int i = 0; i < _anuncios.size(); ++i) {
 		if (dynamic_cast<AnuncioVenda*>(_anuncios[i]) != NULL) {
 			_anuncios[i]->escrever(out);
 		}
 	}
-	for (int i = 0; i < _anuncios.size(); ++i) {
+	for (unsigned int i = 0; i < _anuncios.size(); ++i) {
 		if (dynamic_cast<AnuncioCompra*>(_anuncios[i]) != NULL) {
 			_anuncios[i]->escrever(out);
 		}
 	}
-	for (int i = 0; i < _negociosConcluidos.size(); ++i) {
+	for (unsigned int i = 0; i < _negociosConcluidos.size(); ++i) {
 		_negociosConcluidos[i]->escrever(out);
 	}
 
@@ -176,10 +177,10 @@ string Utilizador::getInfo() const {
 	info += "LOC \n" + _local.freguesia + "\n";
 	info += _local.concelho + "\n";
 	info += _local.distrito + "\n";
-	for (int i = 0; i < _anuncios.size(); ++i) {
+	for (unsigned int i = 0; i < _anuncios.size(); ++i) {
 		info += _anuncios[i]->getInfo();
 	}
-	for (int i = 0; i < _negociosConcluidos.size(); ++i) {
+	for (unsigned int i = 0; i < _negociosConcluidos.size(); ++i) {
 		info += _negociosConcluidos[i]->getInfo();
 	}
 	info += "\n";
