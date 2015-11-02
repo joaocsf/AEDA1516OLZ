@@ -125,6 +125,17 @@ void Menu::menuCategProd(int y) {
 	cout << setw(20) << Highlight("Para Pecas", y, 3) << endl;
 	setcolor(15);
 }
+
+void Menu::menuAnuncioDefinicoes(int y) {
+	system("cls");
+	Website::intro();
+	cout << setw(20) << Highlight("Editar: ", y, 0) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Remover", y, 1) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Voltar Atras", y, 2) << endl;
+	setcolor(15);
+}
 //----------------------------------------------------------------------------------
 //---------------------------Menu Selector------------------------------------------
 void Menu::InterfaceSeletor() {
@@ -154,6 +165,9 @@ void Menu::InterfaceSeletor() {
 			menu = interfaceCategProd();
 			break;
 		case 7:
+			menu = interfaceAnuncioDefinicoes();
+			break;;
+		case 8:
 			return;
 		default:
 			cout << "Interface Invalida" << endl;
@@ -193,7 +207,7 @@ int Menu::menuInterface() {
 
 		break;
 	case 3:
-		return 6;
+		return 8;
 
 	default:
 
@@ -332,6 +346,23 @@ int Menu::interfaceCategProd() {
 	}
 }
 
+
+int Menu::interfaceAnuncioDefinicoes() {
+	int y;
+	y = menu(2,9);
+	switch (y) {
+	case 0://editar anuncio
+
+		break;
+	case 1://remove anuncio
+
+		break;
+	case 2://volta á lista de anucios
+
+		break;
+	}
+}
+
 //------------------------menu propriamente dito-----------------
 int Menu::menu(int tamanho, int menuSelect) {
 	int y = 0;
@@ -364,6 +395,9 @@ int Menu::menu(int tamanho, int menuSelect) {
 		break;
 	case 8:
 		menuCategProd(y);
+		break;
+	case 9:
+		menuAnuncioDefinicoes(y);
 		break;
 	default:
 		cout << "Menu Inixestente" << endl;
@@ -412,8 +446,11 @@ int Menu::menu(int tamanho, int menuSelect) {
 			case 8:
 				menuCategProd(y);
 				break;
+			case 9:
+				menuAnuncioDefinicoes(y);
+				break;
 			default:
-				cout << "menu inixestente" << endl;
+				cout << "Menu Inixestente" << endl;
 			}
 		}
 	}

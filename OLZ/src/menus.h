@@ -38,6 +38,7 @@ static void menuPesquisar(int y);
 static void menuOrdemPesq(int y);
 static void menuConta(int y);
 static void menuAnuncio(int y);
+static void menuAnuncioDefinicoes(int y);
 static void menuTipoAnuncio(int y);
 static void menuCategProd(int y);
 //interface
@@ -48,6 +49,7 @@ static int interfacePesquisar(bool log);
 static int interfaceOrdemPesq();
 static int interfaceTipoAnuncio();
 static int interfaceCategProd();
+static int interfaceAnuncioDefinicoes();
 //selector
 static void InterfaceSeletor();
 static bool logado; //variavel que indica se o usuario está logado
