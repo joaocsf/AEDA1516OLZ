@@ -195,7 +195,6 @@ void Website::Anunciar_AC() {
 
 	data = _data;
 
-
 	getline(cin,lixo);
 
 	do {
