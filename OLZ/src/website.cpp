@@ -169,9 +169,10 @@ void Website::Anunciar_AC() {
 	string descricao;
 	Data data;
 	string lixo;
-	bool erro = false;
 	string imagem;
 	vector<string> imagens;
+	string letra;
+	bool ptrAV;
 
 	do {
 		system("cls");
@@ -207,10 +208,28 @@ void Website::Anunciar_AC() {
 	imagens.pop_back();
 
 
+	AnuncioCompra *ac=new AnuncioCompra(titulo, categ_produto, descricao, data);
+	anuncios.push_back(ac);
+	utilizadores[indiceUtilizador]->AdicionarAnuncio(ac);
 
-	anuncios.push_back(new AnuncioCompra(titulo, categ_produto, descricao, data));
 
+	do {
+		system("cls");
+		intro();
+		cout << "Deseja escolher um dos seus anuncios de venda? (S/N)" << endl;
+		cout << "(Indicando assim, a possibilidade de trocar o produto que esta a vender,pelo produto deste anuncio)"  << endl;
+		getline(cin, letra);
+	} while (letra != "s" && letra != "S" && letra != "n" && letra != "N");
 
+	if (letra != "s" || letra != "S")
+		ptrAV = true;
+	else
+		ptrAV = false;
+
+	if(ptrAV){
+	//mostrar menu com os anuncios de compra do mesmo utilizador e o que escolher faz um setAnuncioVenda()
+	//adicionar bool troca ao auncio venda
+	}
 }
 
 void Website::Anunciar_AV() {
@@ -297,9 +316,9 @@ void Website::Anunciar_AV() {
 
 	estado = Menu::interfaceCategProd();
 
-	anuncios.push_back(
-			new AnuncioVenda(titulo, categ_produto, descricao, data, preco,
-					negociavel, estado));
+	AnuncioVenda *av=new AnuncioVenda(titulo, categ_produto, descricao, data, preco,negociavel, estado);
+	anuncios.push_back(av);
+	utilizadores[indiceUtilizador]->AdicionarAnuncio(av);
 
 }
 
