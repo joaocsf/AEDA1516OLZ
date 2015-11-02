@@ -33,9 +33,10 @@ public:
 	static vector<int> procurarPalavraChave(string palavra);
 	static vector<int> procurarData(Data data);
 	static vector<int> procurarCategoria(string categoria);
-	vector<int> procurarLocalizacao(string loc);
-
+	static vector<int> procurarLocalizacao(string loc);
+	static int menuAnuncioPalavra();
 	static void intro();
+	static void contactar(int id);
 };
 
 class UtilizadorInixestente{

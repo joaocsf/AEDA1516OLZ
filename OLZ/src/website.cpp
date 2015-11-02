@@ -371,3 +371,84 @@ vector<int> Website::procurarPalavraChave(string palavra){
 	return res;
 }
 
+void Website::contactar(int id){
+	string mensagem;
+	string nome;
+	string email;
+	string telefone;
+
+	system("cls");
+	intro();
+	if(Menu::logado){
+		cout << "Mensagem: " << endl;
+		getline(cin,mensagem);
+		anuncios[id]->enviarMensagem(Contacto(mensagem,utilizadores[indiceUtilizador]->getDadosPessoais()));
+	}
+	else{
+		do {
+			system("cls");
+			intro();
+			cout << "Nome: ";
+			getline(cin, nome);
+		} while (nome.size() == 0);
+
+		cout << "Telefone: ";
+		getline(cin, telefone);
+
+		while (telefone.size() < 9) {
+			system("cls");
+			intro();
+			setcolor(12);
+			cout << "Numero Invalido (Deve conter 9 ou mais digitos)" << endl;
+			setcolor(15);
+			cout << "Telefone: ";
+			getline(cin, telefone);
+		}
+
+		do {
+			system("cls");
+			intro();
+			cout << "Email: ";
+			getline(cin, email);
+		} while (email.size() == 0);
+
+		DadosPessoais dados(nome, telefone, email);
+		cout << "Mensagem: " << endl;
+		getline(cin,mensagem);
+		anuncios[id]->enviarMensagem(Contacto(mensagem,dados));
+	}
+}
+
+int Website::menuAnuncioPalavra(){
+
+	string p;
+	system("cls");
+	intro();
+	cout << "Introduza a Palavra-Chave: ";
+	getline(cin,p);
+	while(true){
+		vector<int> indices = procurarPalavraChave(p);
+		if(indices.size() == 0){
+			setcolor(12);
+			cout << "Palavra nao encontrada. ";
+			setcolor(15);
+			getch();
+			return 4;
+		}
+
+		Menu::idAnuncio = Menu::menuAnuncioInterface(indices);
+		if(Menu::idAnuncio ==-1)
+			return 4;
+		int y;
+		do{
+			y= Menu::interfacemenuAnuncio();
+			if(!y){
+				contactar(Menu::idAnuncio);
+			}
+		}while(!y);
+	}
+
+
+
+}
+

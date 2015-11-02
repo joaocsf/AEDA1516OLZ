@@ -20,7 +20,7 @@ void GetKeys() {
 }
 
 int main() {
-	GetKeys();
+	//GetKeys();
 	vector<DadosPessoais> dadosPessoais;
 	dadosPessoais.push_back(DadosPessoais("Nuno", "123", "."));
 	dadosPessoais.push_back(DadosPessoais("Manel", "321", "aff@blup.com"));

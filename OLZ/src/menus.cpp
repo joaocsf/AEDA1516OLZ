@@ -3,6 +3,7 @@
 
 
 bool Menu::logado=false;
+int Menu::idAnuncio=-1;
 
 string Highlight(string frase, int select, int ops) {
 	if (select == ops) {
@@ -106,6 +107,7 @@ void Menu::menuTipoAnuncio(int y) {
 void Menu::menuAnuncio(int y) {
 	system("cls");
 	Website::intro();
+	//cout << (*Website::getAnuncios()[idAnuncio]);
 	cout << setw(20) << Highlight("Contactar Anunciante", y, 0) << endl;
 	setcolor(15);
 	cout << setw(20) << Highlight("Voltar Atras", y, 1) << endl;
@@ -214,7 +216,7 @@ int Menu::menuAnuncioInterface(vector<int> indices){
 			update=false;
 			system("cls");
 			Website::intro();
-
+			//cout<<indices.size()<<endl;
 			cout<<(nPagina+1)<< "/" <<((indices.size()-1)/anuncioPorPagina + 1)<<endl;
 			for (int i = 0; i < 3; ++i) {
 				int n = nPagina * anuncioPorPagina;
@@ -253,7 +255,10 @@ int Menu::menuAnuncioInterface(vector<int> indices){
 					update=true;
 				}
 			}else if (tecla == 13) { // enter
-				break;
+				return (nPagina*anuncioPorPagina+y);
+			}
+			else if(tecla==27){
+				return -1;//voltar atras
 			}
 		}
 	}
@@ -347,6 +352,7 @@ int Menu::interfacePesquisar(bool log) {
 	y = menu(4, 3);
 	switch (y) {
 	case 0: { //palavra
+		return Website::menuAnuncioPalavra();
 	}
 		break;
 	case 1: { //data
@@ -356,18 +362,18 @@ int Menu::interfacePesquisar(bool log) {
 		break;
 	case 2: { //categ
 	}
-		break;
+	break;
 	case 3: { //localizacao
 
 	}
-		break;
+	break;
 	case 4: {
 		if (log)
-			interfaceLog();
+			return 1;
 		else
-			menuInterface();
+			return 0;
 	}
-		break;
+	break;
 	}
 }
 
@@ -443,6 +449,19 @@ int Menu::interfaceAnuncioDefinicoes() {
 	}
 }
 
+int Menu::interfacemenuAnuncio() {
+	int y;
+	y = menu(1,6);
+	switch (y) {
+	case 0://contatar/
+
+		return 0;
+		break;
+	case 1://voltar atras
+		return 1;
+		break;
+	}
+}
 //------------------------menu propriamente dito-----------------
 int Menu::menu(int tamanho, int menuSelect) {
 	int y = 0;
@@ -451,8 +470,7 @@ int Menu::menu(int tamanho, int menuSelect) {
 	switch (menuSelect) {
 	case 0:
 		menuInicial(y);
-		break;
-	case 1:
+		break;	case 1:
 		menuLogin(y);
 		break;
 	case 2:
