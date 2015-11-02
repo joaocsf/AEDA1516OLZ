@@ -67,7 +67,9 @@ void Anuncio::ler(ifstream& in, bool escreve) {
 void Anuncio::alterarVisibilidade(bool vis){
 	_visivel=vis;
 }
-
+bool Anuncio::getVisibilidade(){
+	return _visivel;
+}
 string Anuncio::getInfo() const{
 	string info;
 	stringstream ss;
