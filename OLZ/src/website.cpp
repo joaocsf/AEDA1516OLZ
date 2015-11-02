@@ -164,6 +164,52 @@ void Website::logout() {
 }
 
 void Website::Anunciar_AC() {
+	string titulo;
+	string categ_produto;
+	string descricao;
+	Data data;
+	string lixo;
+	bool erro = false;
+	string imagem;
+	vector<string> imagens;
+
+	do {
+		system("cls");
+		intro();
+		cout << "Titulo Do Anuncio: ";
+		getline(cin, titulo);
+	} while (titulo.size() == 0);
+
+	do {
+		system("cls");
+		intro();
+		cout << "Categoria do Produto: ";
+		getline(cin, categ_produto);
+	} while (categ_produto.size() == 0);
+
+	system("cls");
+	intro();
+	cout << "Descricao: ";
+	getline(cin, descricao);
+
+	data = _data;
+
+
+	getline(cin,lixo);
+
+	do {
+		system("cls");
+		intro();
+		cout << "Imagens(Prima enter se nao quiser adicionar mais imagens): ";
+		getline(cin, imagem);
+		imagens.push_back(imagem);
+	} while (imagem != "");
+	imagens.pop_back();
+
+
+
+	anuncios.push_back(new AnuncioCompra(titulo, categ_produto, descricao, data));
+
 
 }
 
