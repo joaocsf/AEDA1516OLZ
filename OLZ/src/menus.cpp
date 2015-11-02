@@ -190,7 +190,7 @@ int Menu::menuInterface() {
 			logado = true;
 			return 1;
 		} catch (UtilizadorInixestente &e) {
-			setcolor(4);
+			setcolor(12);
 			cout << "O Utilizador " << e.getMail() << " nao esta registado"<< endl;
 			setcolor(15);
 			getch();
@@ -314,11 +314,8 @@ int Menu::interfaceTipoAnuncio() {
 	y = menu(2,7);
 	switch (y) {
 	case 0:  //Anuncio compra
-		cout << Website::getAnuncios().size() << endl;
-		getch();
 		Website::Anunciar_AC();
-		cout << Website::getAnuncios().size() << endl;
-		getch();
+		return 1;
 		break;
 	case 1:  //anuncio venda
 		Website::Anunciar_AV();

@@ -195,7 +195,6 @@ void Website::Anunciar_AC() {
 
 	data = _data;
 
-	getline(cin,lixo);
 
 	do {
 		system("cls");
@@ -216,7 +215,9 @@ void Website::Anunciar_AC() {
 		system("cls");
 		intro();
 		cout << "Deseja escolher um dos seus anuncios de venda? (S/N)" << endl;
-		cout << "(Indicando assim, a possibilidade de trocar o produto que esta a vender,pelo produto deste anuncio)"  << endl;
+		setcolor(7);
+		cout << "(Indicando assim, a possibilidade de trocar o\n produto que esta a vender,pelo produto deste anuncio)"  << endl;
+		setcolor(15);
 		getline(cin, letra);
 	} while (letra != "s" && letra != "S" && letra != "n" && letra != "N");
 
