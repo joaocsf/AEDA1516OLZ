@@ -6,7 +6,9 @@ int Anuncio::_ID = 1;
 int Anuncio::getIDGlobal() {
 	return _ID;
 }
-
+int Anuncio::setIDGlobal(int id){
+	_ID = id;
+}
 Anuncio::Anuncio(string titulo, string categ_produto, string descricao,
 		Data date) :
 		_num_vizualizacoes(0), _titulo(titulo), _categ_produto(categ_produto), _descricao(
@@ -155,7 +157,9 @@ void Anuncio::setImagens(vector<Imagem> img){
 float Anuncio::getPreco() const{
 	return -1;
 }
-
+vector<Contacto> Anuncio::getContactos() const{
+	return _contactos;
+}
 
 //anuncio venda
 AnuncioVenda::AnuncioVenda(string titulo, string categ_produto,

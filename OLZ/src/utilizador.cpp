@@ -20,6 +20,10 @@ int Utilizador::getIDGlobal() {
 	return _ID;
 }
 
+int Utilizador::setIDGlobal(int id){
+	_ID=id;
+}
+
 bool Utilizador::AdicionarAnuncio(Anuncio* anuncio) {
 	_anuncios.push_back(anuncio);
 	return true;

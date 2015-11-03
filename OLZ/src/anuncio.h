@@ -105,6 +105,8 @@ public:
 	 \return o valor da variavel global que contem o numero de identificacao do proximo anuncio.
 	 */
 	static int getIDGlobal();
+
+	static int setIDGlobal(int id);
 	//!Funcao get para o numero de identifacao do anuncio.
 	int getID() const;
 	//!Funcao get para o tipo de anuncio (Compra/Venda)

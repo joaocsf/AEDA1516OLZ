@@ -19,12 +19,7 @@ void GetKeys() {
 
 }
 
-int main() {
-	system("mode con:cols=60 lines=45");
-
-
-	/*
-	//GetKeys();
+void NovosDados() {
 	vector<DadosPessoais> dadosPessoais;
 	dadosPessoais.push_back(DadosPessoais("Nuno", "123", "."));
 	dadosPessoais.push_back(DadosPessoais("Manel", "321", "aff@blup.com"));
@@ -68,6 +63,10 @@ int main() {
 	utilizadores[2].AdicionarAnuncio(a4);
 	utilizadores[0].AdicionarAnuncio(a5);
 
+	file << Anuncio::getIDGlobal()<<" ";
+	file << Utilizador::getIDGlobal()<<" ";
+	file << Negocio::getIDGlobal() << endl;
+
 	for (int i = 0; i < utilizadores.size(); ++i) {
 		utilizadores[i].escrever(file);
 	}
@@ -84,38 +83,12 @@ int main() {
 			utilizadores2.push_back(uTemp);
 		}
 	}
+}
 
-	for (int i = 0; i < utilizadores2.size(); ++i) {
-		Website::addUtilizador(&utilizadores2[i]);
-	}
+int main() {
+	//NovosDados();
 
-	/*
-	cout << endl;
-	if (utilizadores.size() != utilizadores2.size()) {
-		cout << "WTF?";
-		return 0;
-	}
-
-	for (int i = 0; i < utilizadores.size(); ++i) {
-		cout << utilizadores[i].getInfo() << endl << endl;
-
-		cout << utilizadores2[i].getInfo();
-		if (utilizadores[i].getInfo() != utilizadores2[i].getInfo())
-			cout << "WTF MATE!";
-		else
-			cout << "Tudo Bom " << endl << endl;
-	}
-	cout << Website::getUtilizadores().size();
-
-	cout << Website::getUtilizadores()[1]->getInfo();
-	getch();
-
-	for (int i = 0; i < Website::getUtilizadores().size(); ++i) {
-		cout << Website::getUtilizadores()[i]->getInfo() << endl;
-	}
-
-	getch();
-	/**/
+	system("mode con:cols=60 lines=45");
 	ifstream fileI("testeDados.txt");
 	Website::lerFicheiro(fileI);
 	Menu::InterfaceSeletor();
@@ -123,4 +96,5 @@ int main() {
 	Website::guardarFicheiro(fileO);
 	system("pause");
 	return 0;
+	/**/
 }

@@ -49,7 +49,8 @@ public:
 		 \param out funcao de escrita de ficheiros.
 		 */
 	virtual void escrever(ofstream& out);
-
+	DadosPessoais getDados() const;
+	string getMensagem() const;
 };
 
 

@@ -17,6 +17,13 @@ string Contacto::getInfo() const{
 	return info;
 }
 
+DadosPessoais Contacto::getDados() const{
+	return _dados;
+}
+string Contacto::getMensagem() const{
+	return _mensagem;
+}
+
 void Contacto::setMensagem(string mensagem){
 	_mensagem = mensagem;
 }

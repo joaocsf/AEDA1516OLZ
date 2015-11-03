@@ -1,13 +1,11 @@
 #ifndef NEGOCIO_H_
 #define NEGOCIO_H_
 
-
 #include "data.h"
 #include "dados.h"
 //#include "comum.h"
 #include "anuncio.h"
 //#include "utilizador.h"
-
 
 #define N_MONTANTE 0
 #define N_IDENTIFICADOR 1
@@ -17,7 +15,7 @@
 /*!
  * Esta classe estancia um negocio que foi concliudo quer seja uma venda, compra ou troca.
  */
-class Negocio : public Dados{
+class Negocio: public Dados {
 	//! ptr_anuncio
 	/*!
 	 * Apontador para o anuncio do negocio
@@ -50,13 +48,14 @@ class Negocio : public Dados{
 	int _identificador;
 public:
 	//! Construtor default.
-	Negocio(){}
+	Negocio() {
+	}
 	//! Overload do construtor com 2 parametros.
 	/*!
 	 \param anun Anuncio do negocio.
 	 \param valor o valor que foi pago/recebido.
 	 */
-	Negocio(Anuncio* anun,float valor);
+	Negocio(Anuncio* anun, float valor);
 	//virtual ~Negocio();
 	//! Funcao get para o ID
 	/*!
@@ -68,13 +67,18 @@ public:
 	 \param user Novo utilizador.
 	 */
 	void setUser(Utilizador* user);
+
+	//!Funcao global para devolver o valor atual da variavel global ID.
+	static int getIDGlobal();
+
+	static int setIDGlobal(int id);
+
 	//!Funcao de leitura das informacoes de um ficheiro.
-	virtual void ler(ifstream& in,bool escreve= false);
+	virtual void ler(ifstream& in, bool escreve = false);
 	//! Funcao de escrita das informacoes para um ficheiro.
 	virtual void escrever(ofstream& out);
 	//!Funcao get para a informacao referente ao negocio.
-	string getInfo()const;
+	string getInfo() const;
 };
-
 
 #endif

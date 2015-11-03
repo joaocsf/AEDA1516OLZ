@@ -5,7 +5,7 @@
 #include "utilizador.h"
 #include "anuncio.h"
 #include "negocio.h"
-#include "anuncio.h"
+
 
 class Website{
 	static vector<Utilizador *> utilizadores;

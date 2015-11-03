@@ -13,6 +13,13 @@ Negocio::Negocio(Anuncio* anun, float valor) {
 int Negocio::getID() {
 	return _identificador;
 }
+int Negocio::getIDGlobal() {
+	return _ID;
+}
+
+int Negocio::setIDGlobal(int id){
+	_ID=id;
+}
 
 void Negocio::setUser(Utilizador* user) {
 	_user = user;

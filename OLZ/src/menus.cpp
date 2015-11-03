@@ -194,17 +194,17 @@ void Menu::InterfaceSeletor() {
 void Menu::desenharAnuncioThumbnail(int indice, int sel, int pos){
 
 	Anuncio* aTemp = Website::getAnuncios()[indice];
-	AnuncioVenda* aVend = dynamic_cast<AnuncioVenda*>(aTemp);
 
-	string header = (aVend == NULL)? "Anuncio Compra" : "Anuncio Venda";
+
+	string header = (aTemp->getTipo() == TIPO_COMPRA)? "Anuncio Compra" : "Anuncio Venda";
 	setcolor(15);
 	if (sel == pos)
 		setcolor(2);
 	cout << "------------------------------------------" << endl;
 	cout << "|" << setw(40) << header << "|" << endl;
 	cout << "|Titulo: "<< setw(32) << aTemp->getTitulo() << "|" << endl;
-	if (aVend != NULL)
-		cout <<"|Preco: "<<setw(33) << aVend->getPreco() <<"|"<< endl;
+	if (aTemp->getTipo() == TIPO_VENDA)
+		cout <<"|Preco: "<<setw(33) << aTemp->getPreco() <<"|"<< endl;
 	cout << "------------------------------------------"<<endl;
 
 	setcolor(15);
@@ -218,6 +218,7 @@ int Menu::menuAnuncioInterface(vector<int> indices){
 	bool update= true;
 	int maxY;
 	while (true) {
+
 
 
 		if(update){
