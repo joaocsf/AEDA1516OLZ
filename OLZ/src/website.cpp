@@ -446,19 +446,16 @@ int Website::menuAnuncioPalavra(){
 			return 4;
 		int y;
 		do{
-			y= Menu::interfacemenuAnuncio();
 			if(vis){
 				anuncios[Menu::idAnuncio]->visualizacao();
 				vis=false;
 			}
-
+			y= Menu::interfacemenuAnuncio();
 			if(!y){
 				contactar(Menu::idAnuncio);
 			}
 		}while(!y);
+		vis=true;
 	}
-
-
-
 }
 

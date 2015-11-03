@@ -7,6 +7,7 @@
 #include "comum.h"
 #include "dados.h"
 
+
 #define ESTADO_NOVO 0
 #define ESTADO_USADO 1
 #define ESTADO_FUNCIONAL 2

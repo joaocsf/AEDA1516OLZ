@@ -21,7 +21,9 @@ class DadosPessoais : public Dados {
 	bool visiveis[VIS_TOTAL]; //podemos por aqui os dados que são visiveis e quando queremos fazer display fazemos display do vetor
 public:
 	string getNome() const;
+	string getTelefone() const;
 	string getEmail() const;
+	bool* getVisiveis();
 	DadosPessoais();
 	DadosPessoais(string nome, string telefone, string email);
 
@@ -57,5 +59,7 @@ public:
 	virtual void escrever(ofstream& out);
 
 };
+
+ostream & operator<<(ostream & o,DadosPessoais & dados);
 
 #endif

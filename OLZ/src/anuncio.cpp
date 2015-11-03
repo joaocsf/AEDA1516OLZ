@@ -385,6 +385,14 @@ ostream & operator<<(ostream & o, AnuncioVenda & av){
 		break;
 	}
 	o <<endl;
+
+
+	setcolor(3);
+	o << "Dados Vendedor: " << endl;
+	setcolor(15);
+	DadosPessoais dp = av.getUser()->getDadosPessoais();
+	o << dp;
+
 	return o;
 }
 
@@ -423,7 +431,14 @@ ostream & operator<<(ostream & o, AnuncioCompra & ac){
 		cout << "Sim" << endl;
 	else
 		cout << "Nao" << endl;
-	return o;
 
+
+	setcolor(3);
+	o << "Dados Comprador: " << endl;
+	setcolor(15);
+	DadosPessoais dp = ac.getUser()->getDadosPessoais();
+	o << dp;
+
+	return o;
 }
 
