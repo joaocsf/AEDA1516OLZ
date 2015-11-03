@@ -23,15 +23,15 @@ void Data::setData(unsigned int a, unsigned int m, unsigned int d) {
 	dia = d;
 }
 
-unsigned int Data::getAno() const{
+unsigned int Data::getAno() const {
 	return ano;
 }
 
-unsigned int Data::getMes()const {
+unsigned int Data::getMes() const {
 	return mes;
 }
 
-unsigned int Data::getDia()const {
+unsigned int Data::getDia() const {
 	return dia;
 }
 
@@ -56,8 +56,11 @@ void Data::ler(ifstream& in, bool escreve) {
 		default:
 			if (linha == "#DAT")
 				return;
-			else
-				cout << "MERDOU DATA\n";
+			else {
+				stringstream ss;
+				ss << "Erro Leitura Data. Encontrado:" << linha<< " Esperado:#DAT";
+				throw ErroLeitura(ss.str());
+			}
 			break;
 		}
 		index++;
@@ -71,14 +74,13 @@ void Data::escrever(ofstream& out) {
 	out << "#DAT" << endl;
 }
 
-bool operator==(const Data& d1, const Data& d2){
+bool operator==(const Data& d1, const Data& d2) {
 
-	return d1.getAno()==d2.getAno() && d1.getMes() == d2.getMes() && d1.getDia() == d2.getDia();
+	return d1.getAno() == d2.getAno() && d1.getMes() == d2.getMes()
+			&& d1.getDia() == d2.getDia();
 }
-std::ostream & operator<<(ostream & o, const Data & d){
-		o << d.getDia() << '/' << d.getMes() << '/' << d.getAno();
-		return o;
-	}
-
-
+std::ostream & operator<<(ostream & o, const Data & d) {
+	o << d.getDia() << '/' << d.getMes() << '/' << d.getAno();
+	return o;
+}
 

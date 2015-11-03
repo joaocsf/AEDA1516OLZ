@@ -74,7 +74,9 @@ void DadosPessoais::ler(ifstream& in, bool escreve) {
 			break;
 		case VIS_TOTAL:
 			if (linha != "#D") {
-				cout<<"MERDOU DADOSPESSOAIS! "<<linha<<endl ;
+				stringstream ss;
+				ss<< "Erro Leitura Dados Pessoais. Encontrado:" << linha << "Esperado: #D";
+				throw ErroLeitura(ss.str());
 			} else{
 				return; //tudo bem pode continuar.
 			}

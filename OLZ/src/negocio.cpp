@@ -14,20 +14,21 @@ int Negocio::getID() {
 	return _identificador;
 }
 
-void Negocio::setUser(Utilizador* user){
-	_user=user;
+void Negocio::setUser(Utilizador* user) {
+	_user = user;
 }
 
 string Negocio::getInfo() const {
 	string info;
 	stringstream ss;
-	ss<<"NEGOCIO:"<<endl;
-	ss<<" ID: "<<_identificador<<endl;
-	ss<<" AnuncioID: "<<_ptr_anuncio->getID()<<endl;
-	ss<<" Montante: "<<_montante<<endl;
-	ss<<" Data: "<<_data.getDia()<<"/"<<_data.getMes()<<"/"<<_data.getAno() <<endl;
+	ss << "NEGOCIO:" << endl;
+	ss << " ID: " << _identificador << endl;
+	ss << " AnuncioID: " << _ptr_anuncio->getID() << endl;
+	ss << " Montante: " << _montante << endl;
+	ss << " Data: " << _data.getDia() << "/" << _data.getMes() << "/"
+			<< _data.getAno() << endl;
 
-	return ss.str()+info;
+	return ss.str() + info;
 }
 
 void Negocio::ler(ifstream& in, bool escreve) {
@@ -36,23 +37,25 @@ void Negocio::ler(ifstream& in, bool escreve) {
 	while (getline(in, linha)) {
 		switch (index) {
 		case N_MONTANTE:
-			stringstream(linha)>>_montante;
+			stringstream(linha) >> _montante;
 			break;
 		case N_IDENTIFICADOR:
-			stringstream(linha)>>_identificador;
+			stringstream(linha) >> _identificador;
 			break;
 		case N_ANUNCIO_ID:
 			int id;
-			stringstream(linha)>>id;
-			_ptr_anuncio=_user->procurarAnuncio(id);
+			stringstream(linha) >> id;
+			_ptr_anuncio = _user->procurarAnuncio(id);
 			break;
 		default:
-			if(linha=="DAT"){
+			if (linha == "DAT") {
 				_data.ler(in);
-			}else if(linha=="#N"){
+			} else if (linha == "#N") {
 				return;
-			}else{
-				cout <<"Negocio Merdou"<<linha;
+			} else {
+				stringstream ss;
+				ss << "Erro Leitura Negocio. Encontrado:" << linha <<" Esperado:#N / DAT";
+				throw ErroLeitura(ss.str());
 			}
 			break;
 		}
@@ -60,12 +63,12 @@ void Negocio::ler(ifstream& in, bool escreve) {
 	}
 }
 void Negocio::escrever(ofstream& out) {
-	out << "N"<<endl;
-	out << _montante<<endl;
-	out << _identificador<<endl;
-	if(_ptr_anuncio!=NULL)
-		out<<_ptr_anuncio->getID();
-	out<<endl;
+	out << "N" << endl;
+	out << _montante << endl;
+	out << _identificador << endl;
+	if (_ptr_anuncio != NULL)
+		out << _ptr_anuncio->getID();
+	out << endl;
 	_data.escrever(out);
-	out <<"#N"<<endl;
+	out << "#N" << endl;
 }

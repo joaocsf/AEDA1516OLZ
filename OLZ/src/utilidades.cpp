@@ -16,3 +16,10 @@ void setcolor(unsigned int color, unsigned int background_color)	//define a cor 
 }
 
 
+ErroLeitura::ErroLeitura(string erro){
+	this->erro = erro;
+}
+
+string ErroLeitura::getErro(){
+	return erro;
+}

@@ -136,7 +136,10 @@ void Utilizador::ler(ifstream& in, bool escreve) {
 				N->ler(in);
 				_negociosConcluidos.push_back(N);
 			} else if (linha != "#U") {
-				cout << "MERDOU UTILIZADOR!" << linha << endl;
+				stringstream ss;
+				ss << "Erro Leitura Utilizador. Encontrado:" << linha
+						<< " Esperado:#U / N / AC / AV";
+				throw ErroLeitura(ss.str());
 			} else {
 				return;
 			}
