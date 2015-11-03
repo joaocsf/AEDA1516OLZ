@@ -327,23 +327,49 @@ int AnuncioVenda::getEstado() const{
 //overload <<
 
 
-
+//falta o print dos dados do utilizador visiveis
 
 ostream & operator<<(ostream & o, AnuncioVenda & av){
-	o<<endl<<"Titulo: " << av.getTitulo()  << "  Num.Vizualizacoes: " << av.getVisualizacoes() << endl;
-	o<< "Categoria do Produto: " << av.getCategoria()  << endl <<"Data de Criacao: " << av.getData() << endl;
+	setcolor(3);
+	o<<endl<<"Titulo: ";
+	setcolor(15);
+	o << av.getTitulo();
+	setcolor(3);
+	o << "  Num.Vizualizacoes: ";
+	setcolor(15);
+	o << av.getVisualizacoes() << endl;
+	setcolor(3);
+	o<< "Categoria do Produto: ";
+	setcolor(15);
+	o << av.getCategoria()  << endl;
+	setcolor(3);
+	o <<"Data de Criacao: ";
+	setcolor(15);
+	o << av.getData() << endl;
+	setcolor(3);
 	o << "Imagens: " << endl;
+	setcolor(15);
 	for (unsigned int i = 0; i < av.getImagens().size(); ++i) {
 		o << av.getImagens()[i].conteudo << endl;
 	}
-	o<< "Descricao: " << endl <<av.getDescricao() << endl;
-	o << "Preco: " << av.getPreco() << "          Negocialvel: ";
+	setcolor(3);
+	o<< "Descricao: ";
+	setcolor(15);
+	o << endl <<av.getDescricao() << endl;
+	setcolor(3);
+	o << "Preco: ";
+	setcolor(15);
+	o << av.getPreco();
+	setcolor(3);
+	o << "          Negocialvel: ";
+	setcolor(15);
 	if(av.getNegociavel())
 		cout << "Sim" << endl;
 	else
 		cout << "Nao" << endl;
-
+	setcolor(3);
 	o << "Estado: ";
+	setcolor(15);
 	switch(av.getEstado()){
 	case ESTADO_FUNCIONAL:
 		o<<"Funcional";
@@ -364,14 +390,35 @@ ostream & operator<<(ostream & o, AnuncioVenda & av){
 
 
 ostream & operator<<(ostream & o, AnuncioCompra & ac){
-	o << endl << "Titulo: " << ac.getTitulo()  << "  Num.Vizualizacoes: " << ac.getVisualizacoes() << endl;
-	o<< "Categoria do Produto: " << ac.getCategoria()  << endl <<"Data de Criacao: " << ac.getData() << endl;
+	setcolor(3);
+	o<<endl<<"Titulo: ";
+	setcolor(15);
+	o << ac.getTitulo();
+	setcolor(3);
+	o << "  Num.Vizualizacoes: ";
+	setcolor(15);
+	o << ac.getVisualizacoes() << endl;
+	setcolor(3);
+	o<< "Categoria do Produto: ";
+	setcolor(15);
+	o << ac.getCategoria()  << endl;
+	setcolor(3);
+	o <<"Data de Criacao: ";
+	setcolor(15);
+	o << ac.getData() << endl;
+	setcolor(3);
 	o << "Imagens: " << endl;
+	setcolor(15);
 	for (unsigned int i = 0; i < ac.getImagens().size(); ++i) {
 		o << ac.getImagens()[i].conteudo << endl;
 	}
-	o<< "Descricao: " << endl <<ac.getDescricao() << endl;
+	setcolor(3);
+	o<< "Descricao: ";
+	setcolor(15);
+	o << endl <<ac.getDescricao() << endl;
+	setcolor(3);
 	cout << "Troca: ";
+	setcolor(15);
 	if(ac.troca())
 		cout << "Sim" << endl;
 	else

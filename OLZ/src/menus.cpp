@@ -111,9 +111,9 @@ void Menu::menuAnuncio(int y) {
 		cout<< (*static_cast<AnuncioVenda*>(Website::getAnuncios()[idAnuncio]));
 	else
 		cout<< (*static_cast<AnuncioCompra*>(Website::getAnuncios()[idAnuncio]));
-	cout << setw(20) << Highlight("Contactar Anunciante", y, 0) << endl;
+	cout << endl << setw(40) << Highlight("Contactar Anunciante", y, 0) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Voltar Atras", y, 1) << endl;
+	cout << setw(40) << Highlight("Voltar Atras", y, 1) << endl;
 	setcolor(15);
 }
 
@@ -257,7 +257,7 @@ int Menu::menuAnuncioInterface(vector<int> indices){
 					update=true;
 				}
 			}else if (tecla == 13) { // enter
-				return (nPagina*anuncioPorPagina+y);
+				return indices[(nPagina*anuncioPorPagina+y)];
 			}
 			else if(tecla==27){
 				return -1;//voltar atras

@@ -413,6 +413,9 @@ void Website::contactar(int id){
 		} while (email.size() == 0);
 
 		DadosPessoais dados(nome, telefone, email);
+
+		system("cls");
+		intro();
 		cout << "Mensagem: " << endl;
 		getline(cin,mensagem);
 		anuncios[id]->enviarMensagem(Contacto(mensagem,dados));
