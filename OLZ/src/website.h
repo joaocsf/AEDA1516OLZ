@@ -37,6 +37,8 @@ public:
 	//menu pesquisa
 	static int menuAnuncioPalavra();
 	static int menuAnuncioData();
+	static int menuAnuncioCategoria();
+	static int menuAnuncioLocalizacao();
 	static void intro();
 	static void contactar(int id);
 	static void guardarFicheiro(ofstream& file);

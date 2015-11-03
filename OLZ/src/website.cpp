@@ -380,6 +380,7 @@ vector<int> Website::procurarPalavraChave(string palavra){
 	return res;
 }
 
+//menus pesquisar anuncios
 void Website::contactar(int id){
 	string mensagem;
 	string nome;
@@ -573,10 +574,49 @@ int Website::menuAnuncioData(){
 }
 
 
+int Website::menuAnuncioCategoria(){
+	string c;
+	system("cls");
+	intro();
+	cout << "Introduza a Categoria que deseja procurar: ";
+	getline(cin,c);
+	bool vis=true;
+
+	while(true){
+		vector<int> indices = procurarCategoria(c);
+		if(indices.size() == 0){
+			setcolor(12);
+			cout << "Não existem Anuncio dessa Categoria. ";
+			setcolor(15);
+			getch();
+			return 4;
+		}
+
+		Menu::idAnuncio = Menu::menuAnuncioInterface(indices);
+		if(Menu::idAnuncio ==-1)
+			return 4;
+		int y;
+		do{
+			if(vis){
+				anuncios[Menu::idAnuncio]->visualizacao();
+				vis=false;
+			}
+			y= Menu::interfacemenuAnuncio();
+			if(!y){
+				contactar(Menu::idAnuncio);
+			}
+		}while(!y);
+		vis=true;
+	}
+}
+
+int Website::menuAnuncioLocalizacao(){
+
+}
 
 
 
-
+//ficheiros
 
 void Website::guardarFicheiro(ofstream& file){
 	for (int i = 0; i < utilizadores.size(); ++i) {

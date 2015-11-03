@@ -355,16 +355,16 @@ int Menu::interfacePesquisar(bool log) {
 	case 0:  //palavra
 		return Website::menuAnuncioPalavra();
 		break;
-	case 1:
+	case 1://data
 		return Website::menuAnuncioData();
 		break;
-	case 2: { //categ
-	}
-	break;
+	case 2://categoria
+		return Website::menuAnuncioCategoria();
+		break;
 	case 3: { //localizacao
 
 	}
-	break;
+	break;//falta preco
 	case 4: {
 		if (log)
 			return 1;
