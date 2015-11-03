@@ -119,7 +119,7 @@ public:
 	static int getIDGlobal();
 };
 
-//! Class Anuncio Inexistente
+//! Class AnuncioInexistente
 /*!
  * Excepcao de anuncio inexistente no caso do anuncio nao existir
  */
@@ -139,7 +139,7 @@ public:
 	AnuncioInexistente() { _id = 0; _anuncio = NULL;}
 	//! Overload do construtor para id.
 	/*!
-	 \param id do anuncio que nao foi encontrado.
+	 \param iD do anuncio que nao foi encontrado.
 	 */
 	AnuncioInexistente(int iD) {_id = iD; _anuncio = NULL;}
 	//!Overload do construtor para anuncio.

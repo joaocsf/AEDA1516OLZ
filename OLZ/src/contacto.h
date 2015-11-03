@@ -5,7 +5,7 @@
 #include "dadospessoais.h"
 #include "dados.h"
 
-//!  Classe Contacto.
+//!  Class Contacto.
 /*!
  Esta classe contêm as informaçoes relativas ao Utilizador que criou um anuncio nomeadamente a forma de contacto por parte dos interessados.
 */

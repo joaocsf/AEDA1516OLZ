@@ -17,7 +17,7 @@ void intro();
 
 
 
-//! Estrutura localizacao.
+//! Estrutura Localizacao.
 /*!
  *Serve para organizaçao a localizacao de cada utilizador
  */
