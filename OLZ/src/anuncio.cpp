@@ -148,6 +148,10 @@ void Anuncio::AdicionarImagem(Imagem img) {
 	_imagens.push_back(img);
 }
 
+void Anuncio::setImagens(vector<Imagem> img){
+	_imagens = img;
+}
+
 //anuncio venda
 AnuncioVenda::AnuncioVenda(string titulo, string categ_produto,
 		string descricao, Data date, float preco, bool negociavel, int estado) :

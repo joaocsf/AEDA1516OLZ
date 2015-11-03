@@ -23,3 +23,4 @@ ErroLeitura::ErroLeitura(string erro){
 string ErroLeitura::getErro(){
 	return erro;
 }
+ErroLeitura::ErroLeitura(){};

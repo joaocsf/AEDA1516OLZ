@@ -65,6 +65,7 @@ public:
 	void visualizacao();
 	int getVisualizacoes() const;
 	vector<Imagem> getImagens() const;
+	void setImagens(vector<Imagem> img);
 	string getDescricao() const;
 };
 

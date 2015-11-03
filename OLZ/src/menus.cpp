@@ -194,7 +194,6 @@ void Menu::desenharAnuncioThumbnail(int indice, int sel, int pos){
 	setcolor(15);
 	if (sel == pos)
 		setcolor(2);
-
 	cout << "------------------------------------------" << endl;
 	cout << "|" << setw(40) << header << "|" << endl;
 	cout << "|" << setw(40) << aTemp->getTitulo() << "|" << endl;
@@ -353,14 +352,11 @@ int Menu::interfacePesquisar(bool log) {
 	int y;
 	y = menu(4, 3);
 	switch (y) {
-	case 0: { //palavra
+	case 0:  //palavra
 		return Website::menuAnuncioPalavra();
-	}
 		break;
-	case 1: { //data
-		return 5;
-		break;
-	}
+	case 1:
+		return Website::menuAnuncioData();
 		break;
 	case 2: { //categ
 	}

@@ -20,6 +20,10 @@ void GetKeys() {
 }
 
 int main() {
+
+
+
+	/*
 	//GetKeys();
 	vector<DadosPessoais> dadosPessoais;
 	dadosPessoais.push_back(DadosPessoais("Nuno", "123", "."));
@@ -105,14 +109,18 @@ int main() {
 
 	cout << Website::getUtilizadores()[1]->getInfo();
 	getch();
-	*/
+
 	for (int i = 0; i < Website::getUtilizadores().size(); ++i) {
 		cout << Website::getUtilizadores()[i]->getInfo() << endl;
 	}
 
 	getch();
+	/**/
+	ifstream fileI("testeDados.txt");
+	Website::lerFicheiro(fileI);
 	Menu::InterfaceSeletor();
-	Menu::menuAnuncioInterface(Website::procurarPalavraChave(""));
+	ofstream fileO("testeDados.txt");
+	Website::guardarFicheiro(fileO);
 	system("pause");
 	return 0;
 }

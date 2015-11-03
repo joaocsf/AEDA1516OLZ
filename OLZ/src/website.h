@@ -34,9 +34,13 @@ public:
 	static vector<int> procurarData(Data data);
 	static vector<int> procurarCategoria(string categoria);
 	static vector<int> procurarLocalizacao(string loc);
+	//menu pesquisa
 	static int menuAnuncioPalavra();
+	static int menuAnuncioData();
 	static void intro();
 	static void contactar(int id);
+	static void guardarFicheiro(ofstream& file);
+	static void lerFicheiro(ifstream& file);
 };
 
 class UtilizadorInixestente{

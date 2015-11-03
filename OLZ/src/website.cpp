@@ -207,6 +207,7 @@ void Website::Anunciar_AC() {
 
 
 	AnuncioCompra *ac=new AnuncioCompra(titulo, categ_produto, descricao, data);
+	ac->setUser(utilizadores[indiceUtilizador]);
 	anuncios.push_back(ac);
 	utilizadores[indiceUtilizador]->AdicionarAnuncio(ac);
 
@@ -317,6 +318,14 @@ void Website::Anunciar_AV() {
 	estado = Menu::interfaceCategProd();
 
 	AnuncioVenda *av=new AnuncioVenda(titulo, categ_produto, descricao, data, preco,negociavel, estado);
+	av->setUser(utilizadores[indiceUtilizador]);
+
+	for (int i = 0; i < imagens.size(); ++i) {
+		Imagem img;
+		img.conteudo=imagens[i];
+		av->AdicionarImagem(img);
+	}
+
 	anuncios.push_back(av);
 	utilizadores[indiceUtilizador]->AdicionarAnuncio(av);
 
@@ -458,4 +467,149 @@ int Website::menuAnuncioPalavra(){
 		vis=true;
 	}
 }
+
+
+int Website::menuAnuncioData(){
+
+	string p;
+	int dia,mes,ano;
+	bool erro;
+
+	system("cls");
+	intro();
+	cout << "Introduza a Data: ";
+
+	while (true) {
+		system("cls");
+		intro();
+		if (erro) {
+			setcolor(12);
+			cout << "Caracter Invalido" <<endl;
+			setcolor(15);
+		}
+		cout << "Dia: ";
+		cin >> dia;
+
+		if (cin.fail()) {
+			erro = true;
+			cin.clear();
+			cin.ignore();
+		}else{
+			break;
+		}
+	}
+	erro=false;
+	while (true) {
+		system("cls");
+		intro();
+		if (erro) {
+			setcolor(12);
+			cout << "Caracter Invalido" <<endl;
+			setcolor(15);
+		}
+		cout << "Mes: ";
+		cin >> mes;
+
+		if (cin.fail()) {
+			erro = true;
+			cin.clear();
+			cin.ignore();
+		}else{
+			break;
+		}
+	}
+	erro=false;
+	while (true) {
+		system("cls");
+		intro();
+		if (erro) {
+			setcolor(12);
+			cout << "Caracter Invalido" <<endl;
+			setcolor(15);
+		}
+		cout << "Ano: ";
+		cin >> ano;
+
+		if (cin.fail()) {
+			erro = true;
+			cin.clear();
+			cin.ignore();
+		}else{
+			break;
+		}
+	}
+
+
+
+	Data d(ano,mes,dia);
+	bool vis=true;
+
+	while(true){
+		vector<int> indices = procurarData(d);
+		if(indices.size() == 0){
+			setcolor(12);
+			cout << "Nao existem anuncios com a data especificada. ";
+			setcolor(15);
+			getch();
+			return 4;
+		}
+
+		Menu::idAnuncio = Menu::menuAnuncioInterface(indices);
+		if(Menu::idAnuncio ==-1)
+			return 4;
+		int y;
+		do{
+			if(vis){
+				anuncios[Menu::idAnuncio]->visualizacao();
+				vis=false;
+			}
+			y= Menu::interfacemenuAnuncio();
+			if(!y){
+				contactar(Menu::idAnuncio);
+			}
+		}while(!y);
+		vis=true;
+	}
+}
+
+
+
+
+
+
+
+void Website::guardarFicheiro(ofstream& file){
+	for (int i = 0; i < utilizadores.size(); ++i) {
+		utilizadores[i]->escrever(file);
+	}
+}
+void Website::lerFicheiro(ifstream& file){
+	int n=0;
+	string linha;
+	while(getline(file, linha)){
+
+		if(linha=="U"){
+			try{
+				Utilizador* uTemp = new Utilizador();
+				uTemp->ler(file);
+				utilizadores.push_back(uTemp);
+				n++;
+			}catch(ErroLeitura erro){
+				cout << erro.getErro();
+				getch();
+			}
+
+		}
+	}
+	cout <<"Utilizadores registados:"<<n<<endl;
+	getch();
+
+
+}
+
+
+
+
+
+
 
