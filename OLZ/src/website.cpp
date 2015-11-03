@@ -790,16 +790,18 @@ void Website::lerFicheiro(ifstream& file){
 vector<int> Website::anunciosParaIndices(const vector<Anuncio*>& aTemp){
 	vector<int> res;
 	for (unsigned int i = 0; i < aTemp.size(); ++i) {
-		for(int k = 0; anuncios.size(); k++){
-			if(aTemp[i]->getID()==anuncios[i]->getID())
+		for(unsigned int k = 0; k < anuncios.size(); k++){
+			if(aTemp[i]->getID()==anuncios[k]->getID()){
 				res.push_back(k);
+				break;
+			}
 		}
 	}
+
 	return res;
 }
 
 vector<int> Website::retornarMeusAnuncios(bool venda){
-
 	return anunciosParaIndices(utilizadores[indiceUtilizador]->getAnuncios(venda));
 }
 
@@ -808,6 +810,17 @@ int Website::MenuAnuncioConta(bool venda){
 
 
 	while(true){
+		if(retornarMeusAnuncios(venda).size()==0){
+			system("cls");
+			intro();
+			setcolor(12);
+			cout << "Voce nao tem anuncios de ";
+			cout << ((venda)? "Venda" : "Compra");
+			setcolor(15);
+			getch();
+			return 3;
+		}
+
 		Menu::idAnuncio=Menu::menuAnuncioInterface(retornarMeusAnuncios(venda));
 
 		if(Menu::idAnuncio ==-1)
@@ -823,7 +836,6 @@ int Website::MenuAnuncioConta(bool venda){
 	}
 
 }
-
 
 
 

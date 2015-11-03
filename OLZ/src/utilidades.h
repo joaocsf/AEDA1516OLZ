@@ -51,7 +51,7 @@ void setcolor(unsigned int color, unsigned int background_color);
 class ErroLeitura{
 	string erro;
 public:
-	ErroLeitura(){};
+	ErroLeitura();
 	ErroLeitura(string erro);
 	string getErro();
 };
