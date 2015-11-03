@@ -198,7 +198,7 @@ void Website::Anunciar_AC() {
 	do {
 		system("cls");
 		intro();
-		cout << "Imagens(Prima enter se nao quiser adicionar mais imagens): ";
+		cout << "Imagens(Prima enter se nao quiser adicionar mais imagens): " << endl;
 		getline(cin, imagem);
 		imagens.push_back(imagem);
 	} while (imagem != "");
@@ -316,7 +316,7 @@ void Website::Anunciar_AV() {
 	do {
 		system("cls");
 		intro();
-		cout << "Imagens(Prima enter se nao quiser adicionar mais imagens): ";
+		cout << "Imagens(Prima enter se nao quiser adicionar mais imagens): " << endl;
 		getline(cin, imagem);
 		imagens.push_back(imagem);
 	} while (imagem != "");
@@ -600,6 +600,8 @@ int Website::subMenuAnuncio(vector<int>& indices) {
 			vis = true;
 
 		} else {
+			system("cls");
+			intro();
 			if (Website::getAnuncios()[Menu::idAnuncio]->getTipo())
 				cout<< (*dynamic_cast<AnuncioVenda*>(Website::getAnuncios()[Menu::idAnuncio]));
 			else
@@ -623,7 +625,7 @@ int Website::menuAnuncioCategoria() {
 	vector<int> indices = procurarCategoria(c);
 	if (indices.size() == 0) {
 		setcolor(12);
-		cout << "Não existem Anuncios da Categoria" << c << ". ";
+		cout << "Nao existem Anuncios da Categoria" << c << ". ";
 		setcolor(15);
 		getch();
 		return 4;
@@ -635,7 +637,7 @@ int Website::menuAnuncioLocalizacao() {
 	string l;
 	system("cls");
 	intro();
-	cout << "Introduza a Localizao na qual deseja procurar o anuncio: ";
+	cout << "Introduza a Localizao na qual deseja procurar o anuncio: " << endl;
 	getline(cin, l);
 
 	vector<int> indices = procurarLocalizacao(l);
