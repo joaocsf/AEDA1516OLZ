@@ -7,8 +7,7 @@ int Anuncio::getIDGlobal() {
 	return _ID;
 }
 
-Anuncio::Anuncio(string titulo, string categ_produto, string descricao,
-		Data date) :
+Anuncio::Anuncio(string titulo, string categ_produto, string descricao,Data date) :
 		_num_vizualizacoes(0), _titulo(titulo), _categ_produto(categ_produto), _descricao(
 				descricao), _data(date), _identificador(_ID++), _user(NULL), _visivel(
 				true) {
@@ -147,15 +146,6 @@ Utilizador* Anuncio::getUser() {
 void Anuncio::AdicionarImagem(Imagem img) {
 	_imagens.push_back(img);
 }
-
-void Anuncio::setImagens(vector<Imagem> img){
-	_imagens = img;
-}
-
-float Anuncio::getPreco() const{
-	return -1;
-}
-
 
 //anuncio venda
 AnuncioVenda::AnuncioVenda(string titulo, string categ_produto,
@@ -325,6 +315,10 @@ int Anuncio::getVisualizacoes() const {
 }
 
 //get
+vector<Contacto> Anuncio::getContactos() const{
+	return _contactos;
+}
+
 vector<Imagem> Anuncio::getImagens() const {
 	return _imagens;
 }
@@ -340,7 +334,6 @@ bool AnuncioVenda::getNegociavel() const {
 int AnuncioVenda::getEstado() const {
 	return _estado;
 }
-
 
 //overload <<
 
@@ -373,27 +366,12 @@ ostream & operator<<(ostream & o, AnuncioVenda & av) {
 	o << "Descricao: ";
 	setcolor(15);
 	o << endl << av.getDescricao() << endl;
-	//localizacao
-	setcolor(3);
-	o << "Localizacao do Anuncio: " << endl;
-	o << "Distrito: ";
-	setcolor(15);
-	o << av.getUser()->getLocalizacao().distrito << endl;
-	setcolor(3);
-	o << "Concelho: ";
-	setcolor(15);
-	o << av.getUser()->getLocalizacao().concelho << endl;
-	setcolor(3);
-	o << "Freguesia: ";
-	setcolor(15);
-	o << av.getUser()->getLocalizacao().freguesia << endl;
-	//-----------
 	setcolor(3);
 	o << "Preco: ";
 	setcolor(15);
 	o << av.getPreco();
 	setcolor(3);
-	o << "          Negociavel: ";
+	o << "          Negocialvel: ";
 	setcolor(15);
 	if (av.getNegociavel())
 		cout << "Sim" << endl;
@@ -454,21 +432,6 @@ ostream & operator<<(ostream & o, AnuncioCompra & ac) {
 	o << "Descricao: ";
 	setcolor(15);
 	o << endl << ac.getDescricao() << endl;
-	//localizacao
-	setcolor(3);
-	o << "Localizacao do Anuncio: " << endl;
-	o << "Distrito: ";
-	setcolor(15);
-	o << ac.getUser()->getLocalizacao().distrito<< endl;
-	setcolor(3);
-	o << "Concelho: ";
-	setcolor(15);
-	o << ac.getUser()->getLocalizacao().concelho<< endl;
-	setcolor(3);
-	o << "Freguesia: ";
-	setcolor(15);
-	o << ac.getUser()->getLocalizacao().freguesia<< endl;
-	//-----------
 	setcolor(3);
 	cout << "Troca: ";
 	setcolor(15);

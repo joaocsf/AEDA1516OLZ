@@ -271,6 +271,7 @@ int Menu::menuAnuncioInterface(vector<int> indices){
 	}
 }
 //-----------------------------Menu Negocios----------------------------------------
+/*
 void Menu::desenharNegocioThumbnail(int indice, int sel, int pos){
 
 	Negocio* aTemp = Website::getNegocios()()[indice];
@@ -350,7 +351,7 @@ int Menu::menuAnuncioInterface(vector<Negocio*> negocios){
 		}
 	}
 }
-
+*/
 //---------------------------Funcoes Interface--------------------------------------
 int Menu::menuInterface() {
 	int y;
