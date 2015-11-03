@@ -42,6 +42,7 @@ public:
 	static int menuAnuncioCategoria();
 	static int menuAnuncioLocalizacao();
 	static int menuAnuncioPreco(bool crescente);
+	static int subMenuAnuncio(vector<int>& indices);
 	static void ordenaPreco(vector<int>& v,bool crescente);
 	static void intro();
 	static void contactar(int id);

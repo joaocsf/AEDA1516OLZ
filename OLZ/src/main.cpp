@@ -94,7 +94,7 @@ int main() {
 	Menu::InterfaceSeletor();
 	ofstream fileO("testeDados.txt");
 	Website::guardarFicheiro(fileO);
-	system("pause");
+	//system("pause");
 	return 0;
 	/**/
 }

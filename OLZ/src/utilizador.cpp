@@ -3,7 +3,6 @@
 int Utilizador::_ID = 1;
 
 Utilizador::Utilizador() {
-	_identificador = _ID++;
 }
 
 Utilizador::Utilizador(DadosPessoais contacto, Localizacao loc) {
@@ -20,8 +19,8 @@ int Utilizador::getIDGlobal() {
 	return _ID;
 }
 
-int Utilizador::setIDGlobal(int id){
-	_ID=id;
+int Utilizador::setIDGlobal(int id) {
+	_ID = id;
 }
 
 bool Utilizador::AdicionarAnuncio(Anuncio* anuncio) {
@@ -40,8 +39,24 @@ bool Utilizador::RemoverAnuncio(Anuncio* anuncio) {
 }
 
 bool Utilizador::RemoverAnuncio(int id) {
+
 	for (unsigned int var = 0; var < _anuncios.size(); var++) {
 		if (_anuncios[var]->Anuncio::getID() == id) {
+
+			if (_anuncios[var]->getTipo() == TIPO_VENDA) {
+				for (int i = 0; i < _anuncios.size(); ++i) {
+					if (_anuncios[i]->getTipo() == TIPO_COMPRA) {
+						AnuncioCompra* ac =dynamic_cast<AnuncioCompra*>(_anuncios[i]);
+
+						if (ac->getAnuncioVenda()->getID() == id) {
+							ac->setAnuncioVenda(NULL);
+							break;
+						}
+					}
+				}
+			}
+
+
 			free(_anuncios[var]);
 			_anuncios.erase(_anuncios.begin() + var);
 			return true;
@@ -200,12 +215,12 @@ string Utilizador::getInfo() const {
 	return info;
 }
 
-vector<Anuncio*> Utilizador::getAnuncios(bool venda){
+vector<Anuncio*> Utilizador::getAnuncios(bool venda) {
 	vector<Anuncio*> res;
 	for (int i = 0; i < _anuncios.size(); ++i) {
-		if(_anuncios[i]->getTipo() == TIPO_VENDA && venda)
+		if (_anuncios[i]->getTipo() == TIPO_VENDA && venda)
 			res.push_back(_anuncios[i]);
-		else if(_anuncios[i]->getTipo()== TIPO_COMPRA && !venda)
+		else if (_anuncios[i]->getTipo() == TIPO_COMPRA && !venda)
 			res.push_back(_anuncios[i]);
 	}
 

@@ -147,6 +147,8 @@ void Menu::menuAnuncioDefinicoes(int y) {
 	cout << setw(20) << Highlight("Voltar Atras", y, 2) << endl;
 	setcolor(15);
 }
+
+
 //----------------------------------------------------------------------------------
 //---------------------------Menu Selector------------------------------------------
 void Menu::InterfaceSeletor() {
@@ -562,7 +564,8 @@ int Menu::menu(int tamanho, int menuSelect) {
 	switch (menuSelect) {
 	case 0:
 		menuInicial(y);
-		break;	case 1:
+		break;
+	case 1:
 		menuLogin(y);
 		break;
 	case 2:
