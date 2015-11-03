@@ -27,227 +27,81 @@
 #define TIPO_COMPRA 0
 
 
-//!Class Anuncio
-/*!
- * Classe anuncio que contem as informacoes e as funcoes relativas aos anuncios.
- */
+
+
 class Anuncio : public Dados{
-	//!ID
-	/*!
-	 * Variavel global da classe que contem o numero de identificacao do proximo anuncio a ser gerado.
-	 */
 	static int _ID;
-	//! user
-	/*!
-	 * Utilizador deste anuncio.
-	 */
 	Utilizador* _user;
-	//! identificador
-	/*!
-	 * Numero de identificacao unico do anuncio.
-	 */
 	int _identificador;
-	//! titulo
-	/*!
-	 * Titulo do anuncio.
-	 */
 	string _titulo;
-	//! categ_produto
-	/*!
-	 * Categoria em que o produto do anuncio esta inserido.
-	 */
 	string _categ_produto;
-	//! descricao
-	/*!
-	 * Descricao do produto.
-	 */
 	string _descricao;
-	//! num_visualizacoes.
-	/*!
-	 * Contador de visualizacoes do anuncio.
-	 */
 	int _num_vizualizacoes;
-	//! visivel.
-	/*!
-	 * Booleano com a visivilidade do anuncio.
-	 */
 	bool _visivel;
-	//! data.
-	/*!
-	 * Data em que o anuncio foi criado.
-	 */
 	Data _data;
-	//! imagens
-	/*!
-	 * Vetor com as imagens de um produto anunciado.
-	 */
 	vector<Imagem> _imagens;
-	//! contactos
-	/*!
-	 * Vetor com os contactos realizador pelo site entre comprador e anunciante.
-	 */
-	vector<Contacto> _contactos;
+	vector<Contacto> _contactos;//contatos realizados pelo site entre comprador e anunciante
 
 public:
-	//! Construtor default.
 	Anuncio(){}
-	//!Overload do construtor com 4 parametros.
-	/*!
-	 \param titulo do anuncio.
-	 \param categ_produto categoria do produto.
-	 \param descricao do anuncio.
-	 \param date data do anuncio.
-	 */
 	Anuncio(string titulo,string categ_produto,string descricao,Data date);
 	//~Anuncio();
-	//!Funcao get para o ID Global.
-	/*!
-	 \return o valor da variavel global que contem o numero de identificacao do proximo anuncio.
-	 */
 	static int getIDGlobal();
-	//!Funcao get para o numero de identifacao do anuncio.
 	int getID() const;
-	//!Funcao get para o tipo de anuncio (Compra/Venda)
 	virtual int getTipo() const = 0;
-	//!Funcao para enviar uma mensagem
-	/*!
-	 \param c contacto para o qual se vai enviar a mensagem.
-	 */
 	void enviarMensagem(Contacto c);
-	//!Funcao de leitura das informacoes de um ficheiro.
 	virtual void ler(ifstream& in,bool escreve= false);
-	//!Funcao de escrita das informacoes para um ficheiro.
 	virtual void escrever(ofstream& out);
-	//!Funcao get para a informacao relativa ao anuncio.
 	virtual string getInfo() const;
-	//!Funcao get para o titulo e descricao do anuncio.
 	string getTitulo_Descricao()const;
-	//!Funcao get para a data do anuncio.
 	Data getData()const;
-	//!Funcao get para a categoria do anuncio.
 	string getCategoria()const;
-	//!Funcao set para o utilizador do anuncio.
 	virtual void setUser(Utilizador* user);
-	//!Funcao get para o utilizador do anuncio.
 	Utilizador* getUser();
-	//!Funcao get para o titulo.
 	string getTitulo() const;
-	//!Funcao que adiciona um imagem ao vetor de imagens.
-	/*!
-	 \param img imagem que vai ser adicionada.
-	 */
 	void AdicionarImagem(Imagem img);
-	//!Funcao que altera a visibilidade do anuncio.
 	void alterarVisibilidade(bool vis);
-	//!Funcao get para a visibilidade do anuncio.
 	bool getVisibilidade();
-	//!Funcao de incrementacao das visualizacoes do anuncio.
 	void visualizacao();
-	//!Funcao get para o numero de visualizacoes do anuncio.
 	int getVisualizacoes() const;
-	//!Funcao get para o vetor de imagens referentes ao anuncio.
 	vector<Imagem> getImagens() const;
-	//!Funcao get para os contactos referentes ao anuncio.
-	vector<Contacto> getContactos() const;
-	//!Funcao get para a descricao do anuncio.
 	string getDescricao() const;
 };
 
 
-//!Class AnuncioVenda
-/*!
- * Classe para um anuncio de um produto que se pretende vender.
- */
+
 class AnuncioVenda: public Anuncio{
-	//!preco
-	/*!
-	 * Preco que se procura pelo produto.
-	 */
 	float _preco;
-	//!negociavel
-	/*!
-	 * Indica se o preco e negociavel ou nao.
-	 */
 	bool _negociavel;
-	//!estado
-	/*!
-	 * Indica o estado do produto atraves de defines associados a inteiros.
-	 */
 	int _estado; //Usar ESTADO_*
 public:
-	//!Construtor default.
 	AnuncioVenda(){}
-	//!Overlaod do construtor com 7 parametros.
-	/*!
-	 \param titulo do anuncio.
-	 \param categ_produto categoria do produto.
-	 \param descricao.
-	 \param date Data.
-	 \param preco do produto.
-	 \param negociavel
-	 \param estado do produto.
-	 */
 	AnuncioVenda(string titulo,string categ_produto,string descricao,Data date,float preco,bool negociavel, int estado);
-	//!Funcao de leitura das informacoes de um ficheiro.
 	virtual void ler(ifstream& in,bool escreve= false);
-	//!Funcao de escrita das informacoes para um ficheiro.
 	virtual void escrever(ofstream& out);
-	//!Funcao get para a informacao relativa ao AnuncioVenda.
 	virtual string getInfo() const;
-	//!Funcao get para o tipo de Anuncio.
 	virtual int getTipo()const;
-	//!Funcao get para o preco.
 	float getPreco() const;
-	//!Funcao get para o booleano Negociavel.
 	bool getNegociavel() const;
-	//!Funcao get para o Estado do produto.
 	int getEstado() const;
 };
 
-//!Overload do operador << para a classe AnuncioVenda.
 ostream & operator<<(ostream & o, AnuncioVenda & av);
 
-//!Class AnuncioCompra
-/*!
- * Classe para um anuncio de um produto que se pretende comprar.
- */
 class AnuncioCompra: public Anuncio{
-	//!anuncioVenda
-	/*!
-	 * anuncio de venda quando é diferente de NULL significa que o utilizador aceita troca, pointer para anuncio de venda do mesmo utilizador
-	 */
-	AnuncioVenda *_anuncioVenda;
+	AnuncioVenda *_anuncioVenda; //anuncio de venda quando é diferente de NULL significa que o utilizador aceita troca, pointer para anuncio de venda do mesmo utilizador
 public:
-	//!Construtor default.
 	AnuncioCompra(){}
-	//!Overload do construtor com 4 parametros.
-	/*!
-	 \param titulo do anuncio.
-	 \param categ_produto.
-	 \param descricao do anuncio.
-	 \param date Data de criacao.
-	 */
 	AnuncioCompra(string titulo,string categ_produto,string descricao,Data date);
-	//!Funcao set para o anuncio de venda.
 	void setAnuncioVenda(AnuncioVenda* anuncio);
-	//!Funcao get para o Anuncio de Venda.
 	AnuncioVenda* getAnuncioVenda();
-	//!Funcao para ler as informacoes do anuncio de um ficheiro.
 	virtual void ler(ifstream& in,bool escreve= false);
-	//!Funcao para escrever as informacoes do anuncio para um ficheiro.
 	virtual void escrever(ofstream& out);
-	//!Funcao get para a informacao relativa a um anuncio de compra.
 	virtual string getInfo() const;
-	//!Funcao troca
-	/*!
-	 * Verifica se o produto esta disponivel para trocar, se AnuncioVenda != NULL.
-	 */
 	bool troca();
-	//!Funcao get para o tipo de anuncio.
 	virtual int getTipo()const;
 };
 
-//!Overload do operador << para a classe AnuncioCompra.
 ostream & operator<<(ostream & o, AnuncioCompra & ac);
 
 

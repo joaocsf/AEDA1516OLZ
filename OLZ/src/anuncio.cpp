@@ -316,10 +316,6 @@ int Anuncio::getVisualizacoes() const {
 }
 
 //get
-vector<Contacto> Anuncio::getContactos() const{
-	return _contactos;
-}
-
 vector<Imagem> Anuncio::getImagens() const {
 	return _imagens;
 }
