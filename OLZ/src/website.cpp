@@ -586,7 +586,7 @@ int Website::menuAnuncioCategoria(){
 		vector<int> indices = procurarCategoria(c);
 		if(indices.size() == 0){
 			setcolor(12);
-			cout << "Não existem Anuncio dessa Categoria. ";
+			cout << "Não existem Anuncios da Categoria" << c << ". ";
 			setcolor(15);
 			getch();
 			return 4;
@@ -611,7 +611,39 @@ int Website::menuAnuncioCategoria(){
 }
 
 int Website::menuAnuncioLocalizacao(){
+	string l;
+	system("cls");
+	intro();
+	cout << "Introduza a Localizao na qual deseja procurar o anuncio: ";
+	getline(cin,l);
+	bool vis=true;
 
+	while(true){
+		vector<int> indices = procurarLocalizacao(l);
+		if(indices.size() == 0){
+			setcolor(12);
+			cout << "Não existem Anuncios em " << l << ". ";
+			setcolor(15);
+			getch();
+			return 4;
+		}
+
+		Menu::idAnuncio = Menu::menuAnuncioInterface(indices);
+		if(Menu::idAnuncio ==-1)
+			return 4;
+		int y;
+		do{
+			if(vis){
+				anuncios[Menu::idAnuncio]->visualizacao();
+				vis=false;
+			}
+			y= Menu::interfacemenuAnuncio();
+			if(!y){
+				contactar(Menu::idAnuncio);
+			}
+		}while(!y);
+		vis=true;
+	}
 }
 
 

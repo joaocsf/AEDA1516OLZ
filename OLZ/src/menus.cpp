@@ -361,9 +361,9 @@ int Menu::interfacePesquisar(bool log) {
 	case 2://categoria
 		return Website::menuAnuncioCategoria();
 		break;
-	case 3: { //localizacao
+	case 3://localizacao
+		return Website::menuAnuncioLocalizacao();
 
-	}
 	break;//falta preco
 	case 4: {
 		if (log)
