@@ -18,11 +18,11 @@ void Website::intro() {
 	cout << "  \\______/  |_______| /________|" << endl;
 
 	setcolor(23);
-	cout << setw(45)
+	cout << setw(36)
 			<< ((Website::getIndiceUtilizador() == -1) ?
 					"" :
-					Website::getUtilizadores()[Website::getIndiceUtilizador()]->getDadosPessoais().getNome())
-			<< endl;
+				 	Website::getUtilizadores()[Website::getIndiceUtilizador()]->getDadosPessoais().getNome())
+			<<setw(24) <<""<< endl;
 	setcolor(15);
 }
 
@@ -380,6 +380,20 @@ vector<int> Website::procurarPalavraChave(string palavra){
 	return res;
 }
 
+vector<int> Website::procurarPreco(int min, int max){
+	vector<int> res;
+
+	for(unsigned int i = 0 ; i< anuncios.size(); i++){
+		if(anuncios[i]->getTipo()==TIPO_VENDA){
+			AnuncioVenda *av = dynamic_cast<AnuncioVenda*>(anuncios[i]);
+			if(av->getPreco()>=min && av->getPreco()<=max){
+				res.push_back(i);
+			}
+		}
+	}
+	return res;
+}
+
 //menus pesquisar anuncios
 void Website::contactar(int id){
 	string mensagem;
@@ -469,10 +483,8 @@ int Website::menuAnuncioPalavra(){
 	}
 }
 
-
 int Website::menuAnuncioData(){
 
-	string p;
 	int dia,mes,ano;
 	bool erro;
 
@@ -573,7 +585,6 @@ int Website::menuAnuncioData(){
 	}
 }
 
-
 int Website::menuAnuncioCategoria(){
 	string c;
 	system("cls");
@@ -645,7 +656,102 @@ int Website::menuAnuncioLocalizacao(){
 		vis=true;
 	}
 }
+//ordenar
 
+void Website::ordenaPreco(vector<int>& v, bool crescente){
+	for (unsigned int p = 1; p < v.size(); p++)
+	{
+		int tmp = v[p];
+		int j;
+		if(crescente){
+			for (j = p; j > 0 && anuncios[tmp]->getPreco() < anuncios[v[j-1]]->getPreco(); j--){
+				v[j] = v[j-1];
+			}
+		}else{
+			for (j = p; j > 0 && anuncios[tmp]->getPreco() > anuncios[v[j-1]]->getPreco(); j--){
+				v[j] = v[j-1];
+			}
+		}
+		v[j] = tmp;
+	}
+}
+
+int Website::menuAnuncioPreco(bool crescente){
+	float min,max;
+	bool erro;
+
+	system("cls");
+	intro();
+	cout << "Introduza a Data: ";
+
+	while (true) {
+		system("cls");
+		intro();
+		if (erro) {
+			setcolor(12);
+			cout << "Caracter Invalido" <<endl;
+			setcolor(15);
+		}
+		cout << "Valor minimo: ";
+		cin >> min;
+
+		if (cin.fail()) {
+			erro = true;
+			cin.clear();
+			cin.ignore();
+		}else{
+			break;
+		}
+	}
+	erro=false;
+	while (true) {
+		system("cls");
+		intro();
+		if (erro) {
+			setcolor(12);
+			cout << "Caracter Invalido" <<endl;
+			setcolor(15);
+		}
+		cout << "Valor Maximo: ";
+		cin >> max;
+
+		if (cin.fail()) {
+			erro = true;
+			cin.clear();
+			cin.ignore();
+		}else{
+			break;
+		}
+	}
+
+	bool vis=true;
+	while(true){
+		vector<int> indices = procurarPreco(min,max);
+		if(indices.size() == 0){
+			setcolor(12);
+			cout << "Nao existem Produtos no intervalo de preco " << min << "<->" << max;
+			setcolor(15);
+			getch();
+			return 4;
+		}
+		ordenaPreco(indices,crescente);
+		Menu::idAnuncio = Menu::menuAnuncioInterface(indices);
+		if(Menu::idAnuncio ==-1)
+			return 4;
+		int y;
+		do{
+			if(vis){
+				anuncios[Menu::idAnuncio]->visualizacao();
+				vis=false;
+			}
+			y= Menu::interfacemenuAnuncio();
+			if(!y){
+				contactar(Menu::idAnuncio);
+			}
+		}while(!y);
+		vis=true;
+	}
+}
 
 
 //ficheiros
@@ -678,6 +784,60 @@ void Website::lerFicheiro(ifstream& file){
 
 
 }
+
+//meus anuncios
+
+vector<int> Website::anunciosParaIndices(const vector<Anuncio*>& aTemp){
+	vector<int> res;
+	for (unsigned int i = 0; i < aTemp.size(); ++i) {
+		for(int k = 0; anuncios.size(); k++){
+			if(aTemp[i]->getID()==anuncios[i]->getID())
+				res.push_back(k);
+		}
+	}
+	return res;
+}
+
+vector<int> Website::retornarMeusAnuncios(bool venda){
+
+	return anunciosParaIndices(utilizadores[indiceUtilizador]->getAnuncios(venda));
+}
+
+
+int Website::MenuAnuncioConta(bool venda){
+
+
+
+	Menu::idAnuncio=Menu::menuAnuncioInterface(retornarMeusAnuncios(venda));
+
+	if(Menu::idAnuncio ==-1)
+		return 3;
+
+	int	y= Menu::interfaceAnuncioDefinicoes();
+	if(y==0){//ver contatos
+
+	}
+	else if(y==1){//remove anuncio
+
+
+	}
+	else{//voltar atras
+
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

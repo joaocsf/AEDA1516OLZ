@@ -117,6 +117,12 @@ public:
 	int getID() const;
 	//!Funcao global para devolver o valor atual da variavel global ID.
 	static int getIDGlobal();
+	//!Funcao retorna os anuncios do vetor anuncios conforme sejam de venda ou de compra.
+		/*!
+		 \param venda boleano que indica se o tipo de anuncios a retornar e de venda ou de compra.
+		 \return vetor de apontadores do tipo de anuncio.
+		 */
+	vector<Anuncio*> getAnuncios(bool venda);
 };
 
 //! Class AnuncioInexistente

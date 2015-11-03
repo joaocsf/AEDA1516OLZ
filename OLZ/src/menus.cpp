@@ -54,15 +54,15 @@ void Menu::menuAnunciar(int y) {
 void Menu::menuConta(int y) {
 	system("cls");
 	Website::intro();
-	cout << setw(20) << Highlight("Meus Anuncios De Compra", y, 0) << endl;
+	cout << setw(30) << Highlight("Meus Anuncios De Compra", y, 0) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Meus Anuncios De Venda", y, 1) << endl;
+	cout << setw(30) << Highlight("Meus Anuncios De Venda", y, 1) << endl;
 	setcolor(15);
-	cout << setw(20)
-			<< Highlight("Alterar Visibilidade Dos Meus Dados Pessoais", y, 2)
-			<< endl;
+	cout << setw(30)<< Highlight("Meus Negocios", y, 2)<< endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Voltar Atras", y, 3) << endl;
+	cout << setw(30)<< Highlight("Alterar Visibilidade Dos Meus Dados Pessoais", y, 3)<< endl;
+	setcolor(15);
+	cout << setw(30) << Highlight("Voltar Atras", y, 4) << endl;
 	setcolor(15);
 }
 
@@ -78,7 +78,9 @@ void Menu::menuPesquisar(int y) {
 	setcolor(15);
 	cout << setw(20) << Highlight("Localizacao", y, 3) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Voltar Atras", y, 4) << endl;
+	cout << setw(20) << Highlight("Preco", y, 4) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Voltar Atras", y, 5) << endl;
 	setcolor(15);
 }
 
@@ -108,9 +110,9 @@ void Menu::menuAnuncio(int y) {
 	system("cls");
 	Website::intro();
 	if(Website::getAnuncios()[idAnuncio]->getTipo())
-		cout<< (*static_cast<AnuncioVenda*>(Website::getAnuncios()[idAnuncio]));
+		cout<< (*dynamic_cast<AnuncioVenda*>(Website::getAnuncios()[idAnuncio]));
 	else
-		cout<< (*static_cast<AnuncioCompra*>(Website::getAnuncios()[idAnuncio]));
+		cout<< (*dynamic_cast<AnuncioCompra*>(Website::getAnuncios()[idAnuncio]));
 	cout << endl << setw(40) << Highlight("Contactar Anunciante", y, 0) << endl;
 	setcolor(15);
 	cout << setw(40) << Highlight("Voltar Atras", y, 1) << endl;
@@ -133,8 +135,12 @@ void Menu::menuCategProd(int y) {
 
 void Menu::menuAnuncioDefinicoes(int y) {
 	system("cls");
-	Website::intro();
-	cout << setw(20) << Highlight("Editar: ", y, 0) << endl;
+		Website::intro();
+		if(Website::getAnuncios()[idAnuncio]->getTipo())
+			cout<< (*dynamic_cast<AnuncioVenda*>(Website::getAnuncios()[idAnuncio]));
+		else
+			cout<< (*dynamic_cast<AnuncioCompra*>(Website::getAnuncios()[idAnuncio]));
+	cout << setw(20) << Highlight("Ver Contacto(s): ", y, 0) << endl;
 	setcolor(15);
 	cout << setw(20) << Highlight("Remover", y, 1) << endl;
 	setcolor(15);
@@ -170,7 +176,7 @@ void Menu::InterfaceSeletor() {
 			menu = interfaceCategProd();
 			break;
 		case 7:
-			menu = interfaceAnuncioDefinicoes();
+			menu = interfaceAnuncioDefinicoes();//nao precisa estar aqui
 			break;;
 		case 8:
 			return;
@@ -196,7 +202,7 @@ void Menu::desenharAnuncioThumbnail(int indice, int sel, int pos){
 		setcolor(2);
 	cout << "------------------------------------------" << endl;
 	cout << "|" << setw(40) << header << "|" << endl;
-	cout << "|" << setw(40) << aTemp->getTitulo() << "|" << endl;
+	cout << "|Titulo: "<< setw(32) << aTemp->getTitulo() << "|" << endl;
 	if (aVend != NULL)
 		cout <<"|Preco: "<<setw(33) << aVend->getPreco() <<"|"<< endl;
 	cout << "------------------------------------------"<<endl;
@@ -328,29 +334,47 @@ int Menu::interfaceLog() {
 
 int Menu::interfaceConta() {
 	int y;
-	y = menu(3, 5);
+	y = menu(4, 5);
 	switch (y) {
-	case 0: { //ac
-	}
+	case 0:  //ac
+
 		break;
-	case 1: { //av
-	}
+	case 1:  //av
+
 		break;
-	case 2: { //visibilidade
-	}
+	case 2:  //negocios
+
 		break;
-	case 3: {
+	case 3:  //alterar visiblidade
+
+		break;
+	case 4: //voltar atras
 		return 1;
 		break;
-	}
+
 	default:
 		break;
 	}
 }
 
+int Menu::interfaceAnuncioDefinicoes() {
+	int y;
+	y = menu(2,9);
+	switch (y) {
+	case 0://ver contatos
+		return 0;
+		break;
+	case 1://remove anuncio
+		return 1;
+		break;
+	case 2://volta á lista de anucios
+		return 2;
+		break;
+	}
+}
 int Menu::interfacePesquisar(bool log) {
 	int y;
-	y = menu(4, 3);
+	y = menu(5, 3);
 	switch (y) {
 	case 0:  //palavra
 		return Website::menuAnuncioPalavra();
@@ -364,8 +388,11 @@ int Menu::interfacePesquisar(bool log) {
 	case 3://localizacao
 		return Website::menuAnuncioLocalizacao();
 
-	break;//falta preco
-	case 4: {
+	break;
+	case 4://preco
+		return 5;
+		break;
+	case 5: {
 		if (log)
 			return 1;
 		else
@@ -379,11 +406,11 @@ int Menu::interfaceOrdemPesq() {
 	int y;
 	y = menu(2, 4);
 	switch (y) {
-	case 0: { //crescente
-	}
+	case 0: //crescente
+		return Website::menuAnuncioPreco(true);
 		break;
-	case 1: { //decrecente
-	}
+	case 1: //decrecente
+		return Website::menuAnuncioPreco(false);
 		break;
 	case 2: {
 		return 4;
@@ -431,22 +458,6 @@ int Menu::interfaceCategProd() {
 }
 
 
-int Menu::interfaceAnuncioDefinicoes() {
-	int y;
-	y = menu(2,9);
-	switch (y) {
-	case 0://editar anuncio
-
-		break;
-	case 1://remove anuncio
-
-		break;
-	case 2://volta á lista de anucios
-
-		break;
-	}
-}
-
 int Menu::interfacemenuAnuncio() {
 	int y;
 	y = menu(1,6);
@@ -460,6 +471,7 @@ int Menu::interfacemenuAnuncio() {
 		break;
 	}
 }
+
 //------------------------menu propriamente dito-----------------
 int Menu::menu(int tamanho, int menuSelect) {
 	int y = 0;

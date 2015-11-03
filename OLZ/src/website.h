@@ -30,19 +30,27 @@ public:
 	static void RemoveUtilizador(int id);
 	static void	RemoveNegocio(int id);
 	static int getIndiceUtilizador();
+	//procura
 	static vector<int> procurarPalavraChave(string palavra);
 	static vector<int> procurarData(Data data);
 	static vector<int> procurarCategoria(string categoria);
 	static vector<int> procurarLocalizacao(string loc);
+	static vector<int> procurarPreco(int min, int max);
 	//menu pesquisa
 	static int menuAnuncioPalavra();
 	static int menuAnuncioData();
 	static int menuAnuncioCategoria();
 	static int menuAnuncioLocalizacao();
+	static int menuAnuncioPreco(bool crescente);
+	static void ordenaPreco(vector<int>& v,bool crescente);
 	static void intro();
 	static void contactar(int id);
 	static void guardarFicheiro(ofstream& file);
 	static void lerFicheiro(ifstream& file);
+	//menu definicoes
+	static vector<int> anunciosParaIndices(const vector<Anuncio*>& aTemp);
+	static vector<int> retornarMeusAnuncios(bool venda);
+	int Website::MenuAnuncioConta(bool venda);
 };
 
 class UtilizadorInixestente{

@@ -20,7 +20,7 @@ void GetKeys() {
 }
 
 int main() {
-
+	system("mode con:cols=60 lines=45");
 
 
 	/*

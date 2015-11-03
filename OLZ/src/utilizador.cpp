@@ -38,6 +38,7 @@ bool Utilizador::RemoverAnuncio(Anuncio* anuncio) {
 bool Utilizador::RemoverAnuncio(int id) {
 	for (unsigned int var = 0; var < _anuncios.size(); var++) {
 		if (_anuncios[var]->Anuncio::getID() == id) {
+			free(_anuncios[var]);
 			_anuncios.erase(_anuncios.begin() + var);
 			return true;
 		}
@@ -193,4 +194,17 @@ string Utilizador::getInfo() const {
 	info += "\n";
 
 	return info;
+}
+
+vector<Anuncio*> Utilizador::getAnuncios(bool venda){
+	vector<Anuncio*> res;
+	for (int i = 0; i < _anuncios.size(); ++i) {
+		if(_anuncios[i]->getTipo() == TIPO_VENDA && venda)
+			res.push_back(_anuncios[i]);
+		else if(_anuncios[i]->getTipo()== TIPO_COMPRA && !venda)
+			res.push_back(_anuncios[i]);
+	}
+
+	return res;
+
 }
