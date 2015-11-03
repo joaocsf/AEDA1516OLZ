@@ -74,7 +74,9 @@ void DadosPessoais::ler(ifstream& in, bool escreve) {
 			break;
 		case VIS_TOTAL:
 			if (linha != "#D") {
-				cout<<"MERDOU DADOSPESSOAIS! "<<linha<<endl ;
+				stringstream ss;
+				ss<< "Erro Leitura Dados Pessoais. Encontrado:" << linha << "Esperado: #D";
+				throw ErroLeitura(ss.str());
 			} else{
 				return; //tudo bem pode continuar.
 			}
@@ -97,6 +99,37 @@ string DadosPessoais::getNome() const{
 	return nome;
 }
 
+string DadosPessoais::getTelefone() const{
+	 return telefone;
+}
+
 string DadosPessoais::getEmail() const{
 	return email;
+}
+
+bool* DadosPessoais::getVisiveis(){
+	return visiveis;
+}
+
+ostream & operator<<(ostream & o, DadosPessoais & dados){
+	string info;
+	for (int i = 0; i < 3; ++i) {
+		if (dados.getVisiveis()[i]) {
+			switch (i) {
+			case VIS_NOME:
+				info += "Nome: " + dados.getNome() + "\n";
+				break;
+			case VIS_TELEFONE:
+				info += "Telefone: " + dados.getTelefone() + "\n";
+				break;
+			case VIS_EMAIL:
+				info += "Email: " + dados.getEmail() + "\n";
+				break;
+			}
+		}
+	}
+
+	o << info;
+
+	return o;
 }

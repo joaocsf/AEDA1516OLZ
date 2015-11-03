@@ -35,7 +35,10 @@ void Contacto::ler(ifstream& in,bool escreve){
 				}else if(linha == "#C"){
 					return;
 				}else{
-					cout <<"ContactoMerdou";
+				stringstream ss;
+				ss << "Erro Leitura Contacto. Encontrado:" << linha
+						<< " Esperado:#C / D";
+				throw ErroLeitura(ss.str());
 				}
 				break;
 		}

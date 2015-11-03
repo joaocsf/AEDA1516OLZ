@@ -7,6 +7,7 @@
 #include "comum.h"
 #include "dados.h"
 
+
 #define ESTADO_NOVO 0
 #define ESTADO_USADO 1
 #define ESTADO_FUNCIONAL 2
@@ -22,12 +23,14 @@
 #define A_NEGOCIAVEL 1
 #define A_ESTADO 2
 
+#define TIPO_VENDA 1
+#define TIPO_COMPRA 0
+
 
 
 
 class Anuncio : public Dados{
 	static int _ID;
-
 	Utilizador* _user;
 	int _identificador;
 	string _titulo;
@@ -45,7 +48,7 @@ public:
 	//~Anuncio();
 	static int getIDGlobal();
 	int getID() const;
-
+	virtual int getTipo() const = 0;
 	void enviarMensagem(Contacto c);
 	virtual void ler(ifstream& in,bool escreve= false);
 	virtual void escrever(ofstream& out);
@@ -55,9 +58,14 @@ public:
 	string getCategoria()const;
 	virtual void setUser(Utilizador* user);
 	Utilizador* getUser();
+	string getTitulo() const;
 	void AdicionarImagem(Imagem img);
 	void alterarVisibilidade(bool vis);
 	bool getVisibilidade();
+	void visualizacao();
+	int getVisualizacoes() const;
+	vector<Imagem> getImagens() const;
+	string getDescricao() const;
 };
 
 
@@ -72,7 +80,13 @@ public:
 	virtual void ler(ifstream& in,bool escreve= false);
 	virtual void escrever(ofstream& out);
 	virtual string getInfo() const;
+	virtual int getTipo()const;
+	float getPreco() const;
+	bool getNegociavel() const;
+	int getEstado() const;
 };
+
+ostream & operator<<(ostream & o, AnuncioVenda & av);
 
 class AnuncioCompra: public Anuncio{
 	AnuncioVenda *_anuncioVenda; //anuncio de venda quando é diferente de NULL significa que o utilizador aceita troca, pointer para anuncio de venda do mesmo utilizador
@@ -85,10 +99,10 @@ public:
 	virtual void escrever(ofstream& out);
 	virtual string getInfo() const;
 	bool troca();
-
+	virtual int getTipo()const;
 };
 
-
+ostream & operator<<(ostream & o, AnuncioCompra & ac);
 
 
 

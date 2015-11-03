@@ -50,9 +50,14 @@ static int interfaceOrdemPesq();
 static int interfaceTipoAnuncio();
 static int interfaceCategProd();
 static int interfaceAnuncioDefinicoes();
+static int interfacemenuAnuncio();
 //selector
 static void InterfaceSeletor();
 static bool logado; //variavel que indica se o usuario está logado
+static int idAnuncio;//id do anuncio no vetor anuncios onde que o utilizador esta a visualizar no momento
+//menu dos anuncios
+static int menuAnuncioInterface(vector<int> indices);
+static void desenharAnuncioThumbnail(int indice, int sel, int pos);
 };
 
 #endif
