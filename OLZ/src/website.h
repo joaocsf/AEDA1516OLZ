@@ -50,7 +50,7 @@ public:
 	//menu definicoes
 	static vector<int> anunciosParaIndices(const vector<Anuncio*>& aTemp);
 	static vector<int> retornarMeusAnuncios(bool venda);
-	int Website::MenuAnuncioConta(bool venda);
+	static int MenuAnuncioConta(bool venda);
 };
 
 class UtilizadorInixestente{

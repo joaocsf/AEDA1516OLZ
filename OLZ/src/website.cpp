@@ -807,24 +807,23 @@ vector<int> Website::retornarMeusAnuncios(bool venda){
 int Website::MenuAnuncioConta(bool venda){
 
 
+	while(true){
+		Menu::idAnuncio=Menu::menuAnuncioInterface(retornarMeusAnuncios(venda));
 
-	Menu::idAnuncio=Menu::menuAnuncioInterface(retornarMeusAnuncios(venda));
+		if(Menu::idAnuncio ==-1)
+			return 3;
 
-	if(Menu::idAnuncio ==-1)
-		return 3;
+		int	y= Menu::interfaceAnuncioDefinicoes();
+		if(y==0){//ver contatos
 
-	int	y= Menu::interfaceAnuncioDefinicoes();
-	if(y==0){//ver contatos
-
+		}
+		else if(y==1){//remove anuncio
+			RemoveAnuncio(anuncios[Menu::idAnuncio]->getID());
+		}
 	}
-	else if(y==1){//remove anuncio
 
-
-	}
-	else{//voltar atras
-
-	}
 }
+
 
 
 

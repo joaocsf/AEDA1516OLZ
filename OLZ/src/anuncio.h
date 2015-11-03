@@ -67,6 +67,7 @@ public:
 	vector<Imagem> getImagens() const;
 	void setImagens(vector<Imagem> img);
 	string getDescricao() const;
+	virtual float getPreco() const;
 };
 
 

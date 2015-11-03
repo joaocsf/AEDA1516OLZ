@@ -189,7 +189,7 @@ void Menu::InterfaceSeletor() {
 
 }
 
-//---------------------------Funcoes Interface--------------------------------------
+//---------------------------Menu Anuncios--------------------------------------
 
 void Menu::desenharAnuncioThumbnail(int indice, int sel, int pos){
 
@@ -270,7 +270,88 @@ int Menu::menuAnuncioInterface(vector<int> indices){
 		}
 	}
 }
+//-----------------------------Menu Negocios----------------------------------------
+void Menu::desenharNegocioThumbnail(int indice, int sel, int pos){
 
+	Negocio* aTemp = Website::getNegocios()()[indice];
+
+
+	string header = (aVend == NULL)? "Anuncio Compra" : "Anuncio Venda";
+	setcolor(15);
+	if (sel == pos)
+		setcolor(2);
+	cout << "------------------------------------------" << endl;
+	cout << "|" << setw(40) << header << "|" << endl;
+	cout << "|Titulo: "<< setw(32) << aTemp->getTitulo() << "|" << endl;
+	if (aVend != NULL)
+		cout <<"|Montante: "<<setw(33) << aVend->getPreco() <<"|"<< endl;
+	cout << "------------------------------------------"<<endl;
+
+	setcolor(15);
+
+}
+
+int Menu::menuAnuncioInterface(vector<Negocio*> negocios){
+	int y= 0;//Seletor
+	int nPagina=0; //numero pagina;
+	int negocioPorPagina=3;//numero de anuncio por pagina;
+	bool update= true;
+	int maxY;
+	while (true) {
+
+
+		if(update){
+			update=false;
+			system("cls");
+			Website::intro();
+			cout<<(nPagina+1)<< "/" <<((negocios.size()-1)/negocioPorPagina + 1)<<endl;
+			for (int i = 0; i < 3; ++i) {
+				int n = nPagina * negocioPorPagina;
+				if (i + n >= negocios.size())
+					break;
+				maxY=i;
+				desenharNegocioThumbnail(negocios[i + n], y, i);
+			}
+		}
+
+		if (kbhit()) {
+			int tecla = getch();
+			if (tecla == 72) { // para cima
+				if (y > 0){//não diminui o indice se já estiver na posição com o menor indice
+					y--;
+					update=true;
+				}
+
+			} else if (tecla == 80) { // para baixo
+				if(y<maxY){
+					y++;
+					update=true;
+				}
+
+			}else if(tecla == 75){ //esquerda
+				if(nPagina>0){
+					y=0;
+					nPagina--;
+					update=true;
+				}
+
+			}else if(tecla == 77){ // direita
+				if(nPagina < (negocios.size()-1)/negocioPorPagina){
+					y=0;
+					nPagina++;
+					update=true;
+				}
+			}else if (tecla == 13) { // enter
+				return negocios[(nPagina*negocioPorPagina+y)];
+			}
+			else if(tecla==27){
+				return -1;//voltar atras
+			}
+		}
+	}
+}
+
+//---------------------------Funcoes Interface--------------------------------------
 int Menu::menuInterface() {
 	int y;
 	y = menu(3, 0);
@@ -337,10 +418,10 @@ int Menu::interfaceConta() {
 	y = menu(4, 5);
 	switch (y) {
 	case 0:  //ac
-
+		return Website::MenuAnuncioConta(false);
 		break;
 	case 1:  //av
-
+		return Website::MenuAnuncioConta(true);
 		break;
 	case 2:  //negocios
 
