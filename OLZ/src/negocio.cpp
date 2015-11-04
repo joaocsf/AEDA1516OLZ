@@ -6,9 +6,16 @@ int Negocio::_ID = 1;
 Negocio::Negocio(Anuncio* anun, float valor) {
 	_ptr_anuncio = anun;
 	_montante = valor;
-	_identificador = (_ID++);
+	_identificador = _ID++;
 }
 ;
+
+Negocio::Negocio(Anuncio* anun, float valor, Data data){
+	_ptr_anuncio = anun;
+	_montante = valor;
+	_identificador = _ID++;
+	_data=data;
+}
 
 int Negocio::getID() {
 	return _identificador;

@@ -8,6 +8,12 @@ vector<Negocio*> Website::negocios;
 int Website::indiceUtilizador = -1;
 Data Website::_data = Data();
 
+string Website::getInfo(){
+	stringstream ss;
+	ss << &utilizadores;
+	return ss.str();
+}
+
 void Website::intro() {
 	setcolor(9);
 	cout << "   ______    __       ________  " << endl;
@@ -29,6 +35,12 @@ void Website::intro() {
 Website::Website() {
 }
 
+void Website::setData(Data d){
+	_data=d;
+}
+Data Website::getData(){
+	return _data;
+}
 vector<Utilizador*> Website::getUtilizadores() {
 	return utilizadores;
 }
@@ -54,16 +66,15 @@ void Website::addNegocio(Negocio *n) {
 }
 
 void Website::RemoveAnuncio(int id) {
-	int index;
 
 	for (unsigned int i = 0; i < anuncios.size(); ++i) {
 		if (anuncios[i]->getID() == id) {
+			anuncios[i]->getUser()->RemoverAnuncio(id);
 			anuncios.erase(anuncios.begin() + i);
-			index = i;
 			break;
 		}
 	}
-	anuncios[index]->getUser()->RemoverAnuncio(id);
+
 
 }
 
@@ -236,8 +247,11 @@ void Website::Anunciar_AC() {
 			getch();
 			return;
 		}
-		Menu::idAnuncio = Menu::menuAnuncioInterface(
-				retornarMeusAnuncios(true));
+		Menu::idAnuncio = Menu::menuAnuncioInterface(retornarMeusAnuncios(true));
+
+		if(Menu::idAnuncio == -1)
+			return;
+
 		ac->setAnuncioVenda(
 				dynamic_cast<AnuncioVenda*>(anuncios[Menu::idAnuncio]));
 	}
@@ -746,42 +760,15 @@ void Website::guardarFicheiro(ofstream& file) {
 	file << Utilizador::getIDGlobal() << " ";
 	file << Negocio::getIDGlobal() << endl;
 
-	for (int i = 0; i < utilizadores.size(); ++i) {
-		utilizadores[i]->escrever(file);
-	}
+	Dados::escreverFicheiro(file);
 }
 void Website::lerFicheiro(ifstream& file) {
-	int n = 0;
-	string linha;
-	getline(file, linha);
-	int temp;
-	stringstream ss(linha);
-	ss >> temp;
-	cout << "Numero de Anuncios Criados:" << (temp - 1) << endl;
-	Anuncio::setIDGlobal(temp);
-	ss >> temp;
-	cout << "Numero de Utilizadores Criados:" << (temp - 1) << endl;
-	Utilizador::setIDGlobal(temp);
-	ss >> temp;
-	cout << "Numero de Negocios Criados:" << (temp - 1) << endl;
-	Negocio::setIDGlobal(temp);
 
-	while (getline(file, linha)) {
+	Dados::setVetorAnuncio(&anuncios);
+	Dados::setVetorUtilizadores(&utilizadores);
+	Dados::setVetorNegocios(&negocios);
 
-		if (linha == "U") {
-			try {
-				Utilizador* uTemp = new Utilizador();
-				uTemp->ler(file);
-				utilizadores.push_back(uTemp);
-				n++;
-			} catch (ErroLeitura erro) {
-				cout << erro.getErro();
-				getch();
-			}
-
-		}
-	}
-	cout << "Utilizadores registados:" << n << endl;
+	Dados::lerFicheiro(file);
 	getch();
 
 }

@@ -5,6 +5,7 @@
 #include "utilizador.h"
 #include "data.h"
 #include "menus.h"
+#include <time.h>
 using namespace std;
 
 void GetKeys() {
@@ -88,13 +89,21 @@ void NovosDados() {
 int main() {
 	//NovosDados();
 
+	time_t agora= time(0);
+	tm *ltm = localtime(&agora);
+	Website::setData(Data(ltm->tm_year+1900,ltm->tm_mon+1,ltm->tm_mday));
+
+
+	getch();
+	cout<<Website::getData();
 	system("mode con:cols=60 lines=45");
 	ifstream fileI("testeDados.txt");
 	Website::lerFicheiro(fileI);
 	Menu::InterfaceSeletor();
 	ofstream fileO("testeDados.txt");
 	Website::guardarFicheiro(fileO);
-	//system("pause");
+
+	system("pause");
 	return 0;
 	/**/
 }

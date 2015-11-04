@@ -15,6 +15,11 @@ class Website{
 	static Data _data;
 public:
 	Website();
+	static void setData(Data d);
+	static Data getData();
+
+	static string getInfo();
+
 	static void login();
 	static void logout();
 	static void Registar();

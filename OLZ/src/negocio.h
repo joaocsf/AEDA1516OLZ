@@ -56,6 +56,13 @@ public:
 	 \param valor o valor que foi pago/recebido.
 	 */
 	Negocio(Anuncio* anun, float valor);
+	//! Overload do construtor com 2 parametros.
+	/*!
+	 \param anun Anuncio do negocio.
+	 \param valor o valor que foi pago/recebido.
+	 \param data de quando concluiu o negocio
+	 */
+	Negocio(Anuncio* anun, float valor, Data data);
 	//virtual ~Negocio();
 	//! Funcao get para o ID
 	/*!

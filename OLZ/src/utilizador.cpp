@@ -54,6 +54,9 @@ bool Utilizador::RemoverAnuncio(int id) {
 						}
 					}
 				}
+			}else{
+				AnuncioCompra* ac = dynamic_cast<AnuncioCompra*>(_anuncios[var]);
+				ac->setAnuncioVenda(NULL);
 			}
 
 
@@ -62,6 +65,7 @@ bool Utilizador::RemoverAnuncio(int id) {
 			return true;
 		}
 	}
+
 	throw AnuncioInexistente(id);
 }
 
@@ -142,14 +146,14 @@ void Utilizador::ler(ifstream& in, bool escreve) {
 				A->ler(in);
 				AdicionarAnuncio(A);
 				if (A->getVisibilidade())
-					Website::addAnuncio(A);
+					vetorAnuncios->push_back(A); //Website::addAnuncio(A); <<teste!
 			} else if (linha == "AC") {
 				Anuncio* AC = new AnuncioCompra();
 				AC->setUser(this);
 				AC->ler(in);
 				AdicionarAnuncio(AC);
 				if (AC->getVisibilidade())
-					Website::addAnuncio(AC);
+					vetorAnuncios->push_back(AC);//Website::addAnuncio(AC); <<<teste!
 			} else if (linha == "N") {
 				Negocio* N = new Negocio();
 				N->setUser(this);

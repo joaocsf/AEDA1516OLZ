@@ -99,31 +99,39 @@ public:
 
 	//!Funcao get para os dados pessoais.
 	DadosPessoais getDadosPessoais();
+
 	//!Funcao get para a localizacao.
 	Localizacao getLocalizacao();
+
 	//!Funcao para ler as informacoes de um ficheiro.
 	virtual void ler(ifstream& in,bool escreve= false);
+
 	//!Funcao que escreve as informacoes num ficheiro.
 	virtual void escrever(ofstream& out);
+
 	//!Funcao get para a informacao do utilizador.
 	string getInfo() const;
+
 	//!Funcao de pesquisa no vector anuncios para um dado id.
 	/*!
 	 \param id do anuncio a ser procurado
 	 \return apontador para o anuncio no caso deste ser encontrado.
 	 */
 	Anuncio* procurarAnuncio(int id);
+
 	//!Funcao get para o ID.
 	int getID() const;
+
 	//!Funcao global para devolver o valor atual da variavel global ID.
 	static int getIDGlobal();
-
+	//!Funcao global para defenir o valor da variavel global ID.
 	static int setIDGlobal(int id);
+
 	//!Funcao retorna os anuncios do vetor anuncios conforme sejam de venda ou de compra.
-		/*!
-		 \param venda boleano que indica se o tipo de anuncios a retornar e de venda ou de compra.
-		 \return vetor de apontadores do tipo de anuncio.
-		 */
+	/*!
+	 \param venda boleano que indica se o tipo de anuncios a retornar e de venda ou de compra.
+	 \return vetor de apontadores do tipo de anuncio.
+	 */
 	vector<Anuncio*> getAnuncios(bool venda);
 };
 
