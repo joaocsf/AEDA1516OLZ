@@ -144,7 +144,9 @@ void Menu::menuAnuncioDefinicoes(int y) {
 	setcolor(15);
 	cout << setw(20) << Highlight("Remover", y, 1) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Voltar Atras", y, 2) << endl;
+	cout << setw(20) << Highlight("Finalizar Negocio", y, 2) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Voltar Atras", y, 3) << endl;
 	setcolor(15);
 }
 
@@ -178,9 +180,6 @@ void Menu::InterfaceSeletor() {
 			menu = interfaceCategProd();
 			break;
 		case 7:
-			menu = interfaceAnuncioDefinicoes();//nao precisa estar aqui
-			break;;
-		case 8:
 			return;
 		default:
 			cout << "Interface Invalida" << endl;
@@ -384,7 +383,7 @@ int Menu::menuInterface() {
 
 		break;
 	default://sair
-		return 8;
+		return 7;
 	}
 }
 
@@ -424,7 +423,7 @@ int Menu::interfaceConta() {
 		return Website::MenuAnuncioConta(true);
 		break;
 	case 2:  //negocios
-
+		return Website::menuMeusNegocios();
 		break;
 	case 3:  //alterar visiblidade
 
@@ -437,20 +436,9 @@ int Menu::interfaceConta() {
 }
 
 int Menu::interfaceAnuncioDefinicoes() {
-	int y;
-	y = menu(2,9);
-	switch (y) {
-	case 0://ver contatos
-		return 0;
-		break;
-	case 1://remove anuncio
-		return 1;
-		break;
-	default://volta á lista de anucios
-		return 2;
-		break;
-	}
+	return menu(3,9);
 }
+
 int Menu::interfacePesquisar(bool log) {
 	int y;
 	y = menu(5, 3);

@@ -58,6 +58,7 @@ public:
 	static vector<int> retornarMeusAnuncios(bool venda);
 	static int MenuAnuncioConta(bool venda);
 	static int menuMeusNegocios();
+	static void criaNegocio(Anuncio* a);
 };
 
 class UtilizadorInixestente{

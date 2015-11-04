@@ -87,6 +87,26 @@ Anuncio* Utilizador::procurarAnuncio(int id) {
 
 bool Utilizador::FecharNegocio(Anuncio* anuncio, float montante, Data data) {
 	Negocio* neg = NULL;
+
+	for (int i = 0; i < vetorAnuncios->size(); ++i) {
+
+		if(anuncio->getID() == (*vetorAnuncios)[i]->getID()){
+			vetorAnuncios->erase(vetorAnuncios->begin() + i--);
+			if(anuncio->getTipo() == TIPO_VENDA)
+				break;
+			else if(anuncio->getTipo() == TIPO_COMPRA)
+				if(dynamic_cast<AnuncioCompra*>(anuncio)->getAnuncioVenda() == NULL)
+					break;
+		}
+		if(anuncio->getTipo() == TIPO_COMPRA){
+			AnuncioCompra* ac = dynamic_cast<AnuncioCompra*>(anuncio);
+			if(ac->getAnuncioVenda() !=NULL)
+				if(ac->getAnuncioVenda()->getID() == (*vetorAnuncios)[i]->getID())
+					vetorAnuncios->erase(vetorAnuncios->begin() + i--);
+		}
+	}
+
+
 	for (unsigned int i = 0; i < _anuncios.size(); i++) {
 
 		if (_anuncios[i]->getID() == anuncio->getID()) {

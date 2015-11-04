@@ -845,8 +845,61 @@ int Website::MenuAnuncioConta(bool venda) {
 			getch();
 		} else if (y == 1) { //remove anuncio
 			RemoveAnuncio(anuncios[Menu::idAnuncio]->getID());
+		}else if(y==2){
+			criaNegocio(anuncios[Menu::idAnuncio]);
 		}
+	}
+}
+
+void Website::criaNegocio(Anuncio* a){
+	float montante;
+	bool erro = false;
+	if(a->getTipo()==TIPO_VENDA){
+		while (true) {
+			system("cls");
+			intro();
+			if (erro) {
+				setcolor(12);
+				cout << "Caracter Invalido" << endl;
+				setcolor(15);
+			}
+			cout << "Montante: ";
+			cin >> montante;
+
+			if (cin.fail()) {
+				erro = true;
+				cin.clear();
+				cin.ignore();
+			} else {
+				break;
+			}
+		}
+
+		for (i = 0; i < max; ++i) {
+
+		}
+
+		utilizadores[indiceUtilizador]->FecharNegocio(a,montante,_data);
 	}
 
 }
+
+int Website::menuMeusNegocios(){
+
+	while(true){
+		Negocio* negocio = Menu::menuNegocioInterface(utilizadores[indiceUtilizador]->getNegocios());
+		if(negocio==NULL)
+			return 3;
+
+		cout << (*negocio);
+
+		setcolor(3);
+		cout << "Prima qualquer Tecla para sair";
+		getch();
+		setcolor(15);
+	}
+}
+
+
+
 

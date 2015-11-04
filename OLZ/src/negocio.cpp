@@ -107,17 +107,24 @@ Data Negocio::getData()const{
 ostream & operator<<(ostream & o, Negocio& n){
 
 	o<<"Finalizado em:"<<n.getData()<<endl;
-	if(!n.trocou())
+	if(!n.trocou()){
 		o<<"Montante: "<<n.getMontante()<<endl;
-	else
+		if(n.getAnuncio()->getTipo() == TIPO_COMPRA){
+			AnuncioCompra* ac = dynamic_cast<AnuncioCompra*>(n.getAnuncio());
+			o << (*ac);
+		}else{
+			AnuncioVenda* av = dynamic_cast<AnuncioVenda*>(n.getAnuncio());
+			o<<(*av);
+		}
+	}
+	else{
 		o<<"Este negocio resultou de uma toca."<<endl;
-
-	if(n.getAnuncio()->getTipo() == TIPO_COMPRA){
 		AnuncioCompra* ac = dynamic_cast<AnuncioCompra*>(n.getAnuncio());
 		o << (*ac);
-	}else{
-		AnuncioVenda* av = dynamic_cast<AnuncioVenda*>(n.getAnuncio());
-		o<<(*av);
+		cout << "Trocou por:-----------------------------------------------"<< endl;
+		o << ac->getAnuncioVenda();
 	}
+
+	return o;
 
 }
