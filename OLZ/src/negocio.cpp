@@ -3,13 +3,6 @@
 
 int Negocio::_ID = 1;
 
-Negocio::Negocio(Anuncio* anun, float valor) {
-	_ptr_anuncio = anun;
-	_montante = valor;
-	_identificador = _ID++;
-}
-;
-
 Negocio::Negocio(Anuncio* anun, float valor, Data data){
 	_ptr_anuncio = anun;
 	_montante = valor;
@@ -85,4 +78,46 @@ void Negocio::escrever(ofstream& out) {
 	out << endl;
 	_data.escrever(out);
 	out << "#N" << endl;
+}
+
+Anuncio* Negocio::getAnuncio(){
+	return _ptr_anuncio;
+}
+
+float Negocio::getMontante() const{
+	return _montante;
+}
+
+bool Negocio::trocou(){
+
+	if(_ptr_anuncio->getTipo()==TIPO_VENDA){
+		return false;
+	}else{
+		AnuncioCompra* ac = dynamic_cast<AnuncioCompra*>(_ptr_anuncio);
+		if(ac->getAnuncioVenda() == NULL)
+			return false;
+	}
+	return true;
+}
+
+Data Negocio::getData()const{
+	return _data;
+}
+
+ostream & operator<<(ostream & o, Negocio& n){
+
+	o<<"Finalizado em:"<<n.getData()<<endl;
+	if(!n.trocou())
+		o<<"Montante: "<<n.getMontante()<<endl;
+	else
+		o<<"Este negocio resultou de uma toca."<<endl;
+
+	if(n.getAnuncio()->getTipo() == TIPO_COMPRA){
+		AnuncioCompra* ac = dynamic_cast<AnuncioCompra*>(n.getAnuncio());
+		o << (*ac);
+	}else{
+		AnuncioVenda* av = dynamic_cast<AnuncioVenda*>(n.getAnuncio());
+		o<<(*av);
+	}
+
 }

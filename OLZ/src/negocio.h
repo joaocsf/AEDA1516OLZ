@@ -50,13 +50,8 @@ public:
 	//! Construtor default.
 	Negocio() {
 	}
-	//! Overload do construtor com 2 parametros.
-	/*!
-	 \param anun Anuncio do negocio.
-	 \param valor o valor que foi pago/recebido.
-	 */
-	Negocio(Anuncio* anun, float valor);
-	//! Overload do construtor com 2 parametros.
+
+	//! Overload do construtor com 3 parametros.
 	/*!
 	 \param anun Anuncio do negocio.
 	 \param valor o valor que foi pago/recebido.
@@ -86,6 +81,12 @@ public:
 	virtual void escrever(ofstream& out);
 	//!Funcao get para a informacao referente ao negocio.
 	string getInfo() const;
+	Anuncio* getAnuncio();
+	float getMontante() const;
+	Data getData()const;
+	bool trocou();
 };
+
+ostream & operator<<(ostream & o, Negocio& n);
 
 #endif

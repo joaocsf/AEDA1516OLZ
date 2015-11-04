@@ -85,11 +85,11 @@ Anuncio* Utilizador::procurarAnuncio(int id) {
 	return NULL;
 }
 
-bool Utilizador::FecharNegocio(Anuncio* anuncio, float montante) {
+bool Utilizador::FecharNegocio(Anuncio* anuncio, float montante, Data data) {
 	Negocio* neg = NULL;
 	for (unsigned int i = 0; i < _anuncios.size(); i++) {
 		if (_anuncios[i]->getID() == anuncio->getID()) {
-			neg = new Negocio(anuncio, montante); //Se encontrou o anuncio então cria o negocio;
+			neg = new Negocio(anuncio, montante,data); //Se encontrou o anuncio então cria o negocio;
 			if (dynamic_cast<AnuncioVenda*>(_anuncios[i]) != NULL)
 				break;
 		}

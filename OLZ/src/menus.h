@@ -58,6 +58,9 @@ static int idAnuncio;//id do anuncio no vetor anuncios onde que o utilizador est
 //menu dos anuncios
 static int menuAnuncioInterface(vector<int> indices);
 static void desenharAnuncioThumbnail(int indice, int sel, int pos);
+//menu negocios
+static void desenharNegocioThumbnail(Negocio *n, int sel, int pos);
+static Negocio* menuNegocioInterface(const vector<Negocio*>& negocios);
 };
 
 #endif

@@ -274,27 +274,29 @@ int Menu::menuAnuncioInterface(vector<int> indices){
 	}
 }
 //-----------------------------Menu Negocios----------------------------------------
-/*void Menu::desenharNegocioThumbnail(int indice, int sel, int pos){
+void Menu::desenharNegocioThumbnail(Negocio *n, int sel, int pos){
 
-	Negocio* aTemp = Website::getNegocios()()[indice];
+	Anuncio *a =n->getAnuncio();
+	AnuncioVenda *av=dynamic_cast<AnuncioVenda*>(n->getAnuncio());
 
-
-	string header = (aVend == NULL)? "Anuncio Compra" : "Anuncio Venda";
+	string header = (av == NULL)? "Negocio Compra" : "Negocio Venda";
 	setcolor(15);
 	if (sel == pos)
 		setcolor(2);
 	cout << "------------------------------------------" << endl;
 	cout << "|" << setw(40) << header << "|" << endl;
-	cout << "|Titulo: "<< setw(32) << aTemp->getTitulo() << "|" << endl;
-	if (aVend != NULL)
-		cout <<"|Montante: "<<setw(33) << aVend->getPreco() <<"|"<< endl;
+	cout << "|Titulo: "<< setw(32) << a->getTitulo() << "|" << endl;
+	if(n->trocou())
+		cout <<"|Este negocio resultou de uma toca. "<<setw(5)<<"|"<< endl;
+	else
+		cout <<"|Montante: "<<setw(33) <<n->getMontante() <<"|"<< endl;
 	cout << "------------------------------------------"<<endl;
 
 	setcolor(15);
 
 }
 
-int Menu::menuAnuncioInterface(vector<Negocio*> negocios){
+Negocio* Menu::menuNegocioInterface(const vector<Negocio*>& negocios){
 	int y= 0;//Seletor
 	int nPagina=0; //numero pagina;
 	int negocioPorPagina=3;//numero de anuncio por pagina;
@@ -348,12 +350,12 @@ int Menu::menuAnuncioInterface(vector<Negocio*> negocios){
 				return negocios[(nPagina*negocioPorPagina+y)];
 			}
 			else if(tecla==27){
-				return -1;//voltar atras
+				return NULL;//voltar atras
 			}
 		}
 	}
 }
-*/
+
 //---------------------------Funcoes Interface--------------------------------------
 int Menu::menuInterface() {
 	int y;

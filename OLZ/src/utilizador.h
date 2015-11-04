@@ -86,9 +86,10 @@ public:
 			/*!
 			 \param anuncio que ira ser fechado
 			 \param montante valor que foi pago ao utilizador.
+			 \param data data em que o negocio se concretizou.
 			 \return um booleano que indica se foi posivel fechar o negocio ou nao.
 			 */
-	bool FecharNegocio (Anuncio* anuncio, float montante);
+	bool FecharNegocio (Anuncio* anuncio, float montante, Data data);
 	//! Funcao que altera o contacto do utilizador.
 			/*!
 			 \param telefone novo telefone do utlizador
