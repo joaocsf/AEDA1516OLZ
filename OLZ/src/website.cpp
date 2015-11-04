@@ -151,6 +151,8 @@ void Website::Registar() {
 		getline(cin, nome);
 	} while (nome.size() == 0);
 
+	system("cls");
+	intro();
 	cout << "Telefone: ";
 	getline(cin, telefone);
 
@@ -174,12 +176,25 @@ void Website::Registar() {
 	DadosPessoais dados(nome, telefone, email);
 
 	Localizacao loc_tmp;
-	cout << "Freguesia: ";
-	getline(cin, loc_tmp.freguesia);
-	cout << "Concelho: ";
-	getline(cin, loc_tmp.concelho);
-	cout << "Distrito: ";
-	getline(cin, loc_tmp.distrito);
+	do {
+		system("cls");
+		intro();
+		cout << "Freguesia: ";
+		getline(cin, loc_tmp.freguesia);
+	} while (loc_tmp.freguesia.size() == 0);
+	do {
+		system("cls");
+		intro();
+		cout << "Concelho: ";
+		getline(cin, loc_tmp.concelho);
+	} while (loc_tmp.concelho.size() == 0);
+	do {
+		system("cls");
+		intro();
+		cout << "Distrito: ";
+		getline(cin, loc_tmp.distrito);
+	} while (loc_tmp.distrito.size() == 0);
+
 
 	utilizadores.push_back(new Utilizador(dados, loc_tmp));
 	indiceUtilizador = utilizadores.size() - 1;
