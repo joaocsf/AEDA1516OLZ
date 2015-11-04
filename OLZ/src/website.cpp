@@ -89,7 +89,7 @@ void Website::RemoveUtilizador(int id) {
 		if (utilizadores[i]->getID() == id) {
 			vector<int> ind= anunciosParaIndices(utilizadores[i]->getAnuncios());
 			RemoveAnuncios(ind);
-			//chamar destrutor??
+			delete(utilizadores[i]);
 			utilizadores.erase(utilizadores.begin() + i--);
 			break;
 		}
@@ -946,6 +946,12 @@ int Website::menuMeusNegocios(){
 	}
 }
 
+int Website::alterarDadosVisiveis(){
+
+
+
+	return 3;
+}
 
 
 

@@ -152,6 +152,18 @@ void Menu::menuAnuncioDefinicoes(int y) {
 	setcolor(15);
 }
 
+void Menu::menuVisibilidade(int y) {
+	system("cls");
+	Website::intro();
+	cout << "Alterar Visibilidade: " << endl << endl;
+	cout << setw(20) << Highlight("Nome", y, 0) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Telefone", y, 1) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Email", y, 2) << endl;
+	setcolor(15);
+}
+
 
 //----------------------------------------------------------------------------------
 //---------------------------Menu Selector------------------------------------------
@@ -409,7 +421,7 @@ int Menu::interfaceLog() {
 	case 3:
 		logado = false;
 		Website::logout();
-		//por o indice do site a 0
+		//por o indice do utilizador logado a -1
 		return 0;
 	}
 }
@@ -428,7 +440,7 @@ int Menu::interfaceConta() {
 		return Website::menuMeusNegocios();
 		break;
 	case 3:  //alterar visiblidade
-
+		return Website::alterarDadosVisiveis();
 		break;
 	case 4://cancelar conta
 		Website::RemoveUtilizador(Website::getIndiceUtilizador());
@@ -529,18 +541,7 @@ int Menu::interfaceCategProd() {
 
 
 int Menu::interfacemenuAnuncio() {
-	int y;
-	y = menu(1,6);
-
-	switch (y) {
-	case 0://contatar/
-
-		return 0;
-		break;
-	default://voltar atras
-		return 1;
-		break;
-	}
+	return menu(1,6);
 }
 
 //------------------------menu propriamente dito-----------------

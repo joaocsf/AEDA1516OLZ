@@ -61,6 +61,8 @@ static void desenharAnuncioThumbnail(int indice, int sel, int pos);
 //menu negocios
 static void desenharNegocioThumbnail(Negocio *n, int sel, int pos);
 static Negocio* menuNegocioInterface(const vector<Negocio*>& negocios);
+//menu visibilidade
+static void menuVisibilidade(int y);
 };
 
 #endif
