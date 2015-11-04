@@ -106,7 +106,6 @@ bool Utilizador::FecharNegocio(Anuncio* anuncio, float montante, Data data) {
 		}
 	}
 
-
 	for (unsigned int i = 0; i < _anuncios.size(); i++) {
 
 		if (_anuncios[i]->getID() == anuncio->getID()) {
@@ -125,8 +124,10 @@ bool Utilizador::FecharNegocio(Anuncio* anuncio, float montante, Data data) {
 		if(anuncio->getTipo() == TIPO_VENDA){
 			AnuncioCompra* ac = dynamic_cast<AnuncioCompra*>(_anuncios[i]);
 			if (ac != NULL){
-				if (ac->getAnuncioVenda()->getID() == anuncio->getID()) {
-					ac->setAnuncioVenda(NULL);
+				if(ac->getAnuncioVenda()!=NULL){
+					if (ac->getAnuncioVenda()->getID() == anuncio->getID()) {
+						ac->setAnuncioVenda(NULL);
+					}
 				}
 			}
 		}

@@ -286,9 +286,9 @@ void Menu::desenharNegocioThumbnail(Negocio *n, int sel, int pos){
 	cout << "|" << setw(40) << header << "|" << endl;
 	cout << "|Titulo: "<< setw(32) << a->getTitulo() << "|" << endl;
 	if(n->trocou())
-		cout <<"|Este negocio resultou de uma toca. "<<setw(5)<<"|"<< endl;
+		cout <<"|Este negocio resultou de uma toca. "<<setw(6)<<"|"<< endl;
 	else
-		cout <<"|Montante: "<<setw(33) <<n->getMontante() <<"|"<< endl;
+		cout <<"|Montante: "<<setw(30) <<n->getMontante() <<"|"<< endl;
 	cout << "------------------------------------------"<<endl;
 
 	setcolor(15);

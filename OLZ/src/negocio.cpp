@@ -122,7 +122,7 @@ ostream & operator<<(ostream & o, Negocio& n){
 		AnuncioCompra* ac = dynamic_cast<AnuncioCompra*>(n.getAnuncio());
 		o << (*ac);
 		cout << "Trocou por:-----------------------------------------------"<< endl;
-		o << ac->getAnuncioVenda();
+		o << (*ac->getAnuncioVenda());
 	}
 
 	return o;

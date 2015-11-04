@@ -851,11 +851,38 @@ int Website::MenuAnuncioConta(bool venda) {
 	}
 }
 
+
 void Website::criaNegocio(Anuncio* a){
-	float montante;
+	float montante= 0;
 	bool erro = false;
-	if(a->getTipo()==TIPO_VENDA){
-		while (true) {
+
+	bool adicionarMontante=false;
+
+	if(a->getTipo()==TIPO_VENDA ){
+		adicionarMontante=true;
+	}else{
+		AnuncioCompra* ac = dynamic_cast<AnuncioCompra*>(a);
+		if(ac->getAnuncioVenda() != NULL){
+			string letra;
+			do {
+				system("cls");
+				intro();
+				cout << "O Anuncio foi resultado de troca?(S/N): ";
+				getline(cin, letra);
+			} while (letra != "s" && letra != "S" && letra != "n" && letra != "N");
+
+			if (letra == "s" || letra == "S")
+				adicionarMontante = false;
+			else{
+				adicionarMontante = true;
+				ac->setAnuncioVenda(NULL);
+			}
+		}else{
+			adicionarMontante=true;
+		}
+	}
+	if(adicionarMontante){
+		while (true){
 			system("cls");
 			intro();
 			if (erro) {
@@ -874,23 +901,27 @@ void Website::criaNegocio(Anuncio* a){
 				break;
 			}
 		}
-
-		for (i = 0; i < max; ++i) {
-
-		}
-
-		utilizadores[indiceUtilizador]->FecharNegocio(a,montante,_data);
 	}
-
+	utilizadores[indiceUtilizador]->FecharNegocio(a,montante,_data);
 }
 
 int Website::menuMeusNegocios(){
 
 	while(true){
+		if(utilizadores[indiceUtilizador]->getNegocios().size()==0){
+			system("cls");
+			intro();
+			setcolor(12);
+			cout << "Voce nao tem Negocios ";
+			setcolor(15);
+			getch();
+			return 3;
+		}
 		Negocio* negocio = Menu::menuNegocioInterface(utilizadores[indiceUtilizador]->getNegocios());
 		if(negocio==NULL)
 			return 3;
-
+		system("cls");
+		intro();
 		cout << (*negocio);
 
 		setcolor(3);
