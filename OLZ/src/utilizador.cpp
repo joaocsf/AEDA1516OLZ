@@ -44,7 +44,7 @@ bool Utilizador::RemoverAnuncio(int id) {
 		if (_anuncios[var]->Anuncio::getID() == id) {
 
 			if (_anuncios[var]->getTipo() == TIPO_VENDA) {
-				for (int i = 0; i < _anuncios.size(); ++i) {
+				for (unsigned int i = 0; i < _anuncios.size(); ++i) {
 					if (_anuncios[i]->getTipo() == TIPO_COMPRA) {
 						AnuncioCompra* ac =dynamic_cast<AnuncioCompra*>(_anuncios[i]);
 

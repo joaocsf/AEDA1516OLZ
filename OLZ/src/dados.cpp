@@ -23,3 +23,5 @@ vector<Utilizador*>* Dados::getVetorUtilizadores(){
 vector<Negocio*>* Dados::getVetorNegocios(){
 	return vetorNegocios;
 }
+
+
