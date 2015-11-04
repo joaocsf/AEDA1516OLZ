@@ -146,14 +146,14 @@ void Utilizador::ler(ifstream& in, bool escreve) {
 				A->ler(in);
 				AdicionarAnuncio(A);
 				if (A->getVisibilidade())
-					vetorAnuncios->push_back(A); //Website::addAnuncio(A); <<teste!
+					vetorAnuncios->push_back(A);
 			} else if (linha == "AC") {
 				Anuncio* AC = new AnuncioCompra();
 				AC->setUser(this);
 				AC->ler(in);
 				AdicionarAnuncio(AC);
 				if (AC->getVisibilidade())
-					vetorAnuncios->push_back(AC);//Website::addAnuncio(AC); <<<teste!
+					vetorAnuncios->push_back(AC);
 			} else if (linha == "N") {
 				Negocio* N = new Negocio();
 				N->setUser(this);

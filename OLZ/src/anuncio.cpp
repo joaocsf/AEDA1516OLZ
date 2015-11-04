@@ -6,7 +6,7 @@ int Anuncio::_ID = 1;
 int Anuncio::getIDGlobal() {
 	return _ID;
 }
-int Anuncio::setIDGlobal(int id){
+int Anuncio::setIDGlobal(int id) {
 	_ID = id;
 }
 Anuncio::Anuncio(string titulo, string categ_produto, string descricao,
@@ -150,14 +150,14 @@ void Anuncio::AdicionarImagem(Imagem img) {
 	_imagens.push_back(img);
 }
 
-void Anuncio::setImagens(vector<Imagem> img){
+void Anuncio::setImagens(vector<Imagem> img) {
 	_imagens = img;
 }
 
-float Anuncio::getPreco() const{
+float Anuncio::getPreco() const {
 	return -1;
 }
-vector<Contacto> Anuncio::getContactos() const{
+vector<Contacto> Anuncio::getContactos() const {
 	return _contactos;
 }
 
@@ -271,7 +271,8 @@ void AnuncioCompra::ler(ifstream& in, bool escreve) {
 			return;
 		} else {
 			stringstream ss;
-			ss << "Erro Leitura Anuncio Compra. Encontrado:" << linha<< " Esperado:#AC";
+			ss << "Erro Leitura Anuncio Compra. Encontrado:" << linha
+					<< " Esperado:#AC";
 			throw ErroLeitura(ss.str());
 		}
 
@@ -344,7 +345,6 @@ bool AnuncioVenda::getNegociavel() const {
 int AnuncioVenda::getEstado() const {
 	return _estado;
 }
-
 
 //overload <<
 
@@ -463,15 +463,15 @@ ostream & operator<<(ostream & o, AnuncioCompra & ac) {
 	o << "Localizacao do Anuncio: " << endl;
 	o << "Distrito: ";
 	setcolor(15);
-	o << ac.getUser()->getLocalizacao().distrito<< endl;
+	o << ac.getUser()->getLocalizacao().distrito << endl;
 	setcolor(3);
 	o << "Concelho: ";
 	setcolor(15);
-	o << ac.getUser()->getLocalizacao().concelho<< endl;
+	o << ac.getUser()->getLocalizacao().concelho << endl;
 	setcolor(3);
 	o << "Freguesia: ";
 	setcolor(15);
-	o << ac.getUser()->getLocalizacao().freguesia<< endl;
+	o << ac.getUser()->getLocalizacao().freguesia << endl;
 	//-----------
 	setcolor(3);
 	cout << "Troca: ";
