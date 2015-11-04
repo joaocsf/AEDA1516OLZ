@@ -89,8 +89,6 @@ int main() {
 	tm *ltm = localtime(&agora);
 	Website::setData(Data(ltm->tm_year+1900,ltm->tm_mon+1,ltm->tm_mday));
 
-
-	getch();
 	cout<<Website::getData();
 	system("mode con:cols=60 lines=45");
 	ifstream fileI("testeDados.txt");
