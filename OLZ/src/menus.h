@@ -24,7 +24,7 @@ WHITE 15
  */
 
 
-string Highlight();
+string Highlight(string frase, int select, int ops);
 
 class Menu{
 
@@ -63,6 +63,7 @@ static void desenharNegocioThumbnail(Negocio *n, int sel, int pos);
 static Negocio* menuNegocioInterface(const vector<Negocio*>& negocios);
 //menu visibilidade
 static void menuVisibilidade(int y);
+static int interfaceMudarVisibilidade();
 };
 
 #endif

@@ -952,11 +952,97 @@ int Website::menuMeusNegocios(){
 }
 
 int Website::alterarDadosVisiveis(){
+	int y = 0;
+	bool teclado = true;
+	string visiveis[]= {"","",""};
+	bool update= true;
+	bool* v= utilizadores[indiceUtilizador]->getDadosVisiveis();
+
+	for (int i = 0; i < VIS_TOTAL; ++i) {
+		if(v[i])
+			visiveis[i]="Visivel";
+		else
+			visiveis[i]="Invisivel";
+	}
+	bool updateDados=false;
+
+
+	while (true) {
+
+
+		if(!teclado && updateDados){
+			updateDados=false;
+			switch(y){
+			case VIS_NOME:
+				v[VIS_NOME]=!v[VIS_NOME];
+				if(v[VIS_NOME]){
+					visiveis[VIS_NOME] = "Visivel";
+				}else{
+					visiveis[VIS_NOME] = "Invisivel";
+				}
+
+				break;
+			case VIS_TELEFONE:
+				v[VIS_TELEFONE]=!v[VIS_TELEFONE];
+				if(v[VIS_TELEFONE]){
+					visiveis[VIS_TELEFONE] = "Visivel";
+				}else{
+					visiveis[VIS_TELEFONE] = "Invisivel";
+				}
+
+				break;
+			case VIS_EMAIL:
+				v[VIS_EMAIL]=!v[VIS_EMAIL];
+				if(v[VIS_EMAIL]){
+					visiveis[VIS_EMAIL] = "Visivel";
+				}else{
+					visiveis[VIS_EMAIL] = "Invisivel";
+				}
+				break;
+			}
+		}
 
 
 
-	return 3;
+		if(update){
+			update=false;
+			system("cls");
+			Website::intro();
+			cout << "Alterar Visibilidade: " << endl << endl;
+			cout << setw(20) << Highlight("Nome: ", y, 0)  <<visiveis[VIS_NOME]<< endl;
+			setcolor(15);
+			cout << setw(20) << Highlight("Telefone: ", y, 1)<<visiveis[VIS_TELEFONE] << endl;
+			setcolor(15);
+			cout << setw(20) << Highlight("Email: ", y, 2)<<visiveis[VIS_EMAIL] << endl;
+			setcolor(15);
+		}
+
+
+		y= (y<0)? 0 : (y>2)? 2 : y;
+
+		if (kbhit()) {
+			int tecla = getch();
+			if (tecla == 72) { // para cima
+				if (y > 0) { //não diminui o indice se já estiver na posição com o menor indice
+					y--;
+					update=true;
+				}
+			} else if (tecla == 80) { // para baixo
+				if (y < 2) { //não aumenta o indice se já estiver na posição com o maior indice
+					y++;
+					update=true;
+				}
+			} else if (tecla == 13) { // enter
+				teclado = false;
+				updateDados=true;
+				update=true;
+			}
+			else if(tecla == 27){//esc
+
+				return 3;
+			}
+		}
+	}
+
 }
-
-
 

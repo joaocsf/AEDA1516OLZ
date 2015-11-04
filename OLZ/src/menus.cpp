@@ -156,7 +156,7 @@ void Menu::menuVisibilidade(int y) {
 	system("cls");
 	Website::intro();
 	cout << "Alterar Visibilidade: " << endl << endl;
-	cout << setw(20) << Highlight("Nome", y, 0) << endl;
+	cout << setw(20) << Highlight("Nome ", y, 0) << endl;
 	setcolor(15);
 	cout << setw(20) << Highlight("Telefone", y, 1) << endl;
 	setcolor(15);
@@ -539,6 +539,11 @@ int Menu::interfaceCategProd() {
 	}
 }
 
+int Menu::interfaceMudarVisibilidade() {
+	int y;
+	return menu(2,10);
+}
+
 
 int Menu::interfacemenuAnuncio() {
 	return menu(1,6);
@@ -548,7 +553,7 @@ int Menu::interfacemenuAnuncio() {
 int Menu::menu(int tamanho, int menuSelect) {
 	int y = 0;
 	bool teclado = true;
-
+/*
 	switch (menuSelect) {
 	case 0:
 		menuInicial(y);
@@ -582,7 +587,9 @@ int Menu::menu(int tamanho, int menuSelect) {
 		break;
 	default:
 		cout << "Menu Inixestente" << endl;
-	}
+	}*/
+
+	bool update= true;
 
 	while (teclado) {
 		if (kbhit()) {
@@ -590,10 +597,12 @@ int Menu::menu(int tamanho, int menuSelect) {
 			if (tecla == 72) { // para cima
 				if (y > 0) { //não diminui o indice se já estiver na posição com o menor indice
 					y--;
+					update=true;
 				}
 			} else if (tecla == 80) { // para baixo
 				if (y < tamanho) { //não aumenta o indice se já estiver na posição com o maior indice
 					y++;
+					update=true;
 				}
 			} else if (tecla == 13) { // enter
 				teclado = false;
@@ -602,6 +611,10 @@ int Menu::menu(int tamanho, int menuSelect) {
 				y=-1;
 				break;
 			}
+		}
+
+		if(update){
+			update=false;
 			switch (menuSelect) {
 			case 0:
 				menuInicial(y);
@@ -637,6 +650,7 @@ int Menu::menu(int tamanho, int menuSelect) {
 				cout << "Menu Inixestente" << endl;
 			}
 		}
+
 	}
 	return y;
 }

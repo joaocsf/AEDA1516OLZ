@@ -60,6 +60,7 @@ public:
 	static int MenuAnuncioConta(bool venda);
 	static int menuMeusNegocios();
 	static int alterarDadosVisiveis();
+	static void menuVisivel(bool* v);
 	static void criaNegocio(Anuncio* a);
 };
 

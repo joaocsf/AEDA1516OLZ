@@ -34,6 +34,10 @@ int Utilizador::setIDGlobal(int id) {
 	_ID = id;
 }
 
+bool*  Utilizador::getDadosVisiveis(){
+	return _contacto.getVisiveis();
+}
+
 bool Utilizador::AdicionarAnuncio(Anuncio* anuncio) {
 	_anuncios.push_back(anuncio);
 	return true;

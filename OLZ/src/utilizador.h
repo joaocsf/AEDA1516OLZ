@@ -139,6 +139,7 @@ public:
 	vector<Anuncio*> getAnuncios(bool venda);
 	vector<Anuncio*> getAnuncios();
 	vector<Negocio*> getNegocios();
+	bool* getDadosVisiveis();
 };
 
 //! Class AnuncioInexistente
