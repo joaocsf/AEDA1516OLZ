@@ -267,7 +267,7 @@ int Menu::menuAnuncioInterface(vector<int> indices){
 			}else if (tecla == 13) { // enter
 				return indices[(nPagina*anuncioPorPagina+y)];
 			}
-			else if(tecla==27){
+			else if(tecla==27){//esc
 				return -1;//voltar atras
 			}
 		}
@@ -359,7 +359,7 @@ int Menu::menuInterface() {
 	int y;
 	y = menu(3, 0);
 	switch (y) {
-	case 0:
+	case 0://login
 		try {
 			Website::login();
 			logado = true;
@@ -372,7 +372,7 @@ int Menu::menuInterface() {
 			return 0;
 		}
 		break;
-	case 1:
+	case 1://registar
 		Website::Registar();
 		logado=true;
 		return 1;
@@ -381,18 +381,17 @@ int Menu::menuInterface() {
 		return 4;
 
 		break;
-	case 3:
+	default://sair
 		return 8;
-
-	default:
-
-		break;
 	}
 }
 
 int Menu::interfaceLog() {
 	int y;
-	y = menu(3, 1);
+	do{
+		y = menu(3, 1);
+	}while(y==-1);
+
 	switch (y) {
 	case 0:  //anunciar
 		return 2;
@@ -401,18 +400,14 @@ int Menu::interfaceLog() {
 		return 3;
 
 		break;
-	case 2:
+	case 2://pesquisar
 		return 4;
-
 		break;
 	case 3:
 		logado = false;
 		Website::logout();
 		//por o indice do site a 0
 		return 0;
-
-	default:
-		break;
 	}
 }
 
@@ -432,12 +427,10 @@ int Menu::interfaceConta() {
 	case 3:  //alterar visiblidade
 
 		break;
-	case 4: //voltar atras
+	default: //voltar atras
 		return 1;
 		break;
 
-	default:
-		break;
 	}
 }
 
@@ -451,7 +444,7 @@ int Menu::interfaceAnuncioDefinicoes() {
 	case 1://remove anuncio
 		return 1;
 		break;
-	case 2://volta á lista de anucios
+	default://volta á lista de anucios
 		return 2;
 		break;
 	}
@@ -476,7 +469,7 @@ int Menu::interfacePesquisar(bool log) {
 	case 4://preco
 		return 5;
 		break;
-	case 5: {
+	default: {
 		if (log)
 			return 1;
 		else
@@ -496,9 +489,8 @@ int Menu::interfaceOrdemPesq() {
 	case 1: //decrecente
 		return Website::menuAnuncioPreco(false);
 		break;
-	case 2: {
+	default: //voltar atras
 		return 4;
-	}
 		break;
 	}
 }
@@ -515,9 +507,8 @@ int Menu::interfaceTipoAnuncio() {
 		Website::Anunciar_AV();
 		return 1;
 		break;
-	case 2: //voltar atras
+	default: //voltar atras
 		return 1;
-
 		break;
 	}
 }
@@ -545,12 +536,13 @@ int Menu::interfaceCategProd() {
 int Menu::interfacemenuAnuncio() {
 	int y;
 	y = menu(1,6);
+
 	switch (y) {
 	case 0://contatar/
 
 		return 0;
 		break;
-	case 1://voltar atras
+	default://voltar atras
 		return 1;
 		break;
 	}
@@ -610,7 +602,10 @@ int Menu::menu(int tamanho, int menuSelect) {
 			} else if (tecla == 13) { // enter
 				teclado = false;
 			}
-
+			else if(tecla == 27){//esc
+				y=-1;
+				break;
+			}
 			switch (menuSelect) {
 			case 0:
 				menuInicial(y);
