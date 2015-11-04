@@ -55,7 +55,9 @@ class Utilizador : public Dados{
 	 */
 	vector<Negocio *> _negociosConcluidos;
 public:
-
+	
+	~Utilizador();
+	
 	Utilizador();
 	//! Overload do Construtor que recebe dois argumentos.
 		    /*!
@@ -134,6 +136,7 @@ public:
 	 \return vetor de apontadores do tipo de anuncio.
 	 */
 	vector<Anuncio*> getAnuncios(bool venda);
+	vector<Anuncio*> getAnuncios();
 	vector<Negocio*> getNegocios();
 };
 

@@ -74,18 +74,28 @@ void Website::RemoveAnuncio(int id) {
 			break;
 		}
 	}
+}
 
+void Website::RemoveAnuncios(vector<int> indices) {
 
+	for (unsigned int i = 0; i < indices.size(); ++i) {
+			anuncios.erase(anuncios.begin() + indices[i]);
+	}
 }
 
 void Website::RemoveUtilizador(int id) {
 
 	for (unsigned int i = 0; i < utilizadores.size(); ++i) {
 		if (utilizadores[i]->getID() == id) {
-			utilizadores.erase(utilizadores.begin() + i);
+			vector<int> ind= anunciosParaIndices(utilizadores[i]->getAnuncios());
+			RemoveAnuncios(ind);
+			//chamar destrutor??
+			utilizadores.erase(utilizadores.begin() + i--);
 			break;
 		}
 	}
+	indiceUtilizador=-1;
+	Menu::logado=false;
 }
 
 void Website::RemoveNegocio(int id) { //só remove do vetor negocios
@@ -172,6 +182,7 @@ void Website::Registar() {
 
 void Website::logout() {
 	indiceUtilizador = -1;
+	Menu::logado=false;
 }
 
 void Website::Anunciar_AC() {
@@ -789,8 +800,7 @@ vector<int> Website::anunciosParaIndices(const vector<Anuncio*>& aTemp) {
 }
 
 vector<int> Website::retornarMeusAnuncios(bool venda) {
-	return anunciosParaIndices(
-			utilizadores[indiceUtilizador]->getAnuncios(venda));
+	return anunciosParaIndices(utilizadores[indiceUtilizador]->getAnuncios(venda));
 }
 
 int Website::MenuAnuncioConta(bool venda) {
@@ -903,6 +913,11 @@ void Website::criaNegocio(Anuncio* a){
 		}
 	}
 	utilizadores[indiceUtilizador]->FecharNegocio(a,montante,_data);
+	getch();
+	setcolor(3);
+	cout << "Negocio Finalizado Com Sucesso!";
+	setcolor(15);
+	getch();
 }
 
 int Website::menuMeusNegocios(){

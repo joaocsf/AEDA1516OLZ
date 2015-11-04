@@ -62,7 +62,9 @@ void Menu::menuConta(int y) {
 	setcolor(15);
 	cout << setw(30)<< Highlight("Alterar Visibilidade Dos Meus Dados Pessoais", y, 3)<< endl;
 	setcolor(15);
-	cout << setw(30) << Highlight("Voltar Atras", y, 4) << endl;
+	cout << setw(30)<< Highlight("Cancelar Conta", y, 4)<< endl;
+	setcolor(15);
+	cout << setw(30) << Highlight("Voltar Atras", y, 5) << endl;
 	setcolor(15);
 }
 
@@ -414,7 +416,7 @@ int Menu::interfaceLog() {
 
 int Menu::interfaceConta() {
 	int y;
-	y = menu(4, 5);
+	y = menu(5, 5);
 	switch (y) {
 	case 0:  //ac
 		return Website::MenuAnuncioConta(false);
@@ -428,6 +430,9 @@ int Menu::interfaceConta() {
 	case 3:  //alterar visiblidade
 
 		break;
+	case 4://cancelar conta
+		Website::RemoveUtilizador(Website::getIndiceUtilizador());
+		return 0;
 	default: //voltar atras
 		return 1;
 		break;
