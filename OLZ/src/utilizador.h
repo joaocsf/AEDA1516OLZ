@@ -114,7 +114,7 @@ public:
 	string getInfo() const;
 
 	//!Funcao de pesquisa no vector anuncios para um dado id.
-	/*!
+	/*!v
 	 \param id do anuncio a ser procurado
 	 \return apontador para o anuncio no caso deste ser encontrado.
 	 */
@@ -134,6 +134,7 @@ public:
 	 \return vetor de apontadores do tipo de anuncio.
 	 */
 	vector<Anuncio*> getAnuncios(bool venda);
+	vector<Negocio*> getNegocios();
 };
 
 //! Class AnuncioInexistente

@@ -233,3 +233,7 @@ vector<Anuncio*> Utilizador::getAnuncios(bool venda) {
 	return res;
 
 }
+
+vector<Negocio*> Utilizador::getNegocios(){
+	return _negociosConcluidos;
+}

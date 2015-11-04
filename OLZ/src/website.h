@@ -57,6 +57,7 @@ public:
 	static vector<int> anunciosParaIndices(const vector<Anuncio*>& aTemp);
 	static vector<int> retornarMeusAnuncios(bool venda);
 	static int MenuAnuncioConta(bool venda);
+	static int menuMeusNegocios();
 };
 
 class UtilizadorInixestente{
