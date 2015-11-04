@@ -88,10 +88,12 @@ Anuncio* Utilizador::procurarAnuncio(int id) {
 bool Utilizador::FecharNegocio(Anuncio* anuncio, float montante, Data data) {
 	Negocio* neg = NULL;
 	for (unsigned int i = 0; i < _anuncios.size(); i++) {
-		if (_anuncios[i]->getID() == anuncio->getID()) {
+		if (_anuncios[i]->getID() == anuncio->getID()) {//Econtrou o Negocio
 			neg = new Negocio(anuncio, montante,data); //Se encontrou o anuncio então cria o negocio;
-			if (dynamic_cast<AnuncioVenda*>(_anuncios[i]) != NULL)
+			if (dynamic_cast<AnuncioVenda*>(_anuncios[i]) != NULL){
+				dynamic_cast<AnuncioVenda*>(_anuncios[i])->setVisibilidade(false);
 				break;
+			}
 		}
 		AnuncioCompra* ac = dynamic_cast<AnuncioCompra*>(_anuncios[i]);
 		if (ac != NULL) {
@@ -104,7 +106,7 @@ bool Utilizador::FecharNegocio(Anuncio* anuncio, float montante, Data data) {
 		throw AnuncioInexistente(anuncio);
 	}
 	_negociosConcluidos.push_back(neg);
-	anuncio->alterarVisibilidade(false);
+	anuncio->setVisibilidade(false);
 	return true;
 }
 

@@ -140,7 +140,9 @@ public:
 	 */
 	void AdicionarImagem(Imagem img);
 	//!Funcao que altera a visibilidade do anuncio.
-	void alterarVisibilidade(bool vis);
+	void alterarVisibilidade();
+	//!Funcao que altera a visibilidade do anuncio.
+	void setVisibilidade(bool vis);
 	//!Funcao get para a visibilidade do anuncio.
 	bool getVisibilidade();
 	//!Funcao de incrementacao das visualizacoes do anuncio.

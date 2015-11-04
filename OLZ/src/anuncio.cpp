@@ -69,12 +69,15 @@ void Anuncio::ler(ifstream& in, bool escreve) {
 
 }
 
-void Anuncio::alterarVisibilidade(bool vis) {
-	_visivel = vis;
+void Anuncio::alterarVisibilidade() {
+	_visivel = !_visivel;
 }
 
 string Anuncio::getTitulo() const {
 	return _titulo;
+}
+void Anuncio::setVisibilidade(bool vis){
+	_visivel = vis;
 }
 
 bool Anuncio::getVisibilidade() {
