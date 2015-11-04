@@ -88,17 +88,26 @@ Anuncio* Utilizador::procurarAnuncio(int id) {
 bool Utilizador::FecharNegocio(Anuncio* anuncio, float montante, Data data) {
 	Negocio* neg = NULL;
 	for (unsigned int i = 0; i < _anuncios.size(); i++) {
-		if (_anuncios[i]->getID() == anuncio->getID()) {//Econtrou o Negocio
-			neg = new Negocio(anuncio, montante,data); //Se encontrou o anuncio então cria o negocio;
-			if (dynamic_cast<AnuncioVenda*>(_anuncios[i]) != NULL){
-				dynamic_cast<AnuncioVenda*>(_anuncios[i])->setVisibilidade(false);
+
+		if (_anuncios[i]->getID() == anuncio->getID()) {
+
+			_anuncios[i]->setVisibilidade(false);
+			neg = new Negocio(anuncio, montante,data);
+
+			if (_anuncios[i]->getTipo() == TIPO_COMPRA){
+				AnuncioCompra* ac = dynamic_cast<AnuncioCompra*>(_anuncios[i]);
+				if(ac->getAnuncioVenda() != NULL)
+					ac->getAnuncioVenda()->setVisibilidade(false);
 				break;
 			}
 		}
-		AnuncioCompra* ac = dynamic_cast<AnuncioCompra*>(_anuncios[i]);
-		if (ac != NULL) {
-			if (ac->getAnuncioVenda()->getID() == anuncio->getID()) {
-				ac->setAnuncioVenda(NULL);
+
+		if(anuncio->getTipo() == TIPO_VENDA){
+			AnuncioCompra* ac = dynamic_cast<AnuncioCompra*>(_anuncios[i]);
+			if (ac != NULL){
+				if (ac->getAnuncioVenda()->getID() == anuncio->getID()) {
+					ac->setAnuncioVenda(NULL);
+				}
 			}
 		}
 	}
@@ -106,7 +115,6 @@ bool Utilizador::FecharNegocio(Anuncio* anuncio, float montante, Data data) {
 		throw AnuncioInexistente(anuncio);
 	}
 	_negociosConcluidos.push_back(neg);
-	anuncio->setVisibilidade(false);
 	return true;
 }
 
@@ -224,10 +232,13 @@ string Utilizador::getInfo() const {
 vector<Anuncio*> Utilizador::getAnuncios(bool venda) {
 	vector<Anuncio*> res;
 	for (int i = 0; i < _anuncios.size(); ++i) {
-		if (_anuncios[i]->getTipo() == TIPO_VENDA && venda)
-			res.push_back(_anuncios[i]);
+		if (_anuncios[i]->getTipo() == TIPO_VENDA && venda){
+			if(_anuncios[i]->getVisibilidade())
+				res.push_back(_anuncios[i]);
+		}
 		else if (_anuncios[i]->getTipo() == TIPO_COMPRA && !venda)
-			res.push_back(_anuncios[i]);
+			if(_anuncios[i]->getVisibilidade())
+				res.push_back(_anuncios[i]);
 	}
 
 	return res;
