@@ -60,17 +60,30 @@ string DadosPessoais::getInfo() const {
 void DadosPessoais::ler(ifstream& in, bool escreve) {
 	string linha;
 	int index = 0;
+	int temp;
 	while (getline(in, linha)) {
 		//cout <<"["<< index<< "]" << linha << endl;
 		switch (index) {
 		case VIS_NOME:
 			nome = linha;
+			getline(in,linha);
+			stringstream(linha)>>temp;
+			visiveis[VIS_NOME]=temp;
+
 			break;
 		case VIS_TELEFONE:
 			telefone = linha;
+			getline(in,linha);
+			stringstream(linha)>>temp;
+			visiveis[VIS_TELEFONE]=temp;
+
 			break;
 		case VIS_EMAIL:
 			email = linha;
+			getline(in,linha);
+			stringstream(linha)>>temp;
+			visiveis[VIS_EMAIL]=temp;
+
 			break;
 		case VIS_TOTAL:
 			if (linha != "#D") {
@@ -89,7 +102,14 @@ void DadosPessoais::ler(ifstream& in, bool escreve) {
 }
 void DadosPessoais::escrever(ofstream& out) {
 
-	out <<"D"<< endl<< nome << endl << telefone << endl << email << endl << "#D" << endl;
+	out <<"D"<< endl;
+	out << nome << endl;
+	out <<((visiveis[VIS_NOME])? 1 : 0) << endl;
+	out << telefone << endl;
+	out <<((visiveis[VIS_TELEFONE])? 1 : 0) << endl;
+	out << email << endl;
+	out <<((visiveis[VIS_EMAIL])? 1 : 0) << endl;
+	out << "#D" << endl;
 
 }
 
