@@ -64,26 +64,22 @@ void NovosDados() {
 	utilizadores[2].AdicionarAnuncio(a4);
 	utilizadores[0].AdicionarAnuncio(a5);
 
-	file << Anuncio::getIDGlobal()<<" ";
-	file << Utilizador::getIDGlobal()<<" ";
-	file << Negocio::getIDGlobal() << endl;
-
+	vector<Utilizador*> utils;
 	for (int i = 0; i < utilizadores.size(); ++i) {
-		utilizadores[i].escrever(file);
+		utils.push_back(&utilizadores[i]);
 	}
+
+	Dados::setVetorUtilizadores(&utils);
+	Dados::escreverFicheiro(file);
 	string linha;
 
-	vector<Utilizador> utilizadores2;
+	vector<Utilizador*> utilizadores2;
+	vector<Anuncio*> anuncios;
 
-	while (getline(file1, linha)) {
+	Dados::setVetorUtilizadores(&utilizadores2);
+	Dados::setVetorAnuncio(&anuncios);
 
-		if (linha == "U") {
-			Utilizador uTemp;
-			uTemp.ler(file1);
-			cout << uTemp.getDadosPessoais().getInfo() << endl;
-			utilizadores2.push_back(uTemp);
-		}
-	}
+	Dados::lerFicheiro(file1);
 }
 
 int main() {

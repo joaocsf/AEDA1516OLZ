@@ -755,10 +755,9 @@ int Website::menuAnuncioPreco(bool crescente) {
 //ficheiros
 
 void Website::guardarFicheiro(ofstream& file) {
-
-	file << Anuncio::getIDGlobal() << " ";
-	file << Utilizador::getIDGlobal() << " ";
-	file << Negocio::getIDGlobal() << endl;
+	Dados::setVetorAnuncio(&anuncios);
+	Dados::setVetorUtilizadores(&utilizadores);
+	Dados::setVetorNegocios(&negocios);
 
 	Dados::escreverFicheiro(file);
 }
