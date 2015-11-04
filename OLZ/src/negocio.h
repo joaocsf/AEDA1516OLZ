@@ -50,6 +50,7 @@ public:
 	//! Construtor default.
 	Negocio() {
 	}
+	~Negocio();
 
 	//! Overload do construtor com 3 parametros.
 	/*!
