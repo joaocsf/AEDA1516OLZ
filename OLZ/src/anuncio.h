@@ -107,7 +107,7 @@ public:
 	 */
 	static int getIDGlobal();
 
-	static int setIDGlobal(int id);
+	static void setIDGlobal(int id);
 	//!Funcao get para o numero de identifacao do anuncio.
 	int getID() const;
 	//!Funcao get para o tipo de anuncio (Compra/Venda)

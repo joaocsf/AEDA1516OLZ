@@ -10,9 +10,10 @@ Anuncio::~Anuncio(){
 int Anuncio::getIDGlobal() {
 	return _ID;
 }
-int Anuncio::setIDGlobal(int id) {
+void Anuncio::setIDGlobal(int id) {
 	_ID = id;
 }
+
 Anuncio::Anuncio(string titulo, string categ_produto, string descricao,
 		Data date) :
 		_num_vizualizacoes(0), _titulo(titulo), _categ_produto(categ_produto), _descricao(
@@ -98,10 +99,10 @@ string Anuncio::getInfo() const {
 	ss << "Visibilidade...." << ((_visivel) ? "Visivel" : "Invisivel") << endl;
 	ss << "Data          " << _data.getDia() << ":" << _data.getMes() << ":"
 			<< _data.getAno() << endl;
-	for (int i = 0; i < _imagens.size(); ++i) {
+	for (unsigned int i = 0; i < _imagens.size(); ++i) {
 		ss << "  I:" << _imagens[i].conteudo << endl;
 	}
-	for (int i = 0; i < _contactos.size(); ++i) {
+	for (unsigned int i = 0; i < _contactos.size(); ++i) {
 		ss << "Contactos:\n" << _contactos[i].getInfo() << endl;
 	}
 
@@ -121,10 +122,10 @@ void Anuncio::escrever(ofstream& out) {
 	out << _num_vizualizacoes << endl;
 	out << ((_visivel) ? 1 : 0) << endl;
 	_data.escrever(out);
-	for (int i = 0; i < _imagens.size(); ++i) {
+	for (unsigned int i = 0; i < _imagens.size(); ++i) {
 		out << "I" << endl << _imagens[i].conteudo << endl << "#I" << endl;
 	}
-	for (int i = 0; i < _contactos.size(); ++i) {
+	for (unsigned int i = 0; i < _contactos.size(); ++i) {
 		_contactos[i].escrever(out);
 	}
 	out << "#V" << endl; //Sinaliza Fim vetor
