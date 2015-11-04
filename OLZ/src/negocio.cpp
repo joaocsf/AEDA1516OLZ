@@ -10,6 +10,11 @@ Negocio::Negocio(Anuncio* anun, float valor, Data data){
 	_data=data;
 }
 
+Negocio::~Negocio(){
+	_user=NULL;
+	_ptr_anuncio=NULL;
+}
+
 int Negocio::getID() {
 	return _identificador;
 }

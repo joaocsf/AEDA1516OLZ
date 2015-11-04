@@ -76,10 +76,15 @@ void Website::RemoveAnuncio(int id) {
 	}
 }
 
-void Website::RemoveAnuncios(vector<int> indices) {
+void Website::RemoveAnuncios(vector<Anuncio*> ids) {
 
-	for (unsigned int i = 0; i < indices.size(); ++i) {
-			anuncios.erase(anuncios.begin() + indices[i]);
+	for (unsigned int i = 0; i < anuncios.size(); ++i) {
+		for (unsigned int x = 0; x < ids.size(); ++x) {
+			if(anuncios[i]->getID() == ids[x]->getID()){
+				anuncios.erase(anuncios.begin() + i--);
+				break;
+			}
+		}
 	}
 }
 
@@ -87,8 +92,8 @@ void Website::RemoveUtilizador(int id) {
 
 	for (unsigned int i = 0; i < utilizadores.size(); ++i) {
 		if (utilizadores[i]->getID() == id) {
-			vector<int> ind= anunciosParaIndices(utilizadores[i]->getAnuncios());
-			RemoveAnuncios(ind);
+		
+			RemoveAnuncios(utilizadores[i]->getAnuncios());
 			delete(utilizadores[i]);
 			utilizadores.erase(utilizadores.begin() + i--);
 			break;

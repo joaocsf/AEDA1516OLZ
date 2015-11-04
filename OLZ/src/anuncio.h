@@ -91,6 +91,7 @@ class Anuncio : public Dados{
 public:
 	//! Construtor default.
 	Anuncio(){}
+	virtual ~Anuncio();
 	//!Overload do construtor com 4 parametros.
 	/*!
 	 \param titulo do anuncio.
@@ -229,6 +230,8 @@ class AnuncioCompra: public Anuncio{
 public:
 	//!Construtor default.
 	AnuncioCompra(){}
+
+	~AnuncioCompra();
 	//!Overload do construtor com 4 parametros.
 	/*!
 	 \param titulo do anuncio.

@@ -443,7 +443,7 @@ int Menu::interfaceConta() {
 		return Website::alterarDadosVisiveis();
 		break;
 	case 4://cancelar conta
-		Website::RemoveUtilizador(Website::getIndiceUtilizador());
+		Website::RemoveUtilizador(Website::getUtilizadores()[Website::getIndiceUtilizador()]->getID());
 		return 0;
 	default: //voltar atras
 		return 1;

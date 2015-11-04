@@ -3,6 +3,10 @@
 
 int Anuncio::_ID = 1;
 
+Anuncio::~Anuncio(){
+	_user = NULL;
+}
+
 int Anuncio::getIDGlobal() {
 	return _ID;
 }
@@ -251,6 +255,10 @@ float AnuncioVenda::getPreco() const {
 AnuncioCompra::AnuncioCompra(string titulo, string categ_produto,
 		string descricao, Data date) :
 		Anuncio(titulo, categ_produto, descricao, date), _anuncioVenda(NULL) {
+}
+
+AnuncioCompra::~AnuncioCompra(){
+	_anuncioVenda=NULL;
 }
 
 void AnuncioCompra::ler(ifstream& in, bool escreve) {
