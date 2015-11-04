@@ -11,6 +11,17 @@ Utilizador::Utilizador(DadosPessoais contacto, Localizacao loc) {
 	_identificador = _ID++;
 }
 
+Utilizador::~Utilizador(){
+	for (int i = 0; i < _anuncios.size(); ++i) {
+		delete(_anuncios[i]);
+
+	}
+	for (int i = 0; i< _negociosConcluidos.size(); ++i){
+		delete(_negociosConcluidos[i]);
+	}
+
+}
+
 int Utilizador::getID() const {
 	return _identificador;
 }
