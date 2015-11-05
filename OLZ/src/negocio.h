@@ -14,11 +14,13 @@
 //!Class Negocio
 /*!
  * Esta classe estancia um negocio que foi concliudo quer seja uma venda, compra ou troca.
+ \sa Dados
  */
 class Negocio: public Dados {
 	//! ptr_anuncio
 	/*!
 	 * Apontador para o anuncio do negocio
+	 \sa Anuncio
 	 */
 	Anuncio *_ptr_anuncio;
 	//! montante
@@ -29,11 +31,13 @@ class Negocio: public Dados {
 	//! data
 	/*!
 	 * Data da realizacao do negocio.
+	 \sa Data
 	 */
 	Data _data;
 	//! user
 	/*!
 	 * Utilizador referente ao negocio.
+	 \sa Utilizador
 	 */
 	Utilizador* _user;
 	//! ID
@@ -50,6 +54,7 @@ public:
 	//! Construtor default.
 	Negocio() {
 	}
+	//!Destrutor
 	~Negocio();
 
 	//! Overload do construtor com 3 parametros.
@@ -65,29 +70,32 @@ public:
 	 \return numero de identificacao do negocio.
 	 */
 	int getID();
+	//!Funcao global para devolver o valor atual da variavel global ID.
+	static int getIDGlobal();
+	//!Funcao get para a informacao referente ao negocio.
+	string getInfo() const;
+	//!Funcao get para o anuncio do negocio.
+	Anuncio* getAnuncio();
+	//!Funcao get para o montante.
+	float getMontante() const;
+	//!Funcao get para a data do negocio.
+	Data getData()const;
 	//!Funcao para alterar o utilizador.
 	/*!
 	 \param user Novo utilizador.
 	 */
 	void setUser(Utilizador* user);
-
-	//!Funcao global para devolver o valor atual da variavel global ID.
-	static int getIDGlobal();
-
+	//!Funcao set para o numero de identificacao global dos negocios.
 	static int setIDGlobal(int id);
-
 	//!Funcao de leitura das informacoes de um ficheiro.
 	virtual void ler(ifstream& in, bool escreve = false);
 	//! Funcao de escrita das informacoes para um ficheiro.
 	virtual void escrever(ofstream& out);
-	//!Funcao get para a informacao referente ao negocio.
-	string getInfo() const;
-	Anuncio* getAnuncio();
-	float getMontante() const;
-	Data getData()const;
+	//!Funcao para verificar se ocorreu uma troca de produtos no negocio.
 	bool trocou();
 };
 
+//!Overload do operador << para a classe Negocio.
 ostream & operator<<(ostream & o, Negocio& n);
 
 #endif
