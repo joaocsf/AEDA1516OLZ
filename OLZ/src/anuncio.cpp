@@ -406,7 +406,7 @@ ostream & operator<<(ostream & o, AnuncioVenda & av) {
 	setcolor(3);
 	o << "Preco: ";
 	setcolor(15);
-	o << av.getPreco();
+	o << av.getPreco() << " " << char(36);
 	setcolor(3);
 	o << "          Negociavel: ";
 	setcolor(15);

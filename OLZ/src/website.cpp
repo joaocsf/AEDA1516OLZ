@@ -870,6 +870,9 @@ int Website::MenuAnuncioConta(bool venda) {
 			intro();
 			for (unsigned int i = 0; i < c.size(); ++i) {
 				setcolor(3);
+				cout << "------------- Contacto " << i+1 << "------------" << endl;
+
+				setcolor(3);
 				cout << "Dados: " << endl;
 				setcolor(15);
 				DadosPessoais dp = c[i].getDados();
