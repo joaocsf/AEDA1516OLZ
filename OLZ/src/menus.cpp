@@ -164,6 +164,8 @@ void Menu::menuAnuncioDefinicoes(int y) {
 	setcolor(15);
 	cout << setw(20) << Highlight("Finalizar Negocio", y, 2) << endl;
 	setcolor(15);
+	cout << setw(20) << Highlight("Editar", y, 2) << endl;
+	setcolor(15);
 	cout << setw(20) << Highlight("Voltar Atras", y, 3) << endl;
 	setcolor(15);
 }
@@ -177,6 +179,44 @@ void Menu::menuVisibilidade(int y) {
 	cout << setw(20) << Highlight("Telefone", y, 1) << endl;
 	setcolor(15);
 	cout << setw(20) << Highlight("Email", y, 2) << endl;
+	setcolor(15);
+}
+
+void Menu::menuEditar_AV(int y) {
+	system("cls");
+	Website::intro();
+	cout << setw(20) << Highlight("Titulo", y, 0) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Categoria do Produto", y, 1) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Descricao", y, 2) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Adicionar Imagem", y, 3) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Eliminar todas as Imagens", y, 4) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Preco", y, 5) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Negociavel", y, 6) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Estado Produto", y, 7) << endl;
+	setcolor(15);
+}
+
+void Menu::menuEditar_AC(int y) {
+	system("cls");
+	Website::intro();
+	cout << setw(20) << Highlight("Titulo", y, 0) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Categoria do Produto", y, 1) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Descricao", y, 2) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Adicionar Imagem", y, 3) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Eliminar todas as Imagens", y, 4) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Associar/Alterar Anuncio", y, 5) << endl;
 	setcolor(15);
 }
 
@@ -469,7 +509,7 @@ int Menu::interfaceConta() {
 }
 
 int Menu::interfaceAnuncioDefinicoes() {
-	return menu(3,9);
+	return menu(4,9);
 }
 
 int Menu::interfacePesquisar(bool log) {
@@ -537,26 +577,10 @@ int Menu::interfaceTipoAnuncio() {
 }
 
 int Menu::interfaceCategProd() {
-	int y;
-	y = menu(3,8);
-	switch (y) {
-	case 0:
-		return 0;
-		break;
-	case 1:
-		return 1;
-		break;
-	case 2:
-		return 2;
-		break;
-	case 3:
-		return 3;
-		break;
-	}
+	return menu(3,8);
 }
 
 int Menu::interfaceMudarVisibilidade() {
-	int y;
 	return menu(2,10);
 }
 
@@ -565,45 +589,17 @@ int Menu::interfacemenuAnuncio() {
 	return menu(1,6);
 }
 
+int Menu::interfaceAnuncio_AV() {
+	return menu(7,10);
+}
+
+int Menu::interfaceAnuncio_AC() {
+	return menu(5,11);
+}
 //------------------------menu propriamente dito-----------------
 int Menu::menu(int tamanho, int menuSelect) {
 	int y = 0;
 	bool teclado = true;
-/*
-	switch (menuSelect) {
-	case 0:
-		menuInicial(y);
-		break;
-	case 1:
-		menuLogin(y);
-		break;
-	case 2:
-		menuAnunciar(y);
-		break;
-	case 3:
-		menuPesquisar(y);
-		break;
-	case 4:
-		menuOrdemPesq(y);
-		break;
-	case 5:
-		menuConta(y);
-		break;
-	case 6:
-		menuAnuncio(y);
-		break;
-	case 7:
-		menuTipoAnuncio(y);
-		break;
-	case 8:
-		menuCategProd(y);
-		break;
-	case 9:
-		menuAnuncioDefinicoes(y);
-		break;
-	default:
-		cout << "Menu Inixestente" << endl;
-	}*/
 
 	bool update= true;
 
@@ -661,6 +657,12 @@ int Menu::menu(int tamanho, int menuSelect) {
 				break;
 			case 9:
 				menuAnuncioDefinicoes(y);
+				break;
+			case 10:
+				menuEditar_AV(y);
+				break;
+			case 11:
+				menuEditar_AC(y);
 				break;
 			default:
 				cout << "Menu Inixestente" << endl;

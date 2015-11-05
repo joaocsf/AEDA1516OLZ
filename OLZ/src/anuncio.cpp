@@ -428,7 +428,7 @@ ostream & operator<<(ostream & o, AnuncioVenda & av) {
 		o << "Novo Para Pecas";
 		break;
 	case ESTADO_USADO:
-		o << "Usado";
+		o << "Usado Como Novo";
 		break;
 	}
 	o << endl;

@@ -138,12 +138,24 @@ void Website::login() {
 	throw UtilizadorInixestente(login);
 }
 
+bool Website::emailExiste(string email){
+	bool rep=false;
+
+	for (unsigned int i = 0; i < utilizadores.size(); ++i) {
+		if(utilizadores[i]->getDadosPessoais().getEmail()==email){
+			rep=true;
+			break;
+		}
+	}
+	return rep;
+}
+
 void Website::Registar() {
 
 	string nome;
 	string telefone;
 	string email;
-
+	string linha;
 	do {
 		system("cls");
 		intro();
@@ -166,12 +178,22 @@ void Website::Registar() {
 		getline(cin, telefone);
 	}
 
+	bool erro=false;
+
 	do {
 		system("cls");
 		intro();
+		if(erro){
+			setcolor(12);
+			cout << "Email Ja Existe!!" << endl;
+			setcolor(15);
+		}
 		cout << "Email: ";
-		getline(cin, email);
-	} while (email.size() == 0);
+		cin>> email;
+		getline(cin, linha);
+		erro=emailExiste(email);
+	} while ((email.size() == 0) || erro);
+
 
 	DadosPessoais dados(nome, telefone, email);
 
@@ -250,22 +272,27 @@ void Website::Anunciar_AC() {
 			data);
 	ac->setUser(utilizadores[indiceUtilizador]);
 
-	do {
-		system("cls");
-		intro();
-		cout << "Deseja escolher um dos seus anuncios de venda? (S/N)" << endl;
-		setcolor(7);
-		cout
-				<< "(Indicando assim, a possibilidade de trocar o\n produto que esta a vender,pelo produto deste anuncio)"
-				<< endl;
-		setcolor(15);
-		getline(cin, letra);
-	} while (letra != "s" && letra != "S" && letra != "n" && letra != "N");
 
-	if (letra == "s" || letra == "S")
-		ptrAV = true;
-	else
-		ptrAV = false;
+	if(utilizadores[indiceUtilizador]->getAnuncios(true).size() != 0){
+		do {
+			system("cls");
+			intro();
+			cout << "Deseja escolher um dos seus anuncios de venda? (S/N)" << endl;
+			setcolor(7);
+			cout
+			<< "(Indicando assim, a possibilidade de trocar o\n produto que esta a vender,pelo produto deste anuncio)"
+			<< endl;
+			setcolor(15);
+			getline(cin, letra);
+		} while (letra != "s" && letra != "S" && letra != "n" && letra != "N");
+
+		if (letra == "s" || letra == "S")
+			ptrAV = true;
+		else
+			ptrAV = false;
+
+	}else
+		ptrAV=false;
 
 	if (ptrAV) {
 
@@ -384,7 +411,7 @@ void Website::Anunciar_AV() {
 	AnuncioVenda *av = new AnuncioVenda(titulo, categ_produto, descricao, data,	preco, negociavel, estado);
 	av->setUser(utilizadores[indiceUtilizador]);
 
-	for (int i = 0; i < imagens.size(); ++i) {
+	for (unsigned int i = 0; i < imagens.size(); ++i) {
 		Imagem img;
 		img.conteudo = imagens[i];
 		av->AdicionarImagem(img);
@@ -399,7 +426,7 @@ void Website::Anunciar_AV() {
 vector<int> Website::procurarLocalizacao(string loc) {
 	vector<int> res;
 
-	for (int i = 0; i < anuncios.size(); i++) {
+	for (unsigned  int i = 0; i < anuncios.size(); i++) {
 		Localizacao l = anuncios[i]->getUser()->getLocalizacao();
 		if (l.freguesia == loc || l.distrito == loc || l.concelho == loc)
 			res.push_back(i);
@@ -411,7 +438,7 @@ vector<int> Website::procurarLocalizacao(string loc) {
 vector<int> Website::procurarCategoria(string categoria) {
 	vector<int> res;
 
-	for (int i = 0; i < anuncios.size(); i++) {
+	for (unsigned  int i = 0; i < anuncios.size(); i++) {
 		if (categoria == anuncios[i]->getCategoria())
 			res.push_back(i);
 	}
@@ -423,7 +450,7 @@ vector<int> Website::procurarCategoria(string categoria) {
 vector<int> Website::procurarData(Data data) {
 	vector<int> res;
 
-	for (int i = 0; i < anuncios.size(); i++) {
+	for (unsigned int i = 0; i < anuncios.size(); i++) {
 		if (data == anuncios[i]->getData())
 			res.push_back(i);
 	}
@@ -433,7 +460,7 @@ vector<int> Website::procurarData(Data data) {
 
 vector<int> Website::procurarPalavraChave(string palavra) {
 	vector<int> res;
-	for (int i = 0; i < anuncios.size(); i++) {
+	for (unsigned int i = 0; i < anuncios.size(); i++) {
 
 		unsigned int found = anuncios[i]->getTitulo_Descricao().find(palavra);
 		if (found != string::npos) {
@@ -710,17 +737,11 @@ void Website::ordenaPreco(vector<int>& v, bool crescente) {
 		int tmp = v[p];
 		int j;
 		if (crescente) {
-			for (j = p;
-					j > 0
-							&& anuncios[tmp]->getPreco()
-									< anuncios[v[j - 1]]->getPreco(); j--) {
+			for (j = p;	j > 0 && anuncios[tmp]->getPreco()< anuncios[v[j - 1]]->getPreco(); j--) {
 				v[j] = v[j - 1];
 			}
 		} else {
-			for (j = p;
-					j > 0
-							&& anuncios[tmp]->getPreco()
-									> anuncios[v[j - 1]]->getPreco(); j--) {
+			for (j = p;	j > 0 && anuncios[tmp]->getPreco() > anuncios[v[j - 1]]->getPreco(); j--) {
 				v[j] = v[j - 1];
 			}
 		}
@@ -882,11 +903,23 @@ int Website::MenuAnuncioConta(bool venda) {
 				setcolor(15);
 				cout << c[i].getMensagem() << endl << endl;
 			}
+			setcolor(3);
+			cout << "------------- Prima Qualquer Tecla Para Sair ------------" << endl;
+
+			setcolor(3);
 			getch();
 		} else if (y == 1) { //remove anuncio
 			RemoveAnuncio(anuncios[Menu::idAnuncio]->getID());
-		}else if(y==2){
+		}else if(y==2){//cria negocio
 			criaNegocio(anuncios[Menu::idAnuncio]);
+		}
+		else if(y==3){//editar
+			if(anuncios[Menu::idAnuncio]->getTipo()==TIPO_VENDA){
+
+			}
+			else{
+
+			}
 		}
 	}
 }
@@ -978,7 +1011,6 @@ int Website::menuMeusNegocios(){
 
 int Website::alterarDadosVisiveis(){
 	int y = 0;
-	bool teclado = true;
 	string visiveis[]= {"","",""};
 	bool update= true;
 	bool* v= utilizadores[indiceUtilizador]->getDadosVisiveis();
@@ -995,7 +1027,7 @@ int Website::alterarDadosVisiveis(){
 	while (true) {
 
 
-		if(!teclado && updateDados){
+		if(updateDados){
 			updateDados=false;
 			switch(y){
 			case VIS_NOME:
@@ -1058,7 +1090,6 @@ int Website::alterarDadosVisiveis(){
 					update=true;
 				}
 			} else if (tecla == 13) { // enter
-				teclado = false;
 				updateDados=true;
 				update=true;
 			}

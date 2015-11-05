@@ -33,6 +33,7 @@ public:
 	static void addNegocio(Negocio *n);
 	static void RemoveAnuncio(int id);
 	static void RemoveAnuncios(vector<Anuncio*> ids);
+	static bool emailExiste(string email);
 	static void RemoveUtilizador(int id);
 	static void	RemoveNegocio(int id);
 	static int getIndiceUtilizador();
