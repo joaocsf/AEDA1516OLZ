@@ -43,6 +43,7 @@ static void menuTipoAnuncio(int y);
 static void menuCategProd(int y);
 static void menuEditar_AC(int y);
 static void menuEditar_AV(int y);
+static void menuEditarUtilizador(int y);
 //interface
 static int menuInterface();
 static int interfaceLog();
@@ -55,6 +56,7 @@ static int interfaceAnuncioDefinicoes();
 static int interfacemenuAnuncio();
 static int interfaceEditarAnuncio_AV();
 static int interfaceEditarAnuncio_AC();
+static int interfaceEditarUtilizador();
 //selector
 static void InterfaceSeletor();
 static bool logado; //variavel que indica se o usuario está logado

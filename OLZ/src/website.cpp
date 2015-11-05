@@ -278,8 +278,7 @@ void Website::Anunciar_AC() {
 		if(Menu::idAnuncio == -1)
 			return;
 
-		ac->setAnuncioVenda(
-				dynamic_cast<AnuncioVenda*>(anuncios[Menu::idAnuncio]));
+		ac->setAnuncioVenda(dynamic_cast<AnuncioVenda*>(anuncios[Menu::idAnuncio]));
 	}
 
 	for (unsigned int i = 0; i < imagens.size(); ++i) {
@@ -316,8 +315,7 @@ void Website::Anunciar_AV() {
 
 	imagens = InputVetorString("Prima enter se nao quiser adicionar mais imagens: ");
 
-	Inputfloat("O preco deve ser maior que zero: ");
-	getline(cin, erroS);
+	preco = Inputfloat("O preco deve ser maior que zero: ");
 
 	negociavel=InputBool("Negociavel?(S/N) ");
 
@@ -748,6 +746,7 @@ int Website::MenuAnuncioConta(bool venda) {
 	bool semcontatos = true;
 
 	while (true) {
+
 		if (retornarMeusAnuncios(venda).size() == 0) {
 			system("cls");
 			intro();
@@ -758,12 +757,13 @@ int Website::MenuAnuncioConta(bool venda) {
 			getch();
 			return 3;
 		}
+
 		if (semcontatos) {
 			Menu::idAnuncio = Menu::menuAnuncioInterface(retornarMeusAnuncios(venda));
-
 			if (Menu::idAnuncio == -1)
 				return 3;
 		}
+
 		int y = Menu::interfaceAnuncioDefinicoes();
 		semcontatos = true;
 		if (y == 0) { //ver contatos
@@ -806,15 +806,20 @@ int Website::MenuAnuncioConta(bool venda) {
 			criaNegocio(anuncios[Menu::idAnuncio]);
 		}
 		else if(y==3){//editar
+			semcontatos=false;
 			int ind;
 			if(anuncios[Menu::idAnuncio]->getTipo()==TIPO_VENDA)
 				ind=Menu::interfaceEditarAnuncio_AV();
 			else
 				ind = Menu::interfaceEditarAnuncio_AC();
 
+			Imagem img;
+			AnuncioVenda *av = dynamic_cast<AnuncioVenda*>(anuncios[Menu::idAnuncio]);
+			AnuncioCompra *ac = dynamic_cast<AnuncioCompra*>(anuncios[Menu::idAnuncio]);
+
 			switch (ind) {
 			case 0:
-					anuncios[Menu::idAnuncio]->setTitulo(InputLinha("Novo Titulo: "));
+				anuncios[Menu::idAnuncio]->setTitulo(InputLinha("Novo Titulo: "));
 				break;
 			case 1:
 				anuncios[Menu::idAnuncio]->setCategoria(InputLinha("Nova Categoria: "));
@@ -823,24 +828,32 @@ int Website::MenuAnuncioConta(bool venda) {
 				anuncios[Menu::idAnuncio]->setDescricao(InputLinha("Nova Descricao: ",true));
 				break;
 			case 3:
-				Imagem img;
 				img.conteudo =InputLinha("Nova Imagem: ");
 				anuncios[Menu::idAnuncio]->AdicionarImagem(img);
 				break;
 			case 4:
-
+				anuncios[Menu::idAnuncio]->eliminaImagens();
 				break;
 			case 5:
 				if(anuncios[Menu::idAnuncio]->getTipo()==TIPO_VENDA){
-
+					av->setPreco(Inputfloat("Novo Preco: "));
 				}else{
 
+					int novoMenu = Menu::menuAnuncioInterface(retornarMeusAnuncios(true));
+					if(novoMenu!= -1)
+						ac->setAnuncioVenda(dynamic_cast<AnuncioVenda*>(anuncios[novoMenu]));
 				}
-
 				break;
 			case 6:
+				if(anuncios[Menu::idAnuncio]->getTipo()==TIPO_VENDA){
+				av->setNegociavel(InputBool("Negociavel?(S/N) "));
+				}else{
+					ac->setAnuncioVenda(NULL);
+				}
 				break;
 			case 7:
+				av ->setEstado(Menu::interfaceCategProd());
+
 				break;
 			}
 
@@ -933,7 +946,7 @@ int Website::menuMeusNegocios(){
 	}
 }
 
-int Website::alterarDadosVisiveis(){
+void Website::alterarDadosVisiveis(){
 	int y = 0;
 	string visiveis[]= {"","",""};
 	bool update= true;
@@ -1019,7 +1032,7 @@ int Website::alterarDadosVisiveis(){
 			}
 			else if(tecla == 27){//esc
 
-				return 3;
+				return;
 			}
 		}
 	}
@@ -1126,5 +1139,40 @@ string Website::InputInteiro(string mensagemLoop, unsigned int casas){
 	}while (erro);
 
 	return linha;
+}
+//editar utilizador
+
+int Website::EditarUtilizador(){
+
+	while(true){
+		int y= Menu::interfaceEditarUtilizador();
+
+		switch (y) {
+		case 0:
+			utilizadores[indiceUtilizador]->setNome(InputLinha("Novo Nome: "));
+			break;
+		case 1:
+			utilizadores[indiceUtilizador]->setTelefone(InputLinha("Novo Telefone: "));
+			break;
+		case 2:
+			utilizadores[indiceUtilizador]->setEmail(InputLinha("Novo Email: "));
+			break;
+		case 3:
+			alterarDadosVisiveis();
+			break;
+		case 4:
+			utilizadores[indiceUtilizador]->setFreguesia(InputLinha("Nova Freguesia: "));
+			break;
+		case 5:
+			utilizadores[indiceUtilizador]->setConcelho(InputLinha("Novo Concelho: "));
+			break;
+		case 6:
+			utilizadores[indiceUtilizador]->setDistrito(InputLinha("Novo Distrito: "));
+			break;
+		default:
+			return 3;
+			break;
+		}
+	}
 }
 

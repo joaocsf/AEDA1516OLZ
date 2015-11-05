@@ -174,6 +174,7 @@ public:
 	vector<Contacto> getContactos() const;
 	//!Funcao get para a descricao do anuncio.
 	string getDescricao() const;
+	void eliminaImagens();
 };
 
 //!Class AnuncioVenda
@@ -227,6 +228,10 @@ public:
 	bool getNegociavel() const;
 	//!Funcao get para o Estado do produto.
 	int getEstado() const;
+
+	void setPreco(float preco);
+	void setNegociavel(bool negociavel);
+	void setEstado(int estado);
 };
 
 //!Overload do operador << para a classe AnuncioVenda.

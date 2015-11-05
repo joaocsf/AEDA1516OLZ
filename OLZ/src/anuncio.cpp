@@ -167,6 +167,20 @@ float Anuncio::getPreco() const {
 vector<Contacto> Anuncio::getContactos() const {
 	return _contactos;
 }
+void Anuncio::eliminaImagens(){
+	_imagens.clear();
+}
+
+void Anuncio::setTitulo(string t){
+	_titulo= t;
+}
+
+void Anuncio::setCategoria(string c){
+	_categ_produto=c;
+}
+void Anuncio::setDescricao(string d){
+	_descricao=d;
+}
 
 //anuncio venda
 AnuncioVenda::AnuncioVenda(string titulo, string categ_produto,
@@ -206,7 +220,6 @@ void AnuncioVenda::ler(ifstream& in, bool escreve) {
 
 		index++;
 	}
-
 }
 void AnuncioVenda::escrever(ofstream& out) {
 	out << "AV" << endl;
@@ -251,10 +264,22 @@ int AnuncioVenda::getTipo() const {
 float AnuncioVenda::getPreco() const {
 	return _preco;
 }
+
+void AnuncioVenda::setPreco(float preco){
+	_preco=preco;
+}
+
+void AnuncioVenda::setNegociavel(bool negociavel){
+	_negociavel=negociavel;
+}
+void AnuncioVenda::setEstado(int estado){
+	_estado=estado;
+}
+
 //anuncio compra
 AnuncioCompra::AnuncioCompra(string titulo, string categ_produto,
 		string descricao, Data date) :
-		Anuncio(titulo, categ_produto, descricao, date), _anuncioVenda(NULL) {
+				Anuncio(titulo, categ_produto, descricao, date), _anuncioVenda(NULL) {
 }
 
 AnuncioCompra::~AnuncioCompra(){

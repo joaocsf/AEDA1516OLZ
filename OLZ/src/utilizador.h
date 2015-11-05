@@ -150,6 +150,13 @@ public:
 	 \sa Contacto -> getVisiveis()
 	 */
 	bool* getDadosVisiveis();
+	void setNome(string var);
+	void setTelefone(string var);
+	void setEmail(string var);
+	void setFreguesia(string var);
+	void setConcelho(string var);
+	void setDistrito(string var);
+
 };
 
 //! Class AnuncioInexistente

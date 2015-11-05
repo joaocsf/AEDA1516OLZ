@@ -289,4 +289,22 @@ vector<Negocio*> Utilizador::getNegocios(){
 	return _negociosConcluidos;
 }
 
-
+//set
+void Utilizador::setNome(string var){
+	_contacto.alterarNome(var);
+}
+void Utilizador::setTelefone(string var){
+	_contacto.alterarTelefone(var);
+}
+void Utilizador::setEmail(string var){
+	_contacto.alterarEmail(var);
+}
+void Utilizador::setFreguesia(string var){
+	_local.freguesia=var;
+}
+void Utilizador::setConcelho(string var){
+	_local.concelho=var;
+}
+void Utilizador::setDistrito(string var){
+	_local.distrito=var;
+}

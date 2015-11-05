@@ -60,11 +60,32 @@ void Menu::menuConta(int y) {
 	setcolor(15);
 	cout <<setw(3) << ""<< setw(50)<< Highlight("Meus Negocios", y, 2)<< endl;
 	setcolor(15);
-	cout <<setw(3) << ""<< setw(50) << Highlight("Alterar Visibilidade Dos Meus Dados Pessoais", y, 3)<< endl;
+	cout <<setw(3) << ""<< setw(50) << Highlight("Editar Conta", y, 3)<< endl;
 	setcolor(15);
 	cout <<setw(3) << ""<< setw(50) << Highlight("Cancelar Conta", y, 4)<< endl;
 	setcolor(15);
 	cout <<setw(3) << ""<< setw(50) << Highlight("Voltar Atras", y, 5) <<right <<  endl;
+	setcolor(15);
+}
+
+void Menu::menuEditarUtilizador(int y) {
+	system("cls");
+	Website::intro();
+	cout << setw(20) << Highlight("Nome", y, 0) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Telefone", y, 1) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Email", y, 2) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Alterar Visibilidade Dos Meus Dados Pessoais", y, 3) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Freguesia", y, 4) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Concelho", y, 5) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Distrito", y, 6) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Voltar Atras", y, 7) << endl;
 	setcolor(15);
 }
 
@@ -217,6 +238,8 @@ void Menu::menuEditar_AC(int y) {
 	cout << setw(30) << Highlight("Eliminar todas as Imagens", y, 4) << endl;
 	setcolor(15);
 	cout << setw(30) << Highlight("Associar/Alterar Anuncio", y, 5) << endl;
+	setcolor(15);
+	cout << setw(30) << Highlight("Desassociar", y, 6) << endl;
 	setcolor(15);
 }
 
@@ -495,8 +518,8 @@ int Menu::interfaceConta() {
 	case 2:  //negocios
 		return Website::menuMeusNegocios();
 		break;
-	case 3:  //alterar visiblidade
-		return Website::alterarDadosVisiveis();
+	case 3:  //Editar Utilizador
+		return Website::EditarUtilizador();
 		break;
 	case 4://cancelar conta
 		Website::RemoveUtilizador(Website::getUtilizadores()[Website::getIndiceUtilizador()]->getID());
@@ -594,7 +617,11 @@ int Menu::interfaceEditarAnuncio_AV() {
 }
 
 int Menu::interfaceEditarAnuncio_AC() {
-	return menu(5,11);
+	return menu(6,11);
+}
+
+int Menu::interfaceEditarUtilizador() {
+	return menu(6,12);
 }
 //------------------------menu propriamente dito-----------------
 int Menu::menu(int tamanho, int menuSelect) {
@@ -663,6 +690,9 @@ int Menu::menu(int tamanho, int menuSelect) {
 				break;
 			case 11:
 				menuEditar_AC(y);
+				break;
+			case 12:
+				menuEditarUtilizador(y);
 				break;
 			default:
 				cout << "Menu Inixestente" << endl;

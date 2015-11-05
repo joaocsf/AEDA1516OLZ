@@ -60,10 +60,10 @@ public:
 	static vector<int> retornarMeusAnuncios(bool venda);
 	static int MenuAnuncioConta(bool venda);
 	static int menuMeusNegocios();
-	static int alterarDadosVisiveis();
+	static void alterarDadosVisiveis();
 	static void menuVisivel(bool* v);
 	static void criaNegocio(Anuncio* a);
-
+	static int EditarUtilizador();
 	//Validacao
 	static string InputLinha(string mensagemLoop, bool vazio = false);
 	static vector<string> InputVetorString(string mensagemLoop);
