@@ -7,7 +7,7 @@
 
 //!  Class Contacto.
 /*!
- Esta classe contêm as informaçoes relativas ao Utilizador que criou um anuncio nomeadamente a forma de contacto por parte dos interessados.
+* Esta classe contêm as informaçoes relativas ao Utilizador que criou um anuncio nomeadamente a forma de contacto por parte dos interessados.
 */
 class Contacto: public Dados{
 	//! Mensagem.
@@ -18,10 +18,11 @@ class Contacto: public Dados{
 	//! Dados.
 	    /*!
 	      Contem os dados pessoais do anunciante que vai receber a mensagem.
+	      \sa DadosPessoais
 	    */
 	DadosPessoais _dados;
 public:
-
+	//!Construtor Default
 	Contacto();
 	//! Overload do Construtor que recebe dois argumentos.
 	    /*!
@@ -29,11 +30,6 @@ public:
 	      \param dados os dados do utilizador que vai receber a mensagem.
 	    */
 	Contacto(string mensagem, DadosPessoais dados);
-	//! Funcao que retorna a informaçao (mensagem + dados pessoais).
-	    /*!
-	      \return O mensagem juntamente com os dados.
-	    */
-	string getInfo()const;
 	//! Funcao que altera a variavel mensagem.
 	    /*!
 	    */
@@ -49,7 +45,14 @@ public:
 		 \param out funcao de escrita de ficheiros.
 		 */
 	virtual void escrever(ofstream& out);
+	//! Funcao que retorna a informaçao (mensagem + dados pessoais).
+	    /*!
+	      \return O mensagem juntamente com os dados.
+	    */
+	string getInfo()const;
+	//!Funcao get para os Dados Pessoais.
 	DadosPessoais getDados() const;
+	//!Funcao get para a mensagem.
 	string getMensagem() const;
 };
 
