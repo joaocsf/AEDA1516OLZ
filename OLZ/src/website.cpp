@@ -1169,6 +1169,10 @@ int Website::EditarUtilizador(){
 		case 6:
 			utilizadores[indiceUtilizador]->setDistrito(InputLinha("Novo Distrito: "));
 			break;
+		case 7:
+			RemoveUtilizador(utilizadores[indiceUtilizador]->getID());
+			return 0;
+			break;
 		default:
 			return 3;
 			break;

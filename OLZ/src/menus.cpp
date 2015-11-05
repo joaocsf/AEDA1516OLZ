@@ -54,17 +54,15 @@ void Menu::menuAnunciar(int y) {
 void Menu::menuConta(int y) {
 	system("cls");
 	Website::intro();
-	cout <<setw(3) << ""<<left<< setw(50) << Highlight("Meus Anuncios De Compra", y, 0) << endl;
+	cout <<  setw(30) << Highlight("Meus Anuncios De Compra", y, 0) << endl;
 	setcolor(15);
-	cout <<setw(3) << ""<< setw(50)<< Highlight("Meus Anuncios De Venda", y, 1) << endl;
+	cout  <<setw(30)<< Highlight("Meus Anuncios De Venda", y, 1) << endl;
 	setcolor(15);
-	cout <<setw(3) << ""<< setw(50)<< Highlight("Meus Negocios", y, 2)<< endl;
+	cout << setw(30)<< Highlight("Meus Negocios", y, 2)<< endl;
 	setcolor(15);
-	cout <<setw(3) << ""<< setw(50) << Highlight("Editar Conta", y, 3)<< endl;
+	cout << setw(30) << Highlight("Editar Conta", y, 3)<< endl;
 	setcolor(15);
-	cout <<setw(3) << ""<< setw(50) << Highlight("Cancelar Conta", y, 4)<< endl;
-	setcolor(15);
-	cout <<setw(3) << ""<< setw(50) << Highlight("Voltar Atras", y, 5) <<right <<  endl;
+	cout << setw(30) << Highlight("Voltar Atras", y,4) <<  endl;
 	setcolor(15);
 }
 
@@ -85,7 +83,9 @@ void Menu::menuEditarUtilizador(int y) {
 	setcolor(15);
 	cout << setw(20) << Highlight("Distrito", y, 6) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Voltar Atras", y, 7) << endl;
+	cout << setw(20) << Highlight("Cancelar Conta", y, 7) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Voltar Atras", y, 8) << endl;
 	setcolor(15);
 }
 
@@ -507,7 +507,7 @@ int Menu::interfaceLog() {
 
 int Menu::interfaceConta() {
 	int y;
-	y = menu(5, 5);
+	y = menu(4, 5);
 	switch (y) {
 	case 0:  //ac
 		return Website::MenuAnuncioConta(false);
@@ -521,9 +521,6 @@ int Menu::interfaceConta() {
 	case 3:  //Editar Utilizador
 		return Website::EditarUtilizador();
 		break;
-	case 4://cancelar conta
-		Website::RemoveUtilizador(Website::getUtilizadores()[Website::getIndiceUtilizador()]->getID());
-		return 0;
 	default: //voltar atras
 		return 1;
 		break;
@@ -621,7 +618,7 @@ int Menu::interfaceEditarAnuncio_AC() {
 }
 
 int Menu::interfaceEditarUtilizador() {
-	return menu(6,12);
+	return menu(8,12);
 }
 //------------------------menu propriamente dito-----------------
 int Menu::menu(int tamanho, int menuSelect) {
