@@ -14,7 +14,7 @@ using namespace std;
 
 //! Class Dados
 /*!
- * Classe mae que trata de todo o tipo de dados. Esta classe contem as declaracoes dos membros e funcoes do programa principal.
+ * Classe mae que trata do tipo de dados. Esta classe contem as declaracoes dos membros e funcoes do programa principal.
  */
 class Dados{
 protected:

@@ -205,7 +205,7 @@ public:
 	/*!
 	 \param titulo do anuncio.
 	 \param categ_produto categoria do produto.
-	 \param descricao.
+	 \param descricao
 	 \param date Data.
 	 \param preco do produto.
 	 \param negociavel
@@ -253,7 +253,7 @@ public:
 	//!Overload do construtor com 4 parametros.
 	/*!
 	 \param titulo do anuncio.
-	 \param categ_produto.
+	 \param categ_produto
 	 \param descricao do anuncio.
 	 \param date Data de criacao.
 	 */
