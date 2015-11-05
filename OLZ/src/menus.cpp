@@ -54,17 +54,17 @@ void Menu::menuAnunciar(int y) {
 void Menu::menuConta(int y) {
 	system("cls");
 	Website::intro();
-	cout << setw(30) << Highlight("Meus Anuncios De Compra", y, 0) << endl;
+	cout <<setw(3) << ""<<left<< setw(50) << Highlight("Meus Anuncios De Compra", y, 0) << endl;
 	setcolor(15);
-	cout << setw(30) << Highlight("Meus Anuncios De Venda", y, 1) << endl;
+	cout <<setw(3) << ""<< setw(50)<< Highlight("Meus Anuncios De Venda", y, 1) << endl;
 	setcolor(15);
-	cout << setw(30)<< Highlight("Meus Negocios", y, 2)<< endl;
+	cout <<setw(3) << ""<< setw(50)<< Highlight("Meus Negocios", y, 2)<< endl;
 	setcolor(15);
-	cout << setw(30)<< Highlight("Alterar Visibilidade Dos Meus Dados Pessoais", y, 3)<< endl;
+	cout <<setw(3) << ""<< setw(50) << Highlight("Alterar Visibilidade Dos Meus Dados Pessoais", y, 3)<< endl;
 	setcolor(15);
-	cout << setw(30)<< Highlight("Cancelar Conta", y, 4)<< endl;
+	cout <<setw(3) << ""<< setw(50) << Highlight("Cancelar Conta", y, 4)<< endl;
 	setcolor(15);
-	cout << setw(30) << Highlight("Voltar Atras", y, 5) << endl;
+	cout <<setw(3) << ""<< setw(50) << Highlight("Voltar Atras", y, 5) <<right <<  endl;
 	setcolor(15);
 }
 
@@ -164,9 +164,9 @@ void Menu::menuAnuncioDefinicoes(int y) {
 	setcolor(15);
 	cout << setw(20) << Highlight("Finalizar Negocio", y, 2) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Editar", y, 2) << endl;
+	cout << setw(20) << Highlight("Editar", y, 3) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Voltar Atras", y, 3) << endl;
+	cout << setw(20) << Highlight("Voltar Atras", y, 4) << endl;
 	setcolor(15);
 }
 
@@ -185,38 +185,38 @@ void Menu::menuVisibilidade(int y) {
 void Menu::menuEditar_AV(int y) {
 	system("cls");
 	Website::intro();
-	cout << setw(20) << Highlight("Titulo", y, 0) << endl;
+	cout << setw(30) << Highlight("Titulo", y, 0) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Categoria do Produto", y, 1) << endl;
+	cout << setw(30) << Highlight("Categoria do Produto", y, 1) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Descricao", y, 2) << endl;
+	cout << setw(30) << Highlight("Descricao", y, 2) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Adicionar Imagem", y, 3) << endl;
+	cout << setw(30) << Highlight("Adicionar Imagem", y, 3) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Eliminar todas as Imagens", y, 4) << endl;
+	cout << setw(30) << Highlight("Eliminar todas as Imagens", y, 4) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Preco", y, 5) << endl;
+	cout << setw(30) << Highlight("Preco", y, 5) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Negociavel", y, 6) << endl;
+	cout << setw(30) << Highlight("Negociavel", y, 6) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Estado Produto", y, 7) << endl;
+	cout << setw(30) << Highlight("Estado Produto", y, 7) << endl;
 	setcolor(15);
 }
 
 void Menu::menuEditar_AC(int y) {
 	system("cls");
 	Website::intro();
-	cout << setw(20) << Highlight("Titulo", y, 0) << endl;
+	cout << setw(30) << Highlight("Titulo", y, 0) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Categoria do Produto", y, 1) << endl;
+	cout << setw(30) << Highlight("Categoria do Produto", y, 1) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Descricao", y, 2) << endl;
+	cout << setw(30) << Highlight("Descricao", y, 2) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Adicionar Imagem", y, 3) << endl;
+	cout << setw(30) << Highlight("Adicionar Imagem", y, 3) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Eliminar todas as Imagens", y, 4) << endl;
+	cout << setw(30) << Highlight("Eliminar todas as Imagens", y, 4) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Associar/Alterar Anuncio", y, 5) << endl;
+	cout << setw(30) << Highlight("Associar/Alterar Anuncio", y, 5) << endl;
 	setcolor(15);
 }
 
@@ -589,11 +589,11 @@ int Menu::interfacemenuAnuncio() {
 	return menu(1,6);
 }
 
-int Menu::interfaceAnuncio_AV() {
+int Menu::interfaceEditarAnuncio_AV() {
 	return menu(7,10);
 }
 
-int Menu::interfaceAnuncio_AC() {
+int Menu::interfaceEditarAnuncio_AC() {
 	return menu(5,11);
 }
 //------------------------menu propriamente dito-----------------

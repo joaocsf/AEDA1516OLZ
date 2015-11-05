@@ -53,8 +53,8 @@ static int interfaceTipoAnuncio();
 static int interfaceCategProd();
 static int interfaceAnuncioDefinicoes();
 static int interfacemenuAnuncio();
-static int interfaceAnuncio_AV();
-static int interfaceAnuncio_AC();
+static int interfaceEditarAnuncio_AV();
+static int interfaceEditarAnuncio_AC();
 //selector
 static void InterfaceSeletor();
 static bool logado; //variavel que indica se o usuario está logado

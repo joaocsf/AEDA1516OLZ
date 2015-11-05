@@ -10,6 +10,7 @@
 #include <iomanip>
 #include <conio.h>
 #include "limits.h"
+#include "math.h"
 
 using namespace std;
 

@@ -63,6 +63,13 @@ public:
 	static int alterarDadosVisiveis();
 	static void menuVisivel(bool* v);
 	static void criaNegocio(Anuncio* a);
+
+	//Validacao
+	static string InputLinha(string mensagemLoop, bool vazio = false);
+	static vector<string> InputVetorString(string mensagemLoop);
+	static bool InputBool(string mensagemLoop);
+	static float Inputfloat(string mensagemLoop);
+	static string InputInteiro(string mensagemLoop, unsigned int casas);
 };
 
 class UtilizadorInixestente{

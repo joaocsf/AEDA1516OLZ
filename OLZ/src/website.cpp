@@ -238,35 +238,18 @@ void Website::Anunciar_AC() {
 	string letra;
 	bool ptrAV;
 
-	do {
-		system("cls");
-		intro();
-		cout << "Titulo Do Anuncio de Compra: ";
-		getline(cin, titulo);
-	} while (titulo.size() == 0);
+	//erro propositado;
 
-	do {
-		system("cls");
-		intro();
-		cout << "Categoria do Produto: ";
-		getline(cin, categ_produto);
-	} while (categ_produto.size() == 0);
+	titulo = InputLinha("Titulo Do Anuncio de Compra: ");
 
-	system("cls");
-	intro();
-	cout << "Descricao: ";
-	getline(cin, descricao);
+	categ_produto = InputLinha("Categoria do Produto: ");
+
+	descricao = InputLinha("Descricao:", true);
 
 	data = _data;
 
-	do {
-		system("cls");
-		intro();
-		cout << "Imagens(Prima enter se nao quiser adicionar mais imagens): " << endl;
-		getline(cin, imagem);
-		imagens.push_back(imagem);
-	} while (imagem != "");
-	imagens.pop_back();
+	imagens = InputVetorString("Prima enter se nao quiser adicionar mais imagens: ");
+
 
 	AnuncioCompra *ac = new AnuncioCompra(titulo, categ_produto, descricao,
 			data);
@@ -274,23 +257,8 @@ void Website::Anunciar_AC() {
 
 
 	if(utilizadores[indiceUtilizador]->getAnuncios(true).size() != 0){
-		do {
-			system("cls");
-			intro();
-			cout << "Deseja escolher um dos seus anuncios de venda? (S/N)" << endl;
-			setcolor(7);
-			cout
-			<< "(Indicando assim, a possibilidade de trocar o\n produto que esta a vender,pelo produto deste anuncio)"
-			<< endl;
-			setcolor(15);
-			getline(cin, letra);
-		} while (letra != "s" && letra != "S" && letra != "n" && letra != "N");
 
-		if (letra == "s" || letra == "S")
-			ptrAV = true;
-		else
-			ptrAV = false;
-
+		ptrAV= InputBool("Deseja escolher um dos seus anuncios de venda? (S/N) \n (Indicando assim, a possibilidade de trocar o\n produto que esta a vender,pelo produto deste anuncio)");
 	}else
 		ptrAV=false;
 
@@ -314,7 +282,7 @@ void Website::Anunciar_AC() {
 				dynamic_cast<AnuncioVenda*>(anuncios[Menu::idAnuncio]));
 	}
 
-	for (int i = 0; i < imagens.size(); ++i) {
+	for (unsigned int i = 0; i < imagens.size(); ++i) {
 		Imagem img;
 		img.conteudo = imagens[i];
 		ac->AdicionarImagem(img);
@@ -332,79 +300,26 @@ void Website::Anunciar_AV() {
 	float preco;
 	string tmp;
 	bool negociavel;
-	bool erro = false;
 	string erroS;
 	string letra;
 	int estado;
 	string imagem;
 	vector<string> imagens;
 
-	do {
-		system("cls");
-		intro();
-		cout << "Titulo Do Anuncio: ";
-		getline(cin, titulo);
-	} while (titulo.size() == 0);
+	titulo = InputLinha("Titulo Do Anuncio de Compra: ");
 
-	do {
-		system("cls");
-		intro();
-		cout << "Categoria do Produto: ";
-		getline(cin, categ_produto);
-	} while (categ_produto.size() == 0);
+	categ_produto = InputLinha("Categoria do Produto: ");
 
-	system("cls");
-	intro();
-	cout << "Descricao: ";
-	getline(cin, descricao);
+	descricao = InputLinha("Descricao:", true);
 
 	data = _data;
 
-	while (true) {
-		system("cls");
-		intro();
-		if (erro) {
-			setcolor(12);
-			cout << erroS << endl;
-			setcolor(15);
-		}
-		cout << "Preco: ";
-		cin >> preco;
+	imagens = InputVetorString("Prima enter se nao quiser adicionar mais imagens: ");
 
-		if (cin.fail()) {
-			erro = true;
-			erroS = "Caracter Invalido";
-			cin.clear();
-			cin.ignore();
-		} else if (preco <= 0.01f) {
-			erro = true;
-			erroS = "Preco deve ser maior do que zero";
-		} else {
-			erro = false;
-			break;
-		}
-	}
+	Inputfloat("O preco deve ser maior que zero: ");
 	getline(cin, erroS);
-	do {
-		system("cls");
-		intro();
-		cout << "Imagens(Prima enter se nao quiser adicionar mais imagens): " << endl;
-		getline(cin, imagem);
-		imagens.push_back(imagem);
-	} while (imagem != "");
-	imagens.pop_back();
 
-	do {
-		system("cls");
-		intro();
-		cout << "Negociavel? (S/N): ";
-		getline(cin, letra);
-	} while (letra != "s" && letra != "S" && letra != "n" && letra != "N");
-
-	if (letra == "s" || letra == "S")
-		negociavel = true;
-	else
-		negociavel = false;
+	negociavel=InputBool("Negociavel?(S/N) ");
 
 	estado = Menu::interfaceCategProd();
 
@@ -500,39 +415,17 @@ void Website::contactar(int id) {
 				Contacto(mensagem,
 						utilizadores[indiceUtilizador]->getDadosPessoais()));
 	} else {
-		do {
-			system("cls");
-			intro();
-			cout << "Nome: ";
-			getline(cin, nome);
-		} while (nome.size() == 0);
+		nome = InputLinha("Nome: ");
 
-		cout << "Telefone: ";
-		getline(cin, telefone);
+		telefone = InputInteiro("Telefone: ", 9);
 
-		while (telefone.size() < 9) {
-			system("cls");
-			intro();
-			setcolor(12);
-			cout << "Numero Invalido (Deve conter 9 ou mais digitos)" << endl;
-			setcolor(15);
-			cout << "Telefone: ";
-			getline(cin, telefone);
-		}
 
-		do {
-			system("cls");
-			intro();
-			cout << "Email: ";
-			getline(cin, email);
-		} while (email.size() == 0);
+		email = InputLinha("Email: ");
 
 		DadosPessoais dados(nome, telefone, email);
 
-		system("cls");
-		intro();
-		cout << "Mensagem: " << endl;
-		getline(cin, mensagem);
+		mensagem = InputLinha("Mensagem: ");
+
 		anuncios[id]->enviarMensagem(Contacto(mensagem, dados));
 	}
 }
@@ -866,8 +759,7 @@ int Website::MenuAnuncioConta(bool venda) {
 			return 3;
 		}
 		if (semcontatos) {
-			Menu::idAnuncio = Menu::menuAnuncioInterface(
-					retornarMeusAnuncios(venda));
+			Menu::idAnuncio = Menu::menuAnuncioInterface(retornarMeusAnuncios(venda));
 
 			if (Menu::idAnuncio == -1)
 				return 3;
@@ -914,12 +806,44 @@ int Website::MenuAnuncioConta(bool venda) {
 			criaNegocio(anuncios[Menu::idAnuncio]);
 		}
 		else if(y==3){//editar
-			if(anuncios[Menu::idAnuncio]->getTipo()==TIPO_VENDA){
+			int ind;
+			if(anuncios[Menu::idAnuncio]->getTipo()==TIPO_VENDA)
+				ind=Menu::interfaceEditarAnuncio_AV();
+			else
+				ind = Menu::interfaceEditarAnuncio_AC();
 
-			}
-			else{
+			switch (ind) {
+			case 0:
+					anuncios[Menu::idAnuncio]->setTitulo(InputLinha("Novo Titulo: "));
+				break;
+			case 1:
+				anuncios[Menu::idAnuncio]->setCategoria(InputLinha("Nova Categoria: "));
+				break;
+			case 2:
+				anuncios[Menu::idAnuncio]->setDescricao(InputLinha("Nova Descricao: ",true));
+				break;
+			case 3:
+				Imagem img;
+				img.conteudo =InputLinha("Nova Imagem: ");
+				anuncios[Menu::idAnuncio]->AdicionarImagem(img);
+				break;
+			case 4:
 
+				break;
+			case 5:
+				if(anuncios[Menu::idAnuncio]->getTipo()==TIPO_VENDA){
+
+				}else{
+
+				}
+
+				break;
+			case 6:
+				break;
+			case 7:
+				break;
 			}
+
 		}
 	}
 }
@@ -1100,5 +1024,107 @@ int Website::alterarDadosVisiveis(){
 		}
 	}
 
+}
+
+//--------Validar input
+
+
+
+string Website::InputLinha(string mensagemLoop , bool vazio){
+	string linha;
+	do {
+			system("cls");
+			intro();
+			cout << mensagemLoop;
+			getline(cin, linha);
+	} while (linha.size() == 0 && !vazio );
+
+	return linha;
+}
+
+vector<string> Website::InputVetorString(string mensagemLoop){
+	vector<string> res;
+	string linha;
+	do {
+		system("cls");
+		intro();
+		cout << mensagemLoop << endl;
+		getline(cin, linha);
+		res.push_back(linha);
+	} while (linha != "");
+	res.pop_back();
+	return res;
+}
+
+bool Website::InputBool(string mensagemLoop){
+	string linha;
+
+	do {
+		system("cls");
+		intro();
+		cout << mensagemLoop<<endl;
+		getline(cin, linha);
+	} while (linha != "s" && linha != "S" && linha != "n" && linha != "N");
+
+	if (linha == "s" || linha == "S")
+		return true;
+	else
+		return false;
+}
+
+float Website::Inputfloat(string mensagemLoop){
+	string linha;
+	bool erro=false;
+	string erroS;
+	float valor;
+	while (true) {
+		system("cls");
+		intro();
+		if (erro) {
+			setcolor(12);
+			cout << erroS << endl;
+			setcolor(15);
+		}
+		cout << "Preco: ";
+		cin >> valor;
+
+		if (cin.fail()) {
+			erro = true;
+			erroS = "Caracter Invalido";
+			cin.clear();
+			cin.ignore();
+		} else if (valor <= 0.01f) {
+			erro = true;
+			erroS = mensagemLoop;
+		} else {
+			erro = false;
+			break;
+		}
+	}
+	getline(cin, erroS);
+	return valor;
+}
+
+string Website::InputInteiro(string mensagemLoop, unsigned int casas){
+	bool erro=false;
+	string linha;
+
+	do{
+		system("cls");
+		intro();
+		setcolor(12);
+		if(erro){
+			cout << "Numero Invalido,(deve conter pelo menos "<<casas<<" casas"<< endl;
+			erro = false;
+		}
+		setcolor(15);
+		cout << mensagemLoop;
+
+		getline(cin, linha);
+		if(linha.size() < casas)
+			erro=true;
+	}while (erro);
+
+	return linha;
 }
 
