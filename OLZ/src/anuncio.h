@@ -7,7 +7,6 @@
 #include "comum.h"
 #include "dados.h"
 
-
 #define ESTADO_NOVO 0
 #define ESTADO_USADO 1
 #define ESTADO_FUNCIONAL 2
@@ -26,12 +25,11 @@
 #define TIPO_VENDA 1
 #define TIPO_COMPRA 0
 
-
 //!Class Anuncio
 /*!
  * Classe anuncio que contem as informacoes e as funcoes relativas aos anuncios.
  */
-class Anuncio : public Dados{
+class Anuncio: public Dados {
 	//!ID
 	/*!
 	 * Variavel global da classe que contem o numero de identificacao do proximo anuncio a ser gerado.
@@ -40,6 +38,7 @@ class Anuncio : public Dados{
 	//! user
 	/*!
 	 * Utilizador deste anuncio.
+	 \sa Utilizador
 	 */
 	Utilizador* _user;
 	//! identificador
@@ -75,22 +74,27 @@ class Anuncio : public Dados{
 	//! data.
 	/*!
 	 * Data em que o anuncio foi criado.
+	 \sa Data
 	 */
 	Data _data;
 	//! imagens
 	/*!
 	 * Vetor com as imagens de um produto anunciado.
+	 \sa Imagem
 	 */
 	vector<Imagem> _imagens;
 	//! contactos
 	/*!
 	 * Vetor com os contactos realizador pelo site entre comprador e anunciante.
+	 \sa Contacto
 	 */
 	vector<Contacto> _contactos;
 
 public:
 	//! Construtor default.
-	Anuncio(){}
+	Anuncio() {
+	}
+	//!Destrutor.
 	virtual ~Anuncio();
 	//!Overload do construtor com 4 parametros.
 	/*!
@@ -99,42 +103,16 @@ public:
 	 \param descricao do anuncio.
 	 \param date data do anuncio.
 	 */
-	Anuncio(string titulo,string categ_produto,string descricao,Data date);
-	//~Anuncio();
-	//!Funcao get para o ID Global.
-	/*!
-	 \return o valor da variavel global que contem o numero de identificacao do proximo anuncio.
-	 */
-	static int getIDGlobal();
-
-	static void setIDGlobal(int id);
-	//!Funcao get para o numero de identifacao do anuncio.
-	int getID() const;
-	//!Funcao get para o tipo de anuncio (Compra/Venda)
-	virtual int getTipo() const = 0;
+	Anuncio(string titulo, string categ_produto, string descricao, Data date);
 	//!Funcao para enviar uma mensagem
 	/*!
 	 \param c contacto para o qual se vai enviar a mensagem.
 	 */
 	void enviarMensagem(Contacto c);
 	//!Funcao de leitura das informacoes de um ficheiro.
-	virtual void ler(ifstream& in,bool escreve= false);
+	virtual void ler(ifstream& in, bool escreve = false);
 	//!Funcao de escrita das informacoes para um ficheiro.
 	virtual void escrever(ofstream& out);
-	//!Funcao get para a informacao relativa ao anuncio.
-	virtual string getInfo() const;
-	//!Funcao get para o titulo e descricao do anuncio.
-	string getTitulo_Descricao()const;
-	//!Funcao get para a data do anuncio.
-	Data getData()const;
-	//!Funcao get para a categoria do anuncio.
-	string getCategoria()const;
-	//!Funcao set para o utilizador do anuncio.
-	virtual void setUser(Utilizador* user);
-	//!Funcao get para o utilizador do anuncio.
-	Utilizador* getUser();
-	//!Funcao get para o titulo.
-	string getTitulo() const;
 	//!Funcao que adiciona um imagem ao vetor de imagens.
 	/*!
 	 \param img imagem que vai ser adicionada.
@@ -142,33 +120,52 @@ public:
 	void AdicionarImagem(Imagem img);
 	//!Funcao que altera a visibilidade do anuncio.
 	void alterarVisibilidade();
-	//!Funcao que altera a visibilidade do anuncio.
-	void setVisibilidade(bool vis);
-	//!Funcao get para a visibilidade do anuncio.
-	bool getVisibilidade();
 	//!Funcao de incrementacao das visualizacoes do anuncio.
 	void visualizacao();
+	//!Funcao set para o utilizador do anuncio.
+	virtual void setUser(Utilizador* user);
+	//!Funcao set para o numero de identificacao global dos anuncio.
+	static void setIDGlobal(int id);
+	//!Funcao set para o vetor de imagens referentes ao anuncio.
+	void setImagens(vector<Imagem> img);
+	//!Funcao que altera a visibilidade do anuncio.
+	void setVisibilidade(bool vis);
+	//!Funcao get para o numero de identifacao do anuncio.
+	int getID() const;
+	//!Funcao get para o tipo de anuncio (Compra/Venda)
+	virtual int getTipo() const = 0;
+	//!Funcao get para a informacao relativa ao anuncio.
+	virtual string getInfo() const;
+	//!Funcao get para o titulo e descricao do anuncio.
+	string getTitulo_Descricao() const;
+	//!Funcao get para a data do anuncio.
+	Data getData() const;
+	//!Funcao get para a categoria do anuncio.
+	string getCategoria() const;
+	//!Funcao get para o utilizador do anuncio.
+	Utilizador* getUser();
+	//!Funcao get para o titulo.
+	string getTitulo() const;
+	//!Funcao get para a visibilidade do anuncio.
+	bool getVisibilidade();
 	//!Funcao get para o numero de visualizacoes do anuncio.
 	int getVisualizacoes() const;
 	//!Funcao get para o vetor de imagens referentes ao anuncio.
 	vector<Imagem> getImagens() const;
-	
-	void setImagens(vector<Imagem> img);
-	
+	//!Funcao get para o preco.
 	virtual float getPreco() const;
-
 	//!Funcao get para os contactos referentes ao anuncio.
 	vector<Contacto> getContactos() const;
 	//!Funcao get para a descricao do anuncio.
 	string getDescricao() const;
 };
 
-
 //!Class AnuncioVenda
 /*!
  * Classe para um anuncio de um produto que se pretende vender.
+ \sa Anuncio
  */
-class AnuncioVenda: public Anuncio{
+class AnuncioVenda: public Anuncio {
 	//!preco
 	/*!
 	 * Preco que se procura pelo produto.
@@ -186,7 +183,8 @@ class AnuncioVenda: public Anuncio{
 	int _estado; //Usar ESTADO_*
 public:
 	//!Construtor default.
-	AnuncioVenda(){}
+	AnuncioVenda() {
+	}
 	//!Overlaod do construtor com 7 parametros.
 	/*!
 	 \param titulo do anuncio.
@@ -197,15 +195,16 @@ public:
 	 \param negociavel
 	 \param estado do produto.
 	 */
-	AnuncioVenda(string titulo,string categ_produto,string descricao,Data date,float preco,bool negociavel, int estado);
+	AnuncioVenda(string titulo, string categ_produto, string descricao,
+			Data date, float preco, bool negociavel, int estado);
 	//!Funcao de leitura das informacoes de um ficheiro.
-	virtual void ler(ifstream& in,bool escreve= false);
+	virtual void ler(ifstream& in, bool escreve = false);
 	//!Funcao de escrita das informacoes para um ficheiro.
 	virtual void escrever(ofstream& out);
 	//!Funcao get para a informacao relativa ao AnuncioVenda.
 	virtual string getInfo() const;
 	//!Funcao get para o tipo de Anuncio.
-	virtual int getTipo()const;
+	virtual int getTipo() const;
 	//!Funcao get para o preco.
 	float getPreco() const;
 	//!Funcao get para o booleano Negociavel.
@@ -220,17 +219,20 @@ ostream & operator<<(ostream & o, AnuncioVenda & av);
 //!Class AnuncioCompra
 /*!
  * Classe para um anuncio de um produto que se pretende comprar.
+ \sa Anuncio
  */
-class AnuncioCompra: public Anuncio{
+class AnuncioCompra: public Anuncio {
 	//!anuncioVenda
 	/*!
 	 * anuncio de venda quando é diferente de NULL significa que o utilizador aceita troca, pointer para anuncio de venda do mesmo utilizador
+	 \sa AnuncioVenda
 	 */
 	AnuncioVenda *_anuncioVenda;
 public:
 	//!Construtor default.
-	AnuncioCompra(){}
-
+	AnuncioCompra() {
+	}
+	//!Destrutor.
 	~AnuncioCompra();
 	//!Overload do construtor com 4 parametros.
 	/*!
@@ -239,29 +241,28 @@ public:
 	 \param descricao do anuncio.
 	 \param date Data de criacao.
 	 */
-	AnuncioCompra(string titulo,string categ_produto,string descricao,Data date);
-	//!Funcao set para o anuncio de venda.
-	void setAnuncioVenda(AnuncioVenda* anuncio);
-	//!Funcao get para o Anuncio de Venda.
-	AnuncioVenda* getAnuncioVenda();
+	AnuncioCompra(string titulo, string categ_produto, string descricao,
+			Data date);
 	//!Funcao para ler as informacoes do anuncio de um ficheiro.
-	virtual void ler(ifstream& in,bool escreve= false);
+	virtual void ler(ifstream& in, bool escreve = false);
 	//!Funcao para escrever as informacoes do anuncio para um ficheiro.
 	virtual void escrever(ofstream& out);
-	//!Funcao get para a informacao relativa a um anuncio de compra.
-	virtual string getInfo() const;
 	//!Funcao troca
 	/*!
 	 * Verifica se o produto esta disponivel para trocar, se AnuncioVenda != NULL.
 	 */
 	bool troca();
+	//!Funcao set para o anuncio de venda.
+	void setAnuncioVenda(AnuncioVenda* anuncio);
+	//!Funcao get para o Anuncio de Venda.
+	AnuncioVenda* getAnuncioVenda();
+	//!Funcao get para a informacao relativa a um anuncio de compra.
+	virtual string getInfo() const;
 	//!Funcao get para o tipo de anuncio.
-	virtual int getTipo()const;
+	virtual int getTipo() const;
 };
 
 //!Overload do operador << para a classe AnuncioCompra.
 ostream & operator<<(ostream & o, AnuncioCompra & ac);
-
-
 
 #endif
