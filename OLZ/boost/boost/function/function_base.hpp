@@ -91,7 +91,7 @@ namespace boost {
     namespace function {
       class X;
 
-      /**
+      /*
        * A buffer used to store small function objects in
        * boost::function. It is a union containing function pointers,
        * object pointers, and a structure that resembles a bound
@@ -134,7 +134,7 @@ namespace boost {
         mutable char data;
       };
 
-      /**
+      /*
        * The unusable class is a placeholder for unused function arguments
        * It is also completely unusable except that it constructable from
        * anything. This helps compilers without partial specialization to
@@ -242,7 +242,7 @@ namespace boost {
         }
       };
 
-      /**
+      /*
        * Determine if boost::function can use the small-object
        * optimization with the function object type F.
        */
@@ -272,7 +272,7 @@ namespace boost {
 	}
       };
 
-      /**
+      /*
        * The functor_manager class contains a static function "manage" which
        * can clone or destroy the given function/function object pointer.
        */
@@ -602,7 +602,7 @@ namespace boost {
         }
 #endif // BOOST_NO_SFINAE
 
-      /**
+      /*
        * Stores the "manager" portion of the vtable for a
        * boost::function object.
        */
@@ -615,7 +615,7 @@ namespace boost {
     } // end namespace function
   } // end namespace detail
 
-/**
+/*
  * The function_base class contains the basic elements needed for the
  * function1, function2, function3, etc. classes. It is common to all
  * functions (and as such can be used to tell if we have one of the
@@ -626,10 +626,10 @@ class function_base
 public:
   function_base() : vtable(0) { }
 
-  /** Determine if the function is empty (i.e., has no target). */
+  /* Determine if the function is empty (i.e., has no target). */
   bool empty() const { return !vtable; }
 
-  /** Retrieve the type of the stored function object, or BOOST_SP_TYPEID(void)
+  /* Retrieve the type of the stored function object, or BOOST_SP_TYPEID(void)
       if this is empty. */
   const detail::sp_typeinfo& target_type() const
   {
@@ -726,7 +726,7 @@ public: // should be protected, but GCC 2.95.3 will fail to allow access
   mutable detail::function::function_buffer functor;
 };
 
-/**
+/*
  * The bad_function_call exception class is thrown when a boost::function
  * object is invoked
  */

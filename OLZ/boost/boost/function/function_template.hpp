@@ -465,7 +465,7 @@ namespace boost {
       };
 
 
-      /**
+      /*
        * vtable for a specific boost::function instance. This
        * structure must be an aggregate so that we can use static
        * initialization in boost::function's assign_to and assign_to_a
