@@ -130,6 +130,22 @@ public:
 	void setImagens(vector<Imagem> img);
 	//!Funcao que altera a visibilidade do anuncio.
 	void setVisibilidade(bool vis);
+	//!Funcao set para o vetor de contactos relativo ao anuncio.
+	void setContactos(vector<Contacto> vc);
+	//!Funcao set para a data do anuncio.
+	void setData(Data d);
+	//!Funcao set para o numero de visualizacoes do anuncio.
+	void setNVisualizacoes(int v);
+	//!Funcao set para a descricao do anuncio.
+	void setDescricao(string d);
+	//!Funcao set para a categoria do produto.
+	void setCategoria(string c);
+	//!Funcao set para o titulo do anuncio.
+	void setTitulo(string t);
+	//!Funcao set para o numero de identificacao.
+	void setIdentificador(int id);
+	//!Funcao get para o numero de identificacao global dos anuncios.
+	int getIDGlobal();
 	//!Funcao get para o numero de identifacao do anuncio.
 	int getID() const;
 	//!Funcao get para o tipo de anuncio (Compra/Venda)

@@ -158,6 +158,34 @@ void Anuncio::AdicionarImagem(Imagem img) {
 	_imagens.push_back(img);
 }
 
+void Anuncio::setIdentificador(int id){
+	_identificador = id;
+}
+
+void Anuncio::setTitulo(string t){
+	_titulo = t;
+}
+
+void Anuncio::setCategoria(string c){
+	_categ_produto = c;
+}
+
+void Anuncio::setDescricao(string d){
+	_descricao = d;
+}
+
+void Anuncio::setNVisualizacoes(int v){
+	_num_vizualizacoes = v;
+}
+
+void Anuncio::setData(Data d){
+	_data = d;
+}
+
+void Anuncio::setContactos(vector<Contacto> vc){
+	_contactos = vc;
+}
+
 void Anuncio::setImagens(vector<Imagem> img) {
 	_imagens = img;
 }
