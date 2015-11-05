@@ -22,6 +22,7 @@
 //! Class Utilizador
 /*!
  * Esta classe encarrega-se dos atributos de cada utilizador e da gestao dos seus anuncios
+ \sa Dados
  */
 class Utilizador : public Dados{
 	//! ID
@@ -37,28 +38,32 @@ class Utilizador : public Dados{
 	//! Contacto
 	/*!
 	 * Informacoes de contato do utilizador
+	 \sa DadosPessoais
 	 */
 	DadosPessoais _contacto;
 	//! Localizacao
 	/*!
 	 * localizacao do utilizador
+	 \sa Localizacao
 	 */
 	Localizacao _local;
 	//! Anuncios
 	/*!
 	 * Vector de anuncios do utilizador (anuncios de venda e de compra)
+	 \sa Anuncio
 	 */
 	vector<Anuncio *> _anuncios;
 	//! NegociosConcluidos
 	/*!
 	 * Vector com os negocios concluidos do utilizador
+	 \sa Negocio
 	 */
 	vector<Negocio *> _negociosConcluidos;
 public:
-	
+	//!Destrutor
 	~Utilizador();
 	
-
+	//!Construtor default
 	Utilizador();
 	//! Overload do Construtor que recebe dois argumentos.
 		    /*!
@@ -66,7 +71,6 @@ public:
 		      \param loc a localizacao do utilizador.
 		    */
 	Utilizador(DadosPessoais contacto, Localizacao loc);
-	//~Utilizador();
 	//! Funcao que adiciona um anuncio ao utilizador.
 		/*!
 		 \param anuncio que vai ser adicionado.
@@ -74,10 +78,10 @@ public:
 		 */
 	bool AdicionarAnuncio(Anuncio* anuncio);
 	//! Funcao que remove um anuncio do utilizador.
-			/*!
-			 \param anuncio que vai ser removido.
-			 \return um booleano que indica se o anuncio foi removido ou não.
-			 */
+		/*!
+		\param anuncio que vai ser removido.
+		\return um booleano que indica se o anuncio foi removido ou não.
+		*/
 	bool RemoverAnuncio(Anuncio* anuncio);
 	//! Funcao que remove um anuncio ao utilizador por id.
 			/*!
