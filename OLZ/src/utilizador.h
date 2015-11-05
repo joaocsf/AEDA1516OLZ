@@ -104,21 +104,13 @@ public:
 			 \return um booleano que indica se o contacto foi alterado ou não.
 			 */
 	bool AlteraContacto(string telefone, string email);
-
-	//!Funcao get para os dados pessoais.
-	DadosPessoais getDadosPessoais();
-
-	//!Funcao get para a localizacao.
-	Localizacao getLocalizacao();
-
+	//!Funcao global para defenir o valor da variavel global ID.
+	static int setIDGlobal(int id);
 	//!Funcao para ler as informacoes de um ficheiro.
 	virtual void ler(ifstream& in,bool escreve= false);
 
 	//!Funcao que escreve as informacoes num ficheiro.
 	virtual void escrever(ofstream& out);
-
-	//!Funcao get para a informacao do utilizador.
-	string getInfo() const;
 
 	//!Funcao de pesquisa no vector anuncios para um dado id.
 	/*!v
@@ -127,13 +119,21 @@ public:
 	 */
 	Anuncio* procurarAnuncio(int id);
 
+	//!Funcao get para os dados pessoais.
+	DadosPessoais getDadosPessoais();
+
+	//!Funcao get para a localizacao.
+	Localizacao getLocalizacao();
+
+	//!Funcao get para a informacao do utilizador.
+	string getInfo() const;
+
 	//!Funcao get para o ID.
 	int getID() const;
 
 	//!Funcao global para devolver o valor atual da variavel global ID.
 	static int getIDGlobal();
-	//!Funcao global para defenir o valor da variavel global ID.
-	static int setIDGlobal(int id);
+
 
 	//!Funcao retorna os anuncios do vetor anuncios conforme sejam de venda ou de compra.
 	/*!
@@ -141,8 +141,14 @@ public:
 	 \return vetor de apontadores do tipo de anuncio.
 	 */
 	vector<Anuncio*> getAnuncios(bool venda);
+	//!Funcao get para os anuncios do utilizador.
 	vector<Anuncio*> getAnuncios();
+	//!Funcao get para os negocios do utilizador.
 	vector<Negocio*> getNegocios();
+	//!Funcao get para os dados do utilizador que sao visiveis.
+	/*!
+	 \sa Contacto -> getVisiveis()
+	 */
 	bool* getDadosVisiveis();
 };
 
@@ -159,6 +165,7 @@ class AnuncioInexistente{
 	//! anuncio
 	/*!
 	 * anuncio que nao foi encontrado.
+	 \sa Anuncio
 	 */
 	Anuncio* _anuncio;
 public:
