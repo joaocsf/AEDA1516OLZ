@@ -130,8 +130,6 @@ public:
 	void setImagens(vector<Imagem> img);
 	//!Funcao que altera a visibilidade do anuncio.
 	void setVisibilidade(bool vis);
-	//!Funcao set para o vetor de contactos relativo ao anuncio.
-	void setContactos(vector<Contacto> vc);
 	//!Funcao set para a data do anuncio.
 	void setData(Data d);
 	//!Funcao set para o numero de visualizacoes do anuncio.
