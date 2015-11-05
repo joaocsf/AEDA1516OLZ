@@ -38,6 +38,11 @@ class DadosPessoais : public Dados {
 	 */
 	bool visiveis[VIS_TOTAL]; //podemos por aqui os dados que são visiveis e quando queremos fazer display fazemos display do vetor
 public:
+	//!Funcao get para a informacao dos dados pessoais.
+	/*!
+	 \return Esta funcao retorna apenas os membros visiveis, apartir do vetor de visibilidade.
+	 */
+	string getInfo() const;
 	//!Funcao get para o nome do utilizador
 	/*!
 	 \return Nome do Utilizador.
@@ -88,11 +93,6 @@ public:
 	void visibilidadeNome(bool visivel);
 	//!Funcao para definir a visibilidade do parametro telefone.
 	void visibilidadeTelefone(bool visivel);
-	//!Funcao get para a informacao dos dados pessoais.
-	/*!
-	 \return Esta funcao retorna apenas os membros visiveis, apartir do vetor de visibilidade.
-	 */
-	string getInfo() const;
 	//!Funcao de leitura das informacoes dos dados pessoais de um ficheiro.
 	virtual void ler(ifstream& in, bool escreve = false);
 	//!Funcao de escrita das infromacoes dos dados pessoais para um ficheiro.
