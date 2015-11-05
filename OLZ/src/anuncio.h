@@ -174,6 +174,7 @@ public:
 	vector<Contacto> getContactos() const;
 	//!Funcao get para a descricao do anuncio.
 	string getDescricao() const;
+	//!Funcao para eliminar o vector de imagens do anuncio.
 	void eliminaImagens();
 };
 
@@ -228,9 +229,11 @@ public:
 	bool getNegociavel() const;
 	//!Funcao get para o Estado do produto.
 	int getEstado() const;
-
+	//!Funcao set para o preco do anuncio.
 	void setPreco(float preco);
+	//!Funcao set para o booleano negociavel.
 	void setNegociavel(bool negociavel);
+	//!Funcao set para o estado do produto anunciado.
 	void setEstado(int estado);
 };
 
