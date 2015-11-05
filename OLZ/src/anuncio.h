@@ -145,7 +145,7 @@ public:
 	//!Funcao set para o numero de identificacao.
 	void setIdentificador(int id);
 	//!Funcao get para o numero de identificacao global dos anuncios.
-	int getIDGlobal();
+	static int getIDGlobal();
 	//!Funcao get para o numero de identifacao do anuncio.
 	int getID() const;
 	//!Funcao get para o tipo de anuncio (Compra/Venda)

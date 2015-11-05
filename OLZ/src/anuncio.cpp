@@ -13,7 +13,6 @@ int Anuncio::getIDGlobal() {
 void Anuncio::setIDGlobal(int id) {
 	_ID = id;
 }
-
 Anuncio::Anuncio(string titulo, string categ_produto, string descricao,
 		Data date) :
 		_num_vizualizacoes(0), _titulo(titulo), _categ_produto(categ_produto), _descricao(
@@ -99,10 +98,10 @@ string Anuncio::getInfo() const {
 	ss << "Visibilidade...." << ((_visivel) ? "Visivel" : "Invisivel") << endl;
 	ss << "Data          " << _data.getDia() << ":" << _data.getMes() << ":"
 			<< _data.getAno() << endl;
-	for (unsigned int i = 0; i < _imagens.size(); ++i) {
+	for (int i = 0; i < _imagens.size(); ++i) {
 		ss << "  I:" << _imagens[i].conteudo << endl;
 	}
-	for (unsigned int i = 0; i < _contactos.size(); ++i) {
+	for (int i = 0; i < _contactos.size(); ++i) {
 		ss << "Contactos:\n" << _contactos[i].getInfo() << endl;
 	}
 
@@ -122,10 +121,10 @@ void Anuncio::escrever(ofstream& out) {
 	out << _num_vizualizacoes << endl;
 	out << ((_visivel) ? 1 : 0) << endl;
 	_data.escrever(out);
-	for (unsigned int i = 0; i < _imagens.size(); ++i) {
+	for (int i = 0; i < _imagens.size(); ++i) {
 		out << "I" << endl << _imagens[i].conteudo << endl << "#I" << endl;
 	}
-	for (unsigned int i = 0; i < _contactos.size(); ++i) {
+	for (int i = 0; i < _contactos.size(); ++i) {
 		_contactos[i].escrever(out);
 	}
 	out << "#V" << endl; //Sinaliza Fim vetor
@@ -156,34 +155,6 @@ Utilizador* Anuncio::getUser() {
 
 void Anuncio::AdicionarImagem(Imagem img) {
 	_imagens.push_back(img);
-}
-
-void Anuncio::setIdentificador(int id){
-	_identificador = id;
-}
-
-void Anuncio::setTitulo(string t){
-	_titulo = t;
-}
-
-void Anuncio::setCategoria(string c){
-	_categ_produto = c;
-}
-
-void Anuncio::setDescricao(string d){
-	_descricao = d;
-}
-
-void Anuncio::setNVisualizacoes(int v){
-	_num_vizualizacoes = v;
-}
-
-void Anuncio::setData(Data d){
-	_data = d;
-}
-
-void Anuncio::setContactos(vector<Contacto> vc){
-	_contactos = vc;
 }
 
 void Anuncio::setImagens(vector<Imagem> img) {

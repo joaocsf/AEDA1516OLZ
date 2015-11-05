@@ -113,8 +113,16 @@ void Menu::menuAnuncio(int y) {
 	Website::intro();
 	if(Website::getAnuncios()[idAnuncio]->getTipo())
 		cout<< (*dynamic_cast<AnuncioVenda*>(Website::getAnuncios()[idAnuncio]));
-	else
-		cout<< (*dynamic_cast<AnuncioCompra*>(Website::getAnuncios()[idAnuncio]));
+	else{
+		AnuncioCompra *ac = dynamic_cast<AnuncioCompra*>(Website::getAnuncios()[idAnuncio]);
+		cout<< (*ac);
+		if(ac->troca()){
+			setcolor(3);
+			cout << "----------------Anuncio Venda Associado----------------"<< endl;
+			setcolor(15);
+			cout << (*ac->getAnuncioVenda());
+		}
+	}
 	cout << endl << setw(40) << Highlight("Contactar Anunciante", y, 0) << endl;
 	setcolor(15);
 	cout << setw(40) << Highlight("Voltar Atras", y, 1) << endl;
@@ -137,11 +145,19 @@ void Menu::menuCategProd(int y) {
 
 void Menu::menuAnuncioDefinicoes(int y) {
 	system("cls");
-		Website::intro();
-		if(Website::getAnuncios()[idAnuncio]->getTipo())
-			cout<< (*dynamic_cast<AnuncioVenda*>(Website::getAnuncios()[idAnuncio]));
-		else
-			cout<< (*dynamic_cast<AnuncioCompra*>(Website::getAnuncios()[idAnuncio]));
+	Website::intro();
+	if(Website::getAnuncios()[idAnuncio]->getTipo())
+		cout<< (*dynamic_cast<AnuncioVenda*>(Website::getAnuncios()[idAnuncio]));
+	else{
+		AnuncioCompra *ac = dynamic_cast<AnuncioCompra*>(Website::getAnuncios()[idAnuncio]);
+		cout<< (*ac);
+		if(ac->troca()){
+			setcolor(3);
+			cout << "----------------Anuncio Venda Associado----------------"<< endl;
+			setcolor(15);
+			cout << (*ac->getAnuncioVenda());
+		}
+	}
 	cout << setw(20) << Highlight("Ver Contacto(s): ", y, 0) << endl;
 	setcolor(15);
 	cout << setw(20) << Highlight("Remover", y, 1) << endl;

@@ -374,15 +374,14 @@ void Website::Anunciar_AV() {
 		getline(cin, letra);
 	} while (letra != "s" && letra != "S" && letra != "n" && letra != "N");
 
-	if (letra != "s" || letra != "S")
+	if (letra == "s" || letra == "S")
 		negociavel = true;
 	else
 		negociavel = false;
 
 	estado = Menu::interfaceCategProd();
 
-	AnuncioVenda *av = new AnuncioVenda(titulo, categ_produto, descricao, data,
-			preco, negociavel, estado);
+	AnuncioVenda *av = new AnuncioVenda(titulo, categ_produto, descricao, data,	preco, negociavel, estado);
 	av->setUser(utilizadores[indiceUtilizador]);
 
 	for (int i = 0; i < imagens.size(); ++i) {
@@ -649,12 +648,20 @@ int Website::subMenuAnuncio(vector<int>& indices) {
 			intro();
 			if (Website::getAnuncios()[Menu::idAnuncio]->getTipo())
 				cout<< (*dynamic_cast<AnuncioVenda*>(Website::getAnuncios()[Menu::idAnuncio]));
-			else
-				cout<< (*dynamic_cast<AnuncioCompra*>(Website::getAnuncios()[Menu::idAnuncio]));
-			setcolor(3);
-			cout <<endl << setw(45) <<"Prima qualquer tecla para voltar atras";
-			setcolor(15);
-			getch();
+			else{
+				AnuncioCompra *ac = dynamic_cast<AnuncioCompra*>(Website::getAnuncios()[Menu::idAnuncio]);
+				cout<< (*ac);
+				if(ac->troca()){
+					setcolor(3);
+					cout << "----------------Anuncio Venda Associado----------------"<< endl;
+					setcolor(15);
+					cout << (*ac->getAnuncioVenda());
+				}
+			}
+				setcolor(3);
+				cout <<endl << setw(45) <<"Prima qualquer tecla para voltar atras";
+				setcolor(15);
+				getch();
 		}
 
 	}
