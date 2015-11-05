@@ -305,7 +305,7 @@ void Website::Anunciar_AV() {
 	string imagem;
 	vector<string> imagens;
 
-	titulo = InputLinha("Titulo Do Anuncio de Compra: ");
+	titulo = InputLinha("Titulo Do Anuncio de Venda: ");
 
 	categ_produto = InputLinha("Categoria do Produto: ");
 
