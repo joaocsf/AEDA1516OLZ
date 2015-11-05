@@ -12,6 +12,7 @@
 //!Class Data
 /*!
  * Classe data para realizacao de operacoes com data, tal como anuncio e negocio.
+ \sa Dados
  */
 class Data : public Dados {
 public:
