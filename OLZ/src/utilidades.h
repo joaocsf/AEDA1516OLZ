@@ -13,9 +13,6 @@
 
 using namespace std;
 
-void intro();
-
-
 
 //! Estrutura Localizacao.
 /*!
