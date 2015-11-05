@@ -44,12 +44,22 @@ void setcolor(unsigned int color);
 	    */
 void setcolor(unsigned int color, unsigned int background_color);
 
-
+//!Excepcao de Erro na leitura.
 class ErroLeitura{
+	//!erro
+	/*!
+	 * Descricao do erro que ocorreu.
+	 */
 	string erro;
 public:
+	//!Construtor default.
 	ErroLeitura();
+	//!Overload do construtor com 1 parametro.
+	/*!
+	 \param erro descricao do erro que ocorreu na leitura.
+	 */
 	ErroLeitura(string erro);
+	//!Funcao get para o erro.
 	string getErro();
 };
 
