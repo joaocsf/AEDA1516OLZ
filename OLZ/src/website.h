@@ -254,7 +254,7 @@ public:
 	static string InputInteiro(string mensagemLoop, unsigned int casas);
 };
 
-//!Class UtilizadorInixestente
+//!Excepcao de  Utilizador Inixestente
 /*!
  * Excepcao de utilizador inexistente.
  */
