@@ -124,44 +124,155 @@ public:
 	 \return devolve um vetor que contem os indices dos anuncios que foram criados na data a procurar.
 	 */
 	static vector<int> procurarData(Data data);
+	//!Funcao de pesquisa por categoria.
+	/*!
+	 \param categoria a procurar.
+	 \return um vetor de inteiros com os indices dos anuncios cuja categoria e igual a que procuramos.
+	 */
 	static vector<int> procurarCategoria(string categoria);
+	//!Funcao para pesquisar anuncios por localizacao.
+	/*!
+	 \param loc localizacao a procurar.
+	 \return devolve um vetor de inteiros contendo os indices dos anuncios que correspondem aos parametros da pesquisa.
+	 */
 	static vector<int> procurarLocalizacao(string loc);
+	//!Funcao para procurar anuncios dentro de um intervalo de precos.
+	/*!
+	 \param min preco minimo.
+	 \param max preco maximo.
+	 \return o vetor contendo os indices dos anuncios (neste caso somente os de venda) correspondentes.
+	 */
 	static vector<int> procurarPreco(int min, int max);
 	//menu pesquisa
+	//!Funcao para o menu de pesquisa por palavra.
+	/*!
+	 * Esta funcao pede ao utilizador a palavra-chave a pesquisar, efetua a pesquisa e verifica se nao encontrou nenhum anuncio correspondente.
+	 */
 	static int menuAnuncioPalavra();
+	//!Funcao para o menu de pesquisa por data.
+	/*!
+	 * Esta funcao pede ao utilizador a data a pesquisar, efetua a pesquisa e verifica se nao encontrou nenhum anuncio correspondente.
+	 */
 	static int menuAnuncioData();
+	//!Funcao para o menu de pesquisa por categoria.
+	/*!
+	 * Esta funcao pede ao utilizador a categoria a pesquisar, efetua a pesquisa e verifica se nao encontrou nenhum anuncio correspondente.
+	 */
 	static int menuAnuncioCategoria();
+	//!Funcao para o menu de pesquisa por localizacao.
+	/*!
+	 * Esta funcao pede ao utilizador a localizacao a pesquisar, efetua a pesquisa e verifica se nao encontrou nenhum anuncio correspondente.
+	 */
 	static int menuAnuncioLocalizacao();
+	//!Funcao para o menu de pesquisa por intervalo de preco.
+	/*!
+	 * Esta funcao pede ao utilizador o preco minimo e o preco maximo a pesquisar, efetua a pesquisa e verifica se nao encontrou nenhum anuncio correspondente.
+	 */
 	static int menuAnuncioPreco(bool crescente);
+	//!Funcao chamada apos uma pesquisa no caso de esta ser diferente de 0.
+	/*!
+	 * Esta funcao e chamada no fim de uma pesquisa no caso de de o resultado ser diferente de 0 e mostra os anuncios encontrados.
+	 */
 	static int subMenuAnuncio(vector<int>& indices);
+	//!Funcao que ordena os indices por preco.
+	/*!
+	 \param v vetor com os indices dos anuncios correspondentes a pesquisa.
+	 \param crescente booleano que serve para indicar se queremos ordenar por ordem crescente ou decrescente de preco.
+	 */
 	static void ordenaPreco(vector<int>& v,bool crescente);
+	//!Funcao de display da intro ("OLZ").
 	static void intro();
+	//!Funcao para realizar o contacto entre o anunciante e o interessado.
+	/*!
+	 * Esta funcao realiza o contacto entre dois utilizadores, verifica se o utilizador esta logado, em caso afirmativo vai buscar os seus dados pessoais e realiza o contacto, caso contrario pede essas informacoes ao utilizador.
+	 */
 	static void contactar(int id);
+	//!Funcao que guarda todas as informacoes num ficheiro no fim do programa.
 	static void guardarFicheiro(ofstream& file);
+	//!Funcao que le as informacoes do website de um ficheiro no inicio do programa.
 	static void lerFicheiro(ifstream& file);
 	//menu definicoes
+	//!Funcao para converter um vetor de anuncios num vetor com os indices correspondentes a esses anuncios do vetor anuncios do website.
 	static vector<int> anunciosParaIndices(const vector<Anuncio*>& aTemp);
+	//!Funcao quue retorna um vetor de indices com os anuncios de venda do utilizador atualmente logado.
 	static vector<int> retornarMeusAnuncios(bool venda);
+	//!Funcao que lista e gere os anuncios quer de comprar quer de venda do utilizador.
+	/*!
+	 * A funcao mostra uma lista de anuncios dependendo do booleano (Compra ou venda).
+	 \param venda indica se a funcao mostra os anuncios de compra ou de venda.
+	 \return inteiro que esta relacionado com a forma como sao escolhidos os menus.
+	 */
 	static int MenuAnuncioConta(bool venda);
+	//!Funcao que permite ao utilizador visualizar os seus negocios.
 	static int menuMeusNegocios();
+	//!Funcao que faz display do estado atual de visibilidade dos dados do utilizador.
+	/*!
+	 * Esta funcao mostra no ecra o estado dos dados e permite ao usuario altera-los.
+	 */
 	static void alterarDadosVisiveis();
-	static void menuVisivel(bool* v);
+
+	//static void menuVisivel(bool* v);
+	//!Funcao que cria um negocio.
+	/*!
+	 * A funcao trata das possibilidades de ser um anuncio de venda ou compra ou de ter ocorrido uma troca.
+	 \param a anuncio referente ao negocio.
+	 */
 	static void criaNegocio(Anuncio* a);
+	//!Funcao que permite ao utilizador alterar as suas informacoes.
 	static int EditarUtilizador();
 	//Validacao
+	//!Funcao auxiliar para pedir informacoes ao utilizador.
+	/*!
+	 \param mensagemLoop e a mensagem que vai ser impressa na consola.
+	 \return uma string com a informacao pretendida.
+	 */
 	static string InputLinha(string mensagemLoop, bool vazio = false);
+	//!Funcao auxiliar para input de um vetor de strings (varias informacoes).
+	/*!
+	 \param mensagemLoop mensagem a mostrar ao utilizador.
+	 \return um vetor de string com as informacoes.
+	 */
 	static vector<string> InputVetorString(string mensagemLoop);
+	//!Funcao auxiliar para o input de um booleano.
+	/*!
+	 \param mensagemLoop mensagem a ser mostrada no ecra.
+	 \return um booleano com a respota do utilizador.
+	 */
 	static bool InputBool(string mensagemLoop);
+	//!Funcao auxiliar para o input de um float.
+	/*!
+	 \param mensagemLoop mensagem a ser mostrada no ecra.
+	 \return um float com a respota do utilizador.
+	 */
 	static float Inputfloat(string mensagemLoop);
+	//!Funcao auxiliar para o input de um numero (exemplo: numero de telefone).
+	/*!
+	 \param mensagemLoop mensagem a ser impresa.
+	 \param casas numero minimo de casas do numero.
+	 \return uma string com o numero pedido.
+	 */
 	static string InputInteiro(string mensagemLoop, unsigned int casas);
 };
 
+//!Class UtilizadorInixestente
+/*!
+ * Excepcao de utilizador inexistente.
+ */
 class UtilizadorInixestente{
+	//!mail
+	/*!
+	 * Email que nao foi encontrado no vetor de utilizadores.
+	 */
 	string mail;
 public:
+	//!Overload do construtor
+	/*!
+	 \param mail que nao foi encontrado.
+	 */
 	UtilizadorInixestente(string mail){
 		this->mail=mail;
 	}
+	//!Funcao get para o email que deu origem a excepcao.
 	string getMail(){
 		return mail;
 	}
