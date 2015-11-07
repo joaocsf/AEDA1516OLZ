@@ -165,7 +165,7 @@ public:
 
 };
 
-//! Class AnuncioInexistente
+//! Excepcao Anuncio Inexistente
 /*!
  * Excepcao de anuncio inexistente no caso do anuncio nao existir
  */
