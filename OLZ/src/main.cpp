@@ -17,7 +17,9 @@ int main() {
 
 
 	ifstream fileI("testeDados.txt");
+
 	Website::lerFicheiro(fileI);
+
 	Menu::InterfaceSeletor();
 	ofstream fileO("testeDados.txt");
 	Website::guardarFicheiro(fileO);

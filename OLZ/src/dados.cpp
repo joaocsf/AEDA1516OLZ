@@ -28,6 +28,13 @@ vector<Negocio*>* Dados::getVetorNegocios(){
 }
 
 void Dados::lerFicheiro(ifstream& in){
+	if(!in.good()){
+		Anuncio::setIDGlobal(1);
+		Utilizador::setIDGlobal(1);
+		Negocio::setIDGlobal(1);
+		return;
+	}
+
 	int n = 0;
 	string linha;
 	getline(in, linha);
