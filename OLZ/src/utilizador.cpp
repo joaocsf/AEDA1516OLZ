@@ -62,10 +62,11 @@ bool Utilizador::RemoverAnuncio(int id) {
 				for (unsigned int i = 0; i < _anuncios.size(); ++i) {
 					if (_anuncios[i]->getTipo() == TIPO_COMPRA) {
 						AnuncioCompra* ac =dynamic_cast<AnuncioCompra*>(_anuncios[i]);
-
-						if (ac->getAnuncioVenda()->getID() == id) {
-							ac->setAnuncioVenda(NULL);
-							break;
+						if(ac->getAnuncioVenda() != NULL){
+							if (ac->getAnuncioVenda()->getID() == id) {
+								ac->setAnuncioVenda(NULL);
+								break;
+							}
 						}
 					}
 				}
@@ -103,7 +104,7 @@ Anuncio* Utilizador::procurarAnuncio(int id) {
 bool Utilizador::FecharNegocio(Anuncio* anuncio, float montante, Data data) {
 	Negocio* neg = NULL;
 
-	for (int i = 0; i < vetorAnuncios->size(); ++i) {
+	for (unsigned int i = 0; i < vetorAnuncios->size(); ++i) {
 
 		if(anuncio->getID() == (*vetorAnuncios)[i]->getID()){
 			vetorAnuncios->erase(vetorAnuncios->begin() + i--);
