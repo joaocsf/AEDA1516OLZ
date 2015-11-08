@@ -12,11 +12,11 @@ Utilizador::Utilizador(DadosPessoais contacto, Localizacao loc) {
 }
 
 Utilizador::~Utilizador(){
-	for (int i = 0; i < _anuncios.size(); ++i) {
+	for (unsigned int i = 0; i < _anuncios.size(); ++i) {
 		delete(_anuncios[i]);
 
 	}
-	for (int i = 0; i< _negociosConcluidos.size(); ++i){
+	for (unsigned int i = 0; i< _negociosConcluidos.size(); ++i){
 		delete(_negociosConcluidos[i]);
 	}
 
@@ -154,6 +154,7 @@ bool Utilizador::FecharNegocio(Anuncio* anuncio, float montante, Data data) {
 	return true;
 }
 
+//retirar não é preciso
 bool Utilizador::AlteraContacto(string telefone, string email) {
 	this->_contacto.alterarEmail(email);
 	this->_contacto.alterarTelefone(telefone);

@@ -718,7 +718,7 @@ void Website::lerFicheiro(ifstream& file) {
 	Dados::setVetorNegocios(&negocios);
 
 	Dados::lerFicheiro(file);
-	getch();
+
 
 }
 

@@ -17,7 +17,6 @@ void GetKeys() {
 
 		}
 	}
-
 }
 
 void NovosDados() {
@@ -65,7 +64,7 @@ void NovosDados() {
 	utilizadores[0].AdicionarAnuncio(a5);
 
 	vector<Utilizador*> utils;
-	for (int i = 0; i < utilizadores.size(); ++i) {
+	for (unsigned int i = 0; i < utilizadores.size(); ++i) {
 		utils.push_back(&utilizadores[i]);
 	}
 
@@ -89,8 +88,7 @@ int main() {
 	tm *ltm = localtime(&agora);
 	Website::setData(Data(ltm->tm_year+1900,ltm->tm_mon+1,ltm->tm_mday));
 
-	cout<<Website::getData();
-	//system("mode con:cols=60 lines=45");
+
 	ifstream fileI("testeDados.txt");
 	Website::lerFicheiro(fileI);
 	Menu::InterfaceSeletor();

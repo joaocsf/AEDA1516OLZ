@@ -34,13 +34,10 @@ void Dados::lerFicheiro(ifstream& in){
 	int temp;
 	stringstream ss(linha);
 	ss >> temp;
-	cout << "Numero de Anuncios Criados:" << (temp - 1) << endl;
 	Anuncio::setIDGlobal(temp);
 	ss >> temp;
-	cout << "Numero de Utilizadores Criados:" << (temp - 1) << endl;
 	Utilizador::setIDGlobal(temp);
 	ss >> temp;
-	cout << "Numero de Negocios Criados:" << (temp - 1) << endl;
 	Negocio::setIDGlobal(temp);
 
 	while (getline(in, linha)) {
@@ -58,14 +55,13 @@ void Dados::lerFicheiro(ifstream& in){
 
 		}
 	}
-	cout << "Utilizadores registados:" << n << endl;
 }
 
 void Dados::escreverFicheiro(ofstream& out){
 	out << Anuncio::getIDGlobal() << " ";
 	out << Utilizador::getIDGlobal() << " ";
 	out << Negocio::getIDGlobal() << endl;
-	for (int i = 0; i < vetorUtilizadores->size(); ++i) {
+	for (unsigned int i = 0; i < vetorUtilizadores->size(); ++i) {
 		(*vetorUtilizadores)[i]->escrever(out);
 	}
 }
