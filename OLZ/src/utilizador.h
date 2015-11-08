@@ -150,16 +150,22 @@ public:
 	 \sa Contacto -> getVisiveis()
 	 */
 	bool* getDadosVisiveis();
+	//!!Funcao set para o nome.
 	void setNome(string var);
+	//!Funcao set para o numero de telefone.
 	void setTelefone(string var);
+	//!Funcao set para o email.
 	void setEmail(string var);
+	//!Funcao set para a freguesia.
 	void setFreguesia(string var);
+	//!Funcao set para o concelho.
 	void setConcelho(string var);
+	//!Funcao set para o distrito.
 	void setDistrito(string var);
 
 };
 
-//! Class AnuncioInexistente
+//! Excepcao Anuncio Inexistente
 /*!
  * Excepcao de anuncio inexistente no caso do anuncio nao existir
  */
