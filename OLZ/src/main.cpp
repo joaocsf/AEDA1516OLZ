@@ -15,10 +15,11 @@ int main() {
 	tm *ltm = localtime(&agora);
 	Website::setData(Data(ltm->tm_year+1900,ltm->tm_mon+1,ltm->tm_mday));
 
-
 	ifstream fileI("testeDados.txt");
 
 	Website::lerFicheiro(fileI);
+
+	//Website::menuTopNegocios();
 
 	Menu::InterfaceSeletor();
 	ofstream fileO("testeDados.txt");

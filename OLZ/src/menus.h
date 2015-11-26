@@ -113,9 +113,9 @@ static void menuVisibilidade(int y);
 static int interfaceMudarVisibilidade();
 
 //---------------------David Compõe a cena ---------------
-static Utilizador menuTopNegociantesInterface(vector<Utilizador>& util);
+static Utilizador* menuTopNegociantesInterface(vector<Utilizador*>& util);
 
-static void desenharUtilizadorThumbnail(Utilizador& util, int sel, int pos);
+static void desenharUtilizadorThumbnail(Utilizador* util, int sel, int pos);
 
 
 };

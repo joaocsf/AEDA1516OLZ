@@ -319,14 +319,18 @@ bool Utilizador::operator< (const Utilizador & u) const{
 
 	if(this->_negociosConcluidos.size() == u.getNegocios().size()){
 
-		if(this->_negociosConcluidos[this->_negociosConcluidos.size()-1]->getData() < u.getNegocios()[u.getNegocios().size()-1]->getData())
-			return true;
+		return (this->_negociosConcluidos[this->_negociosConcluidos.size()-1]->getData() < u.getNegocios()[u.getNegocios().size()-1]->getData());
 	}
 
 	return false;
 
 
 }
+
+bool compareUsers_ptr(void* u1 =NULL , void* u2=NULL){
+	return (*(Utilizador *)u2) < (*(Utilizador *)u1);
+}
+
 
 ostream & operator<<(ostream & o, Utilizador & u){
 	DadosPessoais dados= u.getDadosPessoais();

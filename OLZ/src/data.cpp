@@ -87,13 +87,18 @@ std::ostream & operator<<(ostream & o, const Data & d) {
 
 
 bool Data::operator< (const Data & d) const{
-	if(this->ano < d.getAno() )
-		return true;
-	else if(this->mes < d.getMes())
-		return true;
-	else if(this->dia < d.getDia())
+	if(this->ano < d.getAno() ){
 		return true;
 
+	}else if(this->ano == d.getAno()){
+		if(this->mes < d.getMes()){
+			return true;
+
+		}else if (this->mes == d.getMes()){
+			if(this->dia < d.getDia())
+				return true;
+		}
+	}
 	return false;
 }
 

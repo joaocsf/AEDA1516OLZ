@@ -15,6 +15,7 @@
 using namespace std;
 
 
+
 //! Estrutura Localizacao.
 /*!
  *Serve para organizaçao a localizacao de cada utilizador

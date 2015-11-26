@@ -1182,64 +1182,51 @@ int Website::EditarUtilizador(){
 	}
 }
 
- vector<Utilizador> Website::BSTParaVetor(BST<Utilizador>& bst){
-	 vector<Utilizador> util;
-	 BSTItrIn<Utilizador> ordem = BSTItrIn<Utilizador>(bst);
+ vector<Utilizador*> Website::BSTParaVetor(BST<Utilizador*>& bst){
+	 vector<Utilizador*> util;
+	 BSTItrIn<Utilizador*> ordem = BSTItrIn<Utilizador*>(bst);
 
-	 while(true){
+	 while(!ordem.isAtEnd()){
 
-		 cout <<"Ordem is at End"<<endl;
-		 getch();
-		 if(ordem.isAtEnd());
-			// break;
-
-		 cout<<"Vou Adicionar"<<endl;
-		 getch();
-		 Utilizador u = ordem.retrieve();
-		 cout << u.getDadosPessoais().getNome() << endl;
+		 Utilizador* u = ordem.retrieve();
+		 cout <<"Utilizador Adicionado: "<<u->getDadosPessoais().getNome() << endl;
 		 getch();
 		 util.push_back(u);
-		 cout<<"Adicionei e vou avancar"<<endl;
-		 getch();
 		 ordem.advance();
-		 cout<<"Advancei"<<endl;
-		 getch();
-
 	 }
-	 cout <<"Acabei o Loop"<<endl;
-	 getch();
+
 	 return util;
  }
 
 
 
- BST<Utilizador> Website::ReturnUtilizadoresBST(){
+ BST<Utilizador*> Website::ReturnUtilizadoresBST(){
 
-	 BST<Utilizador> res(Utilizador(DadosPessoais("","",""), {"","",""}));
+	 BST<Utilizador*> res(NULL);
 	 int n=0;
 	 for (unsigned int i = 0; i < utilizadores.size(); ++i) {
 
-		 Utilizador u =*utilizadores[i];
-		 if(u.getNegocios().size() !=0){
+		 Utilizador* u =utilizadores[i];
+
+
+		 if(u->getNegocios().size() !=0){
 			 n++;
-			 res.insert(u);
+			 cout<<"Adicionado:" << u->getDadosPessoais().getNome() << " Teste:" << u->getNegocios()[u->getNegocios().size()-1]->getData()<<endl;
+					 getch();
+			 res.insert(u , compareUsers_ptr);
 		 }
 	 }
-	 cout <<">>" <<n << endl;
-	 getch();
+
 	 return res;
  }
 
 
  void Website::menuTopNegocios(){
-	 cout<<"BST"<<endl;
-	 getch();
-	 BST<Utilizador> bst_util =ReturnUtilizadoresBST();
-	 cout<<"BSTPARA VETOR"<<endl;
-	 getch();
-	 vector<Utilizador> util= BSTParaVetor(bst_util);
-	 cout<<"Passei o BST"<<endl;
-	 getch();
+
+	 BST<Utilizador*> bst_util =ReturnUtilizadoresBST();
+
+	 vector<Utilizador*> util= BSTParaVetor(bst_util);
+
 
 	 if(util.size()==0){
 		 setcolor(12);
@@ -1248,18 +1235,15 @@ int Website::EditarUtilizador(){
 		 return;
 	 }
 
-	 Utilizador u;
+	 Utilizador* u;
 
 	 do{
-		 cout<<"Negociantes"<<endl;
-		 getch();
 		 u = Menu::menuTopNegociantesInterface(util);
-		 cout<<"1"<<endl;
-		 getch();
-		 if(u.getDadosPessoais().getNome()=="-1")
+		 if(u ==NULL)
 			 return;
-
-		 cout<< u << endl;
+		 system("cls");
+		 intro();
+		 cout<< (*u) << endl;
 		 setcolor(3);
 		 cout << "------------- Prima Qualquer Tecla Para Sair ------------" << endl;
 		 setcolor(15);

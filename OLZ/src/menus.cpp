@@ -311,9 +311,9 @@ void Menu::desenharAnuncioThumbnail(int indice, int sel, int pos){
 
 //-----------------------------Menu top negociantes----------------------------
 
-void Menu::desenharUtilizadorThumbnail(Utilizador& util, int sel, int pos){
+void Menu::desenharUtilizadorThumbnail(Utilizador* util, int sel, int pos){
 
-	DadosPessoais dp = util.getDadosPessoais();
+	DadosPessoais dp = util->getDadosPessoais();
 	setcolor(15);
 	if (sel == pos)
 		setcolor(2);
@@ -325,14 +325,14 @@ void Menu::desenharUtilizadorThumbnail(Utilizador& util, int sel, int pos){
 	cout << "|Nome :" << setw(39) << nome << "|" << endl;
 	cout << "|Mail: "<< setw(39) << email<< "|" << endl;
 	cout << "|Telefone: "<<setw(40) << telefone <<"|"<< endl;
-	cout << "|Numero de Negocios:"<<setw(20) << util.getNegocios().size() <<"|"<< endl;
+	cout << "|Numero de Negocios:"<<setw(20) << util->getNegocios().size() <<"|"<< endl;
 	cout << "-------------------------------------------------"<<endl;
 
 	setcolor(15);
 }
 
 
-Utilizador Menu::menuTopNegociantesInterface(vector<Utilizador>& util){
+Utilizador* Menu::menuTopNegociantesInterface(vector<Utilizador*>& util){
 	int y= 0;//Seletor
 		int nPagina=0; //numero pagina;
 		int utilizadoresPorPagina=3;//numero de anuncio por pagina;
@@ -350,7 +350,8 @@ Utilizador Menu::menuTopNegociantesInterface(vector<Utilizador>& util){
 					if (i + n >= util.size())
 						break;
 					maxY=i;
-					desenharUtilizadorThumbnail(util[i + n], y, i);
+
+					desenharUtilizadorThumbnail(util[i+n], y, i);
 				}
 			}
 
@@ -360,6 +361,7 @@ Utilizador Menu::menuTopNegociantesInterface(vector<Utilizador>& util){
 					if (y > 0){//não diminui o indice se já estiver na posição com o menor indice
 						y--;
 						update=true;
+
 					}
 
 				} else if (tecla == 80) { // para baixo
@@ -385,7 +387,7 @@ Utilizador Menu::menuTopNegociantesInterface(vector<Utilizador>& util){
 					return util[(nPagina*utilizadoresPorPagina+y)];
 				}
 				else if(tecla==27){//esc
-					return Utilizador(DadosPessoais("-1","Easter Egg","You Found me!"),{"What are you doing here?", "Are you lost?", "Please Go away!"});//voltar atras
+					return NULL;//voltar atras Aqui jaz Grande Easter Egg :(
 				}
 			}
 		}

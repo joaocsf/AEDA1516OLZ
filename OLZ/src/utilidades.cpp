@@ -1,5 +1,7 @@
 #include "utilidades.h"
 
+
+
 void setcolor(unsigned int color)		//define a cor da letra
 {
 	HANDLE hcon = GetStdHandle(STD_OUTPUT_HANDLE);

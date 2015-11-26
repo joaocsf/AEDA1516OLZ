@@ -6,6 +6,9 @@
 #include "anuncio.h"
 #include "negocio.h"
 #include "BST.h"
+#include "dadospessoais.h"
+#include "utilidades.h"
+
 
 //!Class Website
 /*!
@@ -255,8 +258,8 @@ public:
 	 */
 	static string InputInteiro(string mensagemLoop, unsigned int casas);
 
-	static vector<Utilizador> BSTParaVetor(BST<Utilizador>& bst);
-	static BST<Utilizador> ReturnUtilizadoresBST();
+	static vector<Utilizador*> BSTParaVetor(BST<Utilizador*>& bst);
+	static BST<Utilizador*> ReturnUtilizadoresBST();
 	static void menuTopNegocios();
 
 };

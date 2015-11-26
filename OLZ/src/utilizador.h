@@ -170,6 +170,8 @@ public:
 
 ostream & operator<<(ostream & o, Utilizador & u);
 
+bool compareUsers_ptr(void* u1 , void* u2);
+
 //! Excepcao Anuncio Inexistente
 /*!
  * Excepcao de anuncio inexistente no caso do anuncio nao existir
