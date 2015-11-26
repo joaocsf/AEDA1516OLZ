@@ -168,6 +168,8 @@ public:
 
 };
 
+ostream & operator<<(ostream & o, Utilizador & u);
+
 //! Excepcao Anuncio Inexistente
 /*!
  * Excepcao de anuncio inexistente no caso do anuncio nao existir

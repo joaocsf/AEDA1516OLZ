@@ -255,8 +255,10 @@ public:
 	 */
 	static string InputInteiro(string mensagemLoop, unsigned int casas);
 
-	static vector<Utilizador> BSTParaVetor(const BST<Utilizador>& bst);
+	static vector<Utilizador> BSTParaVetor(BST<Utilizador>& bst);
 	static BST<Utilizador> ReturnUtilizadoresBST();
+	static void menuTopNegocios();
+
 };
 
 //!Excepcao de  Utilizador Inixestente

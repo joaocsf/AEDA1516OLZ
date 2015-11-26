@@ -23,7 +23,9 @@ void Menu::menuInicial(int y) {
 	setcolor(15);
 	cout << setw(20) << Highlight("Pesquisar Anuncios", y, 2) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Sair", y, 3) << endl;
+	cout << setw(20) << Highlight("Top Negociantes", y, 3) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Sair", y, 4) << endl;
 	setcolor(15);
 }
 
@@ -36,7 +38,9 @@ void Menu::menuLogin(int y) {
 	setcolor(15);
 	cout << setw(20) << Highlight("Pesquisar Anuncios", y, 2) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Terminar Sessao", y, 3) << endl;
+	cout << setw(20) << Highlight("Top Negociantes", y, 3) << endl;
+		setcolor(15);
+	cout << setw(20) << Highlight("Terminar Sessao", y, 4) << endl;
 	setcolor(15);
 }
 
@@ -305,7 +309,7 @@ void Menu::desenharAnuncioThumbnail(int indice, int sel, int pos){
 
 }
 
-//-----------------------------A Pedido do ze----------------------------
+//-----------------------------Menu top negociantes----------------------------
 
 void Menu::desenharUtilizadorThumbnail(Utilizador& util, int sel, int pos){
 
@@ -321,14 +325,14 @@ void Menu::desenharUtilizadorThumbnail(Utilizador& util, int sel, int pos){
 	cout << "|Nome :" << setw(39) << nome << "|" << endl;
 	cout << "|Mail: "<< setw(39) << email<< "|" << endl;
 	cout << "|Telefone: "<<setw(40) << telefone <<"|"<< endl;
-	cout << "|Numero de anuncios:"<<setw(20) << util.getAnuncios().size() <<"|"<< endl;
+	cout << "|Numero de Negocios:"<<setw(20) << util.getNegocios().size() <<"|"<< endl;
 	cout << "-------------------------------------------------"<<endl;
 
 	setcolor(15);
 }
 
 
-Utilizador Menu::menuNegocioInterface(vector<Utilizador>& util){
+Utilizador Menu::menuTopNegociantesInterface(vector<Utilizador>& util){
 	int y= 0;//Seletor
 		int nPagina=0; //numero pagina;
 		int utilizadoresPorPagina=3;//numero de anuncio por pagina;
@@ -388,7 +392,7 @@ Utilizador Menu::menuNegocioInterface(vector<Utilizador>& util){
 }
 
 
-//-----------------------------Em homenagem ao segundo Pedido do ze----------------------------
+//-----------------------------Menu Anuncio----------------------------
 int Menu::menuAnuncioInterface(vector<int> indices){
 	int y= 0;//Seletor
 	int nPagina=0; //numero pagina;
@@ -535,7 +539,7 @@ Negocio* Menu::menuNegocioInterface(const vector<Negocio*>& negocios){
 //---------------------------Funcoes Interface--------------------------------------
 int Menu::menuInterface() {
 	int y;
-	y = menu(3, 0);
+	y = menu(4, 0);
 	switch (y) {
 	case 0://login
 		try {
@@ -557,7 +561,10 @@ int Menu::menuInterface() {
 		break;
 	case 2:  //pesquisar
 		return 4;
-
+		break;
+	case 3: ////menu top anunciantes
+		Website::menuTopNegocios();
+		return 0;
 		break;
 	default://sair
 		return 7;
@@ -567,7 +574,7 @@ int Menu::menuInterface() {
 int Menu::interfaceLog() {
 	int y;
 	do{
-		y = menu(3, 1);
+		y = menu(4, 1);
 	}while(y==-1);
 
 	switch (y) {
@@ -576,12 +583,15 @@ int Menu::interfaceLog() {
 		break;
 	case 1:  //conta
 		return 3;
-
 		break;
 	case 2://pesquisar
 		return 4;
 		break;
-	case 3:
+	case 3://menu top anunciantes
+		Website::menuTopNegocios();
+		return 1;
+		break;
+	case 4:
 		logado = false;
 		Website::logout();
 		//por o indice do utilizador logado a -1

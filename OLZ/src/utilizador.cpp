@@ -316,7 +316,9 @@ void Utilizador::setDistrito(string var){
 bool Utilizador::operator< (const Utilizador & u) const{
 	if(this->_negociosConcluidos.size() < u.getNegocios().size())
 		return true;
+
 	if(this->_negociosConcluidos.size() == u.getNegocios().size()){
+
 		if(this->_negociosConcluidos[this->_negociosConcluidos.size()-1]->getData() < u.getNegocios()[u.getNegocios().size()-1]->getData())
 			return true;
 	}
@@ -326,7 +328,16 @@ bool Utilizador::operator< (const Utilizador & u) const{
 
 }
 
+ostream & operator<<(ostream & o, Utilizador & u){
+	DadosPessoais dados= u.getDadosPessoais();
 
+	o << dados << endl;
+	o << "Distrito: " << u.getLocalizacao().distrito << endl;
+	o << "Concelho: " << u.getLocalizacao().concelho << endl;
+	o << "Freguesia: " << u.getLocalizacao().freguesia<< endl;
+
+	return o;
+}
 
 
 

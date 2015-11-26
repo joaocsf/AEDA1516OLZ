@@ -1182,14 +1182,32 @@ int Website::EditarUtilizador(){
 	}
 }
 
- vector<Utilizador> Website::BSTParaVetor(const BST<Utilizador>& bst){
+ vector<Utilizador> Website::BSTParaVetor(BST<Utilizador>& bst){
 	 vector<Utilizador> util;
-	 BSTItrIn<Utilizador> ordem(bst);
+	 BSTItrIn<Utilizador> ordem = BSTItrIn<Utilizador>(bst);
 
-	 while(!ordem.isAtEnd()){
-		 util.push_back(ordem.retrieve());
+	 while(true){
+
+		 cout <<"Ordem is at End"<<endl;
+		 getch();
+		 if(ordem.isAtEnd());
+			// break;
+
+		 cout<<"Vou Adicionar"<<endl;
+		 getch();
+		 Utilizador u = ordem.retrieve();
+		 cout << u.getDadosPessoais().getNome() << endl;
+		 getch();
+		 util.push_back(u);
+		 cout<<"Adicionei e vou avancar"<<endl;
+		 getch();
 		 ordem.advance();
+		 cout<<"Advancei"<<endl;
+		 getch();
+
 	 }
+	 cout <<"Acabei o Loop"<<endl;
+	 getch();
 	 return util;
  }
 
@@ -1197,13 +1215,65 @@ int Website::EditarUtilizador(){
 
  BST<Utilizador> Website::ReturnUtilizadoresBST(){
 
-	BST<Utilizador> res(Utilizador(DadosPessoais("","",""), {"","",""}));
+	 BST<Utilizador> res(Utilizador(DadosPessoais("","",""), {"","",""}));
+	 int n=0;
+	 for (unsigned int i = 0; i < utilizadores.size(); ++i) {
 
-	for (unsigned int i = 0; i < utilizadores.size(); ++i) {
-		res.insert((*utilizadores[i]));
-	}
+		 Utilizador u =*utilizadores[i];
+		 if(u.getNegocios().size() !=0){
+			 n++;
+			 res.insert(u);
+		 }
+	 }
+	 cout <<">>" <<n << endl;
+	 getch();
+	 return res;
+ }
 
-	return res;
+
+ void Website::menuTopNegocios(){
+	 cout<<"BST"<<endl;
+	 getch();
+	 BST<Utilizador> bst_util =ReturnUtilizadoresBST();
+	 cout<<"BSTPARA VETOR"<<endl;
+	 getch();
+	 vector<Utilizador> util= BSTParaVetor(bst_util);
+	 cout<<"Passei o BST"<<endl;
+	 getch();
+
+	 if(util.size()==0){
+		 setcolor(12);
+		 cout << "Não existem Utilizadores" << endl;
+		 setcolor(15);
+		 return;
+	 }
+
+	 Utilizador u;
+
+	 do{
+		 cout<<"Negociantes"<<endl;
+		 getch();
+		 u = Menu::menuTopNegociantesInterface(util);
+		 cout<<"1"<<endl;
+		 getch();
+		 if(u.getDadosPessoais().getNome()=="-1")
+			 return;
+
+		 cout<< u << endl;
+		 setcolor(3);
+		 cout << "------------- Prima Qualquer Tecla Para Sair ------------" << endl;
+		 setcolor(15);
+		 getch();
+	 }while(true);
+ }
 
 
-}
+
+
+
+
+
+
+
+
+
