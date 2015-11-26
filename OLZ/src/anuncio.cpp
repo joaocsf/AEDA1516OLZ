@@ -1,6 +1,6 @@
 #include "anuncio.h"
 #include "utilizador.h"
-//anuncio
+//anuncios
 int Anuncio::_ID = 1;
 
 Anuncio::~Anuncio(){
