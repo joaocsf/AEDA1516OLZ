@@ -144,7 +144,7 @@ public:
 	//!Funcao get para os anuncios do utilizador.
 	vector<Anuncio*> getAnuncios();
 	//!Funcao get para os negocios do utilizador.
-	vector<Negocio*> getNegocios();
+	vector<Negocio*> getNegocios() const;
 	//!Funcao get para os dados do utilizador que sao visiveis.
 	/*!
 	 \sa Contacto -> getVisiveis()
@@ -162,6 +162,9 @@ public:
 	void setConcelho(string var);
 	//!Funcao set para o distrito.
 	void setDistrito(string var);
+
+
+	bool operator< (const Utilizador & u) const;
 
 };
 

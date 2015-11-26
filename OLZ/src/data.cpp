@@ -84,3 +84,23 @@ std::ostream & operator<<(ostream & o, const Data & d) {
 	return o;
 }
 
+
+
+bool Data::operator< (const Data & d) const{
+	if(this->ano < d.getAno() )
+		return true;
+	else if(this->mes < d.getMes())
+		return true;
+	else if(this->dia < d.getDia())
+		return true;
+
+	return false;
+}
+
+
+
+
+
+
+
+

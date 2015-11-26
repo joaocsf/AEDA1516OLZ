@@ -287,7 +287,7 @@ vector<Anuncio*> Utilizador::getAnuncios(){
 	return _anuncios;
 }
 
-vector<Negocio*> Utilizador::getNegocios(){
+vector<Negocio*> Utilizador::getNegocios() const{
 	return _negociosConcluidos;
 }
 
@@ -310,3 +310,37 @@ void Utilizador::setConcelho(string var){
 void Utilizador::setDistrito(string var){
 	_local.distrito=var;
 }
+
+
+
+bool Utilizador::operator< (const Utilizador & u) const{
+	if(this->_negociosConcluidos.size() < u.getNegocios().size())
+		return true;
+	if(this->_negociosConcluidos.size() == u.getNegocios().size()){
+		if(this->_negociosConcluidos[this->_negociosConcluidos.size()-1]->getData() < u.getNegocios()[u.getNegocios().size()-1]->getData())
+			return true;
+	}
+
+	return false;
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

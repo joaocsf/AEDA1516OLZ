@@ -59,6 +59,8 @@ public:
 	virtual void ler(ifstream& in, bool escreve = false);
 	//!Funcao para escrever a data para um ficheiro.
 	virtual void escrever(ofstream& out);
+
+	bool operator< (const Data & d) const;
 private:
 	//! ano
 	/*!
