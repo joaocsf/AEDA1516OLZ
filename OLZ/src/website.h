@@ -5,6 +5,7 @@
 #include "utilizador.h"
 #include "anuncio.h"
 #include "negocio.h"
+#include "BST.h"
 
 //!Class Website
 /*!
@@ -12,6 +13,7 @@
  * E os membros-funcao relativos ao mesmo.
  */
 class Website{
+
 	//!Declaracao do vetor de utilizadores do website.
 	/*!
 	 \sa Utilizador
@@ -252,6 +254,9 @@ public:
 	 \return uma string com o numero pedido.
 	 */
 	static string InputInteiro(string mensagemLoop, unsigned int casas);
+
+	static vector<Utilizador> BSTParaVetor(const BST<Utilizador>& bst);
+	static BST<Utilizador> ReturnUtilizadoresBST();
 };
 
 //!Excepcao de  Utilizador Inixestente

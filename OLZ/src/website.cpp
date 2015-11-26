@@ -1,12 +1,14 @@
 #include "website.h"
 #include "menus.h"
 
+
 vector<Utilizador*> Website::utilizadores;
 vector<Anuncio *> Website::anuncios;
 vector<Negocio*> Website::negocios;
 
 int Website::indiceUtilizador = -1;
 Data Website::_data = Data();
+
 
 string Website::getInfo(){
 	stringstream ss;
@@ -1180,3 +1182,28 @@ int Website::EditarUtilizador(){
 	}
 }
 
+ vector<Utilizador> Website::BSTParaVetor(const BST<Utilizador>& bst){
+	 vector<Utilizador> util;
+	 BSTItrIn<Utilizador> ordem(bst);
+
+	 while(!ordem.isAtEnd()){
+		 util.push_back(ordem.retrieve());
+		 ordem.advance();
+	 }
+	 return util;
+ }
+
+
+
+ BST<Utilizador> Website::ReturnUtilizadoresBST(){
+
+	BST<Utilizador> res(Utilizador(DadosPessoais("","",""), {"","",""}));
+
+	for (unsigned int i = 0; i < utilizadores.size(); ++i) {
+		res.insert((*utilizadores[i]));
+	}
+
+	return res;
+
+
+}

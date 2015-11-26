@@ -305,6 +305,90 @@ void Menu::desenharAnuncioThumbnail(int indice, int sel, int pos){
 
 }
 
+//-----------------------------A Pedido do ze----------------------------
+
+void Menu::desenharUtilizadorThumbnail(Utilizador& util, int sel, int pos){
+
+	DadosPessoais dp = util.getDadosPessoais();
+	setcolor(15);
+	if (sel == pos)
+		setcolor(2);
+	string nome = (dp.getVisiveis()[VIS_NOME])? dp.getNome() : "Nome nao visivel";
+	string email=(dp.getVisiveis()[VIS_EMAIL])? dp.getEmail() : "Email nao visivel";
+	string telefone=(dp.getVisiveis()[VIS_TELEFONE])? dp.getTelefone() : "Telefone nao visivel";
+
+	cout << "-------------------------------------------------" << endl;
+	cout << "|Nome :" << setw(39) << nome << "|" << endl;
+	cout << "|Mail: "<< setw(39) << email<< "|" << endl;
+	cout << "|Telefone: "<<setw(40) << telefone <<"|"<< endl;
+	cout << "|Numero de anuncios:"<<setw(20) << util.getAnuncios().size() <<"|"<< endl;
+	cout << "-------------------------------------------------"<<endl;
+
+	setcolor(15);
+}
+
+
+Utilizador Menu::menuNegocioInterface(vector<Utilizador>& util){
+	int y= 0;//Seletor
+		int nPagina=0; //numero pagina;
+		int utilizadoresPorPagina=3;//numero de anuncio por pagina;
+		bool update= true;
+		int maxY;
+		while(true){
+
+			if(update){
+				update=false;
+				system("cls");
+				Website::intro();
+				cout<<(nPagina+1)<< "/" <<((util.size()-1)/utilizadoresPorPagina + 1)<<endl;
+				for (int i = 0; i < 3; ++i) {
+					int n = nPagina * utilizadoresPorPagina;
+					if (i + n >= util.size())
+						break;
+					maxY=i;
+					desenharUtilizadorThumbnail(util[i + n], y, i);
+				}
+			}
+
+			if (kbhit()) {
+				int tecla = getch();
+				if (tecla == 72) { // para cima
+					if (y > 0){//não diminui o indice se já estiver na posição com o menor indice
+						y--;
+						update=true;
+					}
+
+				} else if (tecla == 80) { // para baixo
+					if(y<maxY){
+						y++;
+						update=true;
+					}
+
+				}else if(tecla == 75){ //esquerda
+					if(nPagina>0){
+						y=0;
+						nPagina--;
+						update=true;
+					}
+
+				}else if(tecla == 77){ // direita
+					if(nPagina < (util.size()-1)/utilizadoresPorPagina){
+						y=0;
+						nPagina++;
+						update=true;
+					}
+				}else if (tecla == 13) { // enter
+					return util[(nPagina*utilizadoresPorPagina+y)];
+				}
+				else if(tecla==27){//esc
+					return Utilizador(DadosPessoais("-1","Easter Egg","You Found me!"),{"What are you doing here?", "Are you lost?", "Please Go away!"});//voltar atras
+				}
+			}
+		}
+}
+
+
+//-----------------------------Em homenagem ao segundo Pedido do ze----------------------------
 int Menu::menuAnuncioInterface(vector<int> indices){
 	int y= 0;//Seletor
 	int nPagina=0; //numero pagina;

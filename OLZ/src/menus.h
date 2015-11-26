@@ -111,6 +111,13 @@ static Negocio* menuNegocioInterface(const vector<Negocio*>& negocios);
 static void menuVisibilidade(int y);
 //!Interface para alterar a visibilidade dos dados.
 static int interfaceMudarVisibilidade();
+
+//---------------------David Compõe a cena ---------------
+static Utilizador menuNegocioInterface(vector<Utilizador>& util);
+
+static void desenharUtilizadorThumbnail(Utilizador& util, int sel, int pos);
+
+
 };
 
 #endif
