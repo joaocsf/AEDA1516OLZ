@@ -311,6 +311,10 @@ void AnuncioVenda::setPreco(float preco){
 	_preco=preco;
 }
 
+void Anuncio::setDataDestaque(Data d_atual){
+	_data_destaque = d_atual.addMes(d_atual);
+}
+
 void AnuncioVenda::setNegociavel(bool negociavel){
 	_negociavel=negociavel;
 }
