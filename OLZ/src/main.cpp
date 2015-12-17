@@ -13,7 +13,10 @@ int main() {
 
 	time_t agora= time(0);
 	tm *ltm = localtime(&agora);
-	Website::setData(Data(ltm->tm_year+1900,ltm->tm_mon+1,ltm->tm_mday));
+	Data d(ltm->tm_year+1900,ltm->tm_mon+1,ltm->tm_mday);
+	d.setHora(ltm->tm_hour);
+	d.setMinutos(ltm->tm_min);
+	Website::setData(d);
 
 	ifstream fileI("testeDados.txt");
 

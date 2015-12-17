@@ -1,6 +1,6 @@
 #include "data.h"
 
-Data::Data(unsigned int a, unsigned int m, unsigned int d) {
+Data::Data(unsigned int a, unsigned int m, unsigned int d) : hora(0), minutos(0){
 	ano = a;
 	mes = m;
 	dia = d;
@@ -15,6 +15,14 @@ void Data::setMes(unsigned int m) {
 
 void Data::setDia(unsigned int d) {
 	dia = d;
+}
+
+void Data::setHora(unsigned int h){
+	hora = h;
+}
+
+void Data::setMinutos(unsigned int m){
+	minutos = m;
 }
 
 void Data::setData(unsigned int a, unsigned int m, unsigned int d) {
@@ -35,6 +43,14 @@ unsigned int Data::getDia() const {
 	return dia;
 }
 
+unsigned int Data::getHora() const{
+	return hora;
+}
+
+unsigned int Data::getMinutos() const{
+	return minutos;
+}
+
 void Data::imprime() {
 	cout << ano << "/" << mes << "/" << dia;
 }
@@ -44,6 +60,12 @@ void Data::ler(ifstream& in, bool escreve) {
 	string linha;
 	while (getline(in, linha)) {
 		switch (index) {
+		case DATA_MINUTOS:
+			stringstream(linha) >> minutos;
+			break;
+		case DATA_HORA:
+			stringstream(linha) >> hora;
+			break;
 		case DATA_DIA:
 			stringstream(linha) >> dia;
 			break;
@@ -71,20 +93,23 @@ void Data::escrever(ofstream& out) {
 	out << ano << endl;
 	out << mes << endl;
 	out << dia << endl;
+	out << hora << endl;
+	out << minutos << endl;
 	out << "#DAT" << endl;
 }
 
 bool operator==(const Data& d1, const Data& d2) {
 
-	return d1.getAno() == d2.getAno() && d1.getMes() == d2.getMes()
-			&& d1.getDia() == d2.getDia();
+	return 	d1.getAno() == d2.getAno() 	 &&
+			d1.getMes() == d2.getMes() 	 &&
+			d1.getDia() == d2.getDia() 	 &&
+			d1.getHora() == d2.getHora() &&
+			d1.getMinutos() == d2.getMinutos();
 }
 std::ostream & operator<<(ostream & o, const Data & d) {
-	o << d.getDia() << '/' << d.getMes() << '/' << d.getAno();
+	o << d.getDia() << '/' << d.getMes() << '/' << d.getAno() << "  " <<d.getHora() << "h " << d.getMinutos() << "m";
 	return o;
 }
-
-
 
 bool Data::operator< (const Data & d) const{
 	if(this->ano < d.getAno() ){
@@ -95,8 +120,20 @@ bool Data::operator< (const Data & d) const{
 			return true;
 
 		}else if (this->mes == d.getMes()){
-			if(this->dia < d.getDia())
+			if(this->dia < d.getDia()){
 				return true;
+
+			}else if(this->dia == d.getDia()){
+				if(hora < d.getHora()){
+					return true;
+
+				}else if(hora == d.getHora()){
+					if(minutos < d.getMinutos()){
+						return true;
+
+					}
+				}
+			}
 		}
 	}
 	return false;

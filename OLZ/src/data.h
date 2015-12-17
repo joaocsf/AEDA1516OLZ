@@ -7,6 +7,9 @@
 #define DATA_ANO 0
 #define DATA_MES 1
 #define DATA_DIA 2
+#define DATA_HORA 3
+#define DATA_MINUTOS 4
+
 
 
 //!Class Data
@@ -40,6 +43,16 @@ public:
 	 \param d dia.
 	 */
 	void setDia(unsigned int d);
+	//! Funcao set para a hora.
+	/*!
+		 \param h hora.
+	 */
+	void setHora(unsigned int h);
+	//! Funcao set para a minutos.
+	/*!
+			 \param m minutos.
+	 */
+	void setMinutos(unsigned int m);
 	//!Funcao set para a data.
 	/*!
 	 \param a ano.
@@ -53,6 +66,11 @@ public:
 	unsigned int getMes()const;
 	//!Funcao get para o dia.
 	unsigned int getDia()const;
+	//!Funcao get para a hora.
+	unsigned int getHora()const;
+	//!Funcao get para a minutos.
+	unsigned int getMinutos()const;
+
 	//!Funcao para imprimir a data.
 	void imprime();
 	//!Funcao para ler a data de um ficheiro.
@@ -77,10 +95,21 @@ private:
 	 * Variavel Dia.
 	 */
 	unsigned int dia;
+	//! hora
+	/*!
+	 * Variavel Hora.
+	 */
+	unsigned int hora;
+	//! minuto
+	/*!
+	 * Variavel Minuto.
+	 */
+	unsigned int minutos;
+
 
 };
 
-//!Overload do operador de igualdade para a classe Data.
+//!Overload do operador de comparacao de igualdade para a classe Data.
 bool operator==(const Data& d1, const Data& d2);
 //!Overload do operator de insercao para a classe Data.
 std::ostream & operator<<(ostream & o, const Data & d);

@@ -15,8 +15,8 @@ void Anuncio::setIDGlobal(int id) {
 }
 Anuncio::Anuncio(string titulo, string categ_produto, string descricao,
 		Data date) :
-		_num_vizualizacoes(0), _titulo(titulo), _categ_produto(categ_produto), _descricao(
-				descricao), _data(date), _identificador(_ID++), _user(NULL), _visivel(true), _data_destaque(Data(0,0,0)) {
+		_num_vizualizacoes(0), _titulo(titulo), _categ_produto(categ_produto), _descricao(descricao),
+		_data(date), _identificador(_ID++), _user(NULL), _visivel(true), _data_destaque(0,0,0) {
 }
 
 void Anuncio::ler(ifstream& in, bool escreve) {
@@ -27,27 +27,53 @@ void Anuncio::ler(ifstream& in, bool escreve) {
 		case A_IDENFICADOR:
 			stringstream(linha) >> _identificador;
 			break;
+
 		case A_TITULO:
 			_titulo = linha;
 			break;
+
 		case A_CATEG:
 			_categ_produto = linha;
 			break;
+
 		case A_DESC:
-			_descricao = linha;
+			_descricao= linha;
 			break;
+
 		case A_N_VIS:
 			stringstream(linha) >> _num_vizualizacoes;
 			break;
+
 		case A_VISIVEL:
 			int temp;
 			stringstream(linha) >> temp;
 			_visivel = temp;
 			break;
-		default:
-			if (linha == "DAT") {
+
+		case A_DATA:
+			if(linha == "DAT"){
 				_data.ler(in);
-			} else if (linha == "I") {
+			}else{
+				stringstream ss;
+				ss << "Erro Leitura Anuncio. Encontrado:" << linha
+						<< " Esperado: DAT";
+				throw ErroLeitura(ss.str());
+			}
+			break;
+
+		case A_DATA_DESTAQUE:
+			if(linha == "DAT"){
+				_data_destaque.ler(in);
+			}else{
+				stringstream ss;
+				ss << "Erro Leitura Anuncio. Encontrado:" << linha
+						<< " Esperado: DAT";
+				throw ErroLeitura(ss.str());
+			}
+			break;
+
+		default:
+			if (linha == "I") {
 				getline(in, linha);
 				Imagem temp;
 				temp.conteudo = linha;
@@ -120,6 +146,7 @@ void Anuncio::escrever(ofstream& out) {
 	out << _num_vizualizacoes << endl;
 	out << ((_visivel) ? 1 : 0) << endl;
 	_data.escrever(out);
+	_data_destaque.escrever(out);
 	for (int i = 0; i < _imagens.size(); ++i) {
 		out << "I" << endl << _imagens[i].conteudo << endl << "#I" << endl;
 	}
@@ -180,6 +207,7 @@ void Anuncio::setCategoria(string c){
 void Anuncio::setDescricao(string d){
 	_descricao=d;
 }
+
 
 bool operator<(AnuncioHandler aH1,AnuncioHandler aH2){
 	Data d1 = aH1.a->getData();

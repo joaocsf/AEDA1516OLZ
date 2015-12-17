@@ -18,6 +18,9 @@
 #define A_DESC 3
 #define A_N_VIS 4
 #define A_VISIVEL 5
+#define A_DATA 6
+#define A_DATA_DESTAQUE 7
+
 #define A_PRECO 0
 #define A_NEGOCIAVEL 1
 #define A_ESTADO 2
@@ -81,6 +84,7 @@ class Anuncio: public Dados {
 	 \sa Data
 	 */
 	Data _data;
+
 	//! imagens
 	/*!
 	 * Vetor com as imagens de um produto anunciado.
