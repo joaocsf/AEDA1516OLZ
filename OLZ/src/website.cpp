@@ -938,7 +938,7 @@ int Website::menuMeusNegocios(){
 			getch();
 			return 3;
 		}
-		Negocio* negocio = Menu::menuNegocioInterface(utilizadores[indiceUtilizador]->getNegocios());
+		Negocio* negocio = Menu::menuNegocioInterface(utilizadores[indiceUtilizador]->getVetorNegocios());
 		if(negocio==NULL)
 			return 3;
 		system("cls");
@@ -1240,8 +1240,8 @@ void Website::AtualizarBSTNegociantes(Utilizador* utilizador){
 
 		 if(u->getNegocios().size() !=0){
 			 n++;
-			 cout<<"Adicionado:" << u->getDadosPessoais().getNome() << " Teste:" << u->getNegocios()[u->getNegocios().size()-1]->getData()<<endl;
-					 getch();
+			 //cout<<"Adicionado:" << u->getDadosPessoais().getNome() << " Teste:" << u->getNegocios()[u->getNegocios().size()-1]->getData()<<endl;
+			//	 getch();
 			 res.insert(u , compareUsers_ptr);
 		 }
 	 }

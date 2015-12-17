@@ -9,6 +9,7 @@
 #include "data.h"
 #include "comum.h"
 #include "website.h"
+#include <tr1/unordered_set>
 
 #define UT_CONTACTO 0
 #define UT_FREGUESIA 1
@@ -17,6 +18,21 @@
 #define UT_IDENTIFICADOR 4
 #define UT_NEGOCIOS 5
 #define UT_TOTAL 6
+
+struct NegocioHash
+{
+	int operator() (const Negocio *neg) const{
+		return (int)neg->getAnuncio();
+	}
+
+	bool operator() (const Negocio *neg1, const Negocio *neg2) const{
+		return (*neg1)==(*neg2);
+	}
+};
+
+typedef tr1::unordered_set<Negocio*,NegocioHash,NegocioHash> TabNeg;
+
+
 
 
 //! Class Utilizador
@@ -58,7 +74,7 @@ class Utilizador : public Dados{
 	 * Vector com os negocios concluidos do utilizador
 	 \sa Negocio
 	 */
-	vector<Negocio *> _negociosConcluidos;
+	TabNeg _negociosConcluidos;
 public:
 	//!Destrutor
 	~Utilizador();
@@ -144,7 +160,7 @@ public:
 	//!Funcao get para os anuncios do utilizador.
 	vector<Anuncio*> getAnuncios();
 	//!Funcao get para os negocios do utilizador.
-	vector<Negocio*> getNegocios() const;
+	TabNeg getNegocios() const;
 	//!Funcao get para os dados do utilizador que sao visiveis.
 	/*!
 	 \sa Contacto -> getVisiveis()
@@ -163,7 +179,11 @@ public:
 	//!Funcao set para o distrito.
 	void setDistrito(string var);
 
-
+	//comentar-----------------------------------
+	Negocio* getUltimoNegocio() const;
+	vector<Negocio*> getVetorNegocios() const;
+	vector<Negocio*> getVetorNegociosCategoria(string categoria) const;
+	vector<Negocio*> getVetorNegociosTipo(int tipo) const;
 	bool operator< (const Utilizador & u) const;
 
 };

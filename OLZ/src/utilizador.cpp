@@ -11,15 +11,24 @@ Utilizador::Utilizador(DadosPessoais contacto, Localizacao loc) {
 	_identificador = _ID++;
 }
 
-Utilizador::~Utilizador(){
+Utilizador::~Utilizador(){//alterei Tabneg
 	for (unsigned int i = 0; i < _anuncios.size(); ++i) {
 		delete(_anuncios[i]);
 
 	}
+	TabNeg::iterator it=_negociosConcluidos.begin();
+
+	while(it != _negociosConcluidos.end()){
+		delete(*it);
+		it++;
+	}
+
+
+	/*
 	for (unsigned int i = 0; i< _negociosConcluidos.size(); ++i){
 		delete(_negociosConcluidos[i]);
 	}
-
+*/
 }
 
 int Utilizador::getID() const {
@@ -101,7 +110,7 @@ Anuncio* Utilizador::procurarAnuncio(int id) {
 	return NULL;
 }
 
-bool Utilizador::FecharNegocio(Anuncio* anuncio, float montante, Data data) {
+bool Utilizador::FecharNegocio(Anuncio* anuncio, float montante, Data data) {//alterei
 	Negocio* neg = NULL;
 
 	for (unsigned int i = 0; i < vetorAnuncios->size(); ++i) {
@@ -151,7 +160,9 @@ bool Utilizador::FecharNegocio(Anuncio* anuncio, float montante, Data data) {
 	if (neg == NULL) {
 		throw AnuncioInexistente(anuncio);
 	}
-	_negociosConcluidos.push_back(neg);
+//alterrei aqui
+	_negociosConcluidos.insert(neg);
+	//_negociosConcluidos.push_back(neg);
 	return true;
 }
 
@@ -162,7 +173,7 @@ bool Utilizador::AlteraContacto(string telefone, string email) {
 	return true;
 }
 
-void Utilizador::ler(ifstream& in, bool escreve) {
+void Utilizador::ler(ifstream& in, bool escreve) {//alterei
 
 	string linha;
 	int index = 0;
@@ -206,7 +217,9 @@ void Utilizador::ler(ifstream& in, bool escreve) {
 				Negocio* N = new Negocio();
 				N->setUser(this);
 				N->ler(in);
-				_negociosConcluidos.push_back(N);
+				//alterei aqui
+				_negociosConcluidos.insert(N);
+				//_negociosConcluidos.push_back(N);
 			} else if (linha != "#U") {
 				stringstream ss;
 				ss << "Erro Leitura Utilizador. Encontrado:" << linha
@@ -222,7 +235,7 @@ void Utilizador::ler(ifstream& in, bool escreve) {
 	}
 
 }
-void Utilizador::escrever(ofstream& out) {
+void Utilizador::escrever(ofstream& out) {//alterei
 	out << "U" << endl;
 	_contacto.escrever(out);
 	out << _local.freguesia << endl;
@@ -239,10 +252,19 @@ void Utilizador::escrever(ofstream& out) {
 			_anuncios[i]->escrever(out);
 		}
 	}
+//alterei aqui
+	TabNeg::iterator it=_negociosConcluidos.begin();
+
+	while(it !=_negociosConcluidos.end()){
+		(*it)->escrever(out);
+		it++;
+	}
+
+/*
 	for (unsigned int i = 0; i < _negociosConcluidos.size(); ++i) {
 		_negociosConcluidos[i]->escrever(out);
 	}
-
+*/
 	out << "#U" << endl;
 
 }
@@ -259,9 +281,22 @@ string Utilizador::getInfo() const {
 	for (unsigned int i = 0; i < _anuncios.size(); ++i) {
 		info += _anuncios[i]->getInfo();
 	}
+
+	//alterei aqui-------------
+
+	TabNeg::const_iterator it=_negociosConcluidos.begin();
+
+	while(it !=_negociosConcluidos.end()){
+		info += (*it)->getInfo();
+		it++;
+	}
+	//----------------
+	/*
 	for (unsigned int i = 0; i < _negociosConcluidos.size(); ++i) {
 		info += _negociosConcluidos[i]->getInfo();
 	}
+	 */
+
 	info += "\n";
 
 	return info;
@@ -287,7 +322,8 @@ vector<Anuncio*> Utilizador::getAnuncios(){
 	return _anuncios;
 }
 
-vector<Negocio*> Utilizador::getNegocios() const{
+//alterei
+TabNeg Utilizador::getNegocios() const{
 	return _negociosConcluidos;
 }
 
@@ -312,20 +348,83 @@ void Utilizador::setDistrito(string var){
 }
 
 
+Negocio* Utilizador::getUltimoNegocio() const{
+	Negocio *n;
+	n= *(_negociosConcluidos.begin());
 
-bool Utilizador::operator< (const Utilizador & u) const{
+	TabNeg::const_iterator it=_negociosConcluidos.begin();
+	it++;
+
+	while(it != _negociosConcluidos.end()){
+		if((*it)->getIdentificador() > n->getIdentificador())
+			n= (*it);
+		it++;
+	}
+
+	return n;
+}
+
+
+bool Utilizador::operator< (const Utilizador & u) const{//alterei
 	if(this->_negociosConcluidos.size() < u.getNegocios().size())
 		return true;
 
 	if(this->_negociosConcluidos.size() == u.getNegocios().size()){
-
-		return (this->_negociosConcluidos[this->_negociosConcluidos.size()-1]->getData() < u.getNegocios()[u.getNegocios().size()-1]->getData());
+		//alterei
+		return (getUltimoNegocio()->getData() < u.getUltimoNegocio()->getData());
+		//return (this->_negociosConcluidos[this->_negociosConcluidos.size()-1]->getData() < u.getNegocios()[u.getNegocios().size()-1]->getData());
 	}
 
 	return false;
 
-
 }
+
+//getvetor negocios---------------------
+vector<Negocio*> Utilizador::getVetorNegocios() const{
+	vector<Negocio*> res;
+
+	TabNeg::const_iterator it = _negociosConcluidos.begin();
+
+	while(it != _negociosConcluidos.end()){
+		res.push_back(*it);
+		it++;
+	}
+
+	return res;
+}
+
+
+vector<Negocio*> Utilizador::getVetorNegociosCategoria(string categoria) const{
+	vector<Negocio*> res;
+
+	TabNeg::const_iterator it = _negociosConcluidos.begin();
+
+	while(it != _negociosConcluidos.end()){
+		if((*it)->getAnuncio()->getCategoria() == categoria)
+			res.push_back(*it);
+		it++;
+	}
+
+	return res;
+}
+
+vector<Negocio*> Utilizador::getVetorNegociosTipo(int tipo) const{
+	vector<Negocio*> res;
+
+	TabNeg::const_iterator it = _negociosConcluidos.begin();
+
+	while(it != _negociosConcluidos.end()){
+		if((*it)->getAnuncio()->getTipo() == tipo)
+			res.push_back(*it);
+		it++;
+	}
+
+	return res;
+}
+
+//-------------------------------------
+
+
 
 bool compareUsers_ptr(void* u1 =NULL , void* u2=NULL){
 	return (*(Utilizador *)u2) < (*(Utilizador *)u1);

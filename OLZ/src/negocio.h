@@ -75,7 +75,7 @@ public:
 	//!Funcao get para a informacao referente ao negocio.
 	string getInfo() const;
 	//!Funcao get para o anuncio do negocio.
-	Anuncio* getAnuncio();
+	Anuncio* getAnuncio() const;
 	//!Funcao get para o montante.
 	float getMontante() const;
 	//!Funcao get para a data do negocio.
@@ -84,6 +84,11 @@ public:
 	/*!
 	 \param user Novo utilizador.
 	 */
+
+
+	int getIdentificador() const;
+
+
 	void setUser(Utilizador* user);
 	//!Funcao set para o numero de identificacao global dos negocios.
 	static int setIDGlobal(int id);
@@ -93,6 +98,8 @@ public:
 	virtual void escrever(ofstream& out);
 	//!Funcao para verificar se ocorreu uma troca de produtos no negocio.
 	bool trocou();
+
+	bool operator==(const Negocio & n) const;
 };
 
 //!Overload do operador << para a classe Negocio.

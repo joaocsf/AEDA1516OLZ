@@ -85,7 +85,7 @@ void Negocio::escrever(ofstream& out) {
 	out << "#N" << endl;
 }
 
-Anuncio* Negocio::getAnuncio(){
+Anuncio* Negocio::getAnuncio() const{
 	return _ptr_anuncio;
 }
 
@@ -133,3 +133,14 @@ ostream & operator<<(ostream & o, Negocio& n){
 	return o;
 
 }
+
+
+int Negocio::getIdentificador() const{
+	return _identificador;
+}
+
+
+bool Negocio::operator==(const Negocio & n) const{
+	return (_identificador==n.getIdentificador());
+}
+
