@@ -8,7 +8,7 @@
 #include "BST.h"
 #include "dadospessoais.h"
 #include "utilidades.h"
-
+#include <time.h>
 
 //!Class Website
 /*!
@@ -211,7 +211,29 @@ public:
 	 */
 	static int MenuAnuncioConta(bool venda);
 	//!Funcao que permite ao utilizador visualizar os seus negocios.
-	static int menuMeusNegocios();
+
+
+
+
+
+
+
+	static void AtualizarData();
+
+
+
+
+
+
+
+
+
+
+	//foi alterado
+	static void menuNegocios(vector<Negocio*> neg,string msg_erro);
+
+
+
 	//!Funcao que faz display do estado atual de visibilidade dos dados do utilizador.
 	/*!
 	 * Esta funcao mostra no ecra o estado dos dados e permite ao usuario altera-los.
@@ -265,6 +287,9 @@ public:
 	static void menuTopNegocios();
 	static void AtualizarBSTNegociantes();
 	static void AtualizarBSTNegociantes(Utilizador* utilizador);
+	static  vector<Negocio*> VetorNegocioAnunciante();
+	static  vector<Negocio*> VetorPesquisarNegocioPorTipo(int y);
+	static  vector<Negocio*> VetorPesquisarNegocioCategoria();
 
 };
 

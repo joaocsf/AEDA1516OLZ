@@ -23,9 +23,11 @@ void Menu::menuInicial(int y) {
 	setcolor(15);
 	cout << setw(20) << Highlight("Pesquisar Anuncios", y, 2) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Top Negociantes", y, 3) << endl;
+	cout << setw(20) << Highlight("Pesquisar Negocios", y, 3) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Sair", y, 4) << endl;
+	cout << setw(20) << Highlight("Top Negociantes", y, 4) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Sair", y, 5) << endl;
 	setcolor(15);
 }
 
@@ -38,9 +40,11 @@ void Menu::menuLogin(int y) {
 	setcolor(15);
 	cout << setw(20) << Highlight("Pesquisar Anuncios", y, 2) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Top Negociantes", y, 3) << endl;
-		setcolor(15);
-	cout << setw(20) << Highlight("Terminar Sessao", y, 4) << endl;
+	cout << setw(20) << Highlight("Pesquisar Negocios", y, 3) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Top Negociantes", y, 4) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Terminar Sessao", y, 5) << endl;
 	setcolor(15);
 }
 
@@ -247,6 +251,19 @@ void Menu::menuEditar_AC(int y) {
 	setcolor(15);
 }
 
+void Menu::menuPesquisarNegocios(int y){
+	system("cls");
+	Website::intro();
+	cout << setw(20) << Highlight("Anunciante", y, 0) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Tipo de Anuncio", y, 1) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Categoria", y, 2) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Voltar Atras", y, 3) << endl;
+	setcolor(15);
+}
+
 
 //----------------------------------------------------------------------------------
 //---------------------------Menu Selector------------------------------------------
@@ -276,8 +293,12 @@ void Menu::InterfaceSeletor() {
 		case 6:
 			menu = interfaceCategProd();
 			break;
-		case 7:
+		case 7://sair
 			return;
+			break;
+		case 8:
+			menu = interfacePesquisarNegocios();
+			break;
 		default:
 			cout << "Interface Invalida" << endl;
 			return;
@@ -541,7 +562,7 @@ Negocio* Menu::menuNegocioInterface(const vector<Negocio*>& negocios){
 //---------------------------Funcoes Interface--------------------------------------
 int Menu::menuInterface() {
 	int y;
-	y = menu(4, 0);
+	y = menu(5, 0);
 	switch (y) {
 	case 0://login
 		try {
@@ -561,10 +582,13 @@ int Menu::menuInterface() {
 		logado=true;
 		return 1;
 		break;
-	case 2:  //pesquisar
+	case 2:  //pesquisar anuncios
 		return 4;
 		break;
-	case 3: ////menu top anunciantes
+	case 3: //pesquisar negocios
+		return 8;
+
+	case 4: //menu top anunciantes
 		Website::menuTopNegocios();
 		return 0;
 		break;
@@ -576,7 +600,7 @@ int Menu::menuInterface() {
 int Menu::interfaceLog() {
 	int y;
 	do{
-		y = menu(4, 1);
+		y = menu(5, 1);
 	}while(y==-1);
 
 	switch (y) {
@@ -586,14 +610,17 @@ int Menu::interfaceLog() {
 	case 1:  //conta
 		return 3;
 		break;
-	case 2://pesquisar
+	case 2://pesquisar anuncios
 		return 4;
 		break;
-	case 3://menu top anunciantes
+
+	case 3: //pesquisar negocios
+		return 8;
+	case 4://menu top anunciantes
 		Website::menuTopNegocios();
 		return 1;
 		break;
-	case 4:
+	case 5:
 		logado = false;
 		Website::logout();
 		//por o indice do utilizador logado a -1
@@ -612,7 +639,8 @@ int Menu::interfaceConta() {
 		return Website::MenuAnuncioConta(true);
 		break;
 	case 2:  //negocios
-		return Website::menuMeusNegocios();
+		Website::menuNegocios(Website::getUtilizadores()[Website::getIndiceUtilizador()]->getVetorNegocios(),"Voce nao tem Negocios");
+		return 3;
 		break;
 	case 3:  //Editar Utilizador
 		return Website::EditarUtilizador();
@@ -716,6 +744,59 @@ int Menu::interfaceEditarAnuncio_AC() {
 int Menu::interfaceEditarUtilizador() {
 	return menu(8,12);
 }
+
+int Menu::interfacePesquisarNegocios(){
+	int y;
+	y = menu(3, 13);
+	string msg;
+	switch (y) {
+	case 0: //anunciante
+
+		Website::menuNegocios(Website::VetorNegocioAnunciante(),"Nao existem Negocios para este Utilizador");
+		if(logado)
+			return 1;
+		else
+			return 0;
+
+		break;
+	case 1: //tipo negocio
+		y = menu(2,7);
+		if(y==2)
+			return 8;
+
+
+		if(y==TIPO_COMPRA)
+			msg="Nao existem Negocios de Compra";
+		else
+			msg="Nao existem Negocios de Venda";
+
+		Website::menuNegocios(Website::VetorPesquisarNegocioPorTipo(y),msg);
+
+		if(logado)
+			return 1;
+		else
+			return 0;
+		break;
+	case 2:  //categoria
+
+
+		Website::menuNegocios(Website::VetorPesquisarNegocioCategoria(),"Nao existem Negocios desta Categoria");
+
+		if(logado)
+			return 1;
+		else
+			return 0;
+		break;
+	default: //voltar atras
+		if(logado)
+			return 1;
+		else
+			return 0;
+		break;
+	}
+}
+
+
 //------------------------menu propriamente dito-----------------
 int Menu::menu(int tamanho, int menuSelect) {
 	int y = 0;
@@ -786,6 +867,9 @@ int Menu::menu(int tamanho, int menuSelect) {
 				break;
 			case 12:
 				menuEditarUtilizador(y);
+				break;
+			case 13:
+				menuPesquisarNegocios(y);
 				break;
 			default:
 				cout << "Menu Inixestente" << endl;

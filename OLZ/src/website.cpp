@@ -249,7 +249,7 @@ void Website::Anunciar_AC() {
 	categ_produto = InputLinha("Categoria do Produto: ");
 
 	descricao = InputLinha("Descricao:", true);
-
+	AtualizarData();
 	data = _data;
 
 	imagens = InputVetorString("Prima enter se nao quiser adicionar mais imagens: ");
@@ -314,7 +314,7 @@ void Website::Anunciar_AV() {
 	categ_produto = InputLinha("Categoria do Produto: ");
 
 	descricao = InputLinha("Descricao:", true);
-
+	Website::AtualizarData();
 	data = _data;
 
 	imagens = InputVetorString("Prima enter se nao quiser adicionar mais imagens: ");
@@ -916,6 +916,7 @@ void Website::criaNegocio(Anuncio* a){
 			}
 		}
 	}
+	AtualizarData();
 	utilizadores[indiceUtilizador]->FecharNegocio(a,montante,_data);
 	AtualizarBSTNegociantes(utilizadores[indiceUtilizador]);
 
@@ -926,21 +927,24 @@ void Website::criaNegocio(Anuncio* a){
 	getch();
 }
 
-int Website::menuMeusNegocios(){
+void Website::menuNegocios(vector<Negocio*> neg,string msg_erro){
+
+
 
 	while(true){
-		if(utilizadores[indiceUtilizador]->getNegocios().size()==0){
+		if(neg.size()==0){
 			system("cls");
 			intro();
 			setcolor(12);
-			cout << "Voce nao tem Negocios ";
+			cout << msg_erro;
 			setcolor(15);
 			getch();
-			return 3;
+			return;
 		}
-		Negocio* negocio = Menu::menuNegocioInterface(utilizadores[indiceUtilizador]->getVetorNegocios());
+
+		Negocio* negocio = Menu::menuNegocioInterface(neg);
 		if(negocio==NULL)
-			return 3;
+			return;
 		system("cls");
 		intro();
 		cout << (*negocio);
@@ -1281,10 +1285,70 @@ void Website::AtualizarBSTNegociantes(Utilizador* utilizador){
  }
 
 
+ //menu negocios
 
 
+ vector<Negocio*> Website::VetorNegocioAnunciante(){
+	 vector<Negocio*> res;
+
+	 system ("cls");
+	 intro();
+	 string mail = InputLinha("Mail: ");
 
 
+	 for (int i = 0; i < utilizadores.size(); ++i) {
+		 if(mail == utilizadores[i]->getDadosPessoais().getEmail()){
+			 res=utilizadores[i]->getVetorNegocios();
+			 break;
+		 }
+	 }
+	 return res;
+ }
+
+ vector<Negocio*> Website::VetorPesquisarNegocioPorTipo(int y){
+	 vector<Negocio*> res;
+	 vector<Negocio*> tmp;
+
+
+	 for (int i = 0; i < utilizadores.size(); ++i) {
+		 tmp=utilizadores[i]->getVetorNegociosTipo(y);
+		 for (int j = 0; j < tmp.size(); ++j) {
+			 res.push_back(tmp[j]);
+		 }
+	 }
+
+
+	 return res;
+ }
+
+ vector<Negocio*> Website::VetorPesquisarNegocioCategoria(){
+	 vector<Negocio*> res;
+	 vector<Negocio*> tmp;
+
+	 system ("cls");
+	 intro();
+	 string categoria = InputLinha("Categoria: ");
+
+
+	 for (int i = 0; i < utilizadores.size(); ++i) {
+		 tmp=utilizadores[i]->getVetorNegociosCategoria(categoria);
+		 for (int j = 0; j < tmp.size(); ++j) {
+			 res.push_back(tmp[j]);
+		 }
+	 }
+
+	 return res;
+ }
+
+
+void Website::AtualizarData(){
+	time_t agora= time(0);
+	tm *ltm = localtime(&agora);
+	Data d(ltm->tm_year+1900,ltm->tm_mon+1,ltm->tm_mday);
+	d.setHora(ltm->tm_hour);
+	d.setMinutos(ltm->tm_min);
+	_data=d;
+}
 
 
 

@@ -117,6 +117,8 @@ static Utilizador* menuTopNegociantesInterface(vector<Utilizador*>& util);
 
 static void desenharUtilizadorThumbnail(Utilizador* util, int sel, int pos);
 
+static void menuPesquisarNegocios(int y);
+static int interfacePesquisarNegocios();
 
 };
 
