@@ -188,7 +188,7 @@ public:
 /*!
  * Vamos usar uma estrutura (\sa AnuncioHandler) para tratar dos anuncios em apontador na fila de prioridade.
  */
-bool operator<(AnuncioHandler aH1,AnuncioHandler aH2) const;
+bool operator<(AnuncioHandler aH1,AnuncioHandler aH2);
 
 //!Class AnuncioVenda
 /*!

@@ -181,7 +181,7 @@ void Anuncio::setDescricao(string d){
 	_descricao=d;
 }
 
-bool operator<(AnuncioHandler aH1,AnuncioHandler aH2) const{
+bool operator<(AnuncioHandler aH1,AnuncioHandler aH2){
 	Data d1 = aH1.a->getData();
 	Data dd1 = aH1.a->getDataLimite();
 	Data d2 = aH2.a->getData();
