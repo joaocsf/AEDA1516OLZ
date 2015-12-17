@@ -1193,8 +1193,8 @@ int Website::EditarUtilizador(){
 	 while(!ordem.isAtEnd()){
 
 		 Utilizador* u = ordem.retrieve();
-		 cout <<"Utilizador Adicionado: "<<u->getDadosPessoais().getNome() << endl;
-		 getch();
+		 //cout <<"Utilizador Adicionado: "<<u->getDadosPessoais().getNome() << endl;
+		// getch();
 		 util.push_back(u);
 		 ordem.advance();
 	 }

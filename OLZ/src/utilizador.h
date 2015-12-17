@@ -22,7 +22,7 @@
 struct NegocioHash
 {
 	int operator() (const Negocio *neg) const{
-		return (int)neg->getAnuncio();
+		return neg->getIdentificador();
 	}
 
 	bool operator() (const Negocio *neg1, const Negocio *neg2) const{
