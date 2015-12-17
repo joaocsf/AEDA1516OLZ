@@ -322,10 +322,10 @@ void Menu::desenharUtilizadorThumbnail(Utilizador* util, int sel, int pos){
 	string telefone=(dp.getVisiveis()[VIS_TELEFONE])? dp.getTelefone() : "Telefone nao visivel";
 
 	cout << "-------------------------------------------------" << endl;
-	cout << "|Nome :" << setw(39) << nome << "|" << endl;
-	cout << "|Mail: "<< setw(39) << email<< "|" << endl;
-	cout << "|Telefone: "<<setw(40) << telefone <<"|"<< endl;
-	cout << "|Numero de Negocios:"<<setw(20) << util->getNegocios().size() <<"|"<< endl;
+	cout << "|Nome:" << setw(42) << nome << "|" << endl;
+	cout << "|Mail: "<< setw(41) << email<< "|" << endl;
+	cout << "|Telefone: "<<setw(37) << telefone <<"|"<< endl;
+	cout << "|Numero de Negocios:"<<setw(28) << util->getNegocios().size() <<"|"<< endl;
 	cout << "-------------------------------------------------"<<endl;
 
 	setcolor(15);

@@ -42,6 +42,8 @@ class Website{
 	 \sa Data
 	 */
 	static Data _data;
+
+	 static BST<Utilizador*> topNegociantes;
 public:
 	//!Construtor default
 	Website();
@@ -261,6 +263,8 @@ public:
 	static vector<Utilizador*> BSTParaVetor(BST<Utilizador*>& bst);
 	static BST<Utilizador*> ReturnUtilizadoresBST();
 	static void menuTopNegocios();
+	static void AtualizarBSTNegociantes();
+	static void AtualizarBSTNegociantes(Utilizador* utilizador);
 
 };
 

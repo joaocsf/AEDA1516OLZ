@@ -6,6 +6,8 @@ vector<Utilizador*> Website::utilizadores;
 vector<Anuncio *> Website::anuncios;
 vector<Negocio*> Website::negocios;
 
+BST<Utilizador*> Website::topNegociantes(NULL);
+
 int Website::indiceUtilizador = -1;
 Data Website::_data = Data();
 
@@ -721,7 +723,7 @@ void Website::lerFicheiro(ifstream& file) {
 
 	Dados::lerFicheiro(file);
 
-
+	AtualizarBSTNegociantes();
 }
 
 //meus anuncios
@@ -915,6 +917,8 @@ void Website::criaNegocio(Anuncio* a){
 		}
 	}
 	utilizadores[indiceUtilizador]->FecharNegocio(a,montante,_data);
+	AtualizarBSTNegociantes(utilizadores[indiceUtilizador]);
+
 	getch();
 	setcolor(3);
 	cout << "Negocio Finalizado Com Sucesso!";
@@ -1199,6 +1203,31 @@ int Website::EditarUtilizador(){
  }
 
 
+void Website::AtualizarBSTNegociantes(){
+	int n=0;
+	for (unsigned int i = 0; i < utilizadores.size(); ++i) {
+
+		Utilizador* u =utilizadores[i];
+		if(u->getNegocios().size() !=0){
+			n++;
+			//cout<<"Adicionado:" << u->getDadosPessoais().getNome() << " Teste:" << u->getNegocios()[u->getNegocios().size()-1]->getData()<<endl;
+			//getch();
+			topNegociantes.insert(u , compareUsers_ptr);
+		}
+	}
+}
+
+void Website::AtualizarBSTNegociantes(Utilizador* utilizador){
+
+	if(topNegociantes.find(utilizador) == NULL){
+		topNegociantes.insert(utilizador, compareUsers_ptr);
+		return;
+	}
+	topNegociantes.remove(utilizador);
+	topNegociantes.insert(utilizador, compareUsers_ptr);
+}
+
+
 
  BST<Utilizador*> Website::ReturnUtilizadoresBST(){
 
@@ -1223,9 +1252,9 @@ int Website::EditarUtilizador(){
 
  void Website::menuTopNegocios(){
 
-	 BST<Utilizador*> bst_util =ReturnUtilizadoresBST();
+	 //BST<Utilizador*> bst_util =ReturnUtilizadoresBST();
 
-	 vector<Utilizador*> util= BSTParaVetor(bst_util);
+	 vector<Utilizador*> util= BSTParaVetor(topNegociantes);
 
 
 	 if(util.size()==0){
