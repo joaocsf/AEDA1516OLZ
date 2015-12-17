@@ -6,6 +6,7 @@ vector<Utilizador*> Website::utilizadores;
 vector<Anuncio *> Website::anuncios;
 vector<Negocio*> Website::negocios;
 
+priority_queue<AnuncioHandler> Website::anuncios_prioridades;
 BST<Utilizador*> Website::topNegociantes(NULL);
 
 int Website::indiceUtilizador = -1;
@@ -63,6 +64,11 @@ void Website::addUtilizador(Utilizador *u) {
 
 void Website::addAnuncio(Anuncio *a) {
 	anuncios.push_back(a);
+/*DAVID MEXEU AQUI*/
+	AnuncioHandler a1;
+	a1.a = a;
+	anuncios_prioridades.push(a1);
+/*#DAVID MEXEU AQUI*/
 }
 
 void Website::addNegocio(Negocio *n) {
@@ -78,6 +84,18 @@ void Website::RemoveAnuncio(int id) {
 			break;
 		}
 	}
+
+	/*DAVID MEXEU AQUI*/
+	if(anuncios_prioridades.empty()) return;
+	priority_queue<AnuncioHandler> temp;
+	while(!anuncios_prioridades.empty()){
+		AnuncioHandler aH = anuncios_prioridades.top();
+		anuncios_prioridades.pop();
+		if(aH.a->getID() != id)
+			temp.push(aH);
+	}
+	anuncios_prioridades = temp;
+	/*#DAVID MEXEU AQUI*/
 }
 
 void Website::RemoveAnuncios(vector<Anuncio*> ids) {
@@ -90,7 +108,37 @@ void Website::RemoveAnuncios(vector<Anuncio*> ids) {
 			}
 		}
 	}
+	/*DAVID MEXEU AQUI*/
+	if(anuncios_prioridades.empty()) return;
+	for (unsigned int var = 0; var < ids.size(); var++) {
+
+		priority_queue<AnuncioHandler> temp;
+		while(!anuncios_prioridades.empty()){
+			AnuncioHandler aH = anuncios_prioridades.top();
+			anuncios_prioridades.pop();
+			if(aH.a != ids[var])
+				temp.push(aH);
+		}
+		anuncios_prioridades = temp;
+	}
+	/*#DAVID MEXEU AQUI*/
+
 }
+
+/*DAVID MEXEU AQUI*/
+void Website::pagarPrioridade(Data& dAtual,Anuncio *a){
+	priority_queue<AnuncioHandler> temp;
+	while(!anuncios_prioridades.empty()){
+		AnuncioHandler aH = anuncios_prioridades.top();
+		anuncios_prioridades.pop();
+		if(aH.a == a){
+			aH.a->setDataDestaque(dAtual);
+		}
+		temp.push(aH);
+	}
+	anuncios_prioridades = temp;
+}
+/*#DAVID MEXEU AQUI*/
 
 void Website::RemoveUtilizador(int id) {
 
@@ -340,36 +388,80 @@ void Website::Anunciar_AV() {
 }
 
 //Procuras ETC ----------------
+
+/*DAVID ALTEROU AQUI*/
+
 vector<int> Website::procurarLocalizacao(string loc) {
 	vector<int> res;
-
+/*Funcao antiga
 	for (unsigned  int i = 0; i < anuncios.size(); i++) {
 		Localizacao l = anuncios[i]->getUser()->getLocalizacao();
 		if (l.freguesia == loc || l.distrito == loc || l.concelho == loc)
 			res.push_back(i);
 	}
-
+*/
+	priority_queue<AnuncioHandler> temp = anuncios_prioridades;
+	while(!temp.empty()){
+		Localizacao l = temp.top().a->getUser()->getLocalizacao();
+		if(l.freguesia == loc || l.distrito == loc || l.concelho == loc){
+			//Se encontrou um anuncio com a localizacao pertendida vai procurar a sua posicao no vetor de anuncios.
+			for (unsigned int i = 0; i < anuncios.size(); i++) {
+				if(anuncios[i] == temp.top().a){
+					res.push_back(i);
+					break;
+				}
+			}
+		}
+		temp.pop();
+	}
 	return res;
 }
 
 vector<int> Website::procurarCategoria(string categoria) {
 	vector<int> res;
-
+/*
 	for (unsigned  int i = 0; i < anuncios.size(); i++) {
 		if (categoria == anuncios[i]->getCategoria())
 			res.push_back(i);
 	}
-
+*/
+	priority_queue<AnuncioHandler> temp = anuncios_prioridades;
+	while(!temp.empty()){
+		if(temp.top().a->getCategoria() == categoria){
+			//Se encontrou um anuncio com a categoria pertendida vai procurar a sua posicao no vetor de anuncios.
+			for (unsigned int i = 0; i < anuncios.size(); i++) {
+				if(anuncios[i] == temp.top().a){
+					res.push_back(i);
+					break;
+				}
+			}
+		}
+		temp.pop();
+	}
 	return res;
 
 }
 
 vector<int> Website::procurarData(Data data) {
 	vector<int> res;
-
+/*
 	for (unsigned int i = 0; i < anuncios.size(); i++) {
 		if (data == anuncios[i]->getData())
 			res.push_back(i);
+	}
+*/
+	priority_queue<AnuncioHandler> temp = anuncios_prioridades;
+	while(!temp.empty()){
+		if(temp.top().a->getData() == data){
+			//Se encontrou um anuncio com a categoria pertendida vai procurar a sua posicao no vetor de anuncios.
+			for (unsigned int i = 0; i < anuncios.size(); i++) {
+				if(anuncios[i] == temp.top().a){
+					res.push_back(i);
+					break;
+				}
+			}
+		}
+		temp.pop();
 	}
 
 	return res;
@@ -377,6 +469,7 @@ vector<int> Website::procurarData(Data data) {
 
 vector<int> Website::procurarPalavraChave(string palavra) {
 	vector<int> res;
+/*
 	for (unsigned int i = 0; i < anuncios.size(); i++) {
 
 		unsigned int found = anuncios[i]->getTitulo_Descricao().find(palavra);
@@ -384,12 +477,27 @@ vector<int> Website::procurarPalavraChave(string palavra) {
 			res.push_back(i);
 		}
 	}
+*/
+	priority_queue<AnuncioHandler> temp = anuncios_prioridades;
+	while(!temp.empty()){
+		unsigned int found = temp.top().a->getTitulo_Descricao().find(palavra);
+		if(found != string::npos){
+			//Se encontrou um anuncio com a categoria pertendida vai procurar a sua posicao no vetor de anuncios.
+			for (unsigned int i = 0; i < anuncios.size(); i++) {
+				if(anuncios[i] == temp.top().a){
+					res.push_back(i);
+					break;
+				}
+			}
+		}
+		temp.pop();
+	}
 	return res;
 }
 
 vector<int> Website::procurarPreco(int min, int max) {
 	vector<int> res;
-
+/*
 	for (unsigned int i = 0; i < anuncios.size(); i++) {
 		if (anuncios[i]->getTipo() == TIPO_VENDA) {
 			AnuncioVenda *av = dynamic_cast<AnuncioVenda*>(anuncios[i]);
@@ -398,8 +506,27 @@ vector<int> Website::procurarPreco(int min, int max) {
 			}
 		}
 	}
+*/
+	priority_queue<AnuncioHandler> temp = anuncios_prioridades;
+	while(!temp.empty()){
+		if(temp.top().a->getTipo() == TIPO_VENDA){
+			AnuncioVenda *av = dynamic_cast<AnuncioVenda*>(temp.top().a);
+			if(av->getPreco() >= min && av->getPreco() <= max){
+				//Se encontrou um anuncio com a categoria pertendida vai procurar a sua posicao no vetor de anuncios.
+				for (unsigned int i = 0; i < anuncios.size(); i++) {
+					if(anuncios[i] == temp.top().a){
+						res.push_back(i);
+						break;
+					}
+				}
+			}
+		}
+		temp.pop();
+	}
 	return res;
 }
+
+/*#DAVID ALTEROU AQUI*/
 
 //menus pesquisar anuncios
 void Website::contactar(int id) {

@@ -8,15 +8,18 @@
 #include "BST.h"
 #include "dadospessoais.h"
 #include "utilidades.h"
+#include "anuncio.h"
+#include <queue>
 #include <time.h>
 
 //!Class Website
 /*!
- * Esta clase contem o registo de todo relativo ao website, anuncios, utilizadores, negocios...
+ * Esta clase contem o registo de tudo relativo ao website, anuncios, utilizadores, negocios...
  * E os membros-funcao relativos ao mesmo.
  */
 class Website{
 
+	static priority_queue<AnuncioHandler> anuncios_prioridades;
 	//!Declaracao do vetor de utilizadores do website.
 	/*!
 	 \sa Utilizador
@@ -213,7 +216,7 @@ public:
 	//!Funcao que permite ao utilizador visualizar os seus negocios.
 
 
-
+	static void pagarPrioridade(Data& dAtual,Anuncio *a);
 
 
 
