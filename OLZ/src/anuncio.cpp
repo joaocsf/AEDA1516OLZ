@@ -16,8 +16,7 @@ void Anuncio::setIDGlobal(int id) {
 Anuncio::Anuncio(string titulo, string categ_produto, string descricao,
 		Data date) :
 		_num_vizualizacoes(0), _titulo(titulo), _categ_produto(categ_produto), _descricao(
-				descricao), _data(date), _identificador(_ID++), _user(NULL), _visivel(
-				true) {
+				descricao), _data(date), _identificador(_ID++), _user(NULL), _visivel(true), _data_destaque(Data(0,0,0)) {
 }
 
 void Anuncio::ler(ifstream& in, bool escreve) {
@@ -181,6 +180,21 @@ void Anuncio::setCategoria(string c){
 void Anuncio::setDescricao(string d){
 	_descricao=d;
 }
+
+bool operator<(AnuncioHandler aH1,AnuncioHandler aH2) const{
+	Data d1 = aH1.a->getData();
+	Data dd1 = aH1.a->getDataLimite();
+	Data d2 = aH2.a->getData();
+	Data dd2 = aH2.a->getDataLimite();
+	bool p_1 = (d1 < dd1);
+	bool p_2 = (d2 < dd2);
+	if (p_1 && !p_2) return false;
+	if (p_2 && !p_1) return true;
+	if (p_1 && p_2) return (dd2 < dd1);
+	if (!p_1 && !p_2) return (d1 < d2);
+	return false;
+}
+
 
 //anuncio venda
 AnuncioVenda::AnuncioVenda(string titulo, string categ_produto,
@@ -380,6 +394,10 @@ bool AnuncioVenda::getNegociavel() const {
 
 int AnuncioVenda::getEstado() const {
 	return _estado;
+}
+
+Data Anuncio::getDataLimite() const {
+	return _data_destaque;
 }
 
 //overload <<

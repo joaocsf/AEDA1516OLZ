@@ -25,6 +25,10 @@
 #define TIPO_VENDA 1
 #define TIPO_COMPRA 0
 
+struct AnuncioHandler {
+	Anuncio * a;
+};
+
 //!Class Anuncio
 /*!
  * Classe anuncio que contem as informacoes e as funcoes relativas aos anuncios.
@@ -89,6 +93,8 @@ class Anuncio: public Dados {
 	 \sa Contacto
 	 */
 	vector<Contacto> _contactos;
+
+	Data _data_destaque;
 
 public:
 	//! Construtor default.
@@ -172,9 +178,17 @@ public:
 	vector<Contacto> getContactos() const;
 	//!Funcao get para a descricao do anuncio.
 	string getDescricao() const;
+	//!Funcao get para a data limite do anuncio.
+	Data getDataLimite() const;
 	//!Funcao para eliminar o vector de imagens do anuncio.
 	void eliminaImagens();
 };
+
+//!Overload do operador de comparacao que vai ser utilizado na fila de prioridade
+/*!
+ * Vamos usar uma estrutura (\sa AnuncioHandler) para tratar dos anuncios em apontador na fila de prioridade.
+ */
+bool operator<(AnuncioHandler aH1,AnuncioHandler aH2) const;
 
 //!Class AnuncioVenda
 /*!
