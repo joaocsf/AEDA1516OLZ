@@ -77,6 +77,13 @@ public:
 	virtual void ler(ifstream& in, bool escreve = false);
 	//!Funcao para escrever a data para um ficheiro.
 	virtual void escrever(ofstream& out);
+	//!Funcao que adiciona um mes a data atual.
+	/*!
+	 * Esta funcao recebe a data atual e soma 1 mes a data
+	 * E usada quando um utilizador paga para ter o seu anuncio com destaque
+	 * A funcao calcula a data ate ao qual o anuncio vai ter destaque.
+	 */
+	Data addMes(Data& d) const;
 
 	bool operator< (const Data & d) const;
 private:

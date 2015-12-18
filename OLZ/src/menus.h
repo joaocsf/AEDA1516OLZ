@@ -95,12 +95,12 @@ static void InterfaceSeletor();
 //!Variavel que indica se o usuario está logado.
 static bool logado;
 //!Id do anuncio no vetor anuncios onde que o utilizador esta a visualizar no momento
-static int idAnuncio;
+static Anuncio* Anuncio_atual;
 //menu dos anuncios
 //!Menu dos anuncios.
-static int menuAnuncioInterface(vector<int> indices);
+static Anuncio* menuAnuncioInterface(vector<Anuncio*>& anuncios);
 //!Funcao para desenhar a thumbnail de um anuncio.
-static void desenharAnuncioThumbnail(int indice, int sel, int pos);
+static void desenharAnuncioThumbnail(Anuncio* anuncio, int sel, int pos);
 //menu negocios
 //!Funcao para desenhar a thumbnail de negocios.
 static void desenharNegocioThumbnail(Negocio *n, int sel, int pos);

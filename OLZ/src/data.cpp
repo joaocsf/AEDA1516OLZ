@@ -139,6 +139,41 @@ bool Data::operator< (const Data & d) const{
 	return false;
 }
 
+Data Data::addMes(Data& d) const{
+	Data res;
+	res = d;
+	res.mes += 1;
+	if (res.mes == 13){
+		res.mes = 1;
+		res.ano += 1;
+	}
+	switch (res.mes) {
+		case 2:
+			if(res.dia > 28){
+				res.dia = 28;
+			}
+			break;
+		case 4:
+			if(res.dia > 30)
+				res.dia = 30;
+			break;
+		case 6:
+			if(res.dia > 30)
+				res.dia = 30;
+			break;
+		case 9:
+			if(res.dia > 30)
+				res.dia = 30;
+			break;
+		case 11:
+			if(res.dia > 30)
+				res.dia = 30;
+			break;
+		default:
+			break;
+	}
+	return res;
+}
 
 
 

@@ -3,7 +3,7 @@
 
 
 bool Menu::logado=false;
-int Menu::idAnuncio=-1;
+Anuncio* Menu::Anuncio_atual=NULL;
 
 string Highlight(string frase, int select, int ops) {
 	if (select == ops) {
@@ -140,10 +140,11 @@ void Menu::menuTipoAnuncio(int y) {
 void Menu::menuAnuncio(int y) {
 	system("cls");
 	Website::intro();
-	if(Website::getAnuncios()[idAnuncio]->getTipo())
-		cout<< (*dynamic_cast<AnuncioVenda*>(Website::getAnuncios()[idAnuncio]));
+	if(Anuncio_atual!=NULL)
+	if(Anuncio_atual->getTipo())
+		cout<< (*dynamic_cast<AnuncioVenda*>(Anuncio_atual));
 	else{
-		AnuncioCompra *ac = dynamic_cast<AnuncioCompra*>(Website::getAnuncios()[idAnuncio]);
+		AnuncioCompra *ac = dynamic_cast<AnuncioCompra*>(Anuncio_atual);
 		cout<< (*ac);
 		if(ac->troca()){
 			setcolor(3);
@@ -175,10 +176,11 @@ void Menu::menuCategProd(int y) {
 void Menu::menuAnuncioDefinicoes(int y) {
 	system("cls");
 	Website::intro();
-	if(Website::getAnuncios()[idAnuncio]->getTipo())
-		cout<< (*dynamic_cast<AnuncioVenda*>(Website::getAnuncios()[idAnuncio]));
+	if(Anuncio_atual!=NULL)
+	if(Anuncio_atual->getTipo())
+		cout<< (*dynamic_cast<AnuncioVenda*>(Anuncio_atual));
 	else{
-		AnuncioCompra *ac = dynamic_cast<AnuncioCompra*>(Website::getAnuncios()[idAnuncio]);
+		AnuncioCompra *ac = dynamic_cast<AnuncioCompra*>(Anuncio_atual);
 		cout<< (*ac);
 		if(ac->troca()){
 			setcolor(3);
@@ -310,20 +312,18 @@ void Menu::InterfaceSeletor() {
 
 //---------------------------Menu Anuncios--------------------------------------
 
-void Menu::desenharAnuncioThumbnail(int indice, int sel, int pos){
-
-	Anuncio* aTemp = Website::getAnuncios()[indice];
+void Menu::desenharAnuncioThumbnail(Anuncio* anuncio, int sel, int pos){
 
 
-	string header = (aTemp->getTipo() == TIPO_COMPRA)? "Anuncio Compra" : "Anuncio Venda";
+	string header = (anuncio->getTipo() == TIPO_COMPRA)? "Anuncio Compra" : "Anuncio Venda";
 	setcolor(15);
 	if (sel == pos)
 		setcolor(2);
 	cout << "------------------------------------------" << endl;
-	cout << "|" << setw(40) << header << "|" << endl;
-	cout << "|Titulo: "<< setw(32) << aTemp->getTitulo() << "|" << endl;
-	if (aTemp->getTipo() == TIPO_VENDA)
-		cout <<"|Preco: "<<setw(33) << aTemp->getPreco() <<"|"<< endl;
+	cout << "|" << anuncio->getData() << setw(21) << header << "|" << endl;
+	cout << "|Titulo: "<< setw(32) << anuncio->getTitulo() << "|" << endl;
+	if (anuncio->getTipo() == TIPO_VENDA)
+		cout <<"|Preco: "<<setw(33) << anuncio->getPreco() <<"|"<< endl;
 	cout << "------------------------------------------"<<endl;
 
 	setcolor(15);
@@ -416,7 +416,7 @@ Utilizador* Menu::menuTopNegociantesInterface(vector<Utilizador*>& util){
 
 
 //-----------------------------Menu Anuncio----------------------------
-int Menu::menuAnuncioInterface(vector<int> indices){
+Anuncio* Menu::menuAnuncioInterface(vector<Anuncio*>& anuncios){
 	int y= 0;//Seletor
 	int nPagina=0; //numero pagina;
 	int anuncioPorPagina=3;//numero de anuncio por pagina;
@@ -430,13 +430,13 @@ int Menu::menuAnuncioInterface(vector<int> indices){
 			update=false;
 			system("cls");
 			Website::intro();
-			cout<<(nPagina+1)<< "/" <<((indices.size()-1)/anuncioPorPagina + 1)<<endl;
+			cout<<(nPagina+1)<< "/" <<((anuncios.size()-1)/anuncioPorPagina + 1)<<endl;
 			for (int i = 0; i < 3; ++i) {
 				int n = nPagina * anuncioPorPagina;
-				if (i + n >= indices.size())
+				if (i + n >= anuncios.size())
 					break;
 				maxY=i;
-				desenharAnuncioThumbnail(indices[i + n], y, i);
+				desenharAnuncioThumbnail(anuncios[i + n], y, i);
 			}
 		}
 
@@ -462,16 +462,16 @@ int Menu::menuAnuncioInterface(vector<int> indices){
 				}
 
 			}else if(tecla == 77){ // direita
-				if(nPagina < (indices.size()-1)/anuncioPorPagina){
+				if(nPagina < (anuncios.size()-1)/anuncioPorPagina){
 					y=0;
 					nPagina++;
 					update=true;
 				}
 			}else if (tecla == 13) { // enter
-				return indices[(nPagina*anuncioPorPagina+y)];
+				return anuncios[(nPagina*anuncioPorPagina+y)];
 			}
 			else if(tecla==27){//esc
-				return -1;//voltar atras
+				return NULL;//voltar atras
 			}
 		}
 	}
@@ -753,10 +753,7 @@ int Menu::interfacePesquisarNegocios(){
 	case 0: //anunciante
 
 		Website::menuNegocios(Website::VetorNegocioAnunciante(),"Nao existem Negocios para este Utilizador");
-		if(logado)
-			return 1;
-		else
-			return 0;
+		return 8;
 
 		break;
 	case 1: //tipo negocio
@@ -771,21 +768,15 @@ int Menu::interfacePesquisarNegocios(){
 			msg="Nao existem Negocios de Venda";
 
 		Website::menuNegocios(Website::VetorPesquisarNegocioPorTipo(y),msg);
+		return 8;
 
-		if(logado)
-			return 1;
-		else
-			return 0;
 		break;
 	case 2:  //categoria
 
 
 		Website::menuNegocios(Website::VetorPesquisarNegocioCategoria(),"Nao existem Negocios desta Categoria");
+		return 8;
 
-		if(logado)
-			return 1;
-		else
-			return 0;
 		break;
 	default: //voltar atras
 		if(logado)

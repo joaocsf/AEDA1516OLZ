@@ -8,30 +8,23 @@
 #include "BST.h"
 #include "dadospessoais.h"
 #include "utilidades.h"
+#include "anuncio.h"
+#include <queue>
 #include <time.h>
 
 //!Class Website
 /*!
- * Esta clase contem o registo de todo relativo ao website, anuncios, utilizadores, negocios...
+ * Esta clase contem o registo de tudo relativo ao website, anuncios, utilizadores, negocios...
  * E os membros-funcao relativos ao mesmo.
  */
 class Website{
 
+	static priority_queue<AnuncioHandler> anuncios_prioridades;
 	//!Declaracao do vetor de utilizadores do website.
 	/*!
 	 \sa Utilizador
 	 */
 	static vector<Utilizador *> utilizadores;
-	//!Declaracao do vetor de anuncios do website.
-	/*!
-	 \sa Anuncio
-	 */
-	static vector<Anuncio *> anuncios;
-	//!Declaracao do vetor de negocios do website.
-	/*!
-	 \sa Negocio
-	 */
-	static vector<Negocio *> negocios;
 	//!Variavel global que contem o indice do utilizador.
 	/*!
 	 * Indica a posicao no vetor de utilizadores do utilizador que esta atualmente logado.
@@ -87,10 +80,7 @@ public:
 	static void Anunciar_AV();
 	//!Funcao get para o vetor de utilizadores do website.
 	static vector<Utilizador*>  getUtilizadores();
-	//!Funcao get para o vetor de anuncios do website.
-	static vector<Anuncio *>  getAnuncios();
-	//!Funcao get para o vetor de negocios do website.
-	static vector<Negocio*>  getNegocios();
+
 	//!Funcao que adiciona um novo utilizador ao vetor de utilizadores.
 	static void addUtilizador(Utilizador *u);
 	//!Funcao que adiciona um anuncio ao vetor de anuncios do website.
@@ -124,32 +114,35 @@ public:
 	 \param palavra que vai ser procurada na descricao de cada anuncio.
 	 \return devolve um vetor que contem os indices dos anuncios nos quais encontrou a palavra chave com recurso a funcao find() das strings.
 	 */
-	static vector<int> procurarPalavraChave(string palavra);
+
+
+
+	static vector<Anuncio*> procurarPalavraChave(string palavra);
 	//!Funcao para pesquisar por data.
 	/*!
 	 \param data a procurar.
 	 \return devolve um vetor que contem os indices dos anuncios que foram criados na data a procurar.
 	 */
-	static vector<int> procurarData(Data data);
+	static vector<Anuncio*> procurarData();
 	//!Funcao de pesquisa por categoria.
 	/*!
 	 \param categoria a procurar.
 	 \return um vetor de inteiros com os indices dos anuncios cuja categoria e igual a que procuramos.
 	 */
-	static vector<int> procurarCategoria(string categoria);
+	static vector<Anuncio*> procurarCategoria(string categoria);
 	//!Funcao para pesquisar anuncios por localizacao.
 	/*!
 	 \param loc localizacao a procurar.
 	 \return devolve um vetor de inteiros contendo os indices dos anuncios que correspondem aos parametros da pesquisa.
 	 */
-	static vector<int> procurarLocalizacao(string loc);
+	static vector<Anuncio*> procurarLocalizacao(string loc);
 	//!Funcao para procurar anuncios dentro de um intervalo de precos.
 	/*!
 	 \param min preco minimo.
 	 \param max preco maximo.
 	 \return o vetor contendo os indices dos anuncios (neste caso somente os de venda) correspondentes.
 	 */
-	static vector<int> procurarPreco(int min, int max);
+	static vector<Anuncio*> procurarPreco(int min, int max);
 	//menu pesquisa
 	//!Funcao para o menu de pesquisa por palavra.
 	/*!
@@ -180,29 +173,26 @@ public:
 	/*!
 	 * Esta funcao e chamada no fim de uma pesquisa no caso de de o resultado ser diferente de 0 e mostra os anuncios encontrados.
 	 */
-	static int subMenuAnuncio(vector<int>& indices);
+	static int subMenuAnuncio(vector<Anuncio *>& indices);
 	//!Funcao que ordena os indices por preco.
 	/*!
 	 \param v vetor com os indices dos anuncios correspondentes a pesquisa.
 	 \param crescente booleano que serve para indicar se queremos ordenar por ordem crescente ou decrescente de preco.
 	 */
-	static void ordenaPreco(vector<int>& v,bool crescente);
+	static void ordenaPreco(vector<Anuncio*>& v,bool crescente);
 	//!Funcao de display da intro ("OLZ").
 	static void intro();
 	//!Funcao para realizar o contacto entre o anunciante e o interessado.
 	/*!
 	 * Esta funcao realiza o contacto entre dois utilizadores, verifica se o utilizador esta logado, em caso afirmativo vai buscar os seus dados pessoais e realiza o contacto, caso contrario pede essas informacoes ao utilizador.
 	 */
-	static void contactar(int id);
+	static void contactar(Anuncio * an);
 	//!Funcao que guarda todas as informacoes num ficheiro no fim do programa.
 	static void guardarFicheiro(ofstream& file);
 	//!Funcao que le as informacoes do website de um ficheiro no inicio do programa.
 	static void lerFicheiro(ifstream& file);
-	//menu definicoes
-	//!Funcao para converter um vetor de anuncios num vetor com os indices correspondentes a esses anuncios do vetor anuncios do website.
-	static vector<int> anunciosParaIndices(const vector<Anuncio*>& aTemp);
 	//!Funcao quue retorna um vetor de indices com os anuncios de venda do utilizador atualmente logado.
-	static vector<int> retornarMeusAnuncios(bool venda);
+	static vector<Anuncio*> retornarMeusAnuncios(bool venda);
 	//!Funcao que lista e gere os anuncios quer de comprar quer de venda do utilizador.
 	/*!
 	 * A funcao mostra uma lista de anuncios dependendo do booleano (Compra ou venda).
@@ -213,7 +203,7 @@ public:
 	//!Funcao que permite ao utilizador visualizar os seus negocios.
 
 
-
+	static void pagarPrioridade(Data& dAtual,Anuncio *a);
 
 
 
@@ -282,6 +272,7 @@ public:
 	 */
 	static string InputInteiro(string mensagemLoop, unsigned int casas);
 
+	static void AtualizarP_queue();
 	static vector<Utilizador*> BSTParaVetor(BST<Utilizador*>& bst);
 	static BST<Utilizador*> ReturnUtilizadoresBST();
 	static void menuTopNegocios();

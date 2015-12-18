@@ -75,7 +75,7 @@ class Anuncio: public Dados {
 	int _num_vizualizacoes;
 	//! visivel.
 	/*!
-	 * Booleano com a visivilidade do anuncio.
+	 * Booleano com a visibilidade do anuncio.
 	 */
 	bool _visivel;
 	//! data.
@@ -142,6 +142,8 @@ public:
 	void setVisibilidade(bool vis);
 	//!Funcao set para a data do anuncio.
 	void setData(Data d);
+	//!Funcao set para a data limite de destaque do anuncio.
+	void setDataDestaque(Data d);
 	//!Funcao set para o numero de visualizacoes do anuncio.
 	void setNVisualizacoes(int v);
 	//!Funcao set para a descricao do anuncio.

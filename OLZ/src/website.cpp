@@ -3,9 +3,8 @@
 
 
 vector<Utilizador*> Website::utilizadores;
-vector<Anuncio *> Website::anuncios;
-vector<Negocio*> Website::negocios;
 
+priority_queue<AnuncioHandler> Website::anuncios_prioridades;
 BST<Utilizador*> Website::topNegociantes(NULL);
 
 int Website::indiceUtilizador = -1;
@@ -49,57 +48,49 @@ vector<Utilizador*> Website::getUtilizadores() {
 	return utilizadores;
 }
 
-vector<Anuncio *> Website::getAnuncios() {
-	return anuncios;
-}
 
-vector<Negocio*> Website::getNegocios() {
-	return negocios;
-}
 
 void Website::addUtilizador(Utilizador *u) {
 	utilizadores.push_back(u);
 }
 
 void Website::addAnuncio(Anuncio *a) {
-	anuncios.push_back(a);
+/*DAVID MEXEU AQUI*/
+	AnuncioHandler a1;
+	a1.a = a;
+	anuncios_prioridades.push(a1);
+/*#DAVID MEXEU AQUI*/
 }
 
-void Website::addNegocio(Negocio *n) {
-	negocios.push_back(n);
-}
+
 
 void Website::RemoveAnuncio(int id) {
-
-	for (unsigned int i = 0; i < anuncios.size(); ++i) {
-		if (anuncios[i]->getID() == id) {
-			anuncios[i]->getUser()->RemoverAnuncio(id);
-			anuncios.erase(anuncios.begin() + i);
-			break;
-		}
-	}
+		utilizadores[indiceUtilizador]->RemoverAnuncio(id);
+		AtualizarP_queue();
 }
-
-void Website::RemoveAnuncios(vector<Anuncio*> ids) {
-
-	for (unsigned int i = 0; i < anuncios.size(); ++i) {
-		for (unsigned int x = 0; x < ids.size(); ++x) {
-			if(anuncios[i]->getID() == ids[x]->getID()){
-				anuncios.erase(anuncios.begin() + i--);
-				break;
-			}
+/*DAVID MEXEU AQUI*/
+void Website::pagarPrioridade(Data& dAtual,Anuncio *a){
+	priority_queue<AnuncioHandler> temp;
+	while(!anuncios_prioridades.empty()){
+		AnuncioHandler aH = anuncios_prioridades.top();
+		anuncios_prioridades.pop();
+		if(aH.a == a){
+			aH.a->setDataDestaque(dAtual);
 		}
+		temp.push(aH);
 	}
+	anuncios_prioridades = temp;
 }
+/*#DAVID MEXEU AQUI*/
 
 void Website::RemoveUtilizador(int id) {
 
 	for (unsigned int i = 0; i < utilizadores.size(); ++i) {
 		if (utilizadores[i]->getID() == id) {
 		
-			RemoveAnuncios(utilizadores[i]->getAnuncios());
 			delete(utilizadores[i]);
 			utilizadores.erase(utilizadores.begin() + i--);
+			AtualizarP_queue();
 			break;
 		}
 	}
@@ -107,15 +98,7 @@ void Website::RemoveUtilizador(int id) {
 	Menu::logado=false;
 }
 
-void Website::RemoveNegocio(int id) { //só remove do vetor negocios
 
-	for (unsigned int i = 0; i < negocios.size(); ++i) {
-		if (negocios[i]->getID() == id) {
-			negocios.erase(negocios.begin() + i);
-			break;
-		}
-	}
-}
 
 //funçoes interaão com o usuario
 int Website::getIndiceUtilizador() {
@@ -277,12 +260,13 @@ void Website::Anunciar_AC() {
 			getch();
 			return;
 		}
-		Menu::idAnuncio = Menu::menuAnuncioInterface(retornarMeusAnuncios(true));
+		vector<Anuncio* > aTem = retornarMeusAnuncios(true);
+		Anuncio *av = Menu::menuAnuncioInterface(aTem);
 
-		if(Menu::idAnuncio == -1)
+		if(av == NULL)
 			return;
 
-		ac->setAnuncioVenda(dynamic_cast<AnuncioVenda*>(anuncios[Menu::idAnuncio]));
+		ac->setAnuncioVenda(dynamic_cast<AnuncioVenda*>(av));
 	}
 
 	for (unsigned int i = 0; i < imagens.size(); ++i) {
@@ -291,7 +275,7 @@ void Website::Anunciar_AC() {
 		ac->AdicionarImagem(img);
 	}
 
-	anuncios.push_back(ac);
+	addAnuncio(ac);
 	utilizadores[indiceUtilizador]->AdicionarAnuncio(ac);
 }
 
@@ -334,49 +318,79 @@ void Website::Anunciar_AV() {
 		av->AdicionarImagem(img);
 	}
 
-	anuncios.push_back(av);
+	addAnuncio(av);
 	utilizadores[indiceUtilizador]->AdicionarAnuncio(av);
 
 }
 
 //Procuras ETC ----------------
-vector<int> Website::procurarLocalizacao(string loc) {
-	vector<int> res;
 
+/*DAVID ALTEROU AQUI*/
+
+vector<Anuncio *> Website::procurarLocalizacao(string loc) {
+	vector<Anuncio*> res;
+	/*Funcao antiga
 	for (unsigned  int i = 0; i < anuncios.size(); i++) {
 		Localizacao l = anuncios[i]->getUser()->getLocalizacao();
 		if (l.freguesia == loc || l.distrito == loc || l.concelho == loc)
 			res.push_back(i);
 	}
+	 */
+
+	priority_queue<AnuncioHandler> temp = anuncios_prioridades;
+	while(!temp.empty()){
+		Localizacao l = temp.top().a->getUser()->getLocalizacao();
+		if(l.freguesia == loc || l.distrito == loc || l.concelho == loc){
+			res.push_back(temp.top().a);
+			}
+		temp.pop();
+	}
 
 	return res;
 }
 
-vector<int> Website::procurarCategoria(string categoria) {
-	vector<int> res;
-
+vector<Anuncio *>  Website::procurarCategoria(string categoria) {
+	vector<Anuncio *>  res;
+	/*
 	for (unsigned  int i = 0; i < anuncios.size(); i++) {
 		if (categoria == anuncios[i]->getCategoria())
 			res.push_back(i);
 	}
+	 */
+	priority_queue<AnuncioHandler> temp = anuncios_prioridades;
+	while(!temp.empty()){
+		if(temp.top().a->getCategoria() == categoria){
+			res.push_back(temp.top().a);
+		}
 
-	return res;
-
-}
-
-vector<int> Website::procurarData(Data data) {
-	vector<int> res;
-
-	for (unsigned int i = 0; i < anuncios.size(); i++) {
-		if (data == anuncios[i]->getData())
-			res.push_back(i);
+		temp.pop();
 	}
 
 	return res;
 }
 
-vector<int> Website::procurarPalavraChave(string palavra) {
-	vector<int> res;
+vector<Anuncio *>  Website::procurarData() {
+	vector<Anuncio *>  res;
+	/*
+	for (unsigned int i = 0; i < anuncios.size(); i++) {
+		if (data == anuncios[i]->getData())
+			res.push_back(i);
+	}
+	 */
+
+	priority_queue<AnuncioHandler> temp = anuncios_prioridades;
+	while(!temp.empty()){
+			res.push_back(temp.top().a);
+		temp.pop();
+	}
+
+
+	return res;
+}
+
+vector<Anuncio*>  Website::procurarPalavraChave(string palavra) {
+	vector<Anuncio*>  res;
+	/*
 	for (unsigned int i = 0; i < anuncios.size(); i++) {
 
 		unsigned int found = anuncios[i]->getTitulo_Descricao().find(palavra);
@@ -384,12 +398,21 @@ vector<int> Website::procurarPalavraChave(string palavra) {
 			res.push_back(i);
 		}
 	}
+	 */
+	priority_queue<AnuncioHandler> temp = anuncios_prioridades;
+	while(!temp.empty()){
+		unsigned int found = temp.top().a->getTitulo_Descricao().find(palavra);
+		if(found != string::npos){
+			res.push_back(temp.top().a);
+		}
+		temp.pop();
+	}
 	return res;
 }
 
-vector<int> Website::procurarPreco(int min, int max) {
-	vector<int> res;
-
+vector<Anuncio *>  Website::procurarPreco(int min, int max) {
+	vector<Anuncio *>  res;
+/*
 	for (unsigned int i = 0; i < anuncios.size(); i++) {
 		if (anuncios[i]->getTipo() == TIPO_VENDA) {
 			AnuncioVenda *av = dynamic_cast<AnuncioVenda*>(anuncios[i]);
@@ -398,11 +421,41 @@ vector<int> Website::procurarPreco(int min, int max) {
 			}
 		}
 	}
+*/
+	priority_queue<AnuncioHandler> temp = anuncios_prioridades;
+	while(!temp.empty()){
+		if(temp.top().a->getTipo() == TIPO_VENDA){
+			AnuncioVenda *av = dynamic_cast<AnuncioVenda*>(temp.top().a);
+			if(av->getPreco() >= min && av->getPreco() <= max){
+				res.push_back(temp.top().a);
+					}
+				}
+		temp.pop();
+	}
+
 	return res;
 }
 
+
+void Website::AtualizarP_queue(){
+	anuncios_prioridades = priority_queue<AnuncioHandler>();
+
+	for (unsigned int var = 0; var < utilizadores.size(); ++var) {
+		for (unsigned int i = 0; i < utilizadores[var]->getAnuncios().size(); i++) {
+			AnuncioHandler aH;
+			aH.a = utilizadores[var]->getAnuncios()[i];
+			if(aH.a->getVisibilidade()){
+				anuncios_prioridades.push(aH);
+			}
+		}
+	}
+}
+
+
+/*#DAVID ALTEROU AQUI*/
+
 //menus pesquisar anuncios
-void Website::contactar(int id) {
+void Website::contactar(Anuncio* an) {
 	string mensagem;
 	string nome;
 	string email;
@@ -413,9 +466,7 @@ void Website::contactar(int id) {
 	if (Menu::logado) {
 		cout << "Mensagem: " << endl;
 		getline(cin, mensagem);
-		anuncios[id]->enviarMensagem(
-				Contacto(mensagem,
-						utilizadores[indiceUtilizador]->getDadosPessoais()));
+		an->enviarMensagem(Contacto(mensagem,utilizadores[indiceUtilizador]->getDadosPessoais()));
 	} else {
 		nome = InputLinha("Nome: ");
 
@@ -428,7 +479,7 @@ void Website::contactar(int id) {
 
 		mensagem = InputLinha("Mensagem: ");
 
-		anuncios[id]->enviarMensagem(Contacto(mensagem, dados));
+		an->enviarMensagem(Contacto(mensagem, dados));
 	}
 }
 
@@ -440,8 +491,8 @@ int Website::menuAnuncioPalavra() {
 	cout << "Introduza a Palavra-Chave: ";
 	getline(cin, p);
 
-		vector<int> indices = procurarPalavraChave(p);
-		if (indices.size() == 0) {
+		vector<Anuncio *> anuncios = procurarPalavraChave(p);
+		if (anuncios.size() == 0) {
 			setcolor(12);
 			cout << "Palavra nao encontrada. ";
 			setcolor(15);
@@ -449,84 +500,19 @@ int Website::menuAnuncioPalavra() {
 			return 4;
 		}
 
-		return subMenuAnuncio(indices);
+		return subMenuAnuncio(anuncios);
 }
 
 int Website::menuAnuncioData() {
 
-	int dia, mes, ano;
-	bool erro;
-
 	system("cls");
 	intro();
-	cout << "Introduza a Data: ";
 
-	while (true) {
-		system("cls");
-		intro();
-		if (erro) {
-			setcolor(12);
-			cout << "Caracter Invalido" << endl;
-			setcolor(15);
-		}
-		cout << "Dia: ";
-		cin >> dia;
 
-		if (cin.fail()) {
-			erro = true;
-			cin.clear();
-			cin.ignore();
-		} else {
-			break;
-		}
-	}
-	erro = false;
-	while (true) {
-		system("cls");
-		intro();
-		if (erro) {
-			setcolor(12);
-			cout << "Caracter Invalido" << endl;
-			setcolor(15);
-		}
-		cout << "Mes: ";
-		cin >> mes;
-
-		if (cin.fail()) {
-			erro = true;
-			cin.clear();
-			cin.ignore();
-		} else {
-			break;
-		}
-	}
-	erro = false;
-	while (true) {
-		system("cls");
-		intro();
-		if (erro) {
-			setcolor(12);
-			cout << "Caracter Invalido" << endl;
-			setcolor(15);
-		}
-		cout << "Ano: ";
-		cin >> ano;
-
-		if (cin.fail()) {
-			erro = true;
-			cin.clear();
-			cin.ignore();
-		} else {
-			break;
-		}
-	}
-
-	Data d(ano, mes, dia);
-
-	vector<int> indices = procurarData(d);
+	vector<Anuncio *> indices = procurarData();
 	if (indices.size() == 0) {
 		setcolor(12);
-		cout << "Nao existem anuncios com a data especificada. ";
+		cout << "Nao existem anuncios. ";
 		setcolor(15);
 		getch();
 		return 4;
@@ -536,12 +522,13 @@ int Website::menuAnuncioData() {
 
 }
 
-int Website::subMenuAnuncio(vector<int>& indices) {
+int Website::subMenuAnuncio(vector<Anuncio *>& indices) {
 
 	while(true){
 
-		Menu::idAnuncio = Menu::menuAnuncioInterface(indices);
-		if(Menu::idAnuncio==-1){
+		Anuncio *a = Menu::menuAnuncioInterface(indices);
+		Menu::Anuncio_atual=a;
+		if(a==NULL){
 			return 4;
 		}
 
@@ -549,18 +536,18 @@ int Website::subMenuAnuncio(vector<int>& indices) {
 		bool vis = true;
 		bool verExterno = true;
 		if (indiceUtilizador != -1)
-			if (utilizadores[indiceUtilizador]->getID() == anuncios[Menu::idAnuncio]->getUser()->getID())
+			if (utilizadores[indiceUtilizador]->getID() == a->getUser()->getID())
 				verExterno = false;
 
 		if (verExterno) {
 			do {
 				if (vis) {
-					anuncios[Menu::idAnuncio]->visualizacao();
+					a->visualizacao();
 					vis = false;
 				}
 				y = Menu::interfacemenuAnuncio();
 				if (!y) {
-					contactar(Menu::idAnuncio);
+					contactar(a);
 				}
 			} while (!y);
 			vis = true;
@@ -568,10 +555,10 @@ int Website::subMenuAnuncio(vector<int>& indices) {
 		} else {
 			system("cls");
 			intro();
-			if (Website::getAnuncios()[Menu::idAnuncio]->getTipo())
-				cout<< (*dynamic_cast<AnuncioVenda*>(Website::getAnuncios()[Menu::idAnuncio]));
+			if (a->getTipo())
+				cout<< (*dynamic_cast<AnuncioVenda*>(a));
 			else{
-				AnuncioCompra *ac = dynamic_cast<AnuncioCompra*>(Website::getAnuncios()[Menu::idAnuncio]);
+				AnuncioCompra *ac = dynamic_cast<AnuncioCompra*>(a);
 				cout<< (*ac);
 				if(ac->troca()){
 					setcolor(3);
@@ -596,7 +583,7 @@ int Website::menuAnuncioCategoria() {
 	cout << "Introduza a Categoria que deseja procurar: ";
 	getline(cin, c);
 
-	vector<int> indices = procurarCategoria(c);
+	vector<Anuncio*> indices = procurarCategoria(c);
 	if (indices.size() == 0) {
 		setcolor(12);
 		cout << "Nao existem Anuncios da Categoria" << c << ". ";
@@ -614,7 +601,7 @@ int Website::menuAnuncioLocalizacao() {
 	cout << "Introduza a Localizao na qual deseja procurar o anuncio: " << endl;
 	getline(cin, l);
 
-	vector<int> indices = procurarLocalizacao(l);
+	vector<Anuncio*> indices = procurarLocalizacao(l);
 	if (indices.size() == 0) {
 		setcolor(12);
 		cout << "Não existem Anuncios em " << l << ". ";
@@ -627,16 +614,16 @@ int Website::menuAnuncioLocalizacao() {
 }
 //ordenar
 
-void Website::ordenaPreco(vector<int>& v, bool crescente) {
+void Website::ordenaPreco(vector<Anuncio*>& v, bool crescente) {
 	for (unsigned int p = 1; p < v.size(); p++) {
-		int tmp = v[p];
+		Anuncio* tmp = v[p];
 		int j;
 		if (crescente) {
-			for (j = p;	j > 0 && anuncios[tmp]->getPreco()< anuncios[v[j - 1]]->getPreco(); j--) {
+			for (j = p;	j > 0 && tmp->getPreco()< v[j - 1]->getPreco(); j--) {
 				v[j] = v[j - 1];
 			}
 		} else {
-			for (j = p;	j > 0 && anuncios[tmp]->getPreco() > anuncios[v[j - 1]]->getPreco(); j--) {
+			for (j = p;	j > 0 && tmp->getPreco() > v[j - 1]->getPreco(); j--) {
 				v[j] = v[j - 1];
 			}
 		}
@@ -693,7 +680,7 @@ int Website::menuAnuncioPreco(bool crescente) {
 	}
 
 
-		vector<int> indices = procurarPreco(min, max);
+		vector<Anuncio*> indices = procurarPreco(min, max);
 		if (indices.size() == 0) {
 			setcolor(12);
 			cout << "Nao existem Produtos no intervalo de preco " << min
@@ -709,46 +696,27 @@ int Website::menuAnuncioPreco(bool crescente) {
 //ficheiros
 
 void Website::guardarFicheiro(ofstream& file) {
-	Dados::setVetorAnuncio(&anuncios);
-	Dados::setVetorUtilizadores(&utilizadores);
-	Dados::setVetorNegocios(&negocios);
 
-	Dados::escreverFicheiro(file);
+	Dados::escreverFicheiro(file,utilizadores);
 }
 void Website::lerFicheiro(ifstream& file) {
 
-	Dados::setVetorAnuncio(&anuncios);
-	Dados::setVetorUtilizadores(&utilizadores);
-	Dados::setVetorNegocios(&negocios);
-
-	Dados::lerFicheiro(file);
-
+	utilizadores = Dados::lerFicheiro(file);
+	AtualizarP_queue();
 	AtualizarBSTNegociantes();
 }
 
 //meus anuncios
 
-vector<int> Website::anunciosParaIndices(const vector<Anuncio*>& aTemp) {
-	vector<int> res;
-	for (unsigned int i = 0; i < aTemp.size(); ++i) {
-		for (unsigned int k = 0; k < anuncios.size(); k++) {
-			if (aTemp[i]->getID() == anuncios[k]->getID()) {
-				res.push_back(k);
-				break;
-			}
-		}
-	}
 
-	return res;
-}
 
-vector<int> Website::retornarMeusAnuncios(bool venda) {
-	return anunciosParaIndices(utilizadores[indiceUtilizador]->getAnuncios(venda));
+vector<Anuncio*> Website::retornarMeusAnuncios(bool venda) {
+	return utilizadores[indiceUtilizador]->getAnuncios(venda);
 }
 
 int Website::MenuAnuncioConta(bool venda) {
 	bool semcontatos = true;
-
+	Anuncio *a=NULL;
 	while (true) {
 
 		if (retornarMeusAnuncios(venda).size() == 0) {
@@ -763,15 +731,17 @@ int Website::MenuAnuncioConta(bool venda) {
 		}
 
 		if (semcontatos) {
-			Menu::idAnuncio = Menu::menuAnuncioInterface(retornarMeusAnuncios(venda));
-			if (Menu::idAnuncio == -1)
+			vector<Anuncio*> anuncios=retornarMeusAnuncios(venda);
+			a = Menu::menuAnuncioInterface(anuncios);
+			Menu::Anuncio_atual=a;
+			if (a == NULL)
 				return 3;
 		}
 
 		int y = Menu::interfaceAnuncioDefinicoes();
 		semcontatos = true;
 		if (y == 0) { //ver contatos
-			vector<Contacto> c = anuncios[Menu::idAnuncio]->getContactos();
+			vector<Contacto> c = a->getContactos();
 			if (c.size() == 0) {
 				system("cls");
 				intro();
@@ -805,51 +775,51 @@ int Website::MenuAnuncioConta(bool venda) {
 			setcolor(3);
 			getch();
 		} else if (y == 1) { //remove anuncio
-			RemoveAnuncio(anuncios[Menu::idAnuncio]->getID());
+			RemoveAnuncio(a->getID());
 		}else if(y==2){//cria negocio
-			criaNegocio(anuncios[Menu::idAnuncio]);
+			criaNegocio(a);
 		}
 		else if(y==3){//editar
 			semcontatos=false;
 			int ind;
-			if(anuncios[Menu::idAnuncio]->getTipo()==TIPO_VENDA)
+			if(a->getTipo()==TIPO_VENDA)
 				ind=Menu::interfaceEditarAnuncio_AV();
 			else
 				ind = Menu::interfaceEditarAnuncio_AC();
 
 			Imagem img;
-			AnuncioVenda *av = dynamic_cast<AnuncioVenda*>(anuncios[Menu::idAnuncio]);
-			AnuncioCompra *ac = dynamic_cast<AnuncioCompra*>(anuncios[Menu::idAnuncio]);
+			AnuncioVenda *av = dynamic_cast<AnuncioVenda*>(a);
+			AnuncioCompra *ac = dynamic_cast<AnuncioCompra*>(a);
 
 			switch (ind) {
 			case 0:
-				anuncios[Menu::idAnuncio]->setTitulo(InputLinha("Novo Titulo: "));
+				a->setTitulo(InputLinha("Novo Titulo: "));
 				break;
 			case 1:
-				anuncios[Menu::idAnuncio]->setCategoria(InputLinha("Nova Categoria: "));
+				a->setCategoria(InputLinha("Nova Categoria: "));
 				break;
 			case 2:
-				anuncios[Menu::idAnuncio]->setDescricao(InputLinha("Nova Descricao: ",true));
+				a->setDescricao(InputLinha("Nova Descricao: ",true));
 				break;
 			case 3:
 				img.conteudo =InputLinha("Nova Imagem: ");
-				anuncios[Menu::idAnuncio]->AdicionarImagem(img);
+				a->AdicionarImagem(img);
 				break;
 			case 4:
-				anuncios[Menu::idAnuncio]->eliminaImagens();
+				a->eliminaImagens();
 				break;
 			case 5:
-				if(anuncios[Menu::idAnuncio]->getTipo()==TIPO_VENDA){
+				if(a->getTipo()==TIPO_VENDA){
 					av->setPreco(Inputfloat("Novo Preco: "));
 				}else{
-
-					int novoMenu = Menu::menuAnuncioInterface(retornarMeusAnuncios(true));
-					if(novoMenu!= -1)
-						ac->setAnuncioVenda(dynamic_cast<AnuncioVenda*>(anuncios[novoMenu]));
+					vector<Anuncio*> anuncios =retornarMeusAnuncios(true);
+					Anuncio* novoMenu = Menu::menuAnuncioInterface(anuncios);
+					if(novoMenu!= NULL)
+						ac->setAnuncioVenda(dynamic_cast<AnuncioVenda*>(novoMenu));
 				}
 				break;
 			case 6:
-				if(anuncios[Menu::idAnuncio]->getTipo()==TIPO_VENDA){
+				if(a->getTipo()==TIPO_VENDA){
 				av->setNegociavel(InputBool("Negociavel?(S/N) "));
 				}else{
 					ac->setAnuncioVenda(NULL);
@@ -919,6 +889,8 @@ void Website::criaNegocio(Anuncio* a){
 	AtualizarData();
 	utilizadores[indiceUtilizador]->FecharNegocio(a,montante,_data);
 	AtualizarBSTNegociantes(utilizadores[indiceUtilizador]);
+	AtualizarP_queue();
+
 
 	getch();
 	setcolor(3);
@@ -1262,9 +1234,12 @@ void Website::AtualizarBSTNegociantes(Utilizador* utilizador){
 
 
 	 if(util.size()==0){
+		 system("cls");
+		 intro();
 		 setcolor(12);
-		 cout << "Não existem Utilizadores" << endl;
+		 cout << endl  << "Não existem Utilizadores Com Negocios Concluidos" << endl;
 		 setcolor(15);
+		 getch();
 		 return;
 	 }
 
