@@ -453,7 +453,7 @@ vector<int> Website::procurarData(Data data) {
 	priority_queue<AnuncioHandler> temp = anuncios_prioridades;
 	while(!temp.empty()){
 		if(temp.top().a->getData() == data){
-			//Se encontrou um anuncio com a categoria pertendida vai procurar a sua posicao no vetor de anuncios.
+			//Se encontrou um anuncio com a data pertendida vai procurar a sua posicao no vetor de anuncios.
 			for (unsigned int i = 0; i < anuncios.size(); i++) {
 				if(anuncios[i] == temp.top().a){
 					res.push_back(i);
@@ -525,6 +525,16 @@ vector<int> Website::procurarPreco(int min, int max) {
 	}
 	return res;
 }
+
+
+void Website::AtualizarP_queue(){
+	for (unsigned int var = 0; var < anuncios.size(); ++var) {
+		AnuncioHandler aH;
+		aH.a = anuncios[var];
+		anuncios_prioridades.push(aH);
+	}
+}
+
 
 /*#DAVID ALTEROU AQUI*/
 
@@ -836,20 +846,15 @@ int Website::menuAnuncioPreco(bool crescente) {
 //ficheiros
 
 void Website::guardarFicheiro(ofstream& file) {
-	Dados::setVetorAnuncio(&anuncios);
-	Dados::setVetorUtilizadores(&utilizadores);
-	Dados::setVetorNegocios(&negocios);
+
 
 	Dados::escreverFicheiro(file);
 }
 void Website::lerFicheiro(ifstream& file) {
 
-	Dados::setVetorAnuncio(&anuncios);
-	Dados::setVetorUtilizadores(&utilizadores);
-	Dados::setVetorNegocios(&negocios);
 
 	Dados::lerFicheiro(file);
-
+	AtualizarP_queue();
 	AtualizarBSTNegociantes();
 }
 

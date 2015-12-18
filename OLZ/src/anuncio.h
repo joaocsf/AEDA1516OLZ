@@ -75,7 +75,7 @@ class Anuncio: public Dados {
 	int _num_vizualizacoes;
 	//! visivel.
 	/*!
-	 * Booleano com a visivilidade do anuncio.
+	 * Booleano com a visibilidade do anuncio.
 	 */
 	bool _visivel;
 	//! data.

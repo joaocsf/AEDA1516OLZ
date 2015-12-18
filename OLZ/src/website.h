@@ -285,6 +285,7 @@ public:
 	 */
 	static string InputInteiro(string mensagemLoop, unsigned int casas);
 
+	static void AtualizarP_queue();
 	static vector<Utilizador*> BSTParaVetor(BST<Utilizador*>& bst);
 	static BST<Utilizador*> ReturnUtilizadoresBST();
 	static void menuTopNegocios();
