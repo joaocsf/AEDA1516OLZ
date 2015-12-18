@@ -66,8 +66,6 @@ void Website::addAnuncio(Anuncio *a) {
 
 void Website::RemoveAnuncio(int id) {
 		utilizadores[indiceUtilizador]->RemoverAnuncio(id);
-		priority_queue<AnuncioHandler> tmp;
-		anuncios_prioridades=tmp;
 		AtualizarP_queue();
 }
 /*DAVID MEXEU AQUI*/
@@ -92,8 +90,6 @@ void Website::RemoveUtilizador(int id) {
 		
 			delete(utilizadores[i]);
 			utilizadores.erase(utilizadores.begin() + i--);
-			priority_queue<AnuncioHandler> tmp;
-			anuncios_prioridades=tmp;
 			AtualizarP_queue();
 			break;
 		}
@@ -442,6 +438,8 @@ vector<Anuncio *>  Website::procurarPreco(int min, int max) {
 
 
 void Website::AtualizarP_queue(){
+	anuncios_prioridades = priority_queue<AnuncioHandler>();
+
 	for (unsigned int var = 0; var < utilizadores.size(); ++var) {
 		for (unsigned int i = 0; i < utilizadores[var]->getAnuncios().size(); i++) {
 			AnuncioHandler aH;
@@ -891,6 +889,8 @@ void Website::criaNegocio(Anuncio* a){
 	AtualizarData();
 	utilizadores[indiceUtilizador]->FecharNegocio(a,montante,_data);
 	AtualizarBSTNegociantes(utilizadores[indiceUtilizador]);
+	AtualizarP_queue();
+
 
 	getch();
 	setcolor(3);
