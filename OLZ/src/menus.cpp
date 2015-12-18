@@ -137,6 +137,17 @@ void Menu::menuTipoAnuncio(int y) {
 	setcolor(15);
 }
 
+void Menu::menuTipoNegocio(int y) {
+	system("cls");
+	Website::intro();
+	cout << setw(20) << Highlight("Negocio Compra", y, 0) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Negocio Venda", y, 1) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Voltar Atras", y, 2) << endl;
+	setcolor(15);
+}
+
 void Menu::menuAnuncio(int y) {
 	system("cls");
 	Website::intro();
@@ -256,9 +267,12 @@ void Menu::menuEditar_AC(int y) {
 void Menu::menuPesquisarNegocios(int y){
 	system("cls");
 	Website::intro();
+	setcolor(3);
+	cout << "Pesquisar por: " << endl;
+	setcolor(15);
 	cout << setw(20) << Highlight("Anunciante", y, 0) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Tipo de Anuncio", y, 1) << endl;
+	cout << setw(20) << Highlight("Tipo de Negocio", y, 1) << endl;
 	setcolor(15);
 	cout << setw(20) << Highlight("Categoria", y, 2) << endl;
 	setcolor(15);
@@ -757,7 +771,7 @@ int Menu::interfacePesquisarNegocios(){
 
 		break;
 	case 1: //tipo negocio
-		y = menu(2,7);
+		y = menu(2,14);
 		if(y==2)
 			return 8;
 
@@ -861,6 +875,9 @@ int Menu::menu(int tamanho, int menuSelect) {
 				break;
 			case 13:
 				menuPesquisarNegocios(y);
+				break;
+			case 14:
+				menuTipoNegocio(y);
 				break;
 			default:
 				cout << "Menu Inixestente" << endl;

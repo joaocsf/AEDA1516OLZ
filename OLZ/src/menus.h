@@ -119,7 +119,7 @@ static void desenharUtilizadorThumbnail(Utilizador* util, int sel, int pos);
 
 static void menuPesquisarNegocios(int y);
 static int interfacePesquisarNegocios();
-
+static void menuTipoNegocio(int y);
 };
 
 #endif
