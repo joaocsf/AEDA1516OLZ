@@ -98,9 +98,9 @@ static bool logado;
 static int idAnuncio;
 //menu dos anuncios
 //!Menu dos anuncios.
-static int menuAnuncioInterface(vector<int> indices);
+static Anuncio* menuAnuncioInterface(vector<Anuncio*>& anuncios);
 //!Funcao para desenhar a thumbnail de um anuncio.
-static void desenharAnuncioThumbnail(int indice, int sel, int pos);
+static void desenharAnuncioThumbnail(Anuncio* anuncio, int sel, int pos);
 //menu negocios
 //!Funcao para desenhar a thumbnail de negocios.
 static void desenharNegocioThumbnail(Negocio *n, int sel, int pos);

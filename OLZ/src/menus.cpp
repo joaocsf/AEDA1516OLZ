@@ -310,20 +310,18 @@ void Menu::InterfaceSeletor() {
 
 //---------------------------Menu Anuncios--------------------------------------
 
-void Menu::desenharAnuncioThumbnail(int indice, int sel, int pos){
-
-	Anuncio* aTemp = Website::getAnuncios()[indice];
+void Menu::desenharAnuncioThumbnail(Anuncio* anuncio, int sel, int pos){
 
 
-	string header = (aTemp->getTipo() == TIPO_COMPRA)? "Anuncio Compra" : "Anuncio Venda";
+	string header = (anuncio->getTipo() == TIPO_COMPRA)? "Anuncio Compra" : "Anuncio Venda";
 	setcolor(15);
 	if (sel == pos)
 		setcolor(2);
 	cout << "------------------------------------------" << endl;
 	cout << "|" << setw(40) << header << "|" << endl;
-	cout << "|Titulo: "<< setw(32) << aTemp->getTitulo() << "|" << endl;
-	if (aTemp->getTipo() == TIPO_VENDA)
-		cout <<"|Preco: "<<setw(33) << aTemp->getPreco() <<"|"<< endl;
+	cout << "|Titulo: "<< setw(32) << anuncio->getTitulo() << "|" << endl;
+	if (anuncio->getTipo() == TIPO_VENDA)
+		cout <<"|Preco: "<<setw(33) << anuncio->getPreco() <<"|"<< endl;
 	cout << "------------------------------------------"<<endl;
 
 	setcolor(15);
@@ -416,7 +414,7 @@ Utilizador* Menu::menuTopNegociantesInterface(vector<Utilizador*>& util){
 
 
 //-----------------------------Menu Anuncio----------------------------
-int Menu::menuAnuncioInterface(vector<int> indices){
+Anuncio* Menu::menuAnuncioInterface(vector<Anuncio*>& anuncios){
 	int y= 0;//Seletor
 	int nPagina=0; //numero pagina;
 	int anuncioPorPagina=3;//numero de anuncio por pagina;
@@ -430,13 +428,13 @@ int Menu::menuAnuncioInterface(vector<int> indices){
 			update=false;
 			system("cls");
 			Website::intro();
-			cout<<(nPagina+1)<< "/" <<((indices.size()-1)/anuncioPorPagina + 1)<<endl;
+			cout<<(nPagina+1)<< "/" <<((anuncios.size()-1)/anuncioPorPagina + 1)<<endl;
 			for (int i = 0; i < 3; ++i) {
 				int n = nPagina * anuncioPorPagina;
-				if (i + n >= indices.size())
+				if (i + n >= anuncios.size())
 					break;
 				maxY=i;
-				desenharAnuncioThumbnail(indices[i + n], y, i);
+				desenharAnuncioThumbnail(anuncios[i + n], y, i);
 			}
 		}
 
@@ -462,16 +460,16 @@ int Menu::menuAnuncioInterface(vector<int> indices){
 				}
 
 			}else if(tecla == 77){ // direita
-				if(nPagina < (indices.size()-1)/anuncioPorPagina){
+				if(nPagina < (anuncios.size()-1)/anuncioPorPagina){
 					y=0;
 					nPagina++;
 					update=true;
 				}
 			}else if (tecla == 13) { // enter
-				return indices[(nPagina*anuncioPorPagina+y)];
+				return anuncios[(nPagina*anuncioPorPagina+y)];
 			}
 			else if(tecla==27){//esc
-				return -1;//voltar atras
+				return NULL;//voltar atras
 			}
 		}
 	}
