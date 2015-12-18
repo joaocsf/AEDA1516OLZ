@@ -112,7 +112,7 @@ Anuncio* Utilizador::procurarAnuncio(int id) {
 
 bool Utilizador::FecharNegocio(Anuncio* anuncio, float montante, Data data) {//alterei
 	Negocio* neg = NULL;
-
+	/*
 	for (unsigned int i = 0; i < vetorAnuncios->size(); ++i) {
 
 		if(anuncio->getID() == (*vetorAnuncios)[i]->getID()){
@@ -130,6 +130,7 @@ bool Utilizador::FecharNegocio(Anuncio* anuncio, float montante, Data data) {//a
 					vetorAnuncios->erase(vetorAnuncios->begin() + i--);
 		}
 	}
+	/**/
 
 	for (unsigned int i = 0; i < _anuncios.size(); i++) {
 
@@ -204,15 +205,15 @@ void Utilizador::ler(ifstream& in, bool escreve) {//alterei
 				A->setUser(this);
 				A->ler(in);
 				AdicionarAnuncio(A);
-				if (A->getVisibilidade())
-					vetorAnuncios->push_back(A);
+				//if (A->getVisibilidade())
+					//vetorAnuncios->push_back(A);
 			} else if (linha == "AC") {
 				Anuncio* AC = new AnuncioCompra();
 				AC->setUser(this);
 				AC->ler(in);
 				AdicionarAnuncio(AC);
-				if (AC->getVisibilidade())
-					vetorAnuncios->push_back(AC);
+				//if (AC->getVisibilidade())
+					//vetorAnuncios->push_back(AC);
 			} else if (linha == "N") {
 				Negocio* N = new Negocio();
 				N->setUser(this);
