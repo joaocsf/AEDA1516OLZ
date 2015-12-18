@@ -528,10 +528,14 @@ vector<int> Website::procurarPreco(int min, int max) {
 
 
 void Website::AtualizarP_queue(){
-	for (unsigned int var = 0; var < anuncios.size(); ++var) {
-		AnuncioHandler aH;
-		aH.a = anuncios[var];
-		anuncios_prioridades.push(aH);
+	for (unsigned int var = 0; var < utilizadores.size(); ++var) {
+		for (unsigned int i = 0; i < utilizadores[var]->getAnuncios().size(); i++) {
+			AnuncioHandler aH;
+			aH.a = utilizadores[var]->getAnuncios()[i];
+			if(aH.a->getVisibilidade()){
+				anuncios_prioridades.push(aH);
+			}
+		}
 	}
 }
 
