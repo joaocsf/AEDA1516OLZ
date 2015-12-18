@@ -3,7 +3,7 @@
 
 
 bool Menu::logado=false;
-int Menu::idAnuncio=-1;
+Anuncio* Menu::Anuncio_atual=NULL;
 
 string Highlight(string frase, int select, int ops) {
 	if (select == ops) {
@@ -140,10 +140,10 @@ void Menu::menuTipoAnuncio(int y) {
 void Menu::menuAnuncio(int y) {
 	system("cls");
 	Website::intro();
-	if(Website::getAnuncios()[idAnuncio]->getTipo())
-		cout<< (*dynamic_cast<AnuncioVenda*>(Website::getAnuncios()[idAnuncio]));
+	if(Anuncio_atual->getTipo())
+		cout<< (*dynamic_cast<AnuncioVenda*>(Anuncio_atual));
 	else{
-		AnuncioCompra *ac = dynamic_cast<AnuncioCompra*>(Website::getAnuncios()[idAnuncio]);
+		AnuncioCompra *ac = dynamic_cast<AnuncioCompra*>(Anuncio_atual);
 		cout<< (*ac);
 		if(ac->troca()){
 			setcolor(3);
@@ -175,10 +175,10 @@ void Menu::menuCategProd(int y) {
 void Menu::menuAnuncioDefinicoes(int y) {
 	system("cls");
 	Website::intro();
-	if(Website::getAnuncios()[idAnuncio]->getTipo())
-		cout<< (*dynamic_cast<AnuncioVenda*>(Website::getAnuncios()[idAnuncio]));
+	if(Anuncio_atual->getTipo())
+		cout<< (*dynamic_cast<AnuncioVenda*>(Anuncio_atual));
 	else{
-		AnuncioCompra *ac = dynamic_cast<AnuncioCompra*>(Website::getAnuncios()[idAnuncio]);
+		AnuncioCompra *ac = dynamic_cast<AnuncioCompra*>(Anuncio_atual);
 		cout<< (*ac);
 		if(ac->troca()){
 			setcolor(3);

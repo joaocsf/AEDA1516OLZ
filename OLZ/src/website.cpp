@@ -267,7 +267,7 @@ void Website::Anunciar_AC() {
 		vector<Anuncio* > aTem = retornarMeusAnuncios(true);
 		 Anuncio *av = Menu::menuAnuncioInterface(aTem);
 
-		if(Menu::idAnuncio == -1)
+		if(Menu::Anuncio_atual == NULL)
 			return;
 
 		ac->setAnuncioVenda(dynamic_cast<AnuncioVenda*>(av));
@@ -529,6 +529,7 @@ int Website::subMenuAnuncio(vector<Anuncio *>& indices) {
 	while(true){
 
 		Anuncio *a = Menu::menuAnuncioInterface(indices);
+		Menu::Anuncio_atual=a;
 		if(a==NULL){
 			return 4;
 		}

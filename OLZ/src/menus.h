@@ -95,7 +95,7 @@ static void InterfaceSeletor();
 //!Variavel que indica se o usuario está logado.
 static bool logado;
 //!Id do anuncio no vetor anuncios onde que o utilizador esta a visualizar no momento
-static int idAnuncio;
+static Anuncio* Anuncio_atual;
 //menu dos anuncios
 //!Menu dos anuncios.
 static Anuncio* menuAnuncioInterface(vector<Anuncio*>& anuncios);
