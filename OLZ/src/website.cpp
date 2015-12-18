@@ -1234,9 +1234,12 @@ void Website::AtualizarBSTNegociantes(Utilizador* utilizador){
 
 
 	 if(util.size()==0){
+		 system("cls");
+		 intro();
 		 setcolor(12);
-		 cout << "Não existem Utilizadores" << endl;
+		 cout << endl  << "Não existem Utilizadores Com Negocios Concluidos" << endl;
 		 setcolor(15);
+		 getch();
 		 return;
 	 }
 

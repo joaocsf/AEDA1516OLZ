@@ -753,10 +753,7 @@ int Menu::interfacePesquisarNegocios(){
 	case 0: //anunciante
 
 		Website::menuNegocios(Website::VetorNegocioAnunciante(),"Nao existem Negocios para este Utilizador");
-		if(logado)
-			return 1;
-		else
-			return 0;
+		return 8;
 
 		break;
 	case 1: //tipo negocio
@@ -771,21 +768,15 @@ int Menu::interfacePesquisarNegocios(){
 			msg="Nao existem Negocios de Venda";
 
 		Website::menuNegocios(Website::VetorPesquisarNegocioPorTipo(y),msg);
+		return 8;
 
-		if(logado)
-			return 1;
-		else
-			return 0;
 		break;
 	case 2:  //categoria
 
 
 		Website::menuNegocios(Website::VetorPesquisarNegocioCategoria(),"Nao existem Negocios desta Categoria");
+		return 8;
 
-		if(logado)
-			return 1;
-		else
-			return 0;
 		break;
 	default: //voltar atras
 		if(logado)
