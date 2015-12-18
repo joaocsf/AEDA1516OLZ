@@ -80,15 +80,11 @@ public:
 	float getMontante() const;
 	//!Funcao get para a data do negocio.
 	Data getData()const;
-	//!Funcao para alterar o utilizador.
-	/*!
-	 \param user Novo utilizador.
-	 */
 
-
+	//!Funcao get para o identificador do negocio
 	int getIdentificador() const;
 
-
+	//!Funcao set para o utilizador do negocio
 	void setUser(Utilizador* user);
 	//!Funcao set para o numero de identificacao global dos negocios.
 	static int setIDGlobal(int id);
@@ -98,7 +94,7 @@ public:
 	virtual void escrever(ofstream& out);
 	//!Funcao para verificar se ocorreu uma troca de produtos no negocio.
 	bool trocou();
-
+	//!Overload do operador de igualdade para a classe negocio.
 	bool operator==(const Negocio & n) const;
 };
 

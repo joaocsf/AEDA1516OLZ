@@ -28,6 +28,10 @@
 #define TIPO_VENDA 1
 #define TIPO_COMPRA 0
 
+//!Struct AnuncioHandler
+/*!
+ * Estrutura utilizada para a fila de prioridade devio a problemas de overload de operadores que utilizam apontadores.
+ */
 struct AnuncioHandler {
 	Anuncio * a;
 };
@@ -97,9 +101,17 @@ class Anuncio: public Dados {
 	 \sa Contacto
 	 */
 	vector<Contacto> _contactos;
-
+	//! data_destaque
+	/*!
+	 * Data até à qual o vai estar destacado.
+	 * Inicialmente a data é marcada com 0,0,0 e posteriormente atualizada.
+	 */
 	Data _data_destaque;
-
+	//! dataAtual
+	/*!
+	 * Apontador para a data atual. (Membro da classe website)
+	 * \sa Website
+	 */
 	Data* _dataAtual;
 
 public:
@@ -188,13 +200,20 @@ public:
 	Data getDataDestaque() const;
 	//!Funcao para eliminar o vector de imagens do anuncio.
 	void eliminaImagens();
-
+	//!Funcao get para a prioridade do anuncio.
+	/*!
+	 * Verifica se a data de prioridade é maior do que a data atual
+	 \return Devolve um booleano que indica se o anuncio se encontra com prioridade ou nao.
+	 */
 	bool getPrioridade();
-
+	//!Funcao para adicionar uma mensalidade
+	/*!
+	 * Funcao que soma 1 mes a data atual e atualiza a data de prioridade de um anuncio.
+	 */
 	void adicionarMensalidade();
-
+	//!Funcao get para a data atual.
 	Data getDataAtual();
-
+	//!Funcao set para a data atual.
 	void setDataAtual(Data* data);
 };
 

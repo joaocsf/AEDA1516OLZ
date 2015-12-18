@@ -19,12 +19,18 @@
 #define UT_NEGOCIOS 5
 #define UT_TOTAL 6
 
+//!Struct NegocioHash
+/*!
+ * Estrutura para a tabela de dispersão
+ */
 struct NegocioHash
 {
+	//!Funcao hash para a tabela de dispersao
 	int operator() (const Negocio *neg) const{
 		return neg->getIdentificador();
 	}
 
+	//!Funcao de igualdade para a tabela de dispersao
 	bool operator() (const Negocio *neg1, const Negocio *neg2) const{
 		return (*neg1)==(*neg2);
 	}
@@ -179,17 +185,24 @@ public:
 	//!Funcao set para o distrito.
 	void setDistrito(string var);
 
-	//comentar-----------------------------------
+	//!Funcao get para o negocio mais recente
 	Negocio* getUltimoNegocio() const;
+	//!Funcao get para o vetor de negocios
 	vector<Negocio*> getVetorNegocios() const;
+	//!Funcao get que devolve um vetor de negocios de uma dada categoria
 	vector<Negocio*> getVetorNegociosCategoria(string categoria) const;
+	//!Funcao get que devolve um vetor de negocios de um determinado tipo
 	vector<Negocio*> getVetorNegociosTipo(int tipo) const;
+
+	//!Overload do operador < para o Utilizador
 	bool operator< (const Utilizador & u) const;
 
 };
 
+//!Overload do operador de inserção para guardar dados relativos aos utilizadores
 ostream & operator<<(ostream & o, Utilizador & u);
 
+//!Funcao que compara dois pointers para utilizadores
 bool compareUsers_ptr(void* u1 , void* u2);
 
 //! Excepcao Anuncio Inexistente

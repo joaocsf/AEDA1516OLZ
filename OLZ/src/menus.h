@@ -112,13 +112,21 @@ static void menuVisibilidade(int y);
 //!Interface para alterar a visibilidade dos dados.
 static int interfaceMudarVisibilidade();
 
-//---------------------David Compõe a cena ---------------
+//!Menu de interface dos top negociantes
+/*!
+ * Funcao que tira proveito da utilização da arvore binaria de pesquisa
+ */
 static Utilizador* menuTopNegociantesInterface(vector<Utilizador*>& util);
-
+//!Funcao para desenhar a thumbnail do utilizador.
 static void desenharUtilizadorThumbnail(Utilizador* util, int sel, int pos);
-
+//!Menu de pesquisa para os negocios
+/*!
+ * Utiliza a BST para a pesquisa
+ */
 static void menuPesquisarNegocios(int y);
+//!Interface para pesquisar negocios
 static int interfacePesquisarNegocios();
+//!Menu para o tipo de negocio
 static void menuTipoNegocio(int y);
 };
 

@@ -18,7 +18,11 @@
  * E os membros-funcao relativos ao mesmo.
  */
 class Website{
-
+	//!Declaracao da fila de prioridade dos anuncios do website.
+	/*!
+	 \sa AnuncioHandler
+	 \sa Anuncio
+	 */
 	static priority_queue<AnuncioHandler> anuncios_prioridades;
 	//!Declaracao do vetor de utilizadores do website.
 	/*!
@@ -36,7 +40,11 @@ class Website{
 	 */
 	static Data _data;
 
-	 static BST<Utilizador*> topNegociantes;
+	//!Declaracao global da BST de top negociantes.
+	/*!
+	 \sa Utilizador
+	 */
+	static BST<Utilizador*> topNegociantes;
 public:
 	//!Construtor default
 	Website();
@@ -114,9 +122,6 @@ public:
 	 \param palavra que vai ser procurada na descricao de cada anuncio.
 	 \return devolve um vetor que contem os indices dos anuncios nos quais encontrou a palavra chave com recurso a funcao find() das strings.
 	 */
-
-
-
 	static vector<Anuncio*> procurarPalavraChave(string palavra);
 	//!Funcao para pesquisar por data.
 	/*!
@@ -200,37 +205,15 @@ public:
 	 \return inteiro que esta relacionado com a forma como sao escolhidos os menus.
 	 */
 	static int MenuAnuncioConta(bool venda);
-	//!Funcao que permite ao utilizador visualizar os seus negocios.
-
-
-	static void pagarPrioridade(Data& dAtual,Anuncio *a);
-
-
-
-
+	//!Funcao para atualizadar a data atual.
 	static void AtualizarData();
-
-
-
-
-
-
-
-
-
-
-	//foi alterado
+	//!Funcao para o menu relativo aos negocios
 	static void menuNegocios(vector<Negocio*> neg,string msg_erro);
-
-
-
 	//!Funcao que faz display do estado atual de visibilidade dos dados do utilizador.
 	/*!
 	 * Esta funcao mostra no ecra o estado dos dados e permite ao usuario altera-los.
 	 */
 	static void alterarDadosVisiveis();
-
-	//static void menuVisivel(bool* v);
 	//!Funcao que cria um negocio.
 	/*!
 	 * A funcao trata das possibilidades de ser um anuncio de venda ou compra ou de ter ocorrido uma troca.
@@ -271,15 +254,29 @@ public:
 	 \return uma string com o numero pedido.
 	 */
 	static string InputInteiro(string mensagemLoop, unsigned int casas);
-
+	//!Funcao para atualizar a fila de prioridade
+	/*!
+	 * De forma a manter sempre os anuncios ordenados da forma correta
+	 */
 	static void AtualizarP_queue();
+	//!Funcao que converte a BST de utilizadores para um vetor de utilizadores.
 	static vector<Utilizador*> BSTParaVetor(BST<Utilizador*>& bst);
+	//!Funcao que converte o vetor de utilizadores do website numa BST.
 	static BST<Utilizador*> ReturnUtilizadoresBST();
+	//!Menu para o top de negocios.
 	static void menuTopNegocios();
+	//!Funcao para atualizar a BST de negocios de forma a manter a estrutura de dados ordenada.
 	static void AtualizarBSTNegociantes();
+	//!Funcao para atualizar a BST de negocios com um dado utlizador
+	/*!
+	 * Utilizador vai ser inserido na BST de top negociantes.
+	 */
 	static void AtualizarBSTNegociantes(Utilizador* utilizador);
+	//!Funcao que devolve o vetor de negocios do utilizador atual.
 	static  vector<Negocio*> VetorNegocioAnunciante();
+	//!Funcao que pesquisa os negocios por tipo.
 	static  vector<Negocio*> VetorPesquisarNegocioPorTipo(int y);
+	//!Funcao que pesquisa os negocios por categoria.
 	static  vector<Negocio*> VetorPesquisarNegocioCategoria();
 
 };

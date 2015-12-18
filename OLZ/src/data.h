@@ -84,7 +84,7 @@ public:
 	 * A funcao calcula a data ate ao qual o anuncio vai ter destaque.
 	 */
 	void addMes();
-
+	//!Overload do operator < para a classe data.
 	bool operator< (const Data & d) const;
 private:
 	//! ano
