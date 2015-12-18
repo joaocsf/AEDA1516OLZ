@@ -847,12 +847,17 @@ int Website::menuAnuncioPreco(bool crescente) {
 
 void Website::guardarFicheiro(ofstream& file) {
 
+	Dados::setVetorAnuncio(&anuncios);
+	Dados::setVetorUtilizadores(&utilizadores);
+	Dados::setVetorNegocios(&negocios);
 
 	Dados::escreverFicheiro(file);
 }
 void Website::lerFicheiro(ifstream& file) {
 
-
+	Dados::setVetorAnuncio(&anuncios);
+	Dados::setVetorUtilizadores(&utilizadores);
+	Dados::setVetorNegocios(&negocios);
 	Dados::lerFicheiro(file);
 	AtualizarP_queue();
 	AtualizarBSTNegociantes();
