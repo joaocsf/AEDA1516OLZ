@@ -199,7 +199,7 @@ void Menu::menuAnuncioDefinicoes(int y) {
 			setcolor(15);
 			cout << (*ac->getAnuncioVenda());
 		}
-	}
+	}//Supostamente é aqui
 	cout << setw(20) << Highlight("Ver Contacto(s): ", y, 0) << endl;
 	setcolor(15);
 	cout << setw(20) << Highlight("Remover", y, 1) << endl;
@@ -208,7 +208,9 @@ void Menu::menuAnuncioDefinicoes(int y) {
 	setcolor(15);
 	cout << setw(20) << Highlight("Editar", y, 3) << endl;
 	setcolor(15);
-	cout << setw(20) << Highlight("Voltar Atras", y, 4) << endl;
+	cout << setw(20) << Highlight("Destacar Anuncio", y, 4) << endl;
+	setcolor(15);
+	cout << setw(20) << Highlight("Voltar Atras", y, 5) << endl;
 	setcolor(15);
 }
 
@@ -330,11 +332,24 @@ void Menu::desenharAnuncioThumbnail(Anuncio* anuncio, int sel, int pos){
 
 
 	string header = (anuncio->getTipo() == TIPO_COMPRA)? "Anuncio Compra" : "Anuncio Venda";
+
 	setcolor(15);
-	if (sel == pos)
+	bool prioritario = anuncio->getPrioridade();
+	if(prioritario)
 		setcolor(2);
-	cout << "------------------------------------------" << endl;
-	cout << "|" << anuncio->getData() << setw(21) << header << "|" << endl;
+
+	if (sel == pos)
+		if(prioritario)
+			setcolor(114);
+		else
+			setcolor(135);
+	//est
+	if(prioritario)
+		cout << "Destaque ---------------------------------" << endl;
+	else
+		cout << "------------------------------------------" << endl;
+
+	cout <<left << "|" <<setw(19)<< anuncio->getData() << right << setw(21) << header << "|" << endl;
 	cout << "|Titulo: "<< setw(32) << anuncio->getTitulo() << "|" << endl;
 	if (anuncio->getTipo() == TIPO_VENDA)
 		cout <<"|Preco: "<<setw(33) << anuncio->getPreco() <<"|"<< endl;
@@ -667,7 +682,7 @@ int Menu::interfaceConta() {
 }
 
 int Menu::interfaceAnuncioDefinicoes() {
-	return menu(4,9);
+	return menu(5,9);
 }
 
 int Menu::interfacePesquisar(bool log) {

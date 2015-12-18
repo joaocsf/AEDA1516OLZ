@@ -100,6 +100,8 @@ class Anuncio: public Dados {
 
 	Data _data_destaque;
 
+	Data* _dataAtual;
+
 public:
 	//! Construtor default.
 	Anuncio() {
@@ -142,8 +144,6 @@ public:
 	void setVisibilidade(bool vis);
 	//!Funcao set para a data do anuncio.
 	void setData(Data d);
-	//!Funcao set para a data limite de destaque do anuncio.
-	void setDataDestaque(Data d);
 	//!Funcao set para o numero de visualizacoes do anuncio.
 	void setNVisualizacoes(int v);
 	//!Funcao set para a descricao do anuncio.
@@ -185,9 +185,17 @@ public:
 	//!Funcao get para a descricao do anuncio.
 	string getDescricao() const;
 	//!Funcao get para a data limite do anuncio.
-	Data getDataLimite() const;
+	Data getDataDestaque() const;
 	//!Funcao para eliminar o vector de imagens do anuncio.
 	void eliminaImagens();
+
+	bool getPrioridade();
+
+	void adicionarMensalidade();
+
+	Data getDataAtual();
+
+	void setDataAtual(Data* data);
 };
 
 //!Overload do operador de comparacao que vai ser utilizado na fila de prioridade

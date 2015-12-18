@@ -83,7 +83,7 @@ public:
 	 * E usada quando um utilizador paga para ter o seu anuncio com destaque
 	 * A funcao calcula a data ate ao qual o anuncio vai ter destaque.
 	 */
-	Data addMes(Data& d) const;
+	void addMes();
 
 	bool operator< (const Data & d) const;
 private:

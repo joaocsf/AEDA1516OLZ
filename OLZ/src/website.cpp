@@ -68,20 +68,6 @@ void Website::RemoveAnuncio(int id) {
 		utilizadores[indiceUtilizador]->RemoverAnuncio(id);
 		AtualizarP_queue();
 }
-/*DAVID MEXEU AQUI*/
-void Website::pagarPrioridade(Data& dAtual,Anuncio *a){
-	priority_queue<AnuncioHandler> temp;
-	while(!anuncios_prioridades.empty()){
-		AnuncioHandler aH = anuncios_prioridades.top();
-		anuncios_prioridades.pop();
-		if(aH.a == a){
-			aH.a->setDataDestaque(dAtual);
-		}
-		temp.push(aH);
-	}
-	anuncios_prioridades = temp;
-}
-/*#DAVID MEXEU AQUI*/
 
 void Website::RemoveUtilizador(int id) {
 
@@ -444,6 +430,7 @@ void Website::AtualizarP_queue(){
 		for (unsigned int i = 0; i < utilizadores[var]->getAnuncios().size(); i++) {
 			AnuncioHandler aH;
 			aH.a = utilizadores[var]->getAnuncios()[i];
+			aH.a->setDataAtual(&_data);
 			if(aH.a->getVisibilidade()){
 				anuncios_prioridades.push(aH);
 			}
@@ -702,6 +689,7 @@ void Website::guardarFicheiro(ofstream& file) {
 void Website::lerFicheiro(ifstream& file) {
 
 	utilizadores = Dados::lerFicheiro(file);
+	AtualizarData();
 	AtualizarP_queue();
 	AtualizarBSTNegociantes();
 }
@@ -831,6 +819,9 @@ int Website::MenuAnuncioConta(bool venda) {
 				break;
 			}
 
+		}else if(y==4){ //Destacar anuncio
+			a->adicionarMensalidade();
+			AtualizarP_queue();
 		}
 	}
 }

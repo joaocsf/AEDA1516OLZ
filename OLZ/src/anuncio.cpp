@@ -19,6 +19,12 @@ Anuncio::Anuncio(string titulo, string categ_produto, string descricao,
 		_data(date), _identificador(_ID++), _user(NULL), _visivel(true), _data_destaque(0,0,0) {
 }
 
+bool Anuncio::getPrioridade(){
+
+	return	(*_dataAtual) < _data_destaque;
+
+}
+
 void Anuncio::ler(ifstream& in, bool escreve) {
 	string linha;
 	int index = 0;
@@ -159,6 +165,10 @@ void Anuncio::setUser(Utilizador* user) {
 	_user = user;
 }
 
+void Anuncio::setDataAtual(Data* data){
+	_dataAtual=data;
+}
+
 int Anuncio::getID() const {
 	return _identificador;
 }
@@ -208,17 +218,29 @@ void Anuncio::setDescricao(string d){
 	_descricao=d;
 }
 
+Data Anuncio::getDataAtual(){
+	if(_dataAtual != NULL)
+		return *_dataAtual;
+	return Data(0,0,0);
+}
+
+void Anuncio::adicionarMensalidade(){
+	if(_data_destaque < *_dataAtual)
+		_data_destaque = *_dataAtual;
+
+	_data_destaque.addMes();
+}
 
 bool operator<(AnuncioHandler aH1,AnuncioHandler aH2){
 	Data d1 = aH1.a->getData();
-	Data dd1 = aH1.a->getDataLimite();
+	Data dd1 = aH1.a->getDataDestaque();
 	Data d2 = aH2.a->getData();
-	Data dd2 = aH2.a->getDataLimite();
+	Data dd2 = aH2.a->getDataDestaque();
 	bool p_1 = (d1 < dd1);
 	bool p_2 = (d2 < dd2);
 	if (p_1 && !p_2) return false;
 	if (p_2 && !p_1) return true;
-	if (p_1 && p_2) return (dd2 < dd1);
+	if (p_1 && p_2) return (dd1 < dd2);
 	if (!p_1 && !p_2) return (d1 < d2);
 	return false;
 }
@@ -309,10 +331,6 @@ float AnuncioVenda::getPreco() const {
 
 void AnuncioVenda::setPreco(float preco){
 	_preco=preco;
-}
-
-void Anuncio::setDataDestaque(Data d_atual){
-	_data_destaque = d_atual.addMes(d_atual);
 }
 
 void AnuncioVenda::setNegociavel(bool negociavel){
@@ -428,7 +446,7 @@ int AnuncioVenda::getEstado() const {
 	return _estado;
 }
 
-Data Anuncio::getDataLimite() const {
+Data Anuncio::getDataDestaque() const {
 	return _data_destaque;
 }
 
@@ -453,6 +471,10 @@ ostream & operator<<(ostream & o, AnuncioVenda & av) {
 	o << "Data de Criacao: ";
 	setcolor(15);
 	o << av.getData() << endl;
+	setcolor(3);
+	o << "Data de fim Destaque: ";
+	setcolor(15);
+	o << av.getDataDestaque() << endl;
 	setcolor(3);
 	o << "Imagens: " << endl;
 	setcolor(15);
@@ -534,6 +556,14 @@ ostream & operator<<(ostream & o, AnuncioCompra & ac) {
 	o << "Data de Criacao: ";
 	setcolor(15);
 	o << ac.getData() << endl;
+
+
+	setcolor(3);
+	o << "Data de fim Destaque: ";
+	setcolor(15);
+	o << ac.getDataDestaque() << endl;
+
+
 	setcolor(3);
 	o << "Imagens: " << endl;
 	setcolor(15);

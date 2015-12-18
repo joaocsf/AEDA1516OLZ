@@ -1,5 +1,7 @@
 #include "data.h"
-
+#include <sstream>
+#include <iostream>
+#include <string.h>
 Data::Data(unsigned int a, unsigned int m, unsigned int d) : hora(0), minutos(0){
 	ano = a;
 	mes = m;
@@ -107,7 +109,9 @@ bool operator==(const Data& d1, const Data& d2) {
 			d1.getMinutos() == d2.getMinutos();
 }
 std::ostream & operator<<(ostream & o, const Data & d) {
-	o << d.getDia() << '/' << d.getMes() << '/' << d.getAno() << "  " <<d.getHora() << "h " << d.getMinutos() << "m";
+	std::stringstream ss;
+	ss << d.getDia() << '/' << d.getMes() << '/' << d.getAno() << "  " <<d.getHora() << "h " << d.getMinutos() << "m";
+	o << ss.str();
 	return o;
 }
 
@@ -139,40 +143,38 @@ bool Data::operator< (const Data & d) const{
 	return false;
 }
 
-Data Data::addMes(Data& d) const{
-	Data res;
-	res = d;
-	res.mes += 1;
-	if (res.mes == 13){
-		res.mes = 1;
-		res.ano += 1;
+void Data::addMes(){
+
+	mes += 1;
+	if (mes == 13){
+		mes = 1;
+		ano += 1;
 	}
-	switch (res.mes) {
+	switch (mes) {
 		case 2:
-			if(res.dia > 28){
-				res.dia = 28;
+			if(dia > 28){
+				dia = 28;
 			}
 			break;
 		case 4:
-			if(res.dia > 30)
-				res.dia = 30;
+			if(dia > 30)
+				dia = 30;
 			break;
 		case 6:
-			if(res.dia > 30)
-				res.dia = 30;
+			if(dia > 30)
+				dia = 30;
 			break;
 		case 9:
-			if(res.dia > 30)
-				res.dia = 30;
+			if(dia > 30)
+				dia = 30;
 			break;
 		case 11:
-			if(res.dia > 30)
-				res.dia = 30;
+			if(dia > 30)
+				dia = 30;
 			break;
 		default:
 			break;
 	}
-	return res;
 }
 
 
