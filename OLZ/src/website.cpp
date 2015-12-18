@@ -261,9 +261,9 @@ void Website::Anunciar_AC() {
 			return;
 		}
 		vector<Anuncio* > aTem = retornarMeusAnuncios(true);
-		 Anuncio *av = Menu::menuAnuncioInterface(aTem);
+		Anuncio *av = Menu::menuAnuncioInterface(aTem);
 
-		if(Menu::Anuncio_atual == NULL)
+		if(av == NULL)
 			return;
 
 		ac->setAnuncioVenda(dynamic_cast<AnuncioVenda*>(av));
