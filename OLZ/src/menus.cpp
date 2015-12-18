@@ -140,6 +140,7 @@ void Menu::menuTipoAnuncio(int y) {
 void Menu::menuAnuncio(int y) {
 	system("cls");
 	Website::intro();
+	if(Anuncio_atual!=NULL)
 	if(Anuncio_atual->getTipo())
 		cout<< (*dynamic_cast<AnuncioVenda*>(Anuncio_atual));
 	else{
@@ -175,6 +176,7 @@ void Menu::menuCategProd(int y) {
 void Menu::menuAnuncioDefinicoes(int y) {
 	system("cls");
 	Website::intro();
+	if(Anuncio_atual!=NULL)
 	if(Anuncio_atual->getTipo())
 		cout<< (*dynamic_cast<AnuncioVenda*>(Anuncio_atual));
 	else{
@@ -318,7 +320,7 @@ void Menu::desenharAnuncioThumbnail(Anuncio* anuncio, int sel, int pos){
 	if (sel == pos)
 		setcolor(2);
 	cout << "------------------------------------------" << endl;
-	cout << "|" <<setw(16) << anuncio->getData() << setw(24) << header << "|" << endl;
+	cout << "|" << anuncio->getData() << setw(21) << header << "|" << endl;
 	cout << "|Titulo: "<< setw(32) << anuncio->getTitulo() << "|" << endl;
 	if (anuncio->getTipo() == TIPO_VENDA)
 		cout <<"|Preco: "<<setw(33) << anuncio->getPreco() <<"|"<< endl;

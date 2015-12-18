@@ -735,6 +735,7 @@ int Website::MenuAnuncioConta(bool venda) {
 		if (semcontatos) {
 			vector<Anuncio*> anuncios=retornarMeusAnuncios(venda);
 			a = Menu::menuAnuncioInterface(anuncios);
+			Menu::Anuncio_atual=a;
 			if (a == NULL)
 				return 3;
 		}
