@@ -802,9 +802,19 @@ int Website::MenuAnuncioConta(bool venda) {
 					av->setPreco(Inputfloat("Novo Preco: "));
 				}else{
 					vector<Anuncio*> anuncios =retornarMeusAnuncios(true);
+					if(anuncios.size()>0){
 					Anuncio* novoMenu = Menu::menuAnuncioInterface(anuncios);
 					if(novoMenu!= NULL)
 						ac->setAnuncioVenda(dynamic_cast<AnuncioVenda*>(novoMenu));
+					}
+					else{
+						system("cls");
+						intro();
+						setcolor(12);
+						cout << "Voce nao tem Anuncios de Venda para associar a este Anuncio";
+						getch();
+						setcolor(15);
+					}
 				}
 				break;
 			case 6:
