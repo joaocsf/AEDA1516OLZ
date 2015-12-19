@@ -199,11 +199,11 @@ public:
 
 };
 
+
 //!Overload do operador de inserção para guardar dados relativos aos utilizadores
 ostream & operator<<(ostream & o, Utilizador & u);
 
-//!Funcao que compara dois pointers para utilizadores
-bool compareUsers_ptr(void* u1 , void* u2);
+
 
 //! Excepcao Anuncio Inexistente
 /*!

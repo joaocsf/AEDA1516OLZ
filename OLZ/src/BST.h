@@ -6,8 +6,6 @@
 #include <iostream>
 #include <stack>
 #include <queue>
-#include "utilizador.h"
-
 using namespace std;
 
 template <class Comparable>
@@ -57,7 +55,7 @@ class BST
   void printTree( ) const;
   
   void makeEmpty( );
-  void insert(  Comparable x , bool (*f)(void* , void*));
+  void insert( const Comparable & x );
   void remove( const Comparable & x );
   
   const BST & operator=( const BST & rhs );
@@ -68,7 +66,7 @@ class BST
   
   const Comparable & elementAt( BinaryNode<Comparable> *t ) const;
   
-  void insert( Comparable x, BinaryNode<Comparable> * & t , bool (*f)(void* , void*));
+  void insert( const Comparable & x, BinaryNode<Comparable> * & t ) const;
   void remove( const Comparable & x, BinaryNode<Comparable> * & t ) const;
   BinaryNode<Comparable> * findMin( BinaryNode<Comparable> *t ) const;
   BinaryNode<Comparable> * findMax( BinaryNode<Comparable> *t ) const;
@@ -104,9 +102,9 @@ BST<Comparable>::~BST( )
 }
 
 template <class Comparable>
-void BST<Comparable>::insert( Comparable x , bool (*f)(void* , void*))
+void BST<Comparable>::insert( const Comparable & x )
 {
-  insert( x, root ,f);
+  insert( x, root );
 }
 
 template <class Comparable>
@@ -183,15 +181,14 @@ elementAt( BinaryNode<Comparable> *t ) const
 
 template <class Comparable>
 void BST<Comparable>::
-insert( Comparable x, BinaryNode<Comparable> * & t ,bool (*f)(void* , void*))
+insert( const Comparable & x, BinaryNode<Comparable> * & t ) const
 {
-
   if( t == NULL )
     t = new BinaryNode<Comparable>( x, NULL, NULL );
-  else if( f( x , t->element) )
-    insert( x, t->left ,f);
-  else if( f(t->element , x) )
-    insert( x, t->right ,f);
+  else if( x < t->element )
+    insert( x, t->left );
+  else if( t->element < x )
+    insert( x, t->right );
   else
     ;  // Duplicate; do nothing
 }

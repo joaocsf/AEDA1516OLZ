@@ -2,7 +2,6 @@
 #define WEBSITE_H_
 
 #include "utilidades.h"
-#include "utilizador.h"
 #include "anuncio.h"
 #include "negocio.h"
 #include "BST.h"
@@ -11,6 +10,14 @@
 #include "anuncio.h"
 #include <queue>
 #include <time.h>
+#include "utilizador.h"
+
+
+class UtilizadorHandler{
+public:
+	UtilizadorHandler(Utilizador* u);
+	Utilizador* u;
+};
 
 //!Class Website
 /*!
@@ -44,7 +51,7 @@ class Website{
 	/*!
 	 \sa Utilizador
 	 */
-	static BST<Utilizador*> topNegociantes;
+	static BST<UtilizadorHandler> topNegociantes;
 public:
 	//!Construtor default
 	Website();
@@ -260,9 +267,9 @@ public:
 	 */
 	static void AtualizarP_queue();
 	//!Funcao que converte a BST de utilizadores para um vetor de utilizadores.
-	static vector<Utilizador*> BSTParaVetor(BST<Utilizador*>& bst);
+	static vector<Utilizador*> BSTParaVetor(BST<UtilizadorHandler>& bst);
 	//!Funcao que converte o vetor de utilizadores do website numa BST.
-	static BST<Utilizador*> ReturnUtilizadoresBST();
+	static BST<UtilizadorHandler> ReturnUtilizadoresBST();
 	//!Menu para o top de negocios.
 	static void menuTopNegocios();
 	//!Funcao para atualizar a BST de negocios de forma a manter a estrutura de dados ordenada.
@@ -271,7 +278,12 @@ public:
 	/*!
 	 * Utilizador vai ser inserido na BST de top negociantes.
 	 */
-	static void AtualizarBSTNegociantes(Utilizador* utilizador);
+	static void AdicionarUserBSTNegociantes(Utilizador* utilizador);
+
+
+	static void RemoverUserBSTNegociantes(Utilizador* utilizador);
+
+
 	//!Funcao que devolve o vetor de negocios do utilizador atual.
 	static  vector<Negocio*> VetorNegocioAnunciante();
 	//!Funcao que pesquisa os negocios por tipo.
@@ -304,5 +316,14 @@ public:
 		return mail;
 	}
 };
+
+
+bool operator< (UtilizadorHandler u1, UtilizadorHandler u2);
+
+bool operator== (UtilizadorHandler u1, UtilizadorHandler u2);
+
+bool operator > (UtilizadorHandler u1, UtilizadorHandler u2);
+
+
 
 #endif

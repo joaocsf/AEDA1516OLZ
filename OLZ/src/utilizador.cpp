@@ -365,7 +365,6 @@ Negocio* Utilizador::getUltimoNegocio() const{
 	return n;
 }
 
-
 bool Utilizador::operator< (const Utilizador & u) const{//alterei
 	if(this->_negociosConcluidos.size() < u.getNegocios().size())
 		return true;
@@ -421,14 +420,6 @@ vector<Negocio*> Utilizador::getVetorNegociosTipo(int tipo) const{
 	}
 
 	return res;
-}
-
-//-------------------------------------
-
-
-
-bool compareUsers_ptr(void* u1 =NULL , void* u2=NULL){
-	return (*(Utilizador *)u2) < (*(Utilizador *)u1);
 }
 
 

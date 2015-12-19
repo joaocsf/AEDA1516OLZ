@@ -1,11 +1,10 @@
 #include "website.h"
 #include "menus.h"
 
-
 vector<Utilizador*> Website::utilizadores;
 
 priority_queue<AnuncioHandler> Website::anuncios_prioridades;
-BST<Utilizador*> Website::topNegociantes(NULL);
+BST<UtilizadorHandler> Website::topNegociantes(UtilizadorHandler(NULL));
 
 int Website::indiceUtilizador = -1;
 Data Website::_data = Data();
@@ -880,12 +879,14 @@ void Website::criaNegocio(Anuncio* a){
 		}
 	}
 	AtualizarData();
+
+	RemoverUserBSTNegociantes(utilizadores[indiceUtilizador]);
+
 	utilizadores[indiceUtilizador]->FecharNegocio(a,montante,_data);
-	AtualizarBSTNegociantes(utilizadores[indiceUtilizador]);
 	AtualizarP_queue();
 
+	AdicionarUserBSTNegociantes(utilizadores[indiceUtilizador]);
 
-	getch();
 	setcolor(3);
 	cout << "Negocio Finalizado Com Sucesso!";
 	setcolor(15);
@@ -893,8 +894,6 @@ void Website::criaNegocio(Anuncio* a){
 }
 
 void Website::menuNegocios(vector<Negocio*> neg,string msg_erro){
-
-
 
 	while(true){
 		if(neg.size()==0){
@@ -1155,13 +1154,13 @@ int Website::EditarUtilizador(){
 	}
 }
 
- vector<Utilizador*> Website::BSTParaVetor(BST<Utilizador*>& bst){
+ vector<Utilizador*> Website::BSTParaVetor(BST<UtilizadorHandler>& bst){
 	 vector<Utilizador*> util;
-	 BSTItrIn<Utilizador*> ordem = BSTItrIn<Utilizador*>(bst);
+	 BSTItrIn<UtilizadorHandler> ordem = BSTItrIn<UtilizadorHandler>(bst);
 
 	 while(!ordem.isAtEnd()){
 
-		 Utilizador* u = ordem.retrieve();
+		 Utilizador * u = ordem.retrieve().u;
 		 //cout <<"Utilizador Adicionado: "<<u->getDadosPessoais().getNome() << endl;
 		// getch();
 		 util.push_back(u);
@@ -1181,26 +1180,39 @@ void Website::AtualizarBSTNegociantes(){
 			n++;
 			//cout<<"Adicionado:" << u->getDadosPessoais().getNome() << " Teste:" << u->getNegocios()[u->getNegocios().size()-1]->getData()<<endl;
 			//getch();
-			topNegociantes.insert(u , compareUsers_ptr);
+			UtilizadorHandler uH(u);
+			topNegociantes.insert(uH);
 		}
 	}
 }
 
-void Website::AtualizarBSTNegociantes(Utilizador* utilizador){
+void Website::RemoverUserBSTNegociantes(Utilizador* utilizador){
+	cout <<"Pronto para remover" << utilizador->getDadosPessoais().getNome()
+						<< ":" << utilizador << endl;
+	getch();
+	UtilizadorHandler u(utilizador);
+	UtilizadorHandler uC(NULL);
+	if( !(topNegociantes.find(u) == uC)){
+		cout << "Utilizador Existe!" << endl;
+		getch();
 
-	if(topNegociantes.find(utilizador) == NULL){
-		topNegociantes.insert(utilizador, compareUsers_ptr);
+		topNegociantes.remove(u);
 		return;
 	}
-	topNegociantes.remove(utilizador);
-	topNegociantes.insert(utilizador, compareUsers_ptr);
+}
+
+void Website::AdicionarUserBSTNegociantes(Utilizador* utilizador){
+	cout << "Adicionar Utilizador!" << utilizador->getDadosPessoais().getNome() << ":" << utilizador << endl;
+	UtilizadorHandler uH(utilizador);
+	topNegociantes.insert(uH);
 }
 
 
 
- BST<Utilizador*> Website::ReturnUtilizadoresBST(){
 
-	 BST<Utilizador*> res(NULL);
+ BST<UtilizadorHandler> Website::ReturnUtilizadoresBST(){
+
+	 BST<UtilizadorHandler> res(NULL);
 	 int n=0;
 	 for (unsigned int i = 0; i < utilizadores.size(); ++i) {
 
@@ -1211,7 +1223,7 @@ void Website::AtualizarBSTNegociantes(Utilizador* utilizador){
 			 n++;
 			 //cout<<"Adicionado:" << u->getDadosPessoais().getNome() << " Teste:" << u->getNegocios()[u->getNegocios().size()-1]->getData()<<endl;
 			//	 getch();
-			 res.insert(u , compareUsers_ptr);
+			 res.insert(UtilizadorHandler(u));
 		 }
 	 }
 
@@ -1318,7 +1330,21 @@ void Website::AtualizarData(){
 	_data=d;
 }
 
+bool operator< (UtilizadorHandler u1, UtilizadorHandler u2){
+	return (*u2.u < *u1.u);
+}
 
+bool operator > (UtilizadorHandler u1, UtilizadorHandler u2){
+	return u1 < u2;
+}
+
+
+bool operator== (UtilizadorHandler u1, UtilizadorHandler u2){
+	return u1.u == u2.u;
+}
+UtilizadorHandler::UtilizadorHandler(Utilizador* u){
+	this->u = u;
+}
 
 
 
