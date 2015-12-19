@@ -73,7 +73,9 @@ void Website::RemoveUtilizador(int id) {
 
 	for (unsigned int i = 0; i < utilizadores.size(); ++i) {
 		if (utilizadores[i]->getID() == id) {
-		
+
+			topNegociantes.remove(utilizadores[i]);
+
 			delete(utilizadores[i]);
 			utilizadores.erase(utilizadores.begin() + i--);
 			AtualizarP_queue();
