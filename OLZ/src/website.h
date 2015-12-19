@@ -12,10 +12,15 @@
 #include <time.h>
 #include "utilizador.h"
 
-
+//!Classe UtilizadorHandler
+/*!
+ * Classe utilizada para a BST de utilizador devia a problemas relativos ao overload do operador menor com apontadores.
+ */
 class UtilizadorHandler{
 public:
+	//!Construtor default
 	UtilizadorHandler(Utilizador* u);
+	//!Apontador para o utilizador
 	Utilizador* u;
 };
 
@@ -274,13 +279,13 @@ public:
 	static void menuTopNegocios();
 	//!Funcao para atualizar a BST de negocios de forma a manter a estrutura de dados ordenada.
 	static void AtualizarBSTNegociantes();
-	//!Funcao para atualizar a BST de negocios com um dado utlizador
+	//!Funcao para adicionar na BST de negocios um novo utlizador
 	/*!
 	 * Utilizador vai ser inserido na BST de top negociantes.
 	 */
 	static void AdicionarUserBSTNegociantes(Utilizador* utilizador);
 
-
+	//!Funcao para remover um dado utilizador da arvore de negocios.
 	static void RemoverUserBSTNegociantes(Utilizador* utilizador);
 
 
@@ -317,11 +322,11 @@ public:
 	}
 };
 
-
+//!Overload do operador < para a classe UtilizadorHandler.
 bool operator< (UtilizadorHandler u1, UtilizadorHandler u2);
-
+//!Overload do operador de igualdade para a classe UtilizadorHandler.
 bool operator== (UtilizadorHandler u1, UtilizadorHandler u2);
-
+//!Overload do operador > para a classe UtilizadorHandler.
 bool operator > (UtilizadorHandler u1, UtilizadorHandler u2);
 
 

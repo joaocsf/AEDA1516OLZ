@@ -77,7 +77,7 @@ class Utilizador : public Dados{
 	vector<Anuncio *> _anuncios;
 	//! NegociosConcluidos
 	/*!
-	 * Vector com os negocios concluidos do utilizador
+	 * Tabela de dispersao que contem os negocios concluidos
 	 \sa Negocio
 	 */
 	TabNeg _negociosConcluidos;
